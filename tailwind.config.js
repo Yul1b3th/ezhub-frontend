@@ -5,12 +5,31 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'primary': ['"BeVietnamPro"', 'sans-serif'],
+      },
+
       colors: {
-        primary: "#871cf8",
-        "background-100": "#1A1A1A",
-        "background-200": "#292929",
-        "background-300": "#404040",
-        "background-400": "#5B5B5B",
+        "clr-primary": "#1de099",
+        "clr-secondary": "#1dc8cd",
+        "clr-dark": "#1D1D1D",
+        "clr-light": "#3F3F3F",
+        "clr-black": "#000000",
+        "clr-white": "#FFFFFF",
+        "clr-gray": "#EFF5F5",
+
+        "clr-primary-hsl": "158.154 77% 50%",
+        "clr-secondary-hsl": "181.705 75% 46%",
+        "clr-dark-hsl": "0 0% 11%",
+        "clr-light-hsl": "0 0% 25%",
+        "clr-black-hsl": "0 0% 0%",
+        "clr-white-hsl": "0 0% 100%",
+        "clr-gray-hsl": "180 23% 95%",
+      },
+
+      backgroundImage: {
+        'close-menu': 'url("assets/icon-close.svg")',
+        'open-menu': 'url("assets/icon-hamburger.svg")',
       }
     },
   },

@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './delete.component.html',
-  styleUrl: './delete.component.css'
+  styleUrl: './delete.component.scss',
 })
-export class DeleteComponent {
-
-}
+export class DeleteComponent {}

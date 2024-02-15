@@ -1,7 +1,5 @@
 # Ezhub
 
-This project was generated with
-
 ## 📄 Descripción
 
 Este repositorio contiene los recursos del frontend de la aplicación ezhub, diseñada para facilitar la búsqueda y gestión de habitaciones para alquilar. La aplicación permite a los usuarios buscar habitaciones por geolocalización o preferencias, interactuar con el backend para gestionar usuarios, propiedades, habitaciones y transacciones, y proporcionar una experiencia fluida e intuitiva.
@@ -27,11 +25,12 @@ La API sigue los principios de una arquitectura RESTful, lo que facilita su inte
 ## 💻 Tecnologías Utilizadas
 
 - HTML5
-- CSS3
+- SCSS
 - TypeScript
 - [Angular CLI](https://angular.dev/) version 17.1.2.
-- [Angular Material](https://material.angular.io/) version 17.1.0.
+- [Angular Material](https://material.angular.io/) version 17.1.2.
 - [Mapbox](https://www.mapbox.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## 📋 Requisitos
 

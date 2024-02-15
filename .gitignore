@@ -1,7 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 .env
-src/environments/environments.ts
+src/environments/environment.ts
+
 **copy**
 
 # Compiled output

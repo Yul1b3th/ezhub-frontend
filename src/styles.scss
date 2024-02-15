@@ -1,13 +1,15 @@
+// styles.scss
+
+@import 'assets/libs/fonts.css';
+@import '../src/themes/theme-material.scss';
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ------------------- */
-/* Custom properties   */
-/* ------------------- */
-:root {
-  /* colors */
 
+:root {
   --clr-primary: #1de099;
   --clr-secondary: #1dc8cd;
   --clr-dark: #1D1D1D;
@@ -24,8 +26,19 @@
   --clr-white-hsl: 0 0% 100%;
   --clr-gray-hsl: 180 23% 95%;
 
-  /* font-sizes */
-
-  /* font-families */
   --font-primary: 'BeVietnamPro', Arial, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  @apply font-primary text-clr-light font-normal text-base sm:text-lg;
+}
+
+app-root {
+  @apply block min-h-screen relative
 }
