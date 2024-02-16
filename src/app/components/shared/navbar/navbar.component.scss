@@ -9,6 +9,18 @@
   border-left: 0.3em solid transparent;
 }
 
-.hidden {
-  display: none;
+.menu a {
+  display: block;
+  padding: 1.3rem;
+}
+
+.menu a:not(.active):hover {
+  background-color: hsl(var(--clr-primary-hsl) / 0.2);
+  // border-bottom: 1.5px solid hsl(var(--clr-primary-hsl) / 0.6);
+}
+
+.menu .active {
+  background-color: hsl(var(--clr-primary-hsl) / 0.5);
+  // border-bottom: 1.5px solid hsl(var(--clr-primary-hsl) / 1);
+  // color: hsl(var(--clr-primary-hsl));
 }

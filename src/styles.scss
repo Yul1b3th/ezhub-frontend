@@ -10,8 +10,9 @@
 
 
 :root {
-  --clr-primary: #1de099;
-  --clr-secondary: #4ad1d4;
+  color-scheme: light dark;
+  --clr-primary: #30daa6;
+  --clr-secondary: #4cd1d4;
   --clr-dark: #1D1D1D;
   --clr-light: #3F3F3F;
   --clr-black: #000000;
@@ -67,4 +68,9 @@ app-root {
 
 .btn-outline-secondary {
   @apply text-dark-200 border-2 border-secondary shadow-secondary/30 hover:bg-secondary-200 hover:shadow-lg;
+}
+
+.dark {
+  background: var(--clr-light);
+  color: #fff;
 }

@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
+  darkMode: 'class', // Añade esta línea
   theme: {
     extend: {
       fontFamily: {
