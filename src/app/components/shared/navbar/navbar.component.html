@@ -1,3 +1,76 @@
-<div class="container mx-auto text-center">
-  <search-bar />
+<div
+  class="container mx-auto flex flex-wrap items-center justify-between gap-5 px-5 relative"
+>
+  <!-- Hamburger -->
+  <div class="flex items-center gap-5 sm:w-[11.25rem]">
+    <button
+      id="menu"
+      class="peer cursor-pointer transition-all z-50 rounded p-1 hover:bg-primary focus:ring-2 focus:ring-slate-200"
+      (click)="toggleMenu()"
+    >
+      <img
+        [src]="menuOpen ? 'assets/icon-close.svg' : 'assets/icon-hamburger.svg'"
+        alt="Menu"
+        class="w-8 h-8"
+      />
+    </button>
+  </div>
+  <!-- Menu -->
+  <div
+    class="fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform z-40"
+    [style.transform]="menuOpen ? 'translateX(0)' : 'translateX(-100%)'"
+    (keydown)="onKeydown($event)"
+  >
+    <ul
+      class="absolute inset-x-0 top-24 p-12 bg-white w-[90%] mx-auto rounded-md h-max text-center grid gap-6 font-bold text-dark-blue shadow-2xl"
+    >
+      <li>
+        <a
+          href="#"
+          (click)="toggleHelpContact()"
+          class="dropdown-toggle"
+          #menuItems
+          href="#"
+          [attr.tabindex]="menuOpen ? '0' : '-1'"
+          >Help and Contact</a
+        >
+        <ul *ngIf="helpContact">
+          <li><a #menuItems href="#">Help</a></li>
+          <li><a #menuItems href="#">Contact</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#" #menuItems href="#" [attr.tabindex]="menuOpen ? '0' : '-1'"
+          >Accessibility</a
+        >
+        <ul *ngIf="helpContact">
+          <li><a #menuItems href="#">Dark Mode</a></li>
+          <li><a #menuItems href="#">Adjust Font Size</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a #menuItems href="#" [attr.tabindex]="menuOpen ? '0' : '-1'">EZHub</a>
+        <ul *ngIf="helpContact">
+          <li><a #menuItems href="#">About EZHub</a></li>
+          <li><a #menuItems href="#">Legal Notice</a></li>
+          <li><a #menuItems href="#">Terms and Conditions</a></li>
+          <li><a #menuItems href="#">Contact Us</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Logo -->
+  <div class="flex-1 text-center sm:w-full">
+    <div class="max-w-[120px] m-auto mr-0 sm:mx-auto">
+      <a href="#"><img src="assets/logo.svg" alt="Logo" class="w-full" /></a>
+    </div>
+  </div>
+
+  <!-- Button -->
+  <div class="flex items-center gap-5 w-full sm:w-min">
+    <button class="btn btn-normal btn-primary mx-auto">Publish</button>
+  </div>
 </div>

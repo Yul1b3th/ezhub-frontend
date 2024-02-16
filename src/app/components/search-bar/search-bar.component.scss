@@ -1,41 +1,19 @@
 .example-form {
-  min-width: 150px;
-  max-width: 500px;
+
   width: 100%;
 }
 
 .example-full-width {
   width: 100%;
-}
-
-.example-full-width {
-  border-radius: 6px;
-  /* Ajusta el valor para el redondeo deseado */
-}
-
-.example-full-width .mat-form-field-appearance {
-  border-radius: 20px;
-  /* Ajusta el valor para el redondeo */
-}
-
-.example-full-width .mat-form-field-appearance .mat-input-element {
-  padding: 10px 20px;
-  /* Ajusta los valores según sea necesario */
-}
-
-.rounded-search {
-  .mat-form-field-appearance {
-    border-radius: 20px;
-    /* Adjust the value for the desired rounding */
-  }
-
-  .mat-input-element {
-    padding: 10px 20px;
-    /* Adjust the values according to your needs */
-  }
 }
 
 
 .button {
   @apply block w-max py-4 px-12 rounded-full;
+}
+
+
+body {
+  margin: 0;
+  @apply font-primary text-light font-normal text-base;
 }

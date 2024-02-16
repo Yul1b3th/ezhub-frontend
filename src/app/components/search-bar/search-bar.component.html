@@ -1,44 +1,30 @@
-<h1 color="primary">Hola</h1>
-<button
+<!-- <button
   mat-raised-button
   color="primary"
-  class="button shadow-sm shadow-bright-red/30 hidden py-3 lg:block"
+  class="button shadow-sm shadow-bright-red/30 hidden py-3 lg:block text-light"
   (click)="toggleTheme()"
 >
   Toggle Theme
-</button>
-<form class="example-form rounded-full" style="overflow: hidden">
-  <mat-form-field class="example-full-width rounded-search">
-    <mat-label>Number</mat-label>
-    <input
-      type="text"
-      placeholder="Pick one"
-      aria-label="Number"
-      matInput
-      [formControl]="myControl"
-      [matAutocomplete]="auto"
-    />
-    <mat-autocomplete #auto="matAutocomplete">
-      @for (option of options; track option) {
-      <mat-option [value]="option">{{ option }}</mat-option>
-      }
-    </mat-autocomplete>
-  </mat-form-field>
-</form>
+</button> -->
 
-<br />
-<form class="example-form">
+<form class="example-form w-full">
   <input
-    class="rounded-full"
+    class="border-primary rounded-full w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-primary-200"
     type="text"
     placeholder="Pick one"
     matInput
     [formControl]="myControl"
     [matAutocomplete]="auto"
-    style="overflow: hidden; border: 2px solid black"
+    style="
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+
+      transition: width 0.3s;
+    "
   />
   <mat-autocomplete #auto="matAutocomplete">
-    @for (option of options; track option) {
+    @for (option of filteredOptions | async; track option) {
     <mat-option [value]="option">{{ option }}</mat-option>
     }
   </mat-autocomplete>

@@ -1,7 +1,7 @@
 // styles.scss
 
 @import 'assets/libs/fonts.css';
-@import '../src/themes/theme-material.scss';
+// @import '../src/themes/theme-material.scss';
 
 
 @tailwind base;
@@ -11,7 +11,7 @@
 
 :root {
   --clr-primary: #1de099;
-  --clr-secondary: #1dc8cd;
+  --clr-secondary: #4ad1d4;
   --clr-dark: #1D1D1D;
   --clr-light: #3F3F3F;
   --clr-black: #000000;
@@ -36,9 +36,35 @@ body {
 
 body {
   margin: 0;
-  @apply font-primary text-clr-light font-normal text-base sm:text-lg;
+  @apply font-primary text-light font-normal text-base;
 }
 
 app-root {
   @apply block min-h-screen relative
+}
+
+
+
+.btn {
+  @apply block rounded-full shadow-md transition-all font-medium;
+}
+
+.btn-normal {
+  width: 11.25rem;
+  height: 3rem;
+}
+
+.btn-small {
+  width: 7.5rem;
+  height: 2rem;
+}
+
+.btn-primary {
+  @apply bg-primary-200 text-dark-200 shadow-primary/30 hover:bg-primary hover:shadow-lg;
+}
+
+
+
+.btn-outline-secondary {
+  @apply text-dark-200 border-2 border-secondary shadow-secondary/30 hover:bg-secondary-200 hover:shadow-lg;
 }
