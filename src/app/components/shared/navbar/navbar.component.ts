@@ -50,9 +50,23 @@ export class NavbarComponent implements OnInit {
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
+    this.helpContact = false;
+    this.accessibility = false;
+    this.ezhub = false;
     const button = document.getElementById('toggleButton');
     if (button) {
       button.setAttribute('aria-expanded', this.menuOpen ? 'true' : 'false');
+    }
+
+    // Si el menú está abierto, mueve el enfoque al primer elemento del menú
+    if (this.menuOpen) {
+      // Espera a que la vista se actualice
+      setTimeout(() => {
+        const menuItemsArray = this.menuItems.toArray();
+        if (menuItemsArray.length > 0) {
+          menuItemsArray[0].nativeElement.focus();
+        }
+      });
     }
   }
 
@@ -72,6 +86,9 @@ export class NavbarComponent implements OnInit {
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       this.menuOpen = false;
+      this.helpContact = false;
+      this.accessibility = false;
+      this.ezhub = false;
       const button = document.getElementById('toggleButton');
       if (button) {
         button.setAttribute('aria-expanded', 'false');
@@ -117,8 +134,12 @@ export class NavbarComponent implements OnInit {
       localStorage.setItem('fontSize', this.fontSize.toString());
     }
   }
+
   closeMenu() {
     this.menuOpen = false;
+    this.helpContact = false;
+    this.accessibility = false;
+    this.ezhub = false;
     const button = document.getElementById('toggleButton');
     if (button) {
       button.setAttribute('aria-expanded', 'false');

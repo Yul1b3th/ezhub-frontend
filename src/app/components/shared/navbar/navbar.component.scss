@@ -1,3 +1,11 @@
+.dropdown-toggle {
+  width: 100%;
+  padding: 1.3rem;
+}
+.dropdown-toggle:hover {
+  background-color: hsl(var(--clr-primary-hsl) / 0.2);
+}
+
 .dropdown-toggle::after {
   display: inline-block;
   margin-left: 0.255em;

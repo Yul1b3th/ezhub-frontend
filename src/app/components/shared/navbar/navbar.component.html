@@ -22,16 +22,19 @@
   <!-- Logo -->
   <div class="flex-1 text-center sm:w-full">
     <div class="max-w-[120px] m-auto mr-0 sm:mx-auto">
-      <a href="#"><img src="assets/logo.svg" alt="Logo" class="w-full" /></a>
+      <a routerLink="./"
+        ><img src="assets/logo.svg" alt="Logo" class="w-full"
+      /></a>
     </div>
   </div>
 
   <!-- Button -->
   <div class="flex items-center gap-5 w-full sm:w-min">
-    <button class="btn btn-normal btn-primary mx-auto">Publish</button>
+    <button class="btn btn-normal btn-primary mx-auto" routerLink="./publish">
+      Publish
+    </button>
   </div>
 
-  <!-- Menu -->
   <div
     id="menu"
     class="menu fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform z-40 overflow-auto max-h-screen"
@@ -45,7 +48,6 @@
       <li class="border-t-[1.5px] border-b-[1.5px] border-primary">
         <a
           #menuItems
-          href="#"
           routerLink="./"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -60,7 +62,6 @@
       <li>
         <a
           #menuItems
-          href="#"
           routerLink="./publish"
           routerLinkActive="active"
           [attr.tabindex]="menuOpen ? '0' : '-1'"
@@ -74,12 +75,11 @@
       <li>
         <a
           #menuItems
-          href="#"
+          class="border-t-[1.5px] border-b-[1.5px] border-primary"
           routerLink="./log-in"
           routerLinkActive="active"
           [attr.tabindex]="menuOpen ? '0' : '-1'"
           (click)="closeMenu()"
-          class="border-t-[1.5px] border-b-[1.5px] border-primary"
         >
           Log In
         </a>
@@ -89,10 +89,11 @@
       <li>
         <a
           #menuItems
-          href="#"
+          class="border-b-[1.5px] border-primary"
+          routerLink="./sign-up"
+          routerLinkActive="active"
           [attr.tabindex]="menuOpen ? '0' : '-1'"
           (click)="closeMenu()"
-          class="border-b-[1.5px] border-primary"
         >
           Sign Up
         </a>
@@ -100,49 +101,58 @@
 
       <!-- Help and Contact -->
       <li>
-        <a
+        <button
           #menuItems
-          href="#"
-          (click)="toggleHelpContact(); closeMenu()"
-          [attr.tabindex]="menuOpen ? '0' : '-1'"
           class="dropdown-toggle"
+          [attr.tabindex]="menuOpen ? '0' : '-1'"
+          (click)="toggleHelpContact()"
+          aria-haspopup="true"
         >
           Help and Contact
-        </a>
+        </button>
         <ul *ngIf="helpContact">
           <li>
             <a
               #menuItems
-              href="#"
               class="border-t-[1.5px] border-primary"
+              routerLink="./help-contact/help"
+              routerLinkActive="active"
               (click)="closeMenu()"
             >
               Help
             </a>
           </li>
           <li>
-            <a #menuItems href="#" (click)="closeMenu()"> Contact </a>
+            <a
+              #menuItems
+              routerLink="./help-contact/contact"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+            >
+              Contact
+            </a>
           </li>
         </ul>
       </li>
 
       <!-- Accessibility -->
       <li>
-        <a
+        <button
           #menuItems
-          href="#"
-          (click)="toggleAccessibility(); closeMenu()"
-          [attr.tabindex]="menuOpen ? '0' : '-1'"
           class="border-t-[1.5px] border-b-[1.5px] border-primary dropdown-toggle"
+          [attr.tabindex]="menuOpen ? '0' : '-1'"
+          (click)="toggleAccessibility()"
+          aria-haspopup="true"
         >
           Accessibility
-        </a>
+        </button>
         <ul *ngIf="accessibility">
           <li>
             <button
               #menuItems
               class="mb-[1.3rem] mt-[1.3rem]"
               aria-label="Change theme mode"
+              (click)="toggleDarkMode()"
             >
               {{ darkMode ? "Light Mode ☀️" : "Dark Mode 🌙" }}
             </button>
@@ -153,12 +163,14 @@
               <button
                 class="btn btn-outline-light btn-increase-font px-[1rem] py-[0.5rem] bg-white dark:text-dark-200"
                 aria-label="Increase font size"
+                (click)="increaseFontSize()"
               >
                 A+
               </button>
               <button
                 class="btn btn-outline-light btn-decrease-font ms-3 px-[1rem] py-[0.5rem] bg-white dark:text-dark-200"
                 aria-label="Decrease font size"
+                (click)="decreaseFontSize()"
               >
                 A-
               </button>
@@ -169,32 +181,52 @@
 
       <!-- EZHub -->
       <li>
-        <a
+        <button
           #menuItems
-          href="#"
-          (click)="toggleEZHub(); closeMenu()"
-          [attr.tabindex]="menuOpen ? '0' : '-1'"
           class="border-b-[1.5px] border-primary dropdown-toggle"
+          [attr.tabindex]="menuOpen ? '0' : '-1'"
+          (click)="toggleEZHub()"
+          aria-haspopup="true"
         >
           EZHub
-        </a>
+        </button>
         <ul *ngIf="ezhub">
           <li>
-            <a #menuItems href="#" (click)="closeMenu()"> About EZHub </a>
+            <a
+              #menuItems
+              routerLink="./about"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+            >
+              About EZHub
+            </a>
           </li>
           <li>
-            <a #menuItems href="#" (click)="closeMenu()"> Legal Notice </a>
+            <a
+              #menuItems
+              routerLink="./legal-notice"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+            >
+              Legal Notice
+            </a>
           </li>
           <li>
-            <a #menuItems href="#" (click)="closeMenu()">
+            <a
+              #menuItems
+              routerLink="./terms-conditions"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+            >
               Terms and Conditions
             </a>
           </li>
           <li>
             <a
               #menuItems
-              href="#"
               class="border-b-[1.5px] border-primary"
+              routerLink="./contact"
+              routerLinkActive="active"
               (click)="closeMenu()"
             >
               Contact Us
