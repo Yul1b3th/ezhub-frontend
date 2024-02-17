@@ -1,5 +1,5 @@
 <div
-  class="container mx-auto flex flex-wrap items-center justify-between gap-5 px-5 relative"
+  class="container mx-auto px-5 flex flex-wrap items-center justify-between gap-5 relative"
 >
   <!-- Hamburger -->
   <div class="flex items-center gap-5 sm:w-[11.25rem]">
@@ -43,77 +43,106 @@
     >
       <!-- Home -->
       <li class="border-t-[1.5px] border-b-[1.5px] border-primary">
-        <a #menuItems href="#" [attr.tabindex]="menuOpen ? '0' : '-1'">Home</a>
+        <a
+          #menuItems
+          href="#"
+          routerLink="./"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [attr.tabindex]="menuOpen ? '0' : '-1'"
+          (click)="closeMenu()"
+        >
+          Home
+        </a>
       </li>
 
       <!-- Publish -->
       <li>
-        <a #menuItems href="#" [attr.tabindex]="menuOpen ? '0' : '-1'"
-          >Publish</a
+        <a
+          #menuItems
+          href="#"
+          routerLink="./publish"
+          routerLinkActive="active"
+          [attr.tabindex]="menuOpen ? '0' : '-1'"
+          (click)="closeMenu()"
         >
+          Publish
+        </a>
       </li>
 
       <!-- Log In -->
       <li>
         <a
-          class="border-t-[1.5px] border-b-[1.5px] border-primary"
           #menuItems
           href="#"
+          routerLink="./log-in"
+          routerLinkActive="active"
           [attr.tabindex]="menuOpen ? '0' : '-1'"
-          >Log In</a
+          (click)="closeMenu()"
+          class="border-t-[1.5px] border-b-[1.5px] border-primary"
         >
+          Log In
+        </a>
       </li>
 
       <!-- Sign Up -->
       <li>
         <a
-          class="border-b-[1.5px] border-primary"
           #menuItems
           href="#"
           [attr.tabindex]="menuOpen ? '0' : '-1'"
-          >Sign Up</a
+          (click)="closeMenu()"
+          class="border-b-[1.5px] border-primary"
         >
+          Sign Up
+        </a>
       </li>
 
       <!-- Help and Contact -->
       <li>
         <a
-          href="#"
-          (click)="toggleHelpContact()"
-          class="dropdown-toggle"
           #menuItems
           href="#"
+          (click)="toggleHelpContact(); closeMenu()"
           [attr.tabindex]="menuOpen ? '0' : '-1'"
-          >Help and Contact</a
+          class="dropdown-toggle"
         >
+          Help and Contact
+        </a>
         <ul *ngIf="helpContact">
           <li>
-            <a class="border-t-[1.5px] border-primary" #menuItems href="#"
-              >Help</a
+            <a
+              #menuItems
+              href="#"
+              class="border-t-[1.5px] border-primary"
+              (click)="closeMenu()"
             >
+              Help
+            </a>
           </li>
-          <li><a #menuItems href="#">Contact</a></li>
+          <li>
+            <a #menuItems href="#" (click)="closeMenu()"> Contact </a>
+          </li>
         </ul>
       </li>
 
       <!-- Accessibility -->
       <li>
         <a
-          class="border-t-[1.5px] border-b-[1.5px] border-primary dropdown-toggle"
-          href="#"
-          (click)="toggleAccessibility()"
           #menuItems
           href="#"
+          (click)="toggleAccessibility(); closeMenu()"
           [attr.tabindex]="menuOpen ? '0' : '-1'"
-          >Accessibility</a
+          class="border-t-[1.5px] border-b-[1.5px] border-primary dropdown-toggle"
         >
+          Accessibility
+        </a>
         <ul *ngIf="accessibility">
           <li>
             <button
-              class="mb-[1.3rem] mt-[1.3rem]"
-              (click)="toggleDarkMode()"
-              aria-label="Change theme mode"
               #menuItems
+              class="mb-[1.3rem] mt-[1.3rem]"
+              aria-label="Change theme mode"
             >
               {{ darkMode ? "Light Mode ☀️" : "Dark Mode 🌙" }}
             </button>
@@ -122,14 +151,12 @@
             <p>Adjust Font Size</p>
             <div class="flex justify-center items-center gap-3 mb-[1.3rem]">
               <button
-                (click)="increaseFontSize()"
                 class="btn btn-outline-light btn-increase-font px-[1rem] py-[0.5rem] bg-white dark:text-dark-200"
                 aria-label="Increase font size"
               >
                 A+
               </button>
               <button
-                (click)="decreaseFontSize()"
                 class="btn btn-outline-light btn-decrease-font ms-3 px-[1rem] py-[0.5rem] bg-white dark:text-dark-200"
                 aria-label="Decrease font size"
               >
@@ -143,21 +170,35 @@
       <!-- EZHub -->
       <li>
         <a
-          (click)="toggleEZHub()"
-          class="border-b-[1.5px] border-primary dropdown-toggle"
           #menuItems
           href="#"
+          (click)="toggleEZHub(); closeMenu()"
           [attr.tabindex]="menuOpen ? '0' : '-1'"
-          >EZHub</a
+          class="border-b-[1.5px] border-primary dropdown-toggle"
         >
+          EZHub
+        </a>
         <ul *ngIf="ezhub">
-          <li><a #menuItems href="#">About EZHub</a></li>
-          <li><a #menuItems href="#">Legal Notice</a></li>
-          <li><a #menuItems href="#">Terms and Conditions</a></li>
           <li>
-            <a class="border-b-[1.5px] border-primary" #menuItems href="#"
-              >Contact Us</a
+            <a #menuItems href="#" (click)="closeMenu()"> About EZHub </a>
+          </li>
+          <li>
+            <a #menuItems href="#" (click)="closeMenu()"> Legal Notice </a>
+          </li>
+          <li>
+            <a #menuItems href="#" (click)="closeMenu()">
+              Terms and Conditions
+            </a>
+          </li>
+          <li>
+            <a
+              #menuItems
+              href="#"
+              class="border-b-[1.5px] border-primary"
+              (click)="closeMenu()"
             >
+              Contact Us
+            </a>
           </li>
         </ul>
       </li>

@@ -88,6 +88,7 @@ export class NavbarComponent implements OnInit {
       }
     }
   }
+
   toggleDarkMode() {
     this.darkMode = !this.darkMode;
     if (this.darkMode) {
@@ -114,6 +115,13 @@ export class NavbarComponent implements OnInit {
       this.fontSize--;
       document.documentElement.style.fontSize = `${this.fontSize}px`;
       localStorage.setItem('fontSize', this.fontSize.toString());
+    }
+  }
+  closeMenu() {
+    this.menuOpen = false;
+    const button = document.getElementById('toggleButton');
+    if (button) {
+      button.setAttribute('aria-expanded', 'false');
     }
   }
 }

@@ -1,23 +1,21 @@
+// @import '../src/themes/theme-material.scss';
 // styles.scss
 
-@import 'assets/libs/fonts.css';
-// @import '../src/themes/theme-material.scss';
-
+@import "assets/libs/fonts.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   color-scheme: light dark;
   --clr-primary: #30daa6;
   --clr-secondary: #4cd1d4;
-  --clr-dark: #1D1D1D;
-  --clr-light: #3F3F3F;
+  --clr-dark: #1d1d1d;
+  --clr-light: #3f3f3f;
   --clr-black: #000000;
-  --clr-white: #FFFFFF;
-  --clr-gray: #EFF5F5;
+  --clr-white: #ffffff;
+  --clr-gray: #eff5f5;
 
   --clr-primary-hsl: 158.154 77% 50%;
   --clr-secondary-hsl: 181.705 75% 46%;
@@ -27,7 +25,7 @@
   --clr-white-hsl: 0 0% 100%;
   --clr-gray-hsl: 180 23% 95%;
 
-  --font-primary: 'BeVietnamPro', Arial, sans-serif;
+  --font-primary: "BeVietnamPro", Arial, sans-serif;
 }
 
 html,
@@ -37,14 +35,12 @@ body {
 
 body {
   margin: 0;
-  @apply font-primary text-light font-normal text-base;
+  @apply font-primary font-normal text-base bg-white text-light dark:bg-light dark:text-white;
 }
 
 app-root {
-  @apply block min-h-screen relative
+  @apply block min-h-screen relative;
 }
-
-
 
 .btn {
   @apply block rounded-full shadow-md transition-all font-medium;
@@ -63,8 +59,6 @@ app-root {
 .btn-primary {
   @apply bg-primary-200 text-dark-200 shadow-primary/30 hover:bg-primary hover:shadow-lg;
 }
-
-
 
 .btn-outline-secondary {
   @apply text-dark-200 border-2 border-secondary shadow-secondary/30 hover:bg-secondary-200 hover:shadow-lg;
