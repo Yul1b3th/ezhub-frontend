@@ -1,6 +1,8 @@
 // @import '../src/themes/theme-material.scss';
 // styles.scss
 
+@import "mapbox-gl/dist/mapbox-gl.css";
+
 @import "assets/libs/fonts.css";
 
 @tailwind base;

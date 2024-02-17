@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+
+import { RoomService } from '../../../services/room.service';
 
 @Component({
   selector: 'app-edit',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })
-export class EditComponent {}
+export class EditComponent {
+  private roomService = inject(RoomService);
+
+  constructor() {
+    this.roomService.getRooms().subscribe((rooms) => console.log(rooms));
+  }
+}

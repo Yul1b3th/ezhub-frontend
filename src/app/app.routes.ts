@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+  // Home
   {
     path: '',
     title: 'EZHub',
@@ -8,31 +9,36 @@ export const routes: Routes = [
     loadComponent: () => import('./components/home/home.component'),
   },
 
+  // Publish
   {
     path: 'publish',
     title: 'EZHub | Publish ',
-    loadComponent: () => import('./components/properties/add/add.component'),
+    loadComponent: () => import('./components/rooms/add/add.component'),
   },
 
+  // Log In
   {
     path: 'log-in',
     title: 'EZHub | Log In',
-    loadComponent: () => import('./components/account/login/login.component'),
+    loadComponent: () => import('./components/auth/login/login.component'),
   },
 
+  // Sign Up
   {
     path: 'sign-up',
     title: 'EZHub | Sign Up',
     loadComponent: () =>
-      import('./components/account/register/register.component'),
+      import('./components/auth/register/register.component'),
   },
 
+  // About
   {
     path: 'about',
     title: 'EZHub | About',
     loadComponent: () => import('./pages/ezhub/about/about.component'),
   },
 
+  // Legal notice
   {
     path: 'legal-notice',
     title: 'EZHub | Legal notice',
@@ -40,6 +46,7 @@ export const routes: Routes = [
       import('./pages/ezhub/legal-notice/legal-notice.component'),
   },
 
+  // terms-conditions
   {
     path: 'terms-conditions',
     title: 'EZHub | Terms',
@@ -47,6 +54,7 @@ export const routes: Routes = [
       import('./pages/ezhub/terms-conditions/terms-conditions.component'),
   },
 
+  // Contact
   {
     path: 'contact',
     title: 'EZHub | Contact',
