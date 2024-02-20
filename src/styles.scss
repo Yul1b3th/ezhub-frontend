@@ -41,7 +41,7 @@ body {
 }
 
 app-root {
-  @apply block min-h-screen relative;
+  @apply min-h-screen flex flex-col;
 }
 
 .btn {
@@ -60,6 +60,10 @@ app-root {
 
 .btn-primary {
   @apply bg-primary-200 text-dark-200 shadow-primary/30 hover:bg-primary hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply bg-secondary-200 text-dark-200 shadow-secondary/30 hover:bg-secondary hover:shadow-lg;
 }
 
 .btn-outline-secondary {

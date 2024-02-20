@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',
 })
-export default class AddComponent {}
+export default class AddComponent implements OnInit {
+  ngOnInit() {}
+}

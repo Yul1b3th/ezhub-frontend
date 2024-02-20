@@ -5,15 +5,32 @@ export const routes: Routes = [
   {
     path: '',
     title: 'EZHub',
-    pathMatch: 'full',
+    // pathMatch: 'full',
     loadComponent: () => import('./components/home/home.component'),
+    children: [
+      {
+        path: 'list',
+        title: 'EZHub | List',
+        loadComponent: () => import('./components/rooms/list/list.component'),
+      },
+      {
+        path: 'map',
+        title: 'EZHub | Map',
+        loadComponent: () => import('./components/rooms/map/map.component'),
+      },
+      {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full',
+      },
+    ],
   },
 
   // Publish
   {
     path: 'publish',
     title: 'EZHub | Publish ',
-    loadComponent: () => import('./components/rooms/add/add.component'),
+    loadComponent: () => import('./components/properties/add/add.component'),
   },
 
   // Log In

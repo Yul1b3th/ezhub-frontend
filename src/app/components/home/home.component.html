@@ -1,3 +1,22 @@
-<div class="container mx-auto px-5">
-  <p>home works!</p>
+<div class="container mx-auto px-5 my-10">
+  <search-bar />
+
+  <ul class="my-5">
+    <li class="text-center">
+      <a
+        class="inline-block w-[160px] py-4 hover:bg-primary/20"
+        routerLink="./list"
+        routerLinkActive="active"
+        >List</a
+      >
+      <a
+        class="inline-block w-[160px] py-4 hover:bg-primary/20"
+        routerLink="./map"
+        routerLinkActive="active"
+        >Map</a
+      >
+    </li>
+  </ul>
+
+  <router-outlet />
 </div>
