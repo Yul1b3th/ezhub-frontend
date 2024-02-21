@@ -2,11 +2,12 @@ import { Component, OnInit, effect, inject } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { PublicRoomService } from '../../../services/public-room.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })

@@ -9,7 +9,7 @@ import { RoomService } from '../../../services/room.service';
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })
-export class EditComponent {
+export default class EditComponent {
   private roomService = inject(RoomService);
 
   constructor() {

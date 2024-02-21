@@ -1,0 +1,56 @@
+<div class="container mx-auto px-5 my-10">
+  @if (roomData) {
+
+  <div>
+    @for (photo of roomData.photos.split(','); track $index) {
+    <img
+      [srcset]="'assets/img/bedrooms/' + photo.trim()"
+      class="w-full h-[30vh] object-cover"
+      [alt]="roomData.name"
+    />
+    } @empty {
+    <p class="text-center">Loading...</p>
+    }
+  </div>
+
+  <div class="flex flex-wrap">
+    <div class="w-full md:w-1/2">
+      <h3>{{ roomData.name }}</h3>
+      <p>{{ roomData.details }}</p>
+    </div>
+
+    <div class="w-full md:w-1/2">
+      @if (propertyData) {
+      <h4>Datos de la propiedad</h4>
+      <p>País: {{ propertyData.country }}</p>
+      <p>Ciudad: {{ propertyData.city }}</p>
+      }@else{
+      <p>Cargando información...</p>
+      }
+    </div>
+  </div>
+
+  }@else {
+  <p>Cargando información...</p>
+  }
+</div>
+
+<div class="container mx-auto px-5 my-10">
+  <p *ngIf="!roomData">Cargando información...</p>
+  <section *ngIf="roomData">
+    <!-- Mostrar datos de la habitación -->
+    <h3>{{ roomData.name }}</h3>
+    <p>{{ roomData.details }}</p>
+
+    <!-- Mostrar datos de la propiedad -->
+    <h4>Datos de la propiedad</h4>
+    <p>País: {{ propertyData?.country }}</p>
+    <p>Ciudad: {{ propertyData?.city }}</p>
+
+    <!-- Mostrar amenidades -->
+    <h4>Amenidades de la habitación</h4>
+    <ul>
+      <li *ngFor="let amenity of amenities">{{ amenity.name }}</li>
+    </ul>
+  </section>
+</div>

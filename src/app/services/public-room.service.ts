@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { Room } from '../interfaces/room.interface';
+import { Observable, map } from 'rxjs';
+import { Amenity } from '../interfaces/amenity.interface';
 
 interface State {
   rooms: Room[];
@@ -36,5 +38,20 @@ export class PublicRoomService {
       console.log(res);
     });
     console.log('Cargando data');
+  }
+
+  getRoomById(id: number) {
+    return this.http.get<Room>(`${this.baseUrl}/public-rooms/${id}`).pipe(
+      map((res) => {
+        console.log(res);
+        return res;
+      })
+    );
+  }
+
+  getRoomAmenities(id: number) {
+    return this.http.get<Amenity[]>(
+      `${this.baseUrl}/public-rooms/${id}/amenities`
+    );
   }
 }

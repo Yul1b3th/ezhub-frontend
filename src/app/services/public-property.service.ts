@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { Property } from '../interfaces/property.interface';
+import { map } from 'rxjs';
 
 interface State {
   properties: Property[];
@@ -10,7 +11,7 @@ interface State {
 }
 
 @Injectable({ providedIn: 'root' })
-export class PublicRoomService {
+export class PublicPropertyService {
   private http = inject(HttpClient);
   private readonly baseUrl: string = environment.baseUrl;
 
@@ -38,5 +39,16 @@ export class PublicRoomService {
         console.log(res);
       });
     console.log('Cargando data');
+  }
+
+  getPropertyById(id: number) {
+    return this.http
+      .get<Property>(`${this.baseUrl}/public-properties/${id}`)
+      .pipe(
+        map((res) => {
+          console.log(res);
+          return res;
+        })
+      );
   }
 }

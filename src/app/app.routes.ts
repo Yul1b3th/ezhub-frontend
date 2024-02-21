@@ -26,6 +26,21 @@ export const routes: Routes = [
     ],
   },
 
+  {
+    path: 'rooms',
+    children: [
+      {
+        path: 'edit/:id',
+        title: 'EZHub | Room',
+        loadComponent: () => import('./components/rooms/edit/edit.component'),
+      },
+      {
+        path: ':id',
+        loadComponent: () =>
+          import('./components/rooms/details/details.component'),
+      },
+    ],
+  },
   // Publish
   {
     path: 'publish',

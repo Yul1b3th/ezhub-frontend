@@ -51,6 +51,9 @@ app-root {
 .btn-normal {
   width: 11.25rem;
   height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-small {
@@ -73,4 +76,8 @@ app-root {
 .dark {
   background: var(--clr-light);
   color: #fff;
+}
+
+.container {
+  @apply max-w-[1080px];
 }
