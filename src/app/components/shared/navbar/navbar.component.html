@@ -8,7 +8,7 @@
       (click)="toggleMenu()"
       aria-expanded="false"
       aria-controls="menu"
-      class="peer cursor-pointer transition-all z-50 rounded p-1 hover:bg-primary focus:ring-2 focus:ring-slate-200"
+      class="peer cursor-pointer transition-all z-[1050] rounded p-1 hover:bg-primary focus:ring-2 focus:ring-slate-200"
     >
       <span class="sr-only">Menu</span>
       <img
@@ -35,9 +35,10 @@
     </a>
   </div>
 
+  <!-- Menu -->
   <div
     id="menu"
-    class="menu fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform z-40 overflow-auto max-h-screen"
+    class="menu fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform z-[1000] overflow-auto max-h-screen"
     [style.transform]="menuOpen ? 'translateX(0)' : 'translateX(-100%)'"
     (keydown)="onKeydown($event)"
   >

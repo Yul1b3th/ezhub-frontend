@@ -1,3 +1,11 @@
+header {
+  @apply w-full sticky top-0 bg-white dark:bg-light h-[9.5rem] md:h-[5.5rem] z-[900];
+}
+
+main {
+  @apply w-full;
+}
+
 footer {
-  @apply mt-auto;
+  @apply w-full bg-gray dark:bg-light p-4 mt-auto;
 }

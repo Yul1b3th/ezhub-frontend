@@ -1,56 +1,112 @@
 <div class="container mx-auto px-5 my-10">
   @if (roomData) {
 
-  <div>
-    @for (photo of roomData.photos.split(','); track $index) {
-    <img
-      [srcset]="'assets/img/bedrooms/' + photo.trim()"
-      class="w-full h-[30vh] object-cover"
-      [alt]="roomData.name"
-    />
-    } @empty {
-    <p class="text-center">Loading...</p>
-    }
-  </div>
+  <div class="flex items-start flex-wrap md:flex-nowrap gap-5">
+    <div class="w-full md:w-[70%] justify-center">
+      <!-- PHOTOS -->
+      <div>
+        @for (photo of roomData.photos.split(','); track $index) {
+        <img
+          [srcset]="'assets/img/bedrooms/' + photo.trim()"
+          class="w-full h-[30vh] object-cover"
+          [alt]="roomData.name"
+        />
+        } @empty {
+        <p class="text-center"></p>
+        }
+      </div>
 
-  <div class="flex flex-wrap">
-    <div class="w-full md:w-1/2">
-      <h3>{{ roomData.name }}</h3>
-      <p>{{ roomData.details }}</p>
+      <!-- Room features -->
+      <div
+        class="mt-5 bg-zinc-50 dark:bg-light border border-zinc-100 p-5 shadow-sm"
+      >
+        <h2 class="font-bold mb-3">Room features</h2>
+
+        <h3 class="font-bold mb-3 md:hidden">{{ roomData.name }}</h3>
+        <p class="mb-4 md:hidden">
+          Available from: {{ roomData.available_from | date : "yyyy-MM-dd" }}
+        </p>
+        <p class="mb-4 md:hidden">
+          Room size: {{ roomData.room_size }} m<sup>2</sup>
+        </p>
+        <p class="mb-4 md:hidden">
+          Room price: {{ roomData.precio | number : "1.0-0" }}
+        </p>
+
+        <p class="mb-4">{{ roomData.details }}</p>
+        <p class="mb-4">Bed Type {{ roomData.bed_type }}</p>
+        @if (roomData.utilities_included) {
+        <p class="mb-4">Utilities Included</p>
+        } @if (roomData.deposit_required) {
+        <p class="mb-4">Deposit required</p>
+        } @for (service of roomData.services_included.split(','); track $index)
+        {
+        <p class="mb-4">{{ service }}</p>
+        } @if (roomData && amenities) {
+        <p>Amenities</p>
+        <ul class="list-disc">
+          <li class="ml-5" *ngFor="let amenity of amenities">
+            {{ amenity.name }}
+          </li>
+        </ul>
+        }
+      </div>
+
+      <!-- Home features -->
+      <div
+        class="mt-5 bg-zinc-50 dark:bg-light border border-zinc-100 p-5 shadow-sm"
+      >
+        @if (propertyData) {
+        <h2 class="font-bold mb-3">Home features</h2>
+        <p class="mb-4">
+          Home size: {{ propertyData.property_size }} m<sup>2</sup>
+        </p>
+        <p class="mb-4">Bedrooms: {{ propertyData.bedrooms }}</p>
+        <p class="mb-4">Bathrooms: {{ propertyData.bathrooms }}</p>
+        <p class="mb-4">Occupant count: {{ propertyData.occupantCount }}</p>
+        <p>House rules</p>
+        <ul class="list-disc">
+          @if (propertyData.smoking_allowed) {
+          <li class="ml-5">Smoking allowed</li>
+          }@else{
+          <li class="ml-5">No smoking allowed</li>
+          } @if (propertyData.pets_allowed) {
+          <li class="ml-5">Pets allowed</li>
+          }@else{
+          <li class="ml-5">No pets allowed</li>
+          } @if (propertyData.couples_allowed) {
+          <li class="ml-5">Couples Allowed</li>
+          }@else{
+          <li class="ml-5">No couples allowed</li>
+          }
+        </ul>
+        }@else{
+        <p>Loading...</p>
+        }
+      </div>
+
+      <div #map id="map" class="w-full h-[40vh] mt-5"></div>
+
+      <div class="my-5 md:hidden">
+        <a href="" class="btn btn-primary btn-normal">Contact</a>
+      </div>
     </div>
 
-    <div class="w-full md:w-1/2">
-      @if (propertyData) {
-      <h4>Datos de la propiedad</h4>
-      <p>País: {{ propertyData.country }}</p>
-      <p>Ciudad: {{ propertyData.city }}</p>
-      }@else{
-      <p>Cargando información...</p>
-      }
+    <!-- ASIDE -->
+    <div
+      class="hidden md:w-[30%] md:block p-5 border-slate-300 shadow sticky bottom-0 md:top-[8rem]"
+    >
+      <h2 class="font-bold mb-3">{{ roomData.name }}</h2>
+      <p class="mb-4">
+        Available from: {{ roomData.available_from | date : "yyyy-MM-dd" }}
+      </p>
+      <p class="mb-4">Room size: {{ roomData.room_size }} m<sup>2</sup></p>
+      <p class="mb-4">Room price: {{ roomData.precio | number : "1.0-0" }}</p>
+      <a href="" class="btn btn-primary btn-normal">Contact</a>
     </div>
   </div>
 
   }@else {
-  <p>Cargando información...</p>
+  <p>Loading...</p>
   }
-</div>
-
-<div class="container mx-auto px-5 my-10">
-  <p *ngIf="!roomData">Cargando información...</p>
-  <section *ngIf="roomData">
-    <!-- Mostrar datos de la habitación -->
-    <h3>{{ roomData.name }}</h3>
-    <p>{{ roomData.details }}</p>
-
-    <!-- Mostrar datos de la propiedad -->
-    <h4>Datos de la propiedad</h4>
-    <p>País: {{ propertyData?.country }}</p>
-    <p>Ciudad: {{ propertyData?.city }}</p>
-
-    <!-- Mostrar amenidades -->
-    <h4>Amenidades de la habitación</h4>
-    <ul>
-      <li *ngFor="let amenity of amenities">{{ amenity.name }}</li>
-    </ul>
-  </section>
 </div>

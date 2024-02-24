@@ -120,7 +120,7 @@ export class NavbarComponent implements OnInit {
   }
 
   increaseFontSize() {
-    if (this.fontSize < 40) {
+    if (this.fontSize < 32) {
       this.fontSize++;
       document.documentElement.style.fontSize = `${this.fontSize}px`;
       localStorage.setItem('fontSize', this.fontSize.toString());

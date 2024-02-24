@@ -27,6 +27,7 @@ module.exports = {
         secondary: "hsl(181.324, 61%, 56%)",
         dark: "hsl(0, 0%, 11%)",
         "dark-200": "hsl(0, 0%, 6%)",
+        "gray:": "hsl(180, 23%, 95%)",
       },
 
       backgroundImage: {

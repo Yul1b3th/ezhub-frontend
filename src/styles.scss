@@ -1,7 +1,4 @@
 // @import '../src/themes/theme-material.scss';
-// styles.scss
-
-@import "mapbox-gl/dist/mapbox-gl.css";
 
 @import "assets/libs/fonts.css";
 
@@ -30,18 +27,12 @@
   --font-primary: "BeVietnamPro", Arial, sans-serif;
 }
 
-html,
 body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
   @apply font-primary font-normal text-base bg-white text-light dark:bg-light dark:text-white;
 }
 
 app-root {
-  @apply min-h-screen flex flex-col;
+  @apply min-h-screen flex items-start flex-col;
 }
 
 .btn {
@@ -79,5 +70,5 @@ app-root {
 }
 
 .container {
-  @apply max-w-[1080px];
+  @apply max-w-[67.5rem];
 }

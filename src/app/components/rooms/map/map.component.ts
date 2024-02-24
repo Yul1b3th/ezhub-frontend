@@ -19,11 +19,11 @@ import { Observable, catchError, throwError } from 'rxjs';
 })
 export default class MapComponent implements AfterViewInit, OnInit {
   @ViewChild('map') divMap?: ElementRef;
-  public apiUrl = 'http://localhost:8000/api/public-properties/';
-  public properties: any[] = [];
-
   public map?: Map;
   public lngLat: [number, number] = [2.187975058256683, 41.392281189125214];
+
+  public apiUrl = 'http://localhost:8000/api/public-properties/';
+  public properties: any[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -90,7 +90,7 @@ export default class MapComponent implements AfterViewInit, OnInit {
         parseFloat(property.latitude)
       );
 
-      new Marker().setLngLat(lngLat).addTo(this.map!);
+      new Marker({ color: '#30daa6' }).setLngLat(lngLat).addTo(this.map!);
     });
   }
 }
