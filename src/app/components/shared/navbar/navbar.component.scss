@@ -1,7 +1,9 @@
+.btnNavBar,
 .dropdown-toggle {
   width: 100%;
   padding: 1.3rem;
 }
+.btnNavBar:hover,
 .dropdown-toggle:hover {
   background-color: hsl(var(--clr-primary-hsl) / 0.2);
 }

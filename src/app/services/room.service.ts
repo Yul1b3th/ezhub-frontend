@@ -13,9 +13,9 @@ interface State {
 
 @Injectable({ providedIn: 'root' })
 export class RoomService {
+  private http = inject(HttpClient);
   private readonly baseUrl: string = environment.baseUrl;
   private roomAdded = new Subject<Room>();
-  private http = inject(HttpClient);
 
   #state = signal<State>({
     loading: true,

@@ -8,7 +8,7 @@
       (click)="toggleMenu()"
       aria-expanded="false"
       aria-controls="menu"
-      class="peer cursor-pointer transition-all z-[1050] rounded p-1 hover:bg-primary focus:ring-2 focus:ring-slate-200"
+      class="cursor-pointer transition-all z-[1050] rounded p-1 hover:bg-primary focus:ring-2 focus:ring-slate-200"
     >
       <span class="sr-only">Menu</span>
       <img
@@ -29,10 +29,23 @@
   </div>
 
   <!-- Button -->
-  <div class="flex items-center gap-5 w-full sm:w-min">
+  <div class="flex items-center gap-5 w-full md:w-min">
+    @if (!authService.user()) {
     <a class="btn btn-normal btn-primary mx-auto" routerLink="./publish">
       Publish
     </a>
+    }@else {
+    <!-- Menu User -->
+    <button
+      id="userMenuButton"
+      class="btn-normal mx-auto"
+      *ngIf="authService.user()"
+      (click)="toggleUserMenu()"
+    >
+      <img class="w-[30px] mr-2" src="assets/icons/user.svg" alt="" /> Hello,
+      {{ authService.user()?.username }}
+    </button>
+    }
   </div>
 
   <!-- Menu -->
@@ -63,6 +76,7 @@
       <li>
         <a
           #menuItems
+          class="border-b-[1.5px] border-primary"
           routerLink="./publish"
           routerLinkActive="active"
           [attr.tabindex]="menuOpen ? '0' : '-1'"
@@ -72,11 +86,12 @@
         </a>
       </li>
 
+      @if (!authService.user()) {
       <!-- Log In -->
       <li>
         <a
           #menuItems
-          class="border-t-[1.5px] border-b-[1.5px] border-primary"
+          class="border-b-[1.5px] border-primary"
           routerLink="./log-in"
           routerLinkActive="active"
           [attr.tabindex]="menuOpen ? '0' : '-1'"
@@ -99,6 +114,7 @@
           Sign Up
         </a>
       </li>
+      }
 
       <!-- Help and Contact -->
       <li>
@@ -234,6 +250,44 @@
             </a>
           </li>
         </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Menu User -->
+  <div
+    id="userMenu"
+    class="menu fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform z-[1000] overflow-auto max-h-screen"
+    [style.transform]="userMenuOpen ? 'translateX(0)' : 'translateX(100%)'"
+    (keydown)="onKeydown($event)"
+  >
+    <ul
+      class="absolute inset-x-0 top-24 p-5 w-[76%] mx-auto rounded-md h-max text-center grid font-semibold text-dark-blue shadow-2xl bg-white dark:bg-dark-200"
+    >
+      <!-- Publish -->
+      <li>
+        <a
+          #menuItems
+          class="border-b-[1.5px] border-t-[1.5px] border-primary"
+          routerLink="./publish"
+          routerLinkActive="active"
+          [attr.tabindex]="userMenuOpen ? '0' : '-1'"
+          (click)="closeUserMenu()"
+        >
+          Publish
+        </a>
+      </li>
+
+      <!-- Log Out -->
+      <li>
+        <button
+          #menuItems
+          class="btnNavBar border-b-[1.5px] border-primary"
+          [attr.tabindex]="userMenuOpen ? '0' : '-1'"
+          (click)="onLogout(); closeUserMenu()"
+        >
+          Log Out
+        </button>
       </li>
     </ul>
   </div>

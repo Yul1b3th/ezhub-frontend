@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  mode: "jit",
   content: ["./src/**/*.{html,ts}"],
   darkMode: "class", // Añade esta línea
   theme: {
@@ -36,12 +37,13 @@ module.exports = {
       },
       boxShadow: {
         "primary-hover": "0 0 0 2px hsl(161.647, 70%, 52%)",
+        "focus-primary": "0 0 2px 3px hsla(161.647, 70%, 52%, 0.3)", // Añade esta línea
       },
     },
   },
   variants: {
     extend: {
-      boxShadow: ["hover"],
+      boxShadow: ["hover", "focus"], // Añade "focus" aquí
     },
   },
   plugins: [],

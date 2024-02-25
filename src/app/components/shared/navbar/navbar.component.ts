@@ -5,16 +5,18 @@ import {
   QueryList,
   ElementRef,
   OnInit,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { SearchBarComponent } from '../../search-bar/search-bar.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'nav',
   standalone: true,
-  imports: [RouterModule, CommonModule, SearchBarComponent],
+  imports: [CommonModule, RouterModule, SearchBarComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -28,8 +30,14 @@ export class NavbarComponent implements OnInit {
   darkMode = false;
   fontSize = 16; // Tamaño de fuente inicial en px
 
+  userMenuOpen = false;
+
+  public authService = inject(AuthService);
+
   ngOnInit() {
     // ... tu código existente ...
+    console.log(this.authService.user());
+    console.log(Boolean(this.authService.user()));
 
     // Recuperar la preferencia del usuario del almacenamiento local
     const savedTheme = localStorage.getItem('theme');
@@ -48,26 +56,8 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
-    this.helpContact = false;
-    this.accessibility = false;
-    this.ezhub = false;
-    const button = document.getElementById('toggleButton');
-    if (button) {
-      button.setAttribute('aria-expanded', this.menuOpen ? 'true' : 'false');
-    }
-
-    // Si el menú está abierto, mueve el enfoque al primer elemento del menú
-    if (this.menuOpen) {
-      // Espera a que la vista se actualice
-      setTimeout(() => {
-        const menuItemsArray = this.menuItems.toArray();
-        if (menuItemsArray.length > 0) {
-          menuItemsArray[0].nativeElement.focus();
-        }
-      });
-    }
+  onLogout() {
+    this.authService.logout();
   }
 
   toggleHelpContact() {
@@ -135,13 +125,61 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  closeMenu() {
-    this.menuOpen = false;
+  toggleUserMenu() {
+    this.userMenuOpen = !this.userMenuOpen; // Cambia el estado del menú de usuario
+    if (this.userMenuOpen) {
+      this.menuOpen = false; // Si el menú de usuario está abierto, cierra el menú principal
+    }
+    const button = document.getElementById('userMenuButton');
+    if (button) {
+      // Establece el atributo aria-expanded en el botón del menú de usuario para indicar si el menú de usuario está abierto o cerrado
+      button.setAttribute(
+        'aria-expanded',
+        this.userMenuOpen ? 'true' : 'false'
+      );
+    }
+  }
+
+  closeUserMenu() {
+    this.userMenuOpen = false; // Cierra el menú de usuario
+    const button = document.getElementById('userMenuButton');
+    if (button) {
+      // Establece el atributo aria-expanded en el botón del menú de usuario para indicar que el menú de usuario está cerrado
+      button.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen; // Cambia el estado del menú principal
     this.helpContact = false;
     this.accessibility = false;
     this.ezhub = false;
     const button = document.getElementById('toggleButton');
     if (button) {
+      // Establece el atributo aria-expanded en el botón del menú principal para indicar si el menú principal está abierto o cerrado
+      button.setAttribute('aria-expanded', this.menuOpen ? 'true' : 'false');
+    }
+
+    // Si el menú está abierto, mueve el enfoque al primer elemento del menú
+    if (this.menuOpen) {
+      this.userMenuOpen = false; // Si el menú principal está abierto, cierra el menú de usuario
+      setTimeout(() => {
+        const menuItemsArray = this.menuItems.toArray();
+        if (menuItemsArray.length > 0) {
+          menuItemsArray[0].nativeElement.focus();
+        }
+      });
+    }
+  }
+
+  closeMenu() {
+    this.menuOpen = false; // Cierra el menú principal
+    this.helpContact = false;
+    this.accessibility = false;
+    this.ezhub = false;
+    const button = document.getElementById('toggleButton');
+    if (button) {
+      // Establece el atributo aria-expanded en el botón del menú principal para indicar que el menú principal está cerrado
       button.setAttribute('aria-expanded', 'false');
     }
   }

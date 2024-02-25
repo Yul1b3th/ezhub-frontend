@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -14,25 +16,27 @@ import { AuthService } from '../../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export default class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
+export default class LoginComponent {
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService
-  ) {}
-
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      usernameOrEmail: ['user1', Validators.required],
-      password: ['123456', Validators.required],
-    });
-  }
+  public loginForm: FormGroup = this.fb.group({
+    usernameOrEmail: ['user1', Validators.required],
+    password: ['123456', Validators.required],
+  });
 
   onSubmit() {
     if (this.loginForm.valid) {
       const { usernameOrEmail, password } = this.loginForm.value;
-      this.authService.login(usernameOrEmail, password).subscribe();
+      this.authService.login(usernameOrEmail, password).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
     }
   }
 }
