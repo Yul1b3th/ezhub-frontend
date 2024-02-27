@@ -42,6 +42,12 @@ export class AuthService {
     this._currentUser.set(null);
     // this._authStatus.set(AuthStatus.notAuthenticated);
   }
+
+  register(username: string, email: string, password: string) {
+    const url = `${this.baseUrl}/auth/register`;
+    const body = { username, email, password };
+    return this.http.post(url, body);
+  }
 }
 
 /* getToken() {

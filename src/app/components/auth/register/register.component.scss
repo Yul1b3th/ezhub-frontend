@@ -1,0 +1,23 @@
+.form {
+  @apply w-full  mx-auto max-w-sm rounded mb-4 bg-zinc-50 dark:bg-light border border-zinc-200 p-5 shadow-sm;
+}
+
+.sign-in {
+  @apply w-full  mx-auto max-w-sm rounded mb-4  border border-zinc-200 p-5 shadow-sm;
+}
+
+a {
+  @apply text-primary-900 font-medium;
+}
+
+a:hover {
+  @apply underline;
+}
+
+label {
+  @apply block text-sm font-bold mb-2;
+}
+
+input {
+  @apply border border-zinc-200 block w-full px-3 py-2 rounded-md leading-5 focus:outline-none focus:shadow-focus-primary focus:border-primary transition-colors duration-150;
+}

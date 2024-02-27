@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
@@ -12,7 +13,7 @@ import { AuthService } from '../../../services/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -22,8 +23,8 @@ export default class LoginComponent {
   private router = inject(Router);
 
   public loginForm: FormGroup = this.fb.group({
-    usernameOrEmail: ['user1', Validators.required],
-    password: ['123456', Validators.required],
+    usernameOrEmail: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   onSubmit() {

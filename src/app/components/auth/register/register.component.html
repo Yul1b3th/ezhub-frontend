@@ -1,3 +1,96 @@
-<div class="container mx-auto px-5 mt-20">
-  <p>register works!</p>
+<div class="container mx-auto px-5 my-10">
+  <!-- Create an account -->
+  <div class="form">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <p class="font-bold text-lg mb-3">Create an account</p>
+
+      <!-- Username -->
+      <div class="mb-4">
+        <div class="mb-2">
+          <label for="username"> Username </label>
+          <input
+            formControlName="username"
+            id="username"
+            type="text"
+            placeholder="Username"
+          />
+        </div>
+
+        @if (formSubmitted && registerForm.get('username')?.errors) {
+        <div
+          class="w-full bg-red-100 p-1 rounded-md border border-red-500 text-sm text-red-500"
+        >
+          <p
+            customLabel
+            [errors]="registerForm.get('username')?.errors"
+            [fieldName]="'username'"
+          ></p>
+        </div>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="mb-4">
+        <div class="mb-2">
+          <label for="email"> Email </label>
+          <input
+            formControlName="email"
+            id="email"
+            type="email"
+            placeholder="Email"
+          />
+        </div>
+
+        @if (formSubmitted && registerForm.get('email')?.errors) {
+        <div
+          class="w-full bg-red-100 p-2 rounded-md border border-red-500 text-sm text-red-500"
+        >
+          <p
+            customLabel
+            [errors]="registerForm.get('email')?.errors"
+            [fieldName]="'email'"
+          ></p>
+        </div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-6">
+        <div class="mb-2">
+          <label for="password"> Password </label>
+          <input
+            formControlName="password"
+            id="password"
+            type="password"
+            placeholder="******************"
+          />
+        </div>
+
+        @if (formSubmitted && registerForm.get('password')?.errors) {
+        <div
+          class="w-full bg-red-100 p-1 rounded-md border border-red-500 text-sm text-red-500"
+        >
+          <p
+            customLabel
+            [errors]="registerForm.get('password')?.errors"
+            [fieldName]="'password'"
+          ></p>
+        </div>
+        }
+      </div>
+
+      <!-- Button -->
+      <div class="flex items-center justify-between mb-2">
+        <button class="btn btn-normal btn-primary" type="submit">
+          Sign Up
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Sign in -->
+  <div class="sign-in">
+    <p class="mb-2">Already hace an account?</p>
+    <a href="./sign-in">Sign in</a>
+  </div>
 </div>

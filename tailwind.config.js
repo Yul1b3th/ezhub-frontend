@@ -10,10 +10,11 @@ module.exports = {
       },
 
       colors: {
-        "primary-200": "hsl(157.864, 67%, 70%)",
         primary: "hsl(161.647, 70%, 52%)",
-        "secondary-200": "hsl(180, 60%, 69%)",
+        "primary-200": "hsl(157.864, 67%, 70%)",
+        "primary-900": "hsl(176.809, 94%, 20%)",
         secondary: "hsl(181.324, 61%, 56%)",
+        "secondary-200": "hsl(180, 60%, 69%)",
         dark: "hsl(0, 0%, 11%)",
         "dark-200": "hsl(0, 0%, 6%)",
         light: "hsl(0, 0%, 25%)",
@@ -22,10 +23,10 @@ module.exports = {
         gray: "hsl(180, 23%, 95%)",
       },
       backgroundColor: {
-        "primary-200": "hsl(157.864, 67%, 70%)",
         primary: "hsl(161.647, 70%, 52%)",
-        "secondary-200": "hsl(180, 60%, 69%)",
+        "primary-200": "hsl(157.864, 67%, 70%)",
         secondary: "hsl(181.324, 61%, 56%)",
+        "secondary-200": "hsl(180, 60%, 69%)",
         dark: "hsl(0, 0%, 11%)",
         "dark-200": "hsl(0, 0%, 6%)",
         "gray:": "hsl(180, 23%, 95%)",

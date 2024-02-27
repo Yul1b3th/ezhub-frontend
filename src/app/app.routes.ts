@@ -36,6 +36,7 @@ export const routes: Routes = [
       },
       {
         path: ':id',
+        title: 'EZHub | Room',
         loadComponent: () =>
           import('./components/rooms/details/details.component'),
       },
