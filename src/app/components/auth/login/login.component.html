@@ -1,25 +1,59 @@
 <div class="container mx-auto px-5 my-10">
+  <!-- Email -->
   <div class="form">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <p class="font-bold text-lg mb-3">Sign in to EZHub</p>
+
+      <!-- Username or Email -->
       <div class="mb-4">
-        <label for="usernameOrEmail"> Username or Email </label>
-        <input
-          formControlName="usernameOrEmail"
-          id="usernameOrEmail"
-          type="text"
-          placeholder="Username or Email"
-        />
+        <div class="mb-2">
+          <label for="usernameOrEmail"> Username or Email </label>
+          <input
+            formControlName="usernameOrEmail"
+            id="usernameOrEmail"
+            type="text"
+            placeholder="Username or Email"
+            (input)="cleanUsername($event)"
+          />
+        </div>
+
+        @if (formSubmitted && loginForm.get('usernameOrEmail')?.errors) {
+        <div
+          class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
+        >
+          <p
+            customLabel
+            [errors]="loginForm.get('usernameOrEmail')?.errors"
+            [fieldName]="'Username or Email'"
+          ></p>
+        </div>
+        }
       </div>
 
+      <!-- Password -->
       <div class="mb-6">
-        <label for="password"> Password </label>
-        <input
-          formControlName="password"
-          id="password"
-          type="password"
-          placeholder="******************"
-        />
+        <div class="mb-2">
+          <label for="password"> Password </label>
+          <input
+            formControlName="password"
+            id="password"
+            type="password"
+            placeholder="******************"
+            (input)="cleanPassword($event)"
+          />
+        </div>
+
+        @if (formSubmitted && loginForm.get('password')?.errors) {
+        <div
+          class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
+        >
+          <p
+            customLabel
+            [errors]="loginForm.get('password')?.errors"
+            [fieldName]="'password'"
+          ></p>
+        </div>
+        }
       </div>
 
       <div class="flex items-center justify-between">
@@ -30,6 +64,7 @@
     </form>
   </div>
 
+  <!-- Create an account -->
   <div class="register">
     <p class="mb-2">Don't you have an account?</p>
     <a href="./sign-up">Create an account</a>

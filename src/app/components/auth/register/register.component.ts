@@ -23,13 +23,20 @@ export default class RegisterComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  public emailPattern: string =
+    '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$';
+
   public formSubmitted = false;
 
   public registerForm: FormGroup = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(4)]],
     email: [
       '',
-      [Validators.required, Validators.minLength(4), Validators.email],
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.pattern(this.emailPattern),
+      ],
     ],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
@@ -63,4 +70,34 @@ export default class RegisterComponent {
       }
     }
   }
+
+  cleanUsername(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    // Limpia los espacios en blanco
+    inputElement.value = inputElement.value.replace(/\s/g, '');
+    this.registerForm.get('username')?.setValue(inputElement.value);
+  }
+
+  cleanEmail(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    inputElement.value = inputElement.value
+      .trim()
+      .replace(/[^a-zA-Z0-9.@_-]+/g, '');
+    this.registerForm.get('email')?.setValue(inputElement.value);
+  }
+
+  cleanPassword(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    inputElement.value = inputElement.value.replace(/\s/g, '');
+    this.registerForm.get('password')?.setValue(inputElement.value);
+  }
 }
+
+/*   cleanUsername1(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    // Limpia y restringe caracteres no permitidos
+    inputElement.value = inputElement.value
+      .trim()
+      .replace(/[^a-zA-ZÀ-ÿ\s]+/gu, '');
+    this.registerForm.get('username')?.setValue(inputElement.value);
+  } */

@@ -61,7 +61,7 @@ export class CustomLabelDirective {
       return;
     }
 
-    if (errors.includes('email')) {
+    if (errors.includes('pattern')) {
       this.htmlElement.nativeElement.innerText = 'Invalid email format.';
       return;
     }
@@ -75,5 +75,20 @@ export class CustomLabelDirective {
       this.htmlElement.nativeElement.innerText = 'Email exists.';
       return;
     }
+
+    if (errors.includes('usernameOrEmailWrong')) {
+      this.htmlElement.nativeElement.innerText = 'Username or email is wrong.';
+      return;
+    }
+
+    if (errors.includes('passwordWrong')) {
+      this.htmlElement.nativeElement.innerText = 'Password is wrong.';
+      return;
+    }
   }
 }
+
+/* if (errors.includes('email')) {
+      this.htmlElement.nativeElement.innerText = 'Invalid email format.';
+      return;
+    } */

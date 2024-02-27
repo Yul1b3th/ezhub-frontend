@@ -13,12 +13,13 @@
             id="username"
             type="text"
             placeholder="Username"
+            (input)="cleanUsername($event)"
           />
         </div>
 
         @if (formSubmitted && registerForm.get('username')?.errors) {
         <div
-          class="w-full bg-red-100 p-1 rounded-md border border-red-500 text-sm text-red-500"
+          class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
         >
           <p
             customLabel
@@ -38,12 +39,13 @@
             id="email"
             type="email"
             placeholder="Email"
+            (input)="cleanEmail($event)"
           />
         </div>
 
         @if (formSubmitted && registerForm.get('email')?.errors) {
         <div
-          class="w-full bg-red-100 p-2 rounded-md border border-red-500 text-sm text-red-500"
+          class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
         >
           <p
             customLabel
@@ -63,12 +65,13 @@
             id="password"
             type="password"
             placeholder="******************"
+            (input)="cleanPassword($event)"
           />
         </div>
 
         @if (formSubmitted && registerForm.get('password')?.errors) {
         <div
-          class="w-full bg-red-100 p-1 rounded-md border border-red-500 text-sm text-red-500"
+          class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
         >
           <p
             customLabel
