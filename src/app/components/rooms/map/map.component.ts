@@ -25,7 +25,11 @@ export default class MapComponent implements AfterViewInit, OnInit {
   public apiUrl = 'http://localhost:8000/api/public-properties/';
   public properties: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    if (localStorage.getItem('url')) {
+      localStorage.removeItem('url');
+    }
+  }
 
   ngOnInit(): void {
     this.http.get<any[]>(this.apiUrl).subscribe((data) => {

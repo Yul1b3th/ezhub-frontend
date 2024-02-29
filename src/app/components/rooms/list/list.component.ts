@@ -13,4 +13,10 @@ import { RouterModule } from '@angular/router';
 })
 export default class ListComponent {
   publicRoomService = inject(PublicRoomService);
+
+  constructor() {
+    if (localStorage.getItem('url')) {
+      localStorage.removeItem('url');
+    }
+  }
 }

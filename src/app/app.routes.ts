@@ -1,5 +1,10 @@
 import { Routes } from '@angular/router';
 
+import {
+  isAuthenticatedGuard,
+  isNotAuthenticatedGuard,
+} from './components/auth/guards';
+
 export const routes: Routes = [
   // Home
   {
@@ -42,16 +47,27 @@ export const routes: Routes = [
       },
     ],
   },
+
   // Publish
   {
     path: 'publish',
+    canActivate: [isAuthenticatedGuard],
     title: 'EZHub | Publish ',
-    loadComponent: () => import('./components/properties/add/add.component'),
+    loadComponent: () => import('./components/rooms/add/add.component'),
+  },
+
+  // Contact
+  {
+    path: 'contact',
+    canActivate: [isAuthenticatedGuard],
+    title: 'EZHub | Contact ',
+    loadComponent: () => import('./components/contact/contact.component'),
   },
 
   // Log In
   {
     path: 'log-in',
+    canActivate: [isNotAuthenticatedGuard],
     title: 'EZHub | Log In',
     loadComponent: () => import('./components/auth/login/login.component'),
   },
@@ -59,6 +75,7 @@ export const routes: Routes = [
   // Sign Up
   {
     path: 'sign-up',
+    canActivate: [isNotAuthenticatedGuard],
     title: 'EZHub | Sign Up',
     loadComponent: () =>
       import('./components/auth/register/register.component'),

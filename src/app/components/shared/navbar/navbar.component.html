@@ -30,8 +30,8 @@
 
   <!-- Button -->
   <div class="flex items-center gap-5 w-full md:w-min">
-    @if (!authService.user()) {
-    <a class="btn btn-normal btn-primary mx-auto" routerLink="./publish">
+    @if (!authService.currentUser()) {
+    <a class="btn btn-normal btn-primary mx-auto" routerLink="/publish">
       Publish
     </a>
     }@else {
@@ -39,11 +39,15 @@
     <button
       id="userMenuButton"
       class="btn-normal mx-auto"
-      *ngIf="authService.user()"
+      *ngIf="authService.currentUser()"
       (click)="toggleUserMenu()"
     >
-      <img class="w-[30px] mr-2" src="assets/icons/user.svg" alt="" /> Hello,
-      {{ authService.user()?.username }}
+      <img
+        class="w-[30px] mr-2"
+        src="assets/icons/user.svg"
+        alt=""
+      />&nbsp;Hello,&nbsp;
+      <span class="capitalize">{{ authService.currentUser()?.username }}</span>
     </button>
     }
   </div>
@@ -86,7 +90,7 @@
         </a>
       </li>
 
-      @if (!authService.user()) {
+      @if (!authService.currentUser()) {
       <!-- Log In -->
       <li>
         <a

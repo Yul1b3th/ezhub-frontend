@@ -37,7 +37,10 @@ export default class LoginComponent {
       const { usernameOrEmail, password } = this.loginForm.value;
       this.authService.login(usernameOrEmail, password).subscribe({
         next: () => {
-          this.router.navigate(['/']);
+          //this.router.navigateByUrl('/');
+
+          const redirectUrl = localStorage.getItem('url');
+          this.router.navigateByUrl(redirectUrl ?? '/');
         },
         error: (err) => {
           console.log(err);

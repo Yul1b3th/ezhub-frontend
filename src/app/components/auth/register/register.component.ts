@@ -29,7 +29,7 @@ export default class RegisterComponent {
   public formSubmitted = false;
 
   public registerForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required, Validators.minLength(4)]],
+    username: ['', [Validators.required, Validators.minLength(3)]],
     email: [
       '',
       [

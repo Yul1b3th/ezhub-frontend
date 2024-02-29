@@ -9,7 +9,7 @@ import {
   computed,
   inject,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import {
@@ -32,7 +32,7 @@ import { Amenity } from '../../../interfaces/amenity.interface';
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })

@@ -8,7 +8,7 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { SearchBarComponent } from '../../search-bar/search-bar.component';
 import { AuthService } from '../../../services/auth.service';
@@ -33,11 +33,11 @@ export class NavbarComponent implements OnInit {
   userMenuOpen = false;
 
   public authService = inject(AuthService);
+  public router = inject(Router);
 
   ngOnInit() {
-    // ... tu código existente ...
-    console.log(this.authService.user());
-    console.log(Boolean(this.authService.user()));
+    //console.log(this.authService.currentUser());
+    //console.log(Boolean(this.authService.currentUser()));
 
     // Recuperar la preferencia del usuario del almacenamiento local
     const savedTheme = localStorage.getItem('theme');
@@ -58,6 +58,7 @@ export class NavbarComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+    this.router.navigateByUrl('/list');
   }
 
   toggleHelpContact() {
@@ -181,6 +182,9 @@ export class NavbarComponent implements OnInit {
     if (button) {
       // Establece el atributo aria-expanded en el botón del menú principal para indicar que el menú principal está cerrado
       button.setAttribute('aria-expanded', 'false');
+    }
+    if (localStorage.getItem('url')) {
+      localStorage.removeItem('url');
     }
   }
 }

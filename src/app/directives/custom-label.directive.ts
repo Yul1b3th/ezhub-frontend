@@ -77,7 +77,7 @@ export class CustomLabelDirective {
     }
 
     if (errors.includes('usernameOrEmailWrong')) {
-      this.htmlElement.nativeElement.innerText = 'Username or email is wrong.';
+      this.htmlElement.nativeElement.innerText = 'Username or Email is wrong.';
       return;
     }
 
@@ -87,8 +87,3 @@ export class CustomLabelDirective {
     }
   }
 }
-
-/* if (errors.includes('email')) {
-      this.htmlElement.nativeElement.innerText = 'Invalid email format.';
-      return;
-    } */

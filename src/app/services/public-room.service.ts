@@ -35,9 +35,9 @@ export class PublicRoomService {
         loading: false,
         rooms: res,
       });
-      console.log(res);
+      //console.log(res);
     });
-    console.log('Cargando data');
+    //console.log('Cargando data');
   }
 
   getRoomById(id: number) {
