@@ -13,6 +13,6 @@ export default class EditComponent {
   private roomService = inject(RoomService);
 
   constructor() {
-    this.roomService.getRooms().subscribe((rooms) => console.log(rooms));
+    // this.roomService.getRooms().subscribe((rooms) => console.log(rooms));
   }
 }

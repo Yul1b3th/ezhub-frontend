@@ -6,6 +6,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { AuthService } from './services/auth.service';
 import { AuthStatus } from './components/auth/interfaces/auth-status.enum';
 import { CommonModule } from '@angular/common';
+import { PlacesService } from './maps/services';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit {
     return true;
   });
 
-  constructor() {
+  constructor(private placesServices: PlacesService) {
     // console.log('constructor');
     // console.log(this.finishedAuthCheck());
   }
@@ -44,19 +45,22 @@ export class AppComponent implements OnInit {
   // Se dispara automáticamente cuando cambia el estado de autenticación (authStatus).
   public authStatusChangedEffect = effect(() => {
     //console.log('first');
-    console.log('authStatus', this.authService.authStatus());
+    //console.log('authStatus', this.authService.authStatus());
     switch (this.authService.authStatus()) {
       case AuthStatus.checking:
-        console.log(this.finishedAuthCheck());
+        console.log(AuthStatus.checking);
+        //console.log(this.finishedAuthCheck());
         return;
 
       case AuthStatus.authenticated:
-        console.log(this.finishedAuthCheck());
+        console.log(AuthStatus.authenticated);
+        //console.log(this.finishedAuthCheck());
         //this.router.navigateByUrl('/dashboard');
         return;
 
       case AuthStatus.notAuthenticated:
-        console.log(this.finishedAuthCheck());
+        console.log(AuthStatus.notAuthenticated);
+        //console.log(this.finishedAuthCheck());
         //this.router.navigateByUrl('/auth/login');
         return;
     }

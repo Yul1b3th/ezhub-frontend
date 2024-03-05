@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../../services/auth.service';
 import { CustomLabelDirective } from '../../../directives/custom-label.directive';
+import { AuthStatus } from '../interfaces/auth-status.enum';
 
 @Component({
   selector: 'app-login',
@@ -19,28 +20,41 @@ import { CustomLabelDirective } from '../../../directives/custom-label.directive
   styleUrl: './login.component.scss',
 })
 export default class LoginComponent {
-  private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private fb = inject(FormBuilder);
   private router = inject(Router);
-
-  public formSubmitted = false;
 
   public loginForm: FormGroup = this.fb.group({
     usernameOrEmail: ['', Validators.required],
     password: ['', Validators.required],
   });
 
+  public formSubmitted = false;
+
   onSubmit() {
     this.formSubmitted = true;
 
     if (this.loginForm.valid) {
       const { usernameOrEmail, password } = this.loginForm.value;
+      console.log(this.authService.authStatus());
+
       this.authService.login(usernameOrEmail, password).subscribe({
         next: () => {
-          //this.router.navigateByUrl('/');
+          console.log(this.authService.authStatus());
+          if (this.authService.authStatus() === AuthStatus.authenticated) {
+            const redirectUrl = localStorage.getItem('state-url');
+            console.log({ redirectUrl });
 
-          const redirectUrl = localStorage.getItem('url');
-          this.router.navigateByUrl(redirectUrl ?? '/');
+            if (redirectUrl) {
+              console.log('yuli');
+
+              this.router.navigateByUrl(redirectUrl);
+              localStorage.removeItem('state-url');
+              return;
+            }
+          }
+
+          this.router.navigateByUrl('/');
         },
         error: (err) => {
           console.log(err);

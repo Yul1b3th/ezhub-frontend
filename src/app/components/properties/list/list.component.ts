@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { PropertyService } from '../../../services/property.service';
 
 @Component({
   selector: 'app-list',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export class ListComponent {}
+export default class ListComponent {
+  public propertyService = inject(PropertyService);
+}

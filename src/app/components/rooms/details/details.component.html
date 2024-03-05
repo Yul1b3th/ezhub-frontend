@@ -102,7 +102,12 @@
       </p>
       <p class="mb-4">Room size: {{ roomData.room_size }} m<sup>2</sup></p>
       <p class="mb-4">Room price: {{ roomData.precio | number : "1.0-0" }}</p>
-      <a routerLink="/contact" class="btn btn-primary btn-normal">Contact</a>
+      <a
+        class="btn btn-primary btn-normal"
+        (click)="contact()"
+        routerLink="/contact"
+        >Contact</a
+      >
     </div>
   </div>
 

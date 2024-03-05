@@ -1,1 +1,25 @@
-<p>list works!</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+  @for (property of propertyService.propertiesJWT(); track property.id) {
+  <div class="flex flex-col">
+    <div
+      class="flex flex-col bg-white dark:bg-light dark:text-white rounded-lg shadow-md overflow-hidden h-full transition-all hover:shadow-primary-hover"
+    >
+      <div class="p-4 flex-grow">
+        <h2 class="font-bold">{{ property.name }}</h2>
+        <p class="mt-2">{{ property.details }}</p>
+      </div>
+
+      <!-- <div class="p-4">
+        <a
+          class="btn btn-secondary btn-normal"
+          [routerLink]="['/rooms', property.id]"
+        >
+          See more
+        </a>
+      </div> -->
+    </div>
+  </div>
+  } @empty {
+  <p class="text-lg text-center">There are no items.</p>
+  }
+</div>

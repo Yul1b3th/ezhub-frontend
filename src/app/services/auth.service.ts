@@ -16,32 +16,27 @@ export class AuthService {
   private http = inject(HttpClient);
 
   private _currentUser = signal<User | null>(null);
-  private _authStatus = signal<AuthStatus>(AuthStatus.checking);
+  private _authStatus = signal<AuthStatus | null>(null);
 
   public currentUser = computed(() => this._currentUser());
   public authStatus = computed(() => this._authStatus());
 
   constructor() {
     this.checkAuthStatus().subscribe();
+    // Lee el estado de autenticación del almacenamiento local cuando la aplicación se inicia
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    this._authStatus.set(
+      isAuthenticated ? AuthStatus.authenticated : AuthStatus.notAuthenticated
+    );
   }
 
   private setAuthentication(user: User, token: string): boolean {
     this._currentUser.set(user);
-    //console.log(this._currentUser());
     this._authStatus.set(AuthStatus.authenticated);
     localStorage.setItem('token', token);
+    // Almacena el estado de autenticación en el almacenamiento local cuando el usuario se autentica
+    localStorage.setItem('isAuthenticated', 'true');
     return true;
-  }
-
-  login2(usernameOrEmail: string, password: string): Observable<boolean> {
-    const url = `${this.baseUrl}/auth/login`;
-    const body = { usernameOrEmail, password };
-
-    return this.http.post<LoginResponse>(url, body).pipe(
-      //tap((response) => console.log(response)),
-      map(({ user, token }) => this.setAuthentication(user, token)),
-      catchError((err) => throwError(() => err.error.message))
-    );
   }
 
   login(usernameOrEmail: string, password: string): Observable<boolean> {
@@ -90,5 +85,7 @@ export class AuthService {
     localStorage.removeItem('url');
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.notAuthenticated);
+    // Elimina el estado de autenticación del almacenamiento local cuando el usuario se desautentica
+    localStorage.removeItem('isAuthenticated');
   }
 }

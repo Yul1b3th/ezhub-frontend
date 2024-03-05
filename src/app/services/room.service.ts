@@ -1,70 +1,82 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, Subject, tap } from 'rxjs';
+import { Observable, Subject, map, tap } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { Room } from '../interfaces/room.interface';
 
 interface State {
-  rooms: Room[];
-  loading: boolean;
+  roomsJWT: Room[];
+  loadingJWT: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
 export class RoomService {
   private http = inject(HttpClient);
   private readonly baseUrl: string = environment.baseUrl;
-  private roomAdded = new Subject<Room>();
 
   #state = signal<State>({
-    loading: true,
-    rooms: [],
+    loadingJWT: true,
+    roomsJWT: [],
   });
 
   // Señales computadas
-  public rooms = computed(() => this.#state().rooms);
-  public loading = computed(() => this.#state().loading);
+  public roomsJWT = computed(() => this.#state().roomsJWT);
+  public loadingJWT = computed(() => this.#state().loadingJWT);
 
   constructor() {
-    this.getPublicRooms();
+    this.getRooms();
   }
 
-  getPublicRooms(): void {
-    this.http.get<Room[]>(`${this.baseUrl}/public-rooms`).subscribe((res) => {
-      this.#state.set({
-        loading: false,
-        rooms: res,
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
+
+  getRooms(): void {
+    this.http
+      .get<Room[]>(`${this.baseUrl}/rooms`, {
+        headers: this.getAuthHeaders(),
+      })
+      .subscribe((res) => {
+        this.#state.set({
+          loadingJWT: false,
+          roomsJWT: res,
+        });
+        console.log(res);
       });
-      console.log(res);
-    });
     console.log('Cargando data');
   }
 
-  /* getPublicRooms() {
-    return this.http.get<Room[]>(`${this.baseUrl}/public-rooms`);
-  } */
-
-  getRooms(): Observable<Room[]> {
-    console.log(this.baseUrl);
-
+  getRoomById(id: number) {
     return this.http
-      .get<Room[]>(`${this.baseUrl}/rooms`)
-      .pipe(tap((rooms) => console.log(rooms)));
+      .get<Room>(`${this.baseUrl}/rooms/${id}`, {
+        headers: this.getAuthHeaders(),
+      })
+      .pipe(
+        map((res) => {
+          console.log(res);
+          return res;
+        })
+      );
   }
 
-  /* getRooms(): Observable<Room[]> {
-    console.log(this.baseUrl);
+  createRoom(room: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/rooms`, room, {
+      headers: this.getAuthHeaders(),
+    });
+  }
 
-    return this.http
-      .get<Room[]>(`${this.baseUrl}/rooms`)
-      .pipe(tap((rooms) => console.log(rooms)));
-  } */
+  updateRoomJWT(id: number, room: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/rooms/${id}`, room, {
+      headers: this.getAuthHeaders(),
+    });
+  }
 
-  getAllRooms() {
-    debugger;
-    this.http.get<Room[]>(`${this.baseUrl}/rooms`).subscribe((res: any) => {
-      console.log(res.data);
+  deleteRoombyIDJWT(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/rooms/${id}`, {
+      headers: this.getAuthHeaders(),
     });
   }
 }

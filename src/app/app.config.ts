@@ -11,6 +11,7 @@ import mapboxgl from 'mapbox-gl';
 
 import { routes } from './app.routes';
 import { environment } from '../environments/environment';
+import { authInterceptor } from './interceptors/auth-interceptor.interceptor';
 
 mapboxgl.accessToken = environment.mapbox_key;
 
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     //provideHttpClient(withInterceptors([authInterceptor, tokenInterceptor])),
+    //provideHttpClient(withInterceptors([authInterceptor])),
     importProvidersFrom(HttpClientModule),
     provideAnimationsAsync(),
   ],

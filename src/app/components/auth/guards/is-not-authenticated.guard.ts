@@ -12,6 +12,7 @@ export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   console.log('isNotAuthenticatedGuard');
+  console.log(authService.authStatus());
 
   return authService.checkAuthStatus().pipe(
     map((isAuthenticated) => {

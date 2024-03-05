@@ -12,6 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 
 import { SearchBarComponent } from '../../search-bar/search-bar.component';
 import { AuthService } from '../../../services/auth.service';
+import { AuthStatus } from '../../auth/interfaces/auth-status.enum';
 
 @Component({
   selector: 'nav',
@@ -183,8 +184,15 @@ export class NavbarComponent implements OnInit {
       // Establece el atributo aria-expanded en el botón del menú principal para indicar que el menú principal está cerrado
       button.setAttribute('aria-expanded', 'false');
     }
-    if (localStorage.getItem('url')) {
+    /* if (localStorage.getItem('url')) {
       localStorage.removeItem('url');
+    } */
+  }
+
+  publish() {
+    if (this.authService.authStatus() === AuthStatus.notAuthenticated) {
+      console.log('btn publish clicked');
+      localStorage.setItem('state-url', '/publish');
     }
   }
 }

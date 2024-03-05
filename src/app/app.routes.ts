@@ -53,7 +53,24 @@ export const routes: Routes = [
     path: 'publish',
     canActivate: [isAuthenticatedGuard],
     title: 'EZHub | Publish ',
-    loadComponent: () => import('./components/rooms/add/add.component'),
+    loadComponent: () => import('./components/publish/publish.component'),
+    children: [
+      {
+        path: 'properties',
+        loadComponent: () =>
+          import('./components/properties/list/list.component'),
+      },
+      {
+        path: 'rooms',
+        loadComponent: () =>
+          import('./components/rooms/list-jwt/list-jwt.component'),
+      },
+      {
+        path: '',
+        redirectTo: 'properties',
+        pathMatch: 'full',
+      },
+    ],
   },
 
   // Contact
@@ -67,7 +84,7 @@ export const routes: Routes = [
   // Log In
   {
     path: 'log-in',
-    canActivate: [isNotAuthenticatedGuard],
+    //canActivate: [isNotAuthenticatedGuard],
     title: 'EZHub | Log In',
     loadComponent: () => import('./components/auth/login/login.component'),
   },
@@ -75,7 +92,7 @@ export const routes: Routes = [
   // Sign Up
   {
     path: 'sign-up',
-    canActivate: [isNotAuthenticatedGuard],
+    //canActivate: [isNotAuthenticatedGuard],
     title: 'EZHub | Sign Up',
     loadComponent: () =>
       import('./components/auth/register/register.component'),

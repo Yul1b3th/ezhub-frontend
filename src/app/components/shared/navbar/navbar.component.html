@@ -31,7 +31,11 @@
   <!-- Button -->
   <div class="flex items-center gap-5 w-full md:w-min">
     @if (!authService.currentUser()) {
-    <a class="btn btn-normal btn-primary mx-auto" routerLink="/publish">
+    <a
+      class="btn btn-normal btn-primary mx-auto"
+      (click)="publish()"
+      routerLink="/publish"
+    >
       Publish
     </a>
     }@else {

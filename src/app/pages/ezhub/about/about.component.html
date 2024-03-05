@@ -1,3 +1,9 @@
 <div class="container mx-auto px-5 mt-20">
   <p>about works!</p>
+
+  <app-loading *ngIf="!isUserLocationReady; else mapReady"></app-loading>
+
+  <ng-template #mapReady>
+    <app-map-view></app-map-view>
+  </ng-template>
 </div>

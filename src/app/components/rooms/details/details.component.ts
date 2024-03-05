@@ -28,6 +28,8 @@ import { PublicRoomService } from '../../../services/public-room.service';
 import { Room } from '../../../interfaces/room.interface';
 import { Property } from '../../../interfaces/property.interface';
 import { Amenity } from '../../../interfaces/amenity.interface';
+import { AuthService } from '../../../services/auth.service';
+import { AuthStatus } from '../../auth/interfaces/auth-status.enum';
 
 @Component({
   selector: 'app-details',
@@ -37,6 +39,7 @@ import { Amenity } from '../../../interfaces/amenity.interface';
   styleUrl: './details.component.scss',
 })
 export default class DetailsComponent implements OnInit, OnDestroy {
+  public authService = inject(AuthService);
   private route = inject(ActivatedRoute);
   public propertyService = inject(PublicPropertyService);
   public roomService = inject(PublicRoomService);
@@ -115,6 +118,13 @@ export default class DetailsComponent implements OnInit, OnDestroy {
 
       // Crea un nuevo marcador con un color personalizado y añádelo al mapa
       new Marker({ color: '#30daa6' }).setLngLat([lng, lat]).addTo(this.map);
+    }
+  }
+
+  contact() {
+    if (this.authService.authStatus() === AuthStatus.notAuthenticated) {
+      console.log('btn publish contact');
+      // localStorage.setItem('url', '/contact');
     }
   }
 }
