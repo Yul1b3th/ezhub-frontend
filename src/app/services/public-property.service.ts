@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { Property } from '../interfaces/property.interface';
-import { map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
+import { PlacesService } from '../maps/services';
 
 interface State {
   properties: Property[];
@@ -24,11 +25,15 @@ export class PublicPropertyService {
   public properties = computed(() => this.#state().properties);
   public loading = computed(() => this.#state().loading);
 
-  constructor() {
-    this.getPublicProperties();
+  constructor(private placesService: PlacesService) {
+    //this.getPublicProperties();
   }
 
-  getPublicProperties(): void {
+  getPublicProperties(): Observable<Property[]> {
+    return this.http.get<Property[]>(`${this.baseUrl}/public-properties`);
+  }
+
+  /*    getPublicProperties(): void {
     this.http
       .get<Property[]>(`${this.baseUrl}/public-properties`)
       .subscribe((res) => {
@@ -39,7 +44,59 @@ export class PublicPropertyService {
         console.log(res);
       });
     console.log('Cargando data');
-  }
+  }  */
+
+  /*   getPublicProperties(): Observable<Property[]> {
+     if (!this.placesService.useLocation) {
+      console.error('No user location available');
+      return of([]);
+    }
+
+    if (this.placesService.useLocation) {
+      const [userLongitude, userLatitude] = this.placesService.useLocation;
+      console.log(userLongitude, userLatitude);
+
+      return this.http
+        .get<Property[]>(`${this.baseUrl}/public-properties`)
+        .pipe(
+          map((properties) => {
+            return properties.filter((property) => {
+              return this.placesService.calculateDistance(
+                userLongitude,
+                userLatitude,
+                Number(property.longitude),
+                Number(property.latitude)
+              );
+            });
+          })
+        );
+    }
+  } */
+
+  /*   getPublicProperties(): Observable<Property[]> {
+    if (this.placesService.useLocation) {
+      const [userLongitude, userLatitude] = this.placesService.useLocation;
+      console.log(userLongitude, userLatitude);
+
+      return this.http
+        .get<Property[]>(`${this.baseUrl}/public-properties`)
+        .pipe(
+          map((properties) => {
+            return properties.filter((property) => {
+              return this.placesService.calculateDistance(
+                userLongitude,
+                userLatitude,
+                Number(property.longitude),
+                Number(property.latitude)
+              );
+            });
+          })
+        );
+    } else {
+      // Devuelve un Observable vacío cuando useLocation no está definido
+      return of([]);
+    }
+  } */
 
   getPropertyById(id: number) {
     return this.http

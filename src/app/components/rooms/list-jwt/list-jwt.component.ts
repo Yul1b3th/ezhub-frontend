@@ -4,6 +4,14 @@ import { CommonModule } from '@angular/common';
 import { PublicRoomService } from '../../../services/public-room.service';
 import { RouterModule } from '@angular/router';
 import { RoomService } from '../../../services/room.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import EditComponent from '../edit/edit.component';
+import { Room } from '../../../interfaces/room.interface';
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-list',
@@ -15,5 +23,21 @@ import { RoomService } from '../../../services/room.service';
 export default class ListJwtComponent {
   roomService = inject(RoomService);
 
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
+
+  onAddRoom() {}
+
+  onEditRoom(room: Room) {
+    console.log('onEditRoom');
+    const dialogRef = this.dialog.open(EditComponent, {
+      data: room,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
+
+  onDeleteRoom() {}
 }

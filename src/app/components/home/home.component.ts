@@ -15,7 +15,9 @@ export default class HomeComponent implements OnInit {
   constructor(
     private placesService: PlacesService,
     private mapService: MapService
-  ) {}
+  ) {
+    console.log(this.placesService.useLocation);
+  }
 
   ngOnInit(): void {
     console.log(this.placesService.useLocation);

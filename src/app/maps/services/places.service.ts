@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Feature, PlacesResponse } from '../interfaces/places.interface';
 import { PlacesApiClient } from '../api';
 import { MapService } from '.';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,16 +29,18 @@ export class PlacesService {
 
   // Metodo para saber cuando ya tenemos la geolocalizacion del usuario
   public async getUserLocation(): Promise<[number, number]> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       navigator.geolocation.getCurrentPosition(
         ({ coords }) => {
           this.useLocation = [coords.longitude, coords.latitude];
           resolve(this.useLocation);
+          console.log('useLocation', this.useLocation);
         },
         (err) => {
-          alert(err.message);
+          //alert(err.message);
           console.log(err);
-          reject();
+          // Resuelve la promesa con un valor predeterminado en lugar de rechazarla
+          resolve([0, 0]);
         }
       );
     });
@@ -83,5 +86,37 @@ export class PlacesService {
 
   deletePlaces() {
     this.places = [];
+  }
+  calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
+    console.log(this.useLocation);
+
+    const R = 6371; // Radio de la tierra en km
+    const dLat = this.deg2rad(lat2 - lat1);
+    const dLon = this.deg2rad(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2rad(lat1)) *
+        Math.cos(this.deg2rad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = R * c; // Distancia en km
+    return d <= 10; // Devuelve true si la distancia es menor o igual a 10 km
+  }
+
+  deg2rad(deg: number) {
+    return deg * (Math.PI / 180);
+  }
+
+  checkPostalCode(postalCode: string): Observable<boolean> {
+    console.log('checkPostalCode');
+
+    return this.placesApi
+      .get<PlacesResponse>(`/${postalCode}.json`, {
+        params: {
+          types: 'postcode',
+        },
+      })
+      .pipe(map((resp) => resp.features.length > 0));
   }
 }

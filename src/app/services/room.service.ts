@@ -69,7 +69,7 @@ export class RoomService {
   }
 
   updateRoomJWT(id: number, room: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/rooms/${id}`, room, {
+    return this.http.patch(`${this.baseUrl}/rooms/${id}`, room, {
       headers: this.getAuthHeaders(),
     });
   }

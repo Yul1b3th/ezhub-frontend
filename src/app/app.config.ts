@@ -21,6 +21,6 @@ export const appConfig: ApplicationConfig = {
     //provideHttpClient(withInterceptors([authInterceptor, tokenInterceptor])),
     //provideHttpClient(withInterceptors([authInterceptor])),
     importProvidersFrom(HttpClientModule),
-    provideAnimationsAsync(),
+    provideAnimationsAsync(), provideAnimationsAsync(),
   ],
 };

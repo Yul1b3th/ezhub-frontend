@@ -69,7 +69,7 @@ export class PropertyService {
   }
 
   updatePropertyJWT(id: number, property: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/properties/${id}`, property, {
+    return this.http.patch(`${this.baseUrl}/properties/${id}`, property, {
       headers: this.getAuthHeaders(),
     });
   }

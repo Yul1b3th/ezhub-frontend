@@ -1,4 +1,4 @@
-// @import '../src/themes/theme-material.scss';
+@import "../src/themes/theme-material.scss";
 
 @import "assets/libs/fonts.css";
 
@@ -72,3 +72,28 @@ app-root {
 .container {
   @apply max-w-[67.5rem];
 }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  //font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* .cdk-overlay-container {
+  overflow-y: scroll;
+}
+ */
+
+.mdc-dialog__title,
+.mdc-dialog__content,
+.mdc-dialog__actions {
+  padding: 0 !important;
+}
+
+/* .mat-calendar-body-selected {
+  background-color: red !important;
+  color: var(--mat-datepicker-calendar-date-selected-state-text-color);
+} */

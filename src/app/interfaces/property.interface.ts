@@ -7,6 +7,7 @@ export interface Property {
   name: string;
   details: string;
   address: string;
+  postalCode: string;
   city: string;
   country: string;
   latitude: string;

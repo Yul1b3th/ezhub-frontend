@@ -16,4 +16,5 @@ export interface Room {
   deletedAt: null;
   propertyId: number;
   userEmail: string;
+  amenityIds?: number[];
 }

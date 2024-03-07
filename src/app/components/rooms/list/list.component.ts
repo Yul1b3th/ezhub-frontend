@@ -3,6 +3,7 @@ import { Component, OnInit, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PublicRoomService } from '../../../services/public-room.service';
 import { RouterModule } from '@angular/router';
+import { PlacesService } from '../../../maps/services';
 
 @Component({
   selector: 'app-list',
@@ -11,8 +12,12 @@ import { RouterModule } from '@angular/router';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export default class ListComponent {
+export default class ListComponent implements OnInit {
   publicRoomService = inject(PublicRoomService);
 
-  constructor() {}
+  constructor(private placesService: PlacesService) {}
+
+  ngOnInit(): void {
+    console.log(this.placesService.useLocation);
+  }
 }

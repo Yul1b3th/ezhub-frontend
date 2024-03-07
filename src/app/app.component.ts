@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
   constructor(private placesServices: PlacesService) {
     // console.log('constructor');
     // console.log(this.finishedAuthCheck());
+    console.log(this.placesServices.useLocation);
   }
 
   ngOnInit(): void {

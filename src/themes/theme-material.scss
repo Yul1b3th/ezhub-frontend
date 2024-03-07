@@ -1,7 +1,7 @@
 // theme-material.scss
 
-@use '@angular/material' as mat;
-@import url('../assets/libs/fonts.css');
+@use "@angular/material" as mat;
+@import url("../assets/libs/fonts.css");
 
 $custom-primary-palette: (
   50: #e1faed,
@@ -14,7 +14,8 @@ $custom-primary-palette: (
   700: #00a952,
   800: #009746,
   900: #007730,
-  contrast: (50: #000,
+  contrast: (
+    50: #000,
     100: #000,
     200: #000,
     300: #fff,
@@ -26,32 +27,39 @@ $custom-primary-palette: (
     900: #fff,
   ),
 );
-$custom-typography: mat.define-typography-config('BeVietnamPro, sans-serif');
+$custom-typography: mat.define-typography-config("BeVietnamPro, sans-serif");
 $light-text: mat.define-palette(mat.$grey-palette, 900);
 $light-primary: mat.define-palette($custom-primary-palette);
 $light-accent: mat.define-palette($custom-primary-palette);
 
-$light-theme: mat.define-light-theme((color: (primary: $light-primary,
-        accent: $light-accent, text: #fafafa,
-      ),
-      // typography: $custom-typography,
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $light-primary,
+      accent: $light-accent,
+      text: #fafafa,
     ),
-  );
+    typography: $custom-typography,
+  )
+);
 
 $dark-primary: mat.define-palette(mat.$blue-grey-palette);
 $dark-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
 
-$dark-theme: mat.define-dark-theme((color: (primary: $dark-primary,
-        accent: $dark-accent,
-      ),
-      // typography: $custom-typography,
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $dark-primary,
+      accent: $dark-accent,
     ),
-  );
+    typography: $custom-typography,
+  )
+);
 
 body.light-theme {
   @include mat.all-component-themes($light-theme);
 }
 
-body.dark-theme {
+/* body.dark-theme {
   @include mat.all-component-themes($dark-theme);
-}
+} */

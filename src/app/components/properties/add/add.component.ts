@@ -23,7 +23,6 @@ import { PlacesService } from '../../../maps/services';
 export default class AddComponent implements OnInit {
   private propertyService = inject(PropertyService);
   private placesApiClient = inject(PlacesApiClient);
-  private placesService = inject(PlacesService);
   private fb = inject(FormBuilder);
 
   public propertyForm: FormGroup = this.fb.group({
@@ -44,7 +43,7 @@ export default class AddComponent implements OnInit {
 
   public formSubmitted = false;
 
-  constructor() {}
+  constructor(private placesService: PlacesService) {}
 
   ngOnInit() {}
 
