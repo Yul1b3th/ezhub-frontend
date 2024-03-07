@@ -15,9 +15,11 @@ import { PlacesService } from '../../../maps/services';
 export default class ListComponent implements OnInit {
   publicRoomService = inject(PublicRoomService);
 
-  constructor(private placesService: PlacesService) {}
+  constructor(private placesService: PlacesService) {
+    console.log(this.publicRoomService.rooms());
+  }
 
   ngOnInit(): void {
-    console.log(this.placesService.useLocation);
+    //console.log(this.placesService.useLocation);
   }
 }

@@ -16,6 +16,8 @@ import {
   switchMap,
 } from 'rxjs';
 import { PublicRoomService } from '../../services/public-room.service';
+import { PublicPropertyService } from '../../services/public-property.service';
+import { QueryService } from '../../services/query.service';
 
 @Component({
   selector: 'search-bar',
@@ -32,7 +34,11 @@ export class SearchBarComponent implements OnInit {
     searchControl: ['', [Validators.minLength(3)]],
   });
 
-  constructor(private placesService: PlacesService) {}
+  constructor(
+    private placesService: PlacesService,
+    private publicPropertyService: PublicPropertyService,
+    private queryService: QueryService
+  ) {}
 
   ngOnInit() {}
 
@@ -48,6 +54,7 @@ export class SearchBarComponent implements OnInit {
           .subscribe(({ query, exists }) => {
             if (exists) {
               this.publicRoomService.filterRooms(query);
+              this.queryService.setQuery(query);
             } else {
               console.log('El código postal no existe');
             }
@@ -56,7 +63,9 @@ export class SearchBarComponent implements OnInit {
         // Si la consulta no es un código postal, asume que es una ciudad y realiza la búsqueda
         console.log('Buscando por ciudad');
 
+        //this.publicPropertyService.filterProperties(query);
         this.publicRoomService.filterRooms(query);
+        this.queryService.setQuery(query);
       }
     }
   }

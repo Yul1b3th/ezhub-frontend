@@ -3,99 +3,25 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { Property } from '../interfaces/property.interface';
-import { Observable, map, of } from 'rxjs';
+import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { PlacesService } from '../maps/services';
-
-interface State {
-  properties: Property[];
-  loading: boolean;
-}
 
 @Injectable({ providedIn: 'root' })
 export class PublicPropertyService {
   private http = inject(HttpClient);
   private readonly baseUrl: string = environment.baseUrl;
 
-  #state = signal<State>({
-    loading: true,
-    properties: [],
-  });
-
-  // Señales computadas
-  public properties = computed(() => this.#state().properties);
-  public loading = computed(() => this.#state().loading);
-
   constructor(private placesService: PlacesService) {
-    //this.getPublicProperties();
+    this.getPublicProperties();
+    //this.getPublicProperties(query);
+    //this.filterProperties();
   }
 
   getPublicProperties(): Observable<Property[]> {
     return this.http.get<Property[]>(`${this.baseUrl}/public-properties`);
   }
-
-  /*    getPublicProperties(): void {
-    this.http
-      .get<Property[]>(`${this.baseUrl}/public-properties`)
-      .subscribe((res) => {
-        this.#state.set({
-          loading: false,
-          properties: res,
-        });
-        console.log(res);
-      });
-    console.log('Cargando data');
-  }  */
-
-  /*   getPublicProperties(): Observable<Property[]> {
-     if (!this.placesService.useLocation) {
-      console.error('No user location available');
-      return of([]);
-    }
-
-    if (this.placesService.useLocation) {
-      const [userLongitude, userLatitude] = this.placesService.useLocation;
-      console.log(userLongitude, userLatitude);
-
-      return this.http
-        .get<Property[]>(`${this.baseUrl}/public-properties`)
-        .pipe(
-          map((properties) => {
-            return properties.filter((property) => {
-              return this.placesService.calculateDistance(
-                userLongitude,
-                userLatitude,
-                Number(property.longitude),
-                Number(property.latitude)
-              );
-            });
-          })
-        );
-    }
-  } */
-
-  /*   getPublicProperties(): Observable<Property[]> {
-    if (this.placesService.useLocation) {
-      const [userLongitude, userLatitude] = this.placesService.useLocation;
-      console.log(userLongitude, userLatitude);
-
-      return this.http
-        .get<Property[]>(`${this.baseUrl}/public-properties`)
-        .pipe(
-          map((properties) => {
-            return properties.filter((property) => {
-              return this.placesService.calculateDistance(
-                userLongitude,
-                userLatitude,
-                Number(property.longitude),
-                Number(property.latitude)
-              );
-            });
-          })
-        );
-    } else {
-      // Devuelve un Observable vacío cuando useLocation no está definido
-      return of([]);
-    }
+  /*   getPublicPropertiesQuery(query: string): Observable<Property[]> {
+    return this.http.get<Property[]>(`${this.baseUrl}/public-properties`);
   } */
 
   getPropertyById(id: number) {
@@ -108,4 +34,61 @@ export class PublicPropertyService {
         })
       );
   }
+
+  /*   filterProperties(query: string = ''): Observable<Property[]> {
+    console.log(query);
+
+    return this.getPublicPropertiesQuery(query).pipe(
+      tap((properties) => console.log('Fetched properties', properties)),
+      catchError((error) => {
+        console.error('Error fetching properties', error);
+        return throwError(error);
+      }),
+      map((properties: Property[]) => {
+        let filteredProperties: Property[] = [];
+        console.log(properties);
+        console.log(query);
+
+        properties.forEach((property: Property) => {
+          let userLongitude: number = 0;
+          let userLatitude: number = 0;
+          console.log(query);
+          if (this.placesService.useLocation) {
+            [userLongitude, userLatitude] = this.placesService.useLocation;
+          }
+
+          if (userLongitude !== 0 && userLatitude !== 0) {
+            if (
+              this.placesService.calculateDistance(
+                userLongitude,
+                userLatitude,
+                Number(property.longitude),
+                Number(property.latitude)
+              )
+            ) {
+              filteredProperties.push(property);
+            }
+          }
+
+          if (query) {
+            console.log(query);
+            if (
+              property.city.toLowerCase().includes(query.toLowerCase()) ||
+              property.postalCode.includes(query)
+            ) {
+              filteredProperties.push(property);
+            }
+          }
+
+          if (!this.placesService.useLocation && !query) {
+            filteredProperties.push(property);
+          }
+        });
+
+        console.log(filteredProperties);
+
+        return filteredProperties;
+      })
+    );
+  } */
 }

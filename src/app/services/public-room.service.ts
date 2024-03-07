@@ -63,7 +63,7 @@ export class PublicRoomService {
   getRoomById(id: number) {
     return this.http.get<Room>(`${this.baseUrl}/public-rooms/${id}`).pipe(
       map((res) => {
-        console.log(res);
+        //console.log(res);
         return res;
       })
     );
@@ -77,7 +77,7 @@ export class PublicRoomService {
 
   searchRooms(query: string) {
     // Llama a tu API para buscar habitaciones
-    console.log(query);
+    //console.log(query);
 
     this.http
       .get<Room[]>(`${this.baseUrl}/public-rooms`, {
@@ -93,7 +93,7 @@ export class PublicRoomService {
       });
   }
   filterRooms(query: string = '') {
-    console.log('filterRooms');
+    //console.log('filterRooms');
 
     // Filtra las habitaciones basándose en la consulta y la geolocalización
     this.publicPropertyService
@@ -103,13 +103,13 @@ export class PublicRoomService {
         properties.forEach((property: Property) => {
           let userLongitude: number = 0;
           let userLatitude: number = 0;
-          console.log(this.placesService.useLocation);
+          //console.log(this.placesService.useLocation);
 
           if (this.placesService.useLocation) {
             [userLongitude, userLatitude] = this.placesService.useLocation;
           }
           if (userLongitude !== 0 && userLatitude !== 0 && !query) {
-            console.log('useLocation');
+            //console.log('useLocation');
             if (
               this.placesService.calculateDistance(
                 userLongitude,
@@ -122,10 +122,7 @@ export class PublicRoomService {
             }
           }
           if (query) {
-            console.log(query);
-            console.log(
-              property.city.toLowerCase().includes(query.toLowerCase())
-            );
+            //console.log(query);
 
             if (property.city.toLowerCase().includes(query.toLowerCase())) {
               filteredRooms = filteredRooms.concat(property.rooms);
@@ -135,12 +132,12 @@ export class PublicRoomService {
             }
           }
           if (!this.placesService.useLocation && !query) {
-            console.log('!this.placesService.useLocation');
+            //console.log('!this.placesService.useLocation');
             filteredRooms = filteredRooms.concat(property.rooms);
           }
         });
 
-        console.log({ filteredRooms });
+        //console.log({ filteredRooms });
 
         this.#state.set({
           loading: false,

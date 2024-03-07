@@ -34,11 +34,11 @@ export class PlacesService {
         ({ coords }) => {
           this.useLocation = [coords.longitude, coords.latitude];
           resolve(this.useLocation);
-          console.log('useLocation', this.useLocation);
+          //console.log('useLocation', this.useLocation);
         },
         (err) => {
           //alert(err.message);
-          console.log(err);
+          //console.log(err);
           // Resuelve la promesa con un valor predeterminado en lugar de rechazarla
           resolve([0, 0]);
         }
@@ -74,11 +74,11 @@ export class PlacesService {
         },
       })
       .subscribe((resp) => {
-        console.log('resp', resp.features);
+        //console.log('resp', resp.features);
         this.isLoadingPlaces = false;
         this.places = resp.features;
         this.cities = this.places.map(this.getCityFromFeature);
-        console.log(this.cities);
+        //console.log(this.cities);
 
         this.mapService.createMarkersFromPlaces(this.places, this.useLocation!);
       });
@@ -88,7 +88,8 @@ export class PlacesService {
     this.places = [];
   }
   calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
-    console.log(this.useLocation);
+    //console.log(this.useLocation);
+    //console.log({ lat1, lon1, lat2, lon2 });
 
     const R = 6371; // Radio de la tierra en km
     const dLat = this.deg2rad(lat2 - lat1);
