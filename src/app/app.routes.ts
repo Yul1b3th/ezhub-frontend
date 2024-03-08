@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import {
+  clearStateUrlGuard,
   isAuthenticatedGuard,
   isNotAuthenticatedGuard,
 } from './components/auth/guards';
@@ -9,6 +10,7 @@ export const routes: Routes = [
   // Home
   {
     path: '',
+    canActivate: [clearStateUrlGuard],
     title: 'EZHub',
     // pathMatch: 'full',
     loadComponent: () => import('./components/home/home.component'),
@@ -33,6 +35,7 @@ export const routes: Routes = [
 
   {
     path: 'rooms',
+    canActivate: [clearStateUrlGuard],
     children: [
       {
         path: 'edit/:id',
@@ -84,7 +87,7 @@ export const routes: Routes = [
   // Log In
   {
     path: 'log-in',
-    //canActivate: [isNotAuthenticatedGuard],
+    canActivate: [isNotAuthenticatedGuard],
     title: 'EZHub | Log In',
     loadComponent: () => import('./components/auth/login/login.component'),
   },
@@ -92,7 +95,7 @@ export const routes: Routes = [
   // Sign Up
   {
     path: 'sign-up',
-    //canActivate: [isNotAuthenticatedGuard],
+    canActivate: [clearStateUrlGuard, isNotAuthenticatedGuard],
     title: 'EZHub | Sign Up',
     loadComponent: () =>
       import('./components/auth/register/register.component'),
@@ -101,6 +104,7 @@ export const routes: Routes = [
   // About
   {
     path: 'about',
+    canActivate: [clearStateUrlGuard],
     title: 'EZHub | About',
     loadComponent: () => import('./pages/ezhub/about/about.component'),
   },
@@ -108,6 +112,7 @@ export const routes: Routes = [
   // Legal notice
   {
     path: 'legal-notice',
+    canActivate: [clearStateUrlGuard],
     title: 'EZHub | Legal notice',
     loadComponent: () =>
       import('./pages/ezhub/legal-notice/legal-notice.component'),
@@ -116,6 +121,7 @@ export const routes: Routes = [
   // terms-conditions
   {
     path: 'terms-conditions',
+    canActivate: [clearStateUrlGuard],
     title: 'EZHub | Terms',
     loadComponent: () =>
       import('./pages/ezhub/terms-conditions/terms-conditions.component'),
@@ -124,6 +130,7 @@ export const routes: Routes = [
   // Contact
   {
     path: 'contact',
+    canActivate: [clearStateUrlGuard],
     title: 'EZHub | Contact',
     loadComponent: () => import('./pages/ezhub/contact/contact.component'),
   },
@@ -131,6 +138,7 @@ export const routes: Routes = [
   // help-contact
   {
     path: 'help-contact',
+    canActivate: [clearStateUrlGuard],
     children: [
       {
         path: 'help',
@@ -149,6 +157,7 @@ export const routes: Routes = [
   // error404
   {
     path: '404',
+    canActivate: [clearStateUrlGuard],
     title: 'EZHub | 404',
     loadComponent: () =>
       import('./components/shared/error404/error404.component'),

@@ -110,7 +110,7 @@ export class PlacesService {
   }
 
   checkPostalCode(postalCode: string): Observable<boolean> {
-    console.log('checkPostalCode');
+    //console.log('checkPostalCode');
 
     return this.placesApi
       .get<PlacesResponse>(`/${postalCode}.json`, {

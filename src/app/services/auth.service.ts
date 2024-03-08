@@ -82,7 +82,6 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('url');
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.notAuthenticated);
     // Elimina el estado de autenticación del almacenamiento local cuando el usuario se desautentica

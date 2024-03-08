@@ -20,7 +20,7 @@ export default class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.placesService.useLocation);
+    //console.log(this.placesService.useLocation);
   }
 
   get isUserLocationReady() {

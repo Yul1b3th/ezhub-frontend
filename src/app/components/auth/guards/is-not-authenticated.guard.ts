@@ -11,17 +11,20 @@ export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  console.log('isNotAuthenticatedGuard');
-  console.log(authService.authStatus());
-
   return authService.checkAuthStatus().pipe(
     map((isAuthenticated) => {
       if (isAuthenticated) {
-        router.navigateByUrl('/list');
-        console.log('yuli');
+        const savedUrl = localStorage.getItem('state-url');
+        if (savedUrl) {
+          // Si hay una URL guardada, redirige al usuario a esa URL
+          router.navigateByUrl(savedUrl);
+          localStorage.removeItem('state-url'); // Limpiamos la URL guardada
+        } else {
+          // Si no hay una URL guardada, redirige al usuario a la página de la lista
+          router.navigateByUrl('/list');
+        }
         return false;
       }
-      console.log('isNotAuthenticatedGuard');
       return true;
     })
   );

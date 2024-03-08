@@ -57,15 +57,6 @@ export default class MapComponent implements AfterViewInit, OnInit {
     this.queryService.query$.subscribe((query) => {
       this.filterProperties(query);
     });
-    /*     this.properties.forEach((property) => {
-      const markerElement = document.createElement('div');
-      markerElement.className = 'marker';
-      markerElement.textContent = property.name;
-      this.lngLat = [
-        parseFloat(property.longitude),
-        parseFloat(property.latitude),
-      ];
-    }); */
   }
 
   ngAfterViewInit(): void {
@@ -77,128 +68,84 @@ export default class MapComponent implements AfterViewInit, OnInit {
       zoom: 13,
     });
 
-    console.log(this.lngLat);
-
-    // new Marker().setLngLat(this.lngLat).addTo(this.map);
-    /*     this.map.on('load', () => {
-      this.addMarkers();
-    }); */
-  }
-
-  /*   addMarkers(): void {
-    this.properties.forEach((property) => {
-      let availableRooms = 0;
-      let totalPrice = 0;
-
-      property.rooms.forEach((room: any) => {
-        if (room.is_available) {
-          availableRooms++;
-        }
-        totalPrice += parseFloat(room.precio);
-      });
-
-      const markerElement = document.createElement('div');
-      markerElement.className = 'custom-marker';
-
-      const propertyInfo = document.createElement('div');
-      propertyInfo.innerHTML = `
-      <div>
-        <strong><a href="/property-details/${property.id}">${property.name}</a></strong><br>
-        Habitaciones disponibles: ${availableRooms}
-      </div>
-    `;
-      markerElement.appendChild(propertyInfo);
-
-      const lngLat: LngLat = new LngLat(
-        parseFloat(property.longitude),
-        parseFloat(property.latitude)
-      );
-
-      new Marker({ color: '#30daa6' }).setLngLat(lngLat).addTo(this.map!);
-    });
-  } */
-
-  getPublicProperties(): Observable<Property[]> {
-    return this.http.get<Property[]>(`${this.baseUrl}/public-properties`);
+    //console.log(this.lngLat);
   }
 
   filterProperties(query: string = '') {
-    console.log('filterProperties');
+    //console.log('filterProperties');
 
     // Filtra las propiedades basándose en la consulta y la geolocalización
-    this.getPublicProperties().subscribe((properties: Property[]) => {
-      let filteredProperties: Property[] = [];
-      console.log(properties);
+    this.publicPropertyService
+      .getPublicProperties()
+      .subscribe((properties: Property[]) => {
+        let filteredProperties: Property[] = [];
+        //console.log(properties);
 
-      properties.forEach((property: Property) => {
-        let userLongitude: number = 0;
-        let userLatitude: number = 0;
-        console.log(this.placesService.useLocation);
+        properties.forEach((property: Property) => {
+          let userLongitude: number = 0;
+          let userLatitude: number = 0;
+          //console.log(this.placesService.useLocation);
 
-        if (this.placesService.useLocation) {
-          console.log('this.placesService.useLocation');
+          if (this.placesService.useLocation) {
+            //console.log('this.placesService.useLocation');
 
-          [userLongitude, userLatitude] = this.placesService.useLocation;
-        }
-        if (userLongitude !== 0 && userLatitude !== 0 && !query) {
-          console.log('useLocation');
-          //console.log();
-
-          if (
-            this.placesService.calculateDistance(
-              userLongitude,
-              userLatitude,
-              Number(property.longitude),
-              Number(property.latitude)
-            )
-          ) {
-            filteredProperties.push(property);
-            console.log('useLocation', filteredProperties);
+            [userLongitude, userLatitude] = this.placesService.useLocation;
           }
-        }
-        if (query) {
-          console.log(query);
-          console.log(
-            property.city.toLowerCase().includes(query.toLowerCase())
-          );
+          if (userLongitude !== 0 && userLatitude !== 0 && !query) {
+            //console.log('useLocation');
+            //console.log();
 
-          if (property.city.toLowerCase().includes(query.toLowerCase())) {
+            if (
+              this.placesService.calculateDistance(
+                userLongitude,
+                userLatitude,
+                Number(property.longitude),
+                Number(property.latitude)
+              )
+            ) {
+              filteredProperties.push(property);
+              //console.log('useLocation', filteredProperties);
+            }
+          }
+          if (query) {
+            //console.log(query);
+            if (property.city.toLowerCase().includes(query.toLowerCase())) {
+              filteredProperties.push(property);
+            }
+            if (property.postalCode.includes(query)) {
+              filteredProperties.push(property);
+            }
+          }
+          if (!this.placesService.useLocation && !query) {
+            //console.log('!this.placesService.useLocation');
             filteredProperties.push(property);
           }
-          if (property.postalCode.includes(query)) {
-            filteredProperties.push(property);
+        });
+
+        //console.log({ filteredProperties });
+
+        this.#state.set({
+          loading: false,
+          properties: filteredProperties,
+        });
+        if (this.map) {
+          // Elimina los marcadores existentes
+          this.markers.forEach((marker) => marker.remove());
+          this.markers = [];
+
+          // Añade los nuevos marcadores y guarda una referencia a ellos
+          this.addMarkers(filteredProperties);
+
+          // Centra el mapa en los nuevos marcadores
+          if (filteredProperties.length > 0) {
+            const lngs = filteredProperties.map((p) => parseFloat(p.longitude));
+            const lats = filteredProperties.map((p) => parseFloat(p.latitude));
+            const centerLng = lngs.reduce((a, b) => a + b) / lngs.length;
+            const centerLat = lats.reduce((a, b) => a + b) / lats.length;
+            this.map.setCenter([centerLng, centerLat]);
           }
-        }
-        if (!this.placesService.useLocation && !query) {
-          console.log('!this.placesService.useLocation');
-          filteredProperties.push(property);
         }
       });
-
-      console.log({ filteredProperties });
-
-      this.#state.set({
-        loading: false,
-        properties: filteredProperties,
-      });
-      if (this.map) {
-        // Elimina los marcadores existentes
-        this.markers.forEach((marker) => marker.remove());
-        this.markers = [];
-
-        // Añade los nuevos marcadores y guarda una referencia a ellos
-        this.addMarkers(filteredProperties);
-
-        // Centra el mapa en los nuevos marcadores
-        if (filteredProperties.length > 0) {
-          const lngs = filteredProperties.map((p) => parseFloat(p.longitude));
-          const lats = filteredProperties.map((p) => parseFloat(p.latitude));
-          const centerLng = lngs.reduce((a, b) => a + b) / lngs.length;
-          const centerLat = lats.reduce((a, b) => a + b) / lats.length;
-          this.map.setCenter([centerLng, centerLat]);
-        }
-      }
-    });
   }
 
   addMarkers(properties: Property[]): void {

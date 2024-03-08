@@ -34,17 +34,6 @@ export class PublicRoomService {
     this.filterRooms();
   }
 
-  /* getPublicRooms(): void {
-    this.http.get<Room[]>(`${this.baseUrl}/public-rooms`).subscribe((res) => {
-      this.#state.set({
-        loading: false,
-        rooms: res,
-      });
-      console.log(res);
-    });
-    console.log('Cargando data');
-  } */
-
   getPublicRooms(): void {
     this.publicPropertyService
       .getPublicProperties()
@@ -76,9 +65,6 @@ export class PublicRoomService {
   }
 
   searchRooms(query: string) {
-    // Llama a tu API para buscar habitaciones
-    //console.log(query);
-
     this.http
       .get<Room[]>(`${this.baseUrl}/public-rooms`, {
         params: {

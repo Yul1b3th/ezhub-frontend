@@ -43,7 +43,9 @@ export class SearchBarComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    const query = this.searchForm.get('searchControl')?.value;
+    let query = this.searchForm.get('searchControl')?.value;
+
+    query = query?.trim();
 
     if ((query ?? '').length > 3) {
       if (/^[01-52]\d{4}$/.test(query)) {
@@ -56,12 +58,12 @@ export class SearchBarComponent implements OnInit {
               this.publicRoomService.filterRooms(query);
               this.queryService.setQuery(query);
             } else {
-              console.log('El código postal no existe');
+              //console.log('El código postal no existe');
             }
           });
       } else {
         // Si la consulta no es un código postal, asume que es una ciudad y realiza la búsqueda
-        console.log('Buscando por ciudad');
+        //console.log('Buscando por ciudad');
 
         //this.publicPropertyService.filterProperties(query);
         this.publicRoomService.filterRooms(query);
