@@ -41,6 +41,7 @@ export default class RegisterComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
+  // RegisterComponent
   onSubmit() {
     this.formSubmitted = true;
 
@@ -51,7 +52,16 @@ export default class RegisterComponent {
           .register(username.toLowerCase(), email.toLowerCase(), password)
           .subscribe({
             next: () => {
-              this.router.navigate(['/log-in']);
+              this.authService
+                .login(username.toLowerCase(), password)
+                .subscribe({
+                  next: () => {
+                    this.router.navigate(['/list']);
+                  },
+                  error: (err) => {
+                    console.error(err);
+                  },
+                });
             },
             error: (err) => {
               if (err.error.message === 'Username is already in use') {

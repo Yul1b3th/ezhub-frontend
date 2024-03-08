@@ -28,7 +28,7 @@ export default class ListJwtComponent {
   onAddRoom() {}
 
   onEditRoom(room: Room) {
-    console.log('onEditRoom');
+    /* console.log('onEditRoom');
     const dialogRef = this.dialog.open(EditComponent, {
       data: room,
     });
@@ -36,7 +36,7 @@ export default class ListJwtComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
       console.log(result);
-    });
+    }); */
   }
 
   onDeleteRoom() {}

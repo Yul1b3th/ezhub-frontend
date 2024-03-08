@@ -8,12 +8,12 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
   const url = state.url;
   const authService = inject(AuthService);
   const router = inject(Router);
-  console.log({ status: authService.authStatus() });
+  //console.log({ status: authService.authStatus() });
   if (authService.authStatus() === AuthStatus.notAuthenticated) {
-    console.log(url);
+    //console.log(url);
 
     //localStorage.setItem('url', url);
-    console.log({ url });
+    //console.log({ url });
     localStorage.setItem('state-url', url);
   }
 

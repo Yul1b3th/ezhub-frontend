@@ -44,7 +44,7 @@ export default class EditComponent {
   public formSubmitted = false;
   public photoUrl: string | null = null;
 
-  public editForm = this.fb.group({
+  /*   public editForm = this.fb.group({
     name: [
       '',
       [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
@@ -64,9 +64,9 @@ export default class EditComponent {
     photos: ['', Validators.maxLength(5000)],
     amenityIds: [''],
     propertyId: [0, Validators.required],
-  });
+  }); */
 
-  constructor(
+  /*   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<EditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Room
@@ -90,13 +90,13 @@ export default class EditComponent {
     if (data.photos) {
       this.photoUrl = `assets/img/bedrooms/${data.photos}`;
     }
-  }
+  } */
 
   onNoClick(): void {
-    this.dialogRef.close();
+    //this.dialogRef.close();
   }
 
-  onSubmit(): void {
+  /*   onSubmit(): void {
     this.formSubmitted = true;
 
     if (this.editForm.valid) {
@@ -106,14 +106,14 @@ export default class EditComponent {
           this.dialogRef.close();
         });
     }
-  }
+  } */
 
-  onFileChange(event: any) {
+  /*   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.editForm.patchValue({
         photos: file,
       });
     }
-  }
+  } */
 }

@@ -38,7 +38,14 @@ export const routes: Routes = [
     canActivate: [clearStateUrlGuard],
     children: [
       {
+        path: 'contact',
+        canActivate: [isAuthenticatedGuard],
+        title: 'EZHub | Contact ',
+        loadComponent: () => import('./components/contact/contact.component'),
+      },
+      {
         path: 'edit/:id',
+        canActivate: [isAuthenticatedGuard],
         title: 'EZHub | Room',
         loadComponent: () => import('./components/rooms/edit/edit.component'),
       },
@@ -74,14 +81,6 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
     ],
-  },
-
-  // Contact
-  {
-    path: 'contact',
-    canActivate: [isAuthenticatedGuard],
-    title: 'EZHub | Contact ',
-    loadComponent: () => import('./components/contact/contact.component'),
   },
 
   // Log In
@@ -129,7 +128,7 @@ export const routes: Routes = [
 
   // Contact
   {
-    path: 'contact',
+    path: 'contactus',
     canActivate: [clearStateUrlGuard],
     title: 'EZHub | Contact',
     loadComponent: () => import('./pages/ezhub/contact/contact.component'),
