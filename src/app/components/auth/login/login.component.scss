@@ -19,5 +19,5 @@ label {
 }
 
 input {
-  @apply border border-zinc-200 block w-full px-3 py-2 rounded-md leading-5 focus:outline-none focus:shadow-focus-primary focus:border-primary transition-colors duration-150;
+  @apply border border-zinc-200 block w-full px-3 py-2 rounded-md leading-5 focus:outline-none focus:shadow-focus-primary focus:border-primary transition-colors duration-150 dark:text-light;
 }

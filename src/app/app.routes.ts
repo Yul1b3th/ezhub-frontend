@@ -17,12 +17,12 @@ export const routes: Routes = [
     children: [
       {
         path: 'list',
-        title: 'EZHub | List',
+        title: 'EZHub',
         loadComponent: () => import('./components/rooms/list/list.component'),
       },
       {
         path: 'map',
-        title: 'EZHub | Map',
+        title: 'EZHub',
         loadComponent: () => import('./components/rooms/map/map.component'),
       },
       {

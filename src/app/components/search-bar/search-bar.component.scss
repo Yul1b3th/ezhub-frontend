@@ -16,5 +16,5 @@ body {
 }
 
 input {
-  @apply border border-primary block w-full px-3 py-2  rounded-full leading-5 focus:outline-none focus:shadow-focus-primary focus:border-primary  duration-150    focus:ring-2 focus:ring-primary-200 transition-all;
+  @apply border border-primary block w-full px-3 py-2  rounded-full leading-5 focus:outline-none focus:shadow-focus-primary focus:border-primary  duration-150    focus:ring-2 focus:ring-primary-200 transition-all dark:text-light;
 }
