@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 
 @Directive({
@@ -17,14 +17,14 @@ export class CustomLabelDirective {
     // this.setErrorMessage();
   }
 
-  ngOnChanges(): void {
-    this.setErrorMessage();
-  }
-
   constructor(private el: ElementRef<HTMLElement>) {
     this.htmlElement = el;
 
     this.htmlElement.nativeElement.innerHTML = 'red';
+  }
+
+  ngOnChanges(): void {
+    this.setErrorMessage();
   }
 
   setStyle() {

@@ -1,17 +1,4 @@
 import { Component, Inject, inject } from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { RoomService } from '../../../services/room.service';
 import { Room } from '../../../interfaces/room.interface';
@@ -23,19 +10,8 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-edit',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
-  imports: [
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    CommonModule,
-    ReactiveFormsModule,
-    RoomsLabelDirective,
-  ],
+
+  imports: [CommonModule, ReactiveFormsModule, RoomsLabelDirective],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })

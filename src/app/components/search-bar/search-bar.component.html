@@ -1,11 +1,24 @@
 <form [formGroup]="searchForm" class="example-form w-full">
-  <input
-    class=""
-    type="text"
-    placeholder="Enter City or Postal Code"
-    formControlName="searchControl"
-    (input)="cleanInput($event)"
-    (keydown)="preventInitialSpace($event)"
-    (keydown.enter)="onSubmit()"
-  />
+  <div class="mb-2">
+    <input
+      class=""
+      type="text"
+      placeholder="Enter City or Postal Code"
+      formControlName="searchControl"
+      (input)="cleanInput($event)"
+      (keydown)="preventInitialSpace($event)"
+      (keydown.enter)="onSubmit()"
+    />
+  </div>
+  @if (formSubmitted && searchForm.get('searchControl')?.errors) {
+  <div
+    class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
+  >
+    <p
+      searchBarLabel
+      [errors]="searchForm.get('searchControl')?.errors"
+      [fieldName]="'searchControl'"
+    ></p>
+  </div>
+  }
 </form>

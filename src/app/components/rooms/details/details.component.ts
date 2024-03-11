@@ -120,11 +120,4 @@ export default class DetailsComponent implements OnInit, OnDestroy {
       new Marker({ color: '#30daa6' }).setLngLat([lng, lat]).addTo(this.map);
     }
   }
-
-  contact() {
-    if (this.authService.authStatus() === AuthStatus.notAuthenticated) {
-      console.log('btn publish contact');
-      // localStorage.setItem('url', '/contact');
-    }
-  }
 }

@@ -88,7 +88,9 @@
       <div #map id="map" class="w-full h-[40vh] mt-5"></div>
 
       <div class="my-5 md:hidden">
-        <a href="" class="btn btn-primary btn-normal">Contact</a>
+        <a class="btn btn-primary btn-normal" routerLink="/rooms/contact"
+          >Contact</a
+        >
       </div>
     </div>
 
@@ -104,10 +106,7 @@
       <p class="mb-4">Room price: {{ roomData.precio | number : "1.0-0" }}</p>
       <p class="mb-4">City: {{ propertyData?.city }}</p>
       <p class="mb-4">Postal code: {{ propertyData?.postalCode }}</p>
-      <a
-        class="btn btn-primary btn-normal"
-        (click)="contact()"
-        routerLink="/rooms/contact"
+      <a class="btn btn-primary btn-normal" routerLink="/rooms/contact"
         >Contact</a
       >
     </div>

@@ -1,1 +1,8 @@
-<div #map id="map" class="w-full h-[60vh]"></div>
+@defer(when cond){ @if (properties().length > 0) {
+<map-with-marker />
+
+}@else {
+<p class="text-lg text-center">There are no items.</p>
+} } @placeholder {
+<p>Loading...</p>
+}

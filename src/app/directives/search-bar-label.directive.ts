@@ -2,10 +2,10 @@ import { Directive, ElementRef, Input } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 
 @Directive({
-  selector: '[roomLabel]',
+  selector: '[searchBarLabel]',
   standalone: true,
 })
-export class RoomsLabelDirective {
+export class SearchBarLabelDirective {
   private htmlElement?: ElementRef<HTMLElement>;
   private _errors?: ValidationErrors | null = null;
 
@@ -47,9 +47,7 @@ export class RoomsLabelDirective {
     //console.log(errors);
 
     if (errors.includes('required')) {
-      const capitalizedFieldName =
-        this.fieldName.charAt(0).toUpperCase() + this.fieldName.slice(1);
-      this.htmlElement.nativeElement.innerText = `${capitalizedFieldName} is required.`;
+      this.htmlElement.nativeElement.innerText = `City or Postal Code is required.`;
       return;
     }
 
@@ -70,7 +68,7 @@ export class RoomsLabelDirective {
     }
 
     if (errors.includes('pattern')) {
-      this.htmlElement.nativeElement.innerText = 'Invalid email format.';
+      this.htmlElement.nativeElement.innerText = 'Invalid pattern format.';
       return;
     }
   }

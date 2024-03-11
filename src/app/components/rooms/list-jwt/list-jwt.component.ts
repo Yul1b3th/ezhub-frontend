@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PublicRoomService } from '../../../services/public-room.service';
 import { RouterModule } from '@angular/router';
 import { RoomService } from '../../../services/room.service';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import EditComponent from '../edit/edit.component';
 import { Room } from '../../../interfaces/room.interface';
 
@@ -23,7 +22,7 @@ export interface DialogData {
 export default class ListJwtComponent {
   roomService = inject(RoomService);
 
-  constructor(public dialog: MatDialog) {}
+  constructor() {}
 
   onAddRoom() {}
 

@@ -1,40 +1,43 @@
-<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-  @for (room of publicRoomService.rooms(); track room.id) {
-  <div class="flex flex-col">
-    <div
-      class="flex flex-col bg-white dark:bg-light dark:text-white rounded-lg shadow-md overflow-hidden h-full transition-all hover:shadow-primary-hover"
-    >
-      <div tabindex="-1">
-        @for (photo of room.photos.split(','); track $index) {
-        <img
-          [src]="'assets/img/bedrooms/' + photo.trim()"
-          class="w-full h-48 object-cover"
-          alt="{{ room.name }}"
-        />
-        } @empty {
-        <p class="text-center">Loading...</p>
-        }
-      </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center">
+  @for (room of publicRoomService.rooms(); track room.id) { @defer(on viewport){
+  <div
+    class="flex flex-col bg-white dark:bg-light dark:text-white rounded-lg shadow-md overflow-hidden w-full h-full transition-all hover:shadow-primary-hover"
+  >
+    <div tabindex="-1">
+      @for (photo of room.photos.split(','); track $index;) {
+      <img
+        [src]="'assets/img/bedrooms/' + photo.trim()"
+        class="w-full h-48 object-cover"
+        alt="{{ room.name }}"
+      />
 
-      <div class="p-4 flex-grow">
-        <h2 class="font-bold">{{ room.name }}</h2>
-        <p class="mt-2">{{ room.details }}</p>
-        <p class="text-lg mt-2 font-bold">
-          {{ room.precio | number : "1.0-0" }} <span class="text-sm">€</span>
-        </p>
-      </div>
+      } @empty {
+      <p class="text-center">There are no items.</p>
+      }
+    </div>
 
-      <div class="p-4">
-        <a
-          class="btn btn-secondary btn-normal"
-          [routerLink]="['/rooms', room.id]"
-        >
-          See more
-        </a>
-      </div>
+    <div class="p-4 flex-grow">
+      <h2 class="font-bold">{{ room.name }}</h2>
+      <p class="mt-2">{{ room.details }}</p>
+      <p class="text-lg mt-2 font-bold">
+        {{ room.precio | number : "1.0-0" }} <span class="text-sm">€</span>
+      </p>
+    </div>
+
+    <div class="p-4">
+      <a
+        class="btn btn-secondary btn-normal"
+        [routerLink]="['/rooms', room.id]"
+      >
+        See more
+      </a>
     </div>
   </div>
-  } @empty {
-  <p class="text-lg text-center">There are no items.</p>
+  } @placeholder {
+  <p class="h-[600px]">Loading...</p>
+  } } @empty {
+  <div class="col-span-3 flex justify-center items-center">
+    <p class="text-lg text-center">There are no items.</p>
+  </div>
   }
 </div>

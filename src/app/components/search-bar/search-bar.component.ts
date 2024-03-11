@@ -18,11 +18,13 @@ import {
 import { PublicRoomService } from '../../services/public-room.service';
 import { PublicPropertyService } from '../../services/public-property.service';
 import { QueryService } from '../../services/query.service';
+import { CommonModule } from '@angular/common';
+import { SearchBarLabelDirective } from '../../directives/search-bar-label.directive';
 
 @Component({
   selector: 'search-bar',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SearchBarLabelDirective],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
 })
@@ -31,8 +33,10 @@ export class SearchBarComponent implements OnInit {
   publicRoomService = inject(PublicRoomService);
 
   public searchForm: FormGroup = this.fb.group({
-    searchControl: ['', [Validators.minLength(3)]],
+    searchControl: ['', [Validators.minLength(3), Validators.required]],
   });
+
+  public formSubmitted = false;
 
   constructor(
     private placesService: PlacesService,
@@ -43,6 +47,7 @@ export class SearchBarComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
+    this.formSubmitted = true;
     let query = this.searchForm.get('searchControl')?.value;
 
     query = query?.trim();

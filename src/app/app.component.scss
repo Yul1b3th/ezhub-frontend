@@ -3,9 +3,13 @@ header {
 }
 
 main {
-  @apply w-full;
+  @apply w-full flex-grow flex flex-col;
 }
 
 footer {
   @apply w-full bg-gray dark:bg-light p-4 mt-auto;
+}
+
+.defer {
+  @apply w-screen h-screen bg-gradient-to-r from-gray to-secondary-200/30 animate-pulse flex justify-center items-center;
 }

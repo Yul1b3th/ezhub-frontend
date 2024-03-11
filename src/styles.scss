@@ -1,4 +1,4 @@
-@import "../src/themes/theme-material.scss";
+//@import "../src/themes/theme-material.scss";
 
 @import "assets/libs/fonts.css";
 
@@ -37,6 +37,12 @@ a {
 
 app-root {
   @apply min-h-screen flex items-start flex-col;
+}
+
+app-home {
+  min-height: 100%;
+  flex-grow: 1;
+  display: flex;
 }
 
 .btn {

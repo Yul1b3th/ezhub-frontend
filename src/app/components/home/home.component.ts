@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
 import { SearchBarComponent } from '../search-bar/search-bar.component';
@@ -11,18 +11,10 @@ import { MapService, PlacesService } from '../../maps/services';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export default class HomeComponent implements OnInit {
-  constructor(
-    private placesService: PlacesService,
-    private mapService: MapService
-  ) {
+export default class HomeComponent {
+  constructor(private placesService: PlacesService) {
     console.log(this.placesService.useLocation);
   }
-
-  ngOnInit(): void {
-    //console.log(this.placesService.useLocation);
-  }
-
   get isUserLocationReady() {
     return this.placesService.isUserLocationReady;
   }
