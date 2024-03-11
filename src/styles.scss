@@ -31,6 +31,11 @@ body {
   @apply font-primary font-normal text-base bg-white text-light dark:bg-light dark:text-white;
 }
 
+/* html,
+body {
+  height: 100%;
+} */
+
 a {
   @apply transition-all duration-200 ease-in-out;
 }
@@ -46,7 +51,7 @@ app-home {
 }
 
 .btn {
-  @apply rounded-full   flex justify-center items-center;
+  @apply rounded-full   flex justify-center items-center cursor-pointer;
 }
 
 .btn-normal {
@@ -83,28 +88,3 @@ app-home {
 .container {
   @apply max-w-[67.5rem];
 }
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  //font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-/* .cdk-overlay-container {
-  overflow-y: scroll;
-}
- */
-
-.mdc-dialog__title,
-.mdc-dialog__content,
-.mdc-dialog__actions {
-  padding: 0 !important;
-}
-
-/* .mat-calendar-body-selected {
-  background-color: red !important;
-  color: var(--mat-datepicker-calendar-date-selected-state-text-color);
-} */

@@ -24,7 +24,7 @@ export class PublicPropertyService {
       .get<Property>(`${this.baseUrl}/public-properties/${id}`)
       .pipe(
         map((res) => {
-          console.log(res);
+          //console.log(res);
           return res;
         })
       );

@@ -88,7 +88,9 @@
       <div #map id="map" class="w-full h-[40vh] mt-5"></div>
 
       <div class="my-5 md:hidden">
-        <a class="btn btn-primary btn-normal" routerLink="/rooms/contact"
+        <a
+          class="btn btn-primary btn-normal"
+          [routerLink]="['/rooms/contact', roomData.id]"
           >Contact</a
         >
       </div>
@@ -103,10 +105,12 @@
         Available from: {{ roomData.available_from | date : "yyyy-MM-dd" }}
       </p>
       <p class="mb-4">Room size: {{ roomData.room_size }} m<sup>2</sup></p>
-      <p class="mb-4">Room price: {{ roomData.precio | number : "1.0-0" }}</p>
+      <p class="mb-4">Room price: {{ roomData.precio | number : "1.0-0" }} €</p>
       <p class="mb-4">City: {{ propertyData?.city }}</p>
       <p class="mb-4">Postal code: {{ propertyData?.postalCode }}</p>
-      <a class="btn btn-primary btn-normal" routerLink="/rooms/contact"
+      <a
+        class="btn btn-primary btn-normal"
+        [routerLink]="['/rooms/contact', roomData.id]"
         >Contact</a
       >
     </div>

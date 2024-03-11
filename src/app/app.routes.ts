@@ -38,7 +38,7 @@ export const routes: Routes = [
     canActivate: [clearStateUrlGuard],
     children: [
       {
-        path: 'contact',
+        path: 'contact/:id',
         canActivate: [isAuthenticatedGuard],
         title: 'EZHub | Contact ',
         loadComponent: () => import('./components/contact/contact.component'),

@@ -2,7 +2,7 @@
 module.exports = {
   mode: "jit",
   content: ["./src/**/*.{html,ts}"],
-  darkMode: "class", // Añade esta línea
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -38,13 +38,14 @@ module.exports = {
       },
       boxShadow: {
         "primary-hover": "0 0 0 2px hsl(161.647, 70%, 52%)",
-        "focus-primary": "0 0 2px 3px hsla(161.647, 70%, 52%, 0.3)", // Añade esta línea
+        "focus-primary": "0 0 2px 3px hsla(161.647, 70%, 52%, 0.3)",
+        "prim-ezh": "0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.25)",
       },
     },
   },
   variants: {
     extend: {
-      boxShadow: ["hover", "focus"], // Añade "focus" aquí
+      boxShadow: ["hover", "focus"],
     },
   },
   plugins: [],

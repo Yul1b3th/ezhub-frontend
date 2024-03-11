@@ -4,14 +4,19 @@ export interface User {
   id: number;
   username: string;
   email: string;
-  role: string;
+  role: Role;
   first_name: string;
   last_name: string;
   phone: number;
+  whatsapp: number;
   address: string;
   date_of_birth: null;
   photo: string;
   registration_date: string;
   last_update: string;
   deletedAt: null;
+}
+
+export enum Role {
+  User = 'user',
 }

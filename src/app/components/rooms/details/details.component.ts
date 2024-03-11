@@ -1,16 +1,13 @@
 import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
-  computed,
   inject,
 } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import {
   EMPTY,
@@ -29,7 +26,6 @@ import { Room } from '../../../interfaces/room.interface';
 import { Property } from '../../../interfaces/property.interface';
 import { Amenity } from '../../../interfaces/amenity.interface';
 import { AuthService } from '../../../services/auth.service';
-import { AuthStatus } from '../../auth/interfaces/auth-status.enum';
 
 @Component({
   selector: 'app-details',
