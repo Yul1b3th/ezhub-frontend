@@ -1,5 +1,5 @@
 <div class="pt-4 pb-6">
-  <button class="btn btn-primary btn-normal" (click)="onAddRoom()">
+  <a class="btn btn-primary btn-normal" (click)="onAddRoom()">
     <img
       tabindex="-1"
       class="mr-1"
@@ -8,7 +8,7 @@
       alt="Add Rooms"
     />
     Add Rooms
-  </button>
+  </a>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -38,7 +38,7 @@
       </div>
 
       <div class="p-4 flex justify-between">
-        <button class="btn btn-secondary btn-crud" (click)="onEditRoom(room)">
+        <a class="btn btn-secondary btn-small" (click)="onViewRoom(room)">
           <img
             tabindex="-1"
             class="mr-[2px]"
@@ -47,8 +47,8 @@
             alt="View"
           />
           View
-        </button>
-        <button class="btn btn-secondary btn-crud" (click)="onEditRoom(room)">
+        </a>
+        <a class="btn btn-secondary btn-small" (click)="onEditRoom(room)">
           <img
             tabindex="-1"
             class="mr-[2px]"
@@ -57,8 +57,8 @@
             alt="edit"
           />
           Edit
-        </button>
-        <button class="btn btn-delete btn-crud" (click)="onDeleteRoom()">
+        </a>
+        <a class="btn btn-delete btn-small" (click)="onDeleteRoom()">
           <img
             tabindex="-1"
             class="mr-[2px]"
@@ -67,7 +67,7 @@
             alt="delete"
           />
           Delete
-        </button>
+        </a>
       </div>
     </div>
   </div>

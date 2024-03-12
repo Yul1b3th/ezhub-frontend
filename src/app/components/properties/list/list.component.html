@@ -1,4 +1,17 @@
-<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="pt-4 pb-6">
+  <a class="btn btn-primary btn-normal" (click)="onAddRoom()">
+    <img
+      tabindex="-1"
+      class="mr-1"
+      src="assets/icons/add.svg"
+      width="20px"
+      alt="Add Rooms"
+    />
+    Add Rooms
+  </a>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
   @for (property of propertyService.propertiesJWT(); track property.id) {
   <div class="flex flex-col">
     <div
@@ -9,14 +22,41 @@
         <p class="mt-2">{{ property.details }}</p>
       </div>
 
-      <!-- <div class="p-4">
+      <div class="p-4 flex justify-between">
         <a
-          class="btn btn-secondary btn-normal"
+          class="btn btn-secondary btn-small"
           [routerLink]="['/rooms', property.id]"
         >
-          See more
+          <img
+            tabindex="-1"
+            class="mr-[2px]"
+            src="assets/icons/view.svg"
+            width="20px"
+            alt="View"
+          />
+          View
         </a>
-      </div> -->
+        <a class="btn btn-secondary btn-small" (click)="onEditRoom(property)">
+          <img
+            tabindex="-1"
+            class="mr-[2px]"
+            src="assets/icons/edit.svg"
+            width="20px"
+            alt="edit"
+          />
+          Edit
+        </a>
+        <a class="btn btn-delete btn-small" (click)="onDeleteRoom()">
+          <img
+            tabindex="-1"
+            class="mr-[2px]"
+            src="assets/icons/delete.svg"
+            width="20px"
+            alt="delete"
+          />
+          Delete
+        </a>
+      </div>
     </div>
   </div>
   } @empty {

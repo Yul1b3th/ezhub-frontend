@@ -20,11 +20,17 @@ export interface DialogData {
   styleUrl: './list-jwt.component.scss',
 })
 export default class ListJwtComponent {
-  roomService = inject(RoomService);
+  public roomService = inject(RoomService);
 
-  constructor() {}
+  constructor() {
+    this.roomService.getRooms().subscribe(() => {
+      //console.log(this.roomService.roomsJWT());
+    });
+  }
 
   onAddRoom() {}
+
+  onViewRoom(room: Room) {}
 
   onEditRoom(room: Room) {
     /* console.log('onEditRoom');
