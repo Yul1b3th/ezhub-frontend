@@ -5,6 +5,7 @@ import { Observable, catchError, map, tap, throwError } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { Room } from '../interfaces/room.interface';
+import { Amenity } from '../interfaces/amenity.interface';
 
 interface State {
   roomsJWT: Room[];
@@ -38,6 +39,7 @@ export class RoomService {
         headers: this.getAuthHeaders(),
       })
       .pipe(
+        map((rooms) => rooms.filter((room) => room.deletedAt === null)), // Filtrar habitaciones
         tap((res) => {
           this.#state.set({
             loadingJWT: false,
@@ -58,6 +60,8 @@ export class RoomService {
   }
 
   createRoom(room: Room): Observable<Room> {
+    console.log('createRoom');
+
     return this.http.post<Room>(`${this.baseUrl}/rooms`, room, {
       headers: this.getAuthHeaders(),
     });
@@ -74,4 +78,16 @@ export class RoomService {
       headers: this.getAuthHeaders(),
     });
   }
+
+  getRoomAmenities(id: number) {
+    return this.http.get<Amenity[]>(
+      `${this.baseUrl}/public-rooms/${id}/amenities`
+    );
+  }
+
+  /* softDeleteRoomByIDJWT(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/rooms/${id}`, {
+      headers: this.getAuthHeaders(),
+    });
+  } */
 }

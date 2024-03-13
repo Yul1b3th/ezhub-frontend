@@ -33,6 +33,10 @@ a {
   @apply duration-200 ease-in-out transition-all;
 }
 
+textarea {
+  @apply resize-none;
+}
+
 app-root {
   @apply flex items-start min-h-screen flex-col;
 }
@@ -61,6 +65,10 @@ app-home {
 
 .btn-secondary {
   @apply bg-secondary-200 font-semibold hover:bg-secondary hover:shadow-lg shadow-md shadow-secondary/30 text-dark-200;
+}
+
+.btn-outline-primary {
+  @apply border-2 border-primary font-semibold hover:bg-primary-200/30 hover:shadow shadow-sm shadow-secondary/30 text-dark-200;
 }
 
 .btn-outline-secondary {

@@ -2,25 +2,37 @@ import { Component, Inject, inject } from '@angular/core';
 
 import { RoomService } from '../../../services/room.service';
 import { Room } from '../../../interfaces/room.interface';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RoomsLabelDirective } from '../../../directives/rooms-label.directive';
 import { environment } from '../../../../environments/environment';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-
   imports: [CommonModule, ReactiveFormsModule, RoomsLabelDirective],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',
 })
 export default class EditComponent {
+  private fb = inject(FormBuilder);
   private roomService = inject(RoomService);
+  private router = inject(Router);
+
+  private route = inject(ActivatedRoute);
+
+  public roomId: number = 0;
   public formSubmitted = false;
   public photoUrl: string | null = null;
+  public roomName: string | null = null;
 
-  /*   public editForm = this.fb.group({
+  public editForm: FormGroup = this.fb.group({
     name: [
       '',
       [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
@@ -38,58 +50,45 @@ export default class EditComponent {
     deposit_required: ['false', Validators.required],
     services_included: ['false', Validators.maxLength(500)],
     photos: ['', Validators.maxLength(5000)],
-    amenityIds: [''],
+    //amenityIds: [''],
     propertyId: [0, Validators.required],
-  }); */
+  });
 
-  /*   constructor(
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<EditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Room
-  ) {
-    this.editForm.setValue({
-      name: data.name,
-      details: data.details,
-      precio: data.precio,
-      is_available: data.is_available.toString(),
-      room_size: data.room_size.toString(),
-      bed_type: data.bed_type,
-      available_from: data.available_from,
-      utilities_included: data.utilities_included.toString(),
-      deposit_required: data.deposit_required.toString(),
-      services_included: data.services_included,
-      photos: data.photos,
-      amenityIds: data.amenityIds ? data.amenityIds.join(',') : null,
-      propertyId: data.propertyId,
+  constructor() {
+    // Get the room ID from the route parameters
+    this.route.params.subscribe((params) => {
+      this.roomId = params['id'];
+
+      // Get the room details and fill the form
+      this.roomService.getRoomById(this.roomId).subscribe((room) => {
+        this.editForm.patchValue(room);
+        this.roomName = room.name; // Set the room name
+      });
     });
-
-    if (data.photos) {
-      this.photoUrl = `assets/img/bedrooms/${data.photos}`;
-    }
-  } */
-
-  onNoClick(): void {
-    //this.dialogRef.close();
   }
 
-  /*   onSubmit(): void {
+  onSubmit(): void {
     this.formSubmitted = true;
 
     if (this.editForm.valid) {
-      this.roomService
-        .updateRoomJWT(this.data.id, this.editForm.value)
-        .subscribe(() => {
-          this.dialogRef.close();
-        });
-    }
-  } */
+      // Get the form values
+      const values = this.editForm.value;
 
-  /*   onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.editForm.patchValue({
-        photos: file,
+      // Convert 'precio' to a number
+      values.precio = Number(values.precio);
+
+      // Convert 'amenityIds' to an array
+      //values.amenityIds = values.amenityIds.split(',');
+
+      // Call the updateRoomJWT method with the form values
+      this.roomService.updateRoomJWT(this.roomId, values).subscribe(() => {
+        // Navigate back to the room list or wherever you want to go after the room is updated
+        this.router.navigate(['/publish/rooms']);
       });
     }
-  } */
+  }
+
+  onNoClick() {
+    this.router.navigate(['/publish/rooms']);
+  }
 }

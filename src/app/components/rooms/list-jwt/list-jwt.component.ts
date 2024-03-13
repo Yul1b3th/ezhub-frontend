@@ -1,16 +1,8 @@
-import { Component, OnInit, effect, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { PublicRoomService } from '../../../services/public-room.service';
 import { RouterModule } from '@angular/router';
 import { RoomService } from '../../../services/room.service';
-import EditComponent from '../edit/edit.component';
-import { Room } from '../../../interfaces/room.interface';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-list',
@@ -21,6 +13,8 @@ export interface DialogData {
 })
 export default class ListJwtComponent {
   public roomService = inject(RoomService);
+  public deleteModalOpen = false;
+  public roomToDelete: number | null = null;
 
   constructor() {
     this.roomService.getRooms().subscribe(() => {
@@ -28,21 +22,26 @@ export default class ListJwtComponent {
     });
   }
 
-  onAddRoom() {}
-
-  onViewRoom(room: Room) {}
-
-  onEditRoom(room: Room) {
-    /* console.log('onEditRoom');
-    const dialogRef = this.dialog.open(EditComponent, {
-      data: room,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      console.log(result);
-    }); */
+  onDeleteRoom(roomId: number) {
+    this.deleteModalOpen = true;
+    this.roomToDelete = roomId;
   }
 
-  onDeleteRoom() {}
+  confirmDelete() {
+    if (this.roomToDelete !== null) {
+      this.roomService.deleteRoombyIDJWT(this.roomToDelete).subscribe(
+        () => {
+          this.deleteModalOpen = false;
+          this.roomToDelete = null;
+          this.roomService.getRooms().subscribe();
+        },
+        (error) => {}
+      );
+    }
+  }
+
+  cancelDelete() {
+    this.deleteModalOpen = false;
+    this.roomToDelete = null;
+  }
 }

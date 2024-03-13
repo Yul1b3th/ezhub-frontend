@@ -1,10 +1,12 @@
-import { Routes } from '@angular/router';
+// app-routing.module.ts
 
 import {
   clearStateUrlGuard,
   isAuthenticatedGuard,
   isNotAuthenticatedGuard,
 } from './components/auth/guards';
+
+import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   // Home
@@ -33,6 +35,7 @@ export const routes: Routes = [
     ],
   },
 
+  // Rooms
   {
     path: 'rooms',
     canActivate: [clearStateUrlGuard],
@@ -42,12 +45,6 @@ export const routes: Routes = [
         canActivate: [isAuthenticatedGuard],
         title: 'EZHub | Contact ',
         loadComponent: () => import('./components/contact/contact.component'),
-      },
-      {
-        path: 'edit/:id',
-        canActivate: [isAuthenticatedGuard],
-        title: 'EZHub | Room',
-        loadComponent: () => import('./components/rooms/edit/edit.component'),
       },
       {
         path: ':id',
@@ -78,6 +75,67 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'properties',
+        pathMatch: 'full',
+      },
+    ],
+  },
+
+  // Publish-Properties
+  {
+    path: 'publish/properties',
+    canActivate: [isAuthenticatedGuard],
+    title: 'EZHub | Publish ',
+    children: [
+      {
+        path: 'add',
+        loadComponent: () =>
+          import('./components/properties/add/add.component'),
+      },
+      {
+        path: 'edit/:id',
+        canActivate: [isAuthenticatedGuard],
+        loadComponent: () =>
+          import('./components/properties/edit/edit.component'),
+      },
+      {
+        path: ':id',
+        loadComponent: () =>
+          import('./components/properties/details/details.component'),
+      },
+    ],
+  },
+
+  // Publish-Rooms
+  {
+    path: 'publish/rooms',
+    canActivate: [isAuthenticatedGuard],
+    title: 'EZHub | Publish ',
+    children: [
+      {
+        path: 'add',
+        loadComponent: () => import('./components/rooms/add/add.component'),
+      },
+      {
+        path: 'edit/:id',
+        canActivate: [isAuthenticatedGuard],
+        loadComponent: () => import('./components/rooms/edit/edit.component'),
+      },
+      {
+        path: 'delete/:id',
+        canActivate: [isAuthenticatedGuard],
+        loadComponent: () =>
+          import('./components/rooms/delete/delete.component'),
+      },
+      {
+        path: ':id',
+        loadComponent: () =>
+          import(
+            './components/rooms/publish-details/publish-details.component'
+          ),
+      },
+      {
+        path: '',
+        redirectTo: 'rooms',
         pathMatch: 'full',
       },
     ],

@@ -31,6 +31,7 @@ export class PublicRoomService {
   public loading = computed(() => this.#state().loading);
 
   constructor(private placesService: PlacesService) {
+    this.getPublicRooms();
     this.filterRooms();
   }
 
@@ -40,7 +41,10 @@ export class PublicRoomService {
       .subscribe((properties: Property[]) => {
         let rooms: Room[] = [];
         properties.forEach((property: Property) => {
-          rooms = rooms.concat(property.rooms);
+          const validRooms = property.rooms.filter(
+            (room) => room.deletedAt === null && room.is_available
+          );
+          rooms = rooms.concat(validRooms);
         });
         this.#state.set({
           loading: false,
@@ -79,8 +83,6 @@ export class PublicRoomService {
       });
   }
   filterRooms(query: string = '') {
-    //console.log('filterRooms');
-
     // Filtra las habitaciones basándose en la consulta y la geolocalización
     this.publicPropertyService
       .getPublicProperties()
@@ -89,13 +91,11 @@ export class PublicRoomService {
         properties.forEach((property: Property) => {
           let userLongitude: number = 0;
           let userLatitude: number = 0;
-          //console.log(this.placesService.useLocation);
 
           if (this.placesService.useLocation) {
             [userLongitude, userLatitude] = this.placesService.useLocation;
           }
           if (userLongitude !== 0 && userLatitude !== 0 && !query) {
-            //console.log('useLocation');
             if (
               this.placesService.calculateDistance(
                 userLongitude,
@@ -104,26 +104,33 @@ export class PublicRoomService {
                 Number(property.latitude)
               )
             ) {
-              filteredRooms = filteredRooms.concat(property.rooms);
+              const validRooms = property.rooms.filter(
+                (room) => room.deletedAt === null && room.is_available
+              );
+              filteredRooms = filteredRooms.concat(validRooms);
             }
           }
           if (query) {
-            //console.log(query);
-
             if (property.city.toLowerCase().includes(query.toLowerCase())) {
-              filteredRooms = filteredRooms.concat(property.rooms);
+              const validRooms = property.rooms.filter(
+                (room) => room.deletedAt === null && room.is_available
+              );
+              filteredRooms = filteredRooms.concat(validRooms);
             }
             if (property.postalCode.includes(query)) {
-              filteredRooms = filteredRooms.concat(property.rooms);
+              const validRooms = property.rooms.filter(
+                (room) => room.deletedAt === null && room.is_available
+              );
+              filteredRooms = filteredRooms.concat(validRooms);
             }
           }
           if (!this.placesService.useLocation && !query) {
-            //console.log('!this.placesService.useLocation');
-            filteredRooms = filteredRooms.concat(property.rooms);
+            const validRooms = property.rooms.filter(
+              (room) => room.deletedAt === null && room.is_available
+            );
+            filteredRooms = filteredRooms.concat(validRooms);
           }
         });
-
-        //console.log({ filteredRooms });
 
         this.#state.set({
           loading: false,

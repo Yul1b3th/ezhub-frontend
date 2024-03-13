@@ -38,6 +38,9 @@ export class PropertyService {
         headers: this.getAuthHeaders(),
       })
       .pipe(
+        map((properties) =>
+          properties.filter((property) => property.deletedAt === null)
+        ),
         tap((res) => {
           this.#state.set({
             loadingJWT: false,

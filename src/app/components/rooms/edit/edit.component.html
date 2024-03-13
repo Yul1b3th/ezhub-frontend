@@ -1,108 +1,100 @@
-<!-- <div style="padding: 1rem">
-  <div class="form">
-    <h2 mat-dialog-title>Edit {{ data.name }}</h2>
-    <div mat-dialog-content>
-      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-        <div>
-          <div class="mb-4">
-            <div class="mb-2">
-              <label for="name">Name</label>
+<div class="cntainer mx-auto px-5 my-10">
+  <div class="w-full mx-auto justify-center max-w-[45rem]">
+    <button class="btn btn-small btn-outline-primary" (click)="onNoClick()">
+      Back
+    </button>
+
+    <h1 class="text-center text-4xl font-semibold mb-5">Edit Room Details</h1>
+    <div class="form">
+      <h2 class="mb-4 text-lg">
+        Editing Room: <span class="font-semibold">{{ roomName }}</span>
+      </h2>
+      <div>
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+          <div>
+            <div class="mb-4">
+              <div class="mb-2">
+                <label for="name">Name</label>
+                <input
+                  class="w-full"
+                  formControlName="name"
+                  id="name"
+                  type="text"
+                  placeholder="Name"
+                />
+              </div>
+
+              @if (formSubmitted && editForm.get('name')?.errors) {
+              <div
+                class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
+              >
+                <p
+                  roomLabel
+                  [errors]="editForm.get('name')?.errors"
+                  [fieldName]="'name'"
+                ></p>
+              </div>
+              }
+            </div>
+
+            <div class="mb-4">
+              <div class="mb-2">
+                <label for="details">Details</label>
+                <textarea
+                  class="w-full"
+                  name="details"
+                  rows="10"
+                  formControlName="details"
+                  id="details"
+                  type="text"
+                  placeholder="Details"
+                ></textarea>
+              </div>
+
+              @if (formSubmitted && editForm.get('details')?.errors) {
+              <div
+                class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
+              >
+                <p
+                  roomLabel
+                  [errors]="editForm.get('details')?.errors"
+                  [fieldName]="'details'"
+                ></p>
+              </div>
+              }
+            </div>
+
+            <div class="mb-4">
+              <label for="precio">Precio</label>
               <input
-                formControlName="name"
-                id="name"
-                type="text"
-                placeholder="Name"
+                formControlName="precio"
+                id="precio"
+                type="number"
+                placeholder="Precio"
+                min="10"
               />
             </div>
 
-            @if (formSubmitted && editForm.get('name')?.errors) {
-            <div
-              class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
-            >
-              <p
-                roomLabel
-                [errors]="editForm.get('name')?.errors"
-                [fieldName]="'name'"
-              ></p>
-            </div>
-            }
-          </div>
-
-          <div class="mb-4">
-            <div class="mb-2">
-              <label for="details">Details</label>
+            <div class="mb-4 flex">
+              <label for="is_available">Is Available</label>
               <input
-                formControlName="details"
-                id="details"
-                type="text"
-                placeholder="Details"
+                formControlName="is_available"
+                id="is_available"
+                type="checkbox"
               />
             </div>
-
-            @if (formSubmitted && editForm.get('details')?.errors) {
-            <div
-              class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
-            >
-              <p
-                roomLabel
-                [errors]="editForm.get('details')?.errors"
-                [fieldName]="'details'"
-              ></p>
-            </div>
-            }
           </div>
-
-          <div class="mb-2">
-            <label for="available_from">Available From</label>
-            <div class="relative w-fit">
-              <input
-                [matDatepicker]="picker"
-                formControlName="available_from"
-                id="available_from"
-                placeholder="MM/DD/YYYY"
-              />
-              <mat-datepicker-toggle
-                class="absolute right-0 top-0"
-                matIconSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </div>
-          </div>
-
-          <div class="mb-4">
-            <label for="precio">Precio</label>
-            <input
-              formControlName="precio"
-              id="precio"
-              type="number"
-              placeholder="Precio"
-            />
-          </div>
-
-          <div class="mb-4 flex">
-            <label for="is_available">Is Available</label>
-            <input
-              formControlName="is_available"
-              id="is_available"
-              type="checkbox"
-            />
-          </div>
-          <div class="mb-4">
-            <label for="photos">Photos</label>
-            <input type="file" id="photos" (change)="onFileChange($event)" />
-            <img [src]="photoUrl" alt="Room Photo" *ngIf="photoUrl" />
-          </div>
-        </div>
-      </form>
-    </div>
-    <div mat-dialog-actions class="flex items-center gap-5">
-      <button class="btn btn-normal btn-primary" type="submit">Save</button>
-      <button class="btn btn-normal btn-secondary" (click)="onNoClick()">
-        Cancel
-      </button>
+        </form>
+      </div>
+      <div class="flex items-center gap-5">
+        <button
+          class="btn btn-normal btn-primary"
+          type="submit"
+          (click)="onSubmit()"
+        >
+          Save
+        </button>
+      </div>
     </div>
   </div>
 </div>
- -->
-<h1>EDIT</h1>

@@ -1,5 +1,9 @@
 <div class="pt-4 pb-6">
-  <a class="btn btn-primary btn-normal" (click)="onAddRoom()">
+  <a
+    class="btn btn-primary btn-normal"
+    (click)="onAddRoom()"
+    routerLink="./add"
+  >
     <img
       tabindex="-1"
       class="mr-1"
@@ -25,7 +29,7 @@
       <div class="p-4 flex justify-between">
         <a
           class="btn btn-secondary btn-small"
-          [routerLink]="['/rooms', property.id]"
+          [routerLink]="['./', property.id]"
         >
           <img
             tabindex="-1"
@@ -36,7 +40,11 @@
           />
           View
         </a>
-        <a class="btn btn-secondary btn-small" (click)="onEditRoom(property)">
+        <a
+          class="btn btn-secondary btn-small"
+          (click)="onEditRoom(property)"
+          [routerLink]="['./edit/', property.id]"
+        >
           <img
             tabindex="-1"
             class="mr-[2px]"

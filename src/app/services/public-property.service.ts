@@ -16,7 +16,13 @@ export class PublicPropertyService {
   }
 
   getPublicProperties(): Observable<Property[]> {
-    return this.http.get<Property[]>(`${this.baseUrl}/public-properties`);
+    return this.http
+      .get<Property[]>(`${this.baseUrl}/public-properties`)
+      .pipe(
+        map((properties) =>
+          properties.filter((property) => property.deletedAt === null)
+        )
+      );
   }
 
   getPropertyById(id: number) {
