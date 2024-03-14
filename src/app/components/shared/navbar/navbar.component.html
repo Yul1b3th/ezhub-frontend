@@ -269,6 +269,12 @@
     [style.transform]="userMenuOpen ? 'translateX(0)' : 'translateX(100%)'"
     (keydown)="onKeydown($event)"
   >
+    <button
+      class="absolute top-5 right-5 closeUserMenu"
+      (click)="closeUserMenu()"
+    >
+      X
+    </button>
     <ul
       class="absolute inset-x-0 top-24 p-5 w-[76%] mx-auto rounded-md h-max text-center grid font-semibold text-dark-blue shadow-2xl bg-white dark:bg-dark-200"
     >

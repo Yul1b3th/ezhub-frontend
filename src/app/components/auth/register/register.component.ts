@@ -102,12 +102,3 @@ export default class RegisterComponent {
     this.registerForm.get('password')?.setValue(inputElement.value);
   }
 }
-
-/*   cleanUsername1(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    // Limpia y restringe caracteres no permitidos
-    inputElement.value = inputElement.value
-      .trim()
-      .replace(/[^a-zA-ZÀ-ÿ\s]+/gu, '');
-    this.registerForm.get('username')?.setValue(inputElement.value);
-  } */

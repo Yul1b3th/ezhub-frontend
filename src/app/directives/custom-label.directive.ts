@@ -13,7 +13,7 @@ export class CustomLabelDirective {
 
   @Input() set errors(value: ValidationErrors | null | undefined) {
     this._errors = value;
-    console.log(this._errors);
+    //console.log(this._errors);
     // this.setErrorMessage();
   }
 
@@ -33,7 +33,7 @@ export class CustomLabelDirective {
   }
 
   setErrorMessage(): void {
-    console.log(this.fieldName);
+    //console.log(this.fieldName);
 
     if (!this.htmlElement) return;
 
@@ -44,7 +44,7 @@ export class CustomLabelDirective {
 
     // Creamos un array con las claves de los errores
     const errors = Object.keys(this._errors);
-    console.log(errors);
+    //console.log(errors);
 
     if (errors.includes('required')) {
       const capitalizedFieldName =

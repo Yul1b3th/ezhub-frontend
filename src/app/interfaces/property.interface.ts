@@ -14,6 +14,7 @@ export interface Property {
   longitude: string;
   bedrooms: number;
   bathrooms: number;
+  is_available: boolean;
   property_size: number;
   smoking_allowed: boolean;
   pets_allowed: boolean;

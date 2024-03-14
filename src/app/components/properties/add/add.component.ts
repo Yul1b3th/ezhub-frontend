@@ -10,26 +10,36 @@ import {
 
 import { PlacesApiClient } from '../../../maps/api';
 import { PropertyService } from '../../../services/property.service';
-import { CustomLabelDirective } from '../../../directives/custom-label.directive';
 import { PlacesService } from '../../../maps/services';
+import { Router } from '@angular/router';
+import { RoomsLabelDirective } from '../../../directives/rooms-label.directive';
 
 @Component({
   selector: 'app-add',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CustomLabelDirective],
+  imports: [CommonModule, ReactiveFormsModule, RoomsLabelDirective],
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',
 })
 export default class AddComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
   private propertyService = inject(PropertyService);
   private placesApiClient = inject(PlacesApiClient);
-  private fb = inject(FormBuilder);
 
-  public propertyForm: FormGroup = this.fb.group({
-    name: ['', Validators.required],
+  public addForm: FormGroup = this.fb.group({
+    name: [
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
+    ],
+    details: [
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(500)],
+    ],
     address: ['', Validators.required],
     postalCode: ['', [Validators.minLength(4), Validators.maxLength(20)]],
     city: ['', Validators.required],
+    //city: [{ value: '', disabled: true }, Validators.required],
     country: ['España', Validators.required],
     latitude: [
       '',
@@ -39,6 +49,14 @@ export default class AddComponent implements OnInit {
       '',
       [Validators.required, Validators.min(-180), Validators.max(180)],
     ],
+    is_available: [false, Validators.required],
+    bedrooms: [4, Validators.required],
+    bathrooms: [2, Validators.required],
+    property_size: [120, Validators.required],
+    smoking_allowed: [false],
+    pets_allowed: [true],
+    couples_allowed: [false],
+    occupantCount: [0],
   });
 
   public formSubmitted = false;
@@ -47,11 +65,11 @@ export default class AddComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmitProperty() {
+  onSubmit() {
     this.formSubmitted = true;
-    if (this.propertyForm.valid) {
+    if (this.addForm.valid) {
       // Obtiene los valores del formulario
-      let property = this.propertyForm.value;
+      let property = this.addForm.value;
 
       // Convierte latitude y longitude a números
       property.latitude = Number(property.latitude);
@@ -62,6 +80,7 @@ export default class AddComponent implements OnInit {
         (response) => {
           console.log(response);
           // Aquí puedes manejar la respuesta del servidor
+          this.router.navigate(['/publish/properties']);
         },
         (error) => {
           console.log(error);
@@ -72,10 +91,10 @@ export default class AddComponent implements OnInit {
   }
 
   onAddressChange() {
-    const addressControl = this.propertyForm.get('address');
-    const postalCodeControl = this.propertyForm.get('postalCode');
-    const latitudeControl = this.propertyForm.get('latitude');
-    const longitudeControl = this.propertyForm.get('longitude');
+    const addressControl = this.addForm.get('address');
+    const postalCodeControl = this.addForm.get('postalCode');
+    const latitudeControl = this.addForm.get('latitude');
+    const longitudeControl = this.addForm.get('longitude');
 
     console.log('onAddressChange');
 
@@ -103,7 +122,7 @@ export default class AddComponent implements OnInit {
 
                 // Obtén la ciudad y la imprime en la consola
                 const city = this.placesService.getCityFromFeature(features[0]);
-                this.propertyForm.get('city')!.setValue(city);
+                this.addForm.get('city')!.setValue(city);
                 console.log(city);
               }
             },
@@ -114,5 +133,9 @@ export default class AddComponent implements OnInit {
           );
       }
     }
+  }
+
+  onNoClick() {
+    this.router.navigate(['/publish/properties']);
   }
 }

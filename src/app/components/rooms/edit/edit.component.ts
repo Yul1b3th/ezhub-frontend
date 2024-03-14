@@ -1,17 +1,15 @@
-import { Component, Inject, inject } from '@angular/core';
-
-import { RoomService } from '../../../services/room.service';
-import { Room } from '../../../interfaces/room.interface';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+
 import { RoomsLabelDirective } from '../../../directives/rooms-label.directive';
-import { environment } from '../../../../environments/environment';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { RoomService } from '../../../services/room.service';
 
 @Component({
   selector: 'app-edit',
@@ -22,15 +20,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export default class EditComponent {
   private fb = inject(FormBuilder);
-  private roomService = inject(RoomService);
   private router = inject(Router);
-
   private route = inject(ActivatedRoute);
+  private roomService = inject(RoomService);
 
-  public roomId: number = 0;
   public formSubmitted = false;
-  public photoUrl: string | null = null;
+  public roomId: number = 0;
   public roomName: string | null = null;
+  public photoUrl: string | null = null;
 
   public editForm: FormGroup = this.fb.group({
     name: [

@@ -49,7 +49,7 @@ export default class AddComponent implements OnInit {
       'Contrato de alquiler, Servicio de limpieza',
       Validators.maxLength(500),
     ],
-    photos: ['9.jpg', Validators.maxLength(5000)],
+    photos: ['10.jpg', Validators.maxLength(5000)],
     amenityIds: [[1, 5, 9]],
     propertyId: ['', Validators.required],
   });

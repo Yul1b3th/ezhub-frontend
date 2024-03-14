@@ -1,17 +1,13 @@
 <div class="pt-4 pb-6">
-  <a
-    class="btn btn-primary btn-normal"
-    (click)="onAddRoom()"
-    routerLink="./add"
-  >
+  <a class="btn btn-primary btn-normal" routerLink="./add">
     <img
       tabindex="-1"
       class="mr-1"
       src="assets/icons/add.svg"
       width="20px"
-      alt="Add Rooms"
+      alt="Add Properties"
     />
-    Add Rooms
+    Add Properties
   </a>
 </div>
 
@@ -42,7 +38,6 @@
         </a>
         <a
           class="btn btn-secondary btn-small"
-          (click)="onEditRoom(property)"
           [routerLink]="['./edit/', property.id]"
         >
           <img
@@ -54,7 +49,7 @@
           />
           Edit
         </a>
-        <a class="btn btn-delete btn-small" (click)="onDeleteRoom()">
+        <a class="btn btn-delete btn-small" (click)="onDeleteRoom(property.id)">
           <img
             tabindex="-1"
             class="mr-[2px]"
@@ -71,3 +66,23 @@
   <p class="text-lg text-center">There are no items.</p>
   }
 </div>
+
+@if (deleteModalOpen) {
+<div
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1001]"
+>
+  <div class="bg-white rounded p-5">
+    <h2 class="text-lg font-bold mb-4">
+      Are you sure you want to delete this room?
+    </h2>
+    <div class="flex justify-end gap-4">
+      <button class="btn btn-secondary btn-small" (click)="cancelDelete()">
+        Cancel
+      </button>
+      <button class="btn btn-delete btn-small" (click)="confirmDelete()">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+}

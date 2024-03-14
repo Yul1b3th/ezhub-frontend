@@ -1,1 +1,40 @@
-<p>details works!</p>
+<div class="cntainer mx-auto px-5 my-10">
+  @if (property()) {
+  <div class="w-full mx-auto justify-center max-w-[45rem]">
+    <button class="btn btn-small btn-outline-primary" (click)="onNoClick()">
+      Back
+    </button>
+
+    <h1 class="text-center text-4xl font-semibold mb-5">Property Details</h1>
+
+    <!-- Room features -->
+    <div
+      class="mt-5 bg-zinc-50 dark:bg-light border border-zinc-200 p-5 shadow-sm"
+    >
+      <h2 class="font-bold mb-3 text-lg">{{ property()!.name }}</h2>
+
+      <p class="mb-4">{{ property()!.details }}</p>
+
+      <p class="mb-4">
+        Property size: {{ property()!.property_size }} m<sup>2</sup>
+      </p>
+
+      <p class="mb-4">City: {{ property()!.city }}</p>
+      <p class="mb-4">Postal Code: {{ property()!.postalCode }}</p>
+      <p class="mb-4">Address: {{ property()!.address }}</p>
+      <p class="mb-4">Bedrooms: {{ property()!.bedrooms }}</p>
+      <p class="mb-4">Bathrooms: {{ property()!.bathrooms }}</p>
+      <p class="mb-4">Occupant count: {{ property()!.occupantCount }}</p>
+      @if (property()!.smoking_allowed) {
+      <p class="mb-4">Smoking allowed</p>
+      } @if (property()!.pets_allowed) {
+      <p class="mb-4">Pets allowed</p>
+      } @if (property()!.couples_allowed) {
+      <p class="mb-4">Couples allowed</p>
+      }
+    </div>
+  </div>
+  }@else {
+  <p>Loading...</p>
+  }
+</div>

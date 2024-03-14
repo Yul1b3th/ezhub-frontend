@@ -35,7 +35,9 @@ export default class ListJwtComponent {
           this.roomToDelete = null;
           this.roomService.getRooms().subscribe();
         },
-        (error) => {}
+        (error) => {
+          console.error('Error deleting property:', error);
+        }
       );
     }
   }

@@ -34,3 +34,12 @@
   // border-bottom: 1.5px solid hsl(var(--clr-primary-hsl) / 1);
   // color: hsl(var(--clr-primary-hsl));
 }
+
+.closeUserMenu {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}

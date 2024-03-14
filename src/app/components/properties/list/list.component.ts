@@ -13,17 +13,39 @@ import { RouterModule } from '@angular/router';
 })
 export default class ListComponent {
   public propertyService = inject(PropertyService);
+  public deleteModalOpen = false;
+  public propertyToDelete: number | null = null;
+
   constructor() {
     this.propertyService.getProperties().subscribe(() => {
       //console.log(this.propertyService.propertiesJWT());
     });
   }
 
-  onAddRoom() {}
+  onDeleteRoom(propertyId: number) {
+    this.deleteModalOpen = true;
+    this.propertyToDelete = propertyId;
+  }
 
-  onViewRoom(property: Property) {}
+  confirmDelete() {
+    if (this.propertyToDelete !== null) {
+      this.propertyService
+        .deletePropertybyIDJWT(this.propertyToDelete)
+        .subscribe(
+          () => {
+            this.deleteModalOpen = false;
+            this.propertyToDelete = null;
+            this.propertyService.getProperties().subscribe();
+          },
+          (error) => {
+            console.error('Error deleting property:', error);
+          }
+        );
+    }
+  }
 
-  onEditRoom(property: Property) {}
-
-  onDeleteRoom() {}
+  cancelDelete() {
+    this.deleteModalOpen = false;
+    this.propertyToDelete = null;
+  }
 }

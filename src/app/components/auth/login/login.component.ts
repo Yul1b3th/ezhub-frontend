@@ -36,17 +36,17 @@ export default class LoginComponent {
 
     if (this.loginForm.valid) {
       const { usernameOrEmail, password } = this.loginForm.value;
-      console.log(this.authService.authStatus());
+      //console.log(this.authService.authStatus());
 
       this.authService.login(usernameOrEmail, password).subscribe({
         next: () => {
-          console.log(this.authService.authStatus());
+          //console.log(this.authService.authStatus());
           if (this.authService.authStatus() === AuthStatus.authenticated) {
             const redirectUrl = localStorage.getItem('state-url');
-            console.log({ redirectUrl });
+            //console.log({ redirectUrl });
 
             if (redirectUrl) {
-              console.log('yuli');
+              //console.log('yuli');
 
               this.router.navigateByUrl(redirectUrl);
               localStorage.removeItem('state-url');
@@ -57,9 +57,9 @@ export default class LoginComponent {
           this.router.navigateByUrl('/');
         },
         error: (err) => {
-          console.log(err);
+          //console.log(err);
 
-          if (err === 'Username or email is wrong') {
+          if (err === 'Username or Email is wrong') {
             this.loginForm
               .get('usernameOrEmail')
               ?.setErrors({ usernameOrEmailWrong: true });

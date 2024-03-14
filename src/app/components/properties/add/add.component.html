@@ -1,53 +1,166 @@
 <div class="container mx-auto px-5 my-10">
-  <div
-    class="w-[30%] md:block p-5 border-slate-300 shadow bottom-0 md:top-[8rem]"
-  ></div>
+  <div class="w-full mx-auto justify-center max-w-[45rem]">
+    <button class="btn btn-small btn-outline-primary" (click)="onNoClick()">
+      Back
+    </button>
+
+    <h1 class="text-center text-4xl font-semibold mb-5">Add New Property</h1>
+
+    <div class="form">
+      <div>
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+          <div>
+            <div class="mb-4">
+              <div class="mb-2">
+                <label for="name">Name</label>
+                <input
+                  class="w-full mt-2"
+                  formControlName="name"
+                  id="name"
+                  type="text"
+                  placeholder="Name"
+                />
+              </div>
+
+              @if (formSubmitted && addForm.get('name')?.errors) {
+              <div
+                class="w-fit bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
+              >
+                <p
+                  roomLabel
+                  [errors]="addForm.get('name')?.errors"
+                  [fieldName]="'name'"
+                ></p>
+              </div>
+              }
+            </div>
+
+            <div class="mb-4">
+              <div class="mb-2">
+                <label for="details">Details</label>
+                <textarea
+                  class="w-full mt-2"
+                  name="details"
+                  rows="10"
+                  formControlName="details"
+                  id="details"
+                  type="text"
+                  placeholder="Details"
+                ></textarea>
+              </div>
+
+              @if (formSubmitted && addForm.get('details')?.errors) {
+              <div
+                class="w-fit bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
+              >
+                <p
+                  roomLabel
+                  [errors]="addForm.get('details')?.errors"
+                  [fieldName]="'details'"
+                ></p>
+              </div>
+              }
+            </div>
+
+            <div class="mb-4">
+              <div class="mb-2">
+                <label for="address">Address</label>
+                <input
+                  id="address"
+                  type="text"
+                  placeholder="address"
+                  class="w-full mt-2"
+                  formControlName="address"
+                  (change)="onAddressChange()"
+                />
+              </div>
+
+              @if (formSubmitted && addForm.get('address')?.errors) {
+              <div
+                class="w-fit bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
+              >
+                <p
+                  roomLabel
+                  [errors]="addForm.get('address')?.errors"
+                  [fieldName]="'address'"
+                ></p>
+              </div>
+              }
+            </div>
+
+            <div class="mb-4">
+              <div class="mb-2">
+                <label for="postalCode">Postal Code</label>
+                <input
+                  id="postalCode"
+                  type="text"
+                  placeholder="postalCode"
+                  class="w-full mt-2"
+                  formControlName="postalCode"
+                  (change)="onAddressChange()"
+                />
+              </div>
+
+              @if (formSubmitted && addForm.get('postalCode')?.errors) {
+              <div
+                class="w-fit bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
+              >
+                <p
+                  roomLabel
+                  [errors]="addForm.get('postalCode')?.errors"
+                  [fieldName]="'postalCode'"
+                ></p>
+              </div>
+              }
+            </div>
+
+            <div class="mb-4">
+              <div class="mb-2">
+                <label for="city">City</label>
+                <input
+                  id="city"
+                  type="text"
+                  placeholder="city"
+                  class="w-full mt-2"
+                  formControlName="city"
+                />
+              </div>
+
+              @if (formSubmitted && addForm.get('city')?.errors) {
+              <div
+                class="w-fit bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
+              >
+                <p
+                  roomLabel
+                  [errors]="addForm.get('city')?.errors"
+                  [fieldName]="'city'"
+                ></p>
+              </div>
+              }
+            </div>
+
+            <div class="mb-4 flex">
+              <label class="mb-0 mr-1" for="is_available">Is Available</label>
+              <input
+                formControlName="is_available"
+                id="is_available"
+                value="IsAvailable"
+                type="checkbox"
+              />
+            </div>
+          </div>
+
+          <!-- Campos para la latitud y la longitud (ocultos al usuario) -->
+          <input type="hidden" formControlName="latitude" />
+          <input type="hidden" formControlName="longitude" />
+
+          <div class="flex items-center gap-5">
+            <button class="btn btn-normal btn-primary" type="submit">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
-
-<form [formGroup]="propertyForm" (ngSubmit)="onSubmitProperty()">
-  <!-- Campo para el nombre de la propiedad -->
-  <div>
-    <label for="name">Nombre</label>
-    <input type="text" id="name" formControlName="name" required />
-  </div>
-
-  <!-- Campo para la dirección -->
-  <div>
-    <label for="address">Dirección</label>
-    <input
-      type="text"
-      id="address"
-      formControlName="address"
-      (change)="onAddressChange()"
-    />
-  </div>
-
-  <!-- Campo para el código postal -->
-  <div>
-    <label for="postalCode">Código Postal</label>
-    <input
-      type="text"
-      id="postalCode"
-      formControlName="postalCode"
-      (change)="onAddressChange()"
-    />
-  </div>
-
-  <!-- Campo para la ciudad -->
-  <div>
-    <label for="city">Ciudad</label>
-    <input type="text" id="city" formControlName="city" required />
-  </div>
-
-  <!-- Campo para el país -->
-  <div>
-    <label for="country">País</label>
-    <input type="text" id="country" formControlName="country" required />
-  </div>
-
-  <!-- Campos para la latitud y la longitud (ocultos al usuario) -->
-  <input type="hidden" formControlName="latitude" />
-  <input type="hidden" formControlName="longitude" />
-
-  <button type="submit">Crear propiedad</button>
-</form>

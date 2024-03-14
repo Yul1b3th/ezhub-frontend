@@ -1,4 +1,4 @@
-<div class="cntainer mx-auto px-5 my-10">
+<div class="container mx-auto px-5 my-10">
   <div class="w-full mx-auto justify-center max-w-[45rem]">
     <button class="btn btn-small btn-outline-primary" (click)="onNoClick()">
       Back
@@ -14,14 +14,13 @@
               <div class="mb-2">
                 <label for="name">Name</label>
                 <input
-                  class="w-full mt-2"
-                  formControlName="name"
                   id="name"
                   type="text"
                   placeholder="Name"
+                  class="w-full mt-2"
+                  formControlName="name"
                 />
               </div>
-
               @if (formSubmitted && addForm.get('name')?.errors) {
               <div
                 class="w-fit bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
@@ -39,16 +38,14 @@
               <div class="mb-2">
                 <label for="details">Details</label>
                 <textarea
-                  class="w-full mt-2"
-                  name="details"
-                  rows="10"
-                  formControlName="details"
                   id="details"
                   type="text"
                   placeholder="Details"
+                  rows="10"
+                  class="w-full mt-2"
+                  formControlName="details"
                 ></textarea>
               </div>
-
               @if (formSubmitted && addForm.get('details')?.errors) {
               <div
                 class="w-fit bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
@@ -66,9 +63,9 @@
               <div class="mb-2">
                 <label for="propertyId">Property</label>
                 <select
+                  id="propertyId"
                   class="mt-2"
                   formControlName="propertyId"
-                  id="propertyId"
                 >
                   <option value="" disabled selected>Select a property</option>
                   <option
@@ -79,7 +76,6 @@
                   </option>
                 </select>
               </div>
-
               @if (formSubmitted && addForm.get('propertyId')?.errors) {
               <div
                 class="w-fit bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
@@ -97,15 +93,14 @@
               <div class="mb-2">
                 <label for="precio">Precio</label>
                 <input
-                  class="mt-2"
-                  formControlName="precio"
                   id="precio"
                   type="number"
                   placeholder="Precio"
                   min="10"
+                  class="mt-2"
+                  formControlName="precio"
                 />
               </div>
-
               @if (formSubmitted && addForm.get('precio')?.errors) {
               <div
                 class="w-fit bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
@@ -122,10 +117,10 @@
             <div class="mb-4 flex">
               <label class="mb-0 mr-1" for="is_available">Is Available</label>
               <input
-                formControlName="is_available"
                 id="is_available"
-                value="IsAvailable"
                 type="checkbox"
+                value="IsAvailable"
+                formControlName="is_available"
               />
             </div>
           </div>
