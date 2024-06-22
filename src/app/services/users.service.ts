@@ -17,7 +17,7 @@ interface State {
   providedIn: 'root',
 })
 export class UsersService {
-  private http = inject(HttpClient);
+  private readonly _http = inject(HttpClient);
   private readonly baseUrl: string = environment.baseUrl;
 
   stateSignal = signal<State>({
@@ -32,7 +32,7 @@ export class UsersService {
   constructor() {}
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}/users`).pipe(
+    return this._http.get<User[]>(`${this.baseUrl}/users`).pipe(
       tap((res) => {
         console.log(res);
 
@@ -45,7 +45,7 @@ export class UsersService {
   }
 
   getUserById(id: string) {
-    return this.http.get<User[]>(`${this.baseUrl}/users/${id}`).pipe(
+    return this._http.get<User[]>(`${this.baseUrl}/users/${id}`).pipe(
       map((res) => {
         console.log(res);
         return res;
@@ -54,11 +54,11 @@ export class UsersService {
   }
 
   getUserByEmail(email: string): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/users?email=${email}`);
+    return this._http.get<User>(`${this.baseUrl}/users?email=${email}`);
   }
 
   createUser(user: User) {
-    return this.http.post<User>(`${this.baseUrl}/users`, user).pipe(
+    return this._http.post<User>(`${this.baseUrl}/users`, user).pipe(
       tap((res) => {
         this.stateSignal.update((state) => ({
           ...state,
@@ -69,7 +69,7 @@ export class UsersService {
   }
 
   updateUser(id: string, user: User) {
-    return this.http.patch<User>(`${this.baseUrl}/users/${id}`, user).pipe(
+    return this._http.patch<User>(`${this.baseUrl}/users/${id}`, user).pipe(
       tap((res) => {
         this.stateSignal.update((state) => ({
           ...state,
@@ -80,7 +80,7 @@ export class UsersService {
   }
 
   deleteUser(id: string) {
-    return this.http.delete(`${this.baseUrl}/users/${id}`).pipe(
+    return this._http.delete(`${this.baseUrl}/users/${id}`).pipe(
       tap(() => {
         this.stateSignal.update((state) => ({
           ...state,
