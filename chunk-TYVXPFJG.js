@@ -1,0 +1,1 @@
+import{ga as c,p as o}from"./chunk-XLW5XAEJ.js";var a=(()=>{let t=class t{constructor(){this.querySubject=new o("")}get query$(){return this.querySubject.asObservable()}setQuery(r){this.querySubject.next(r)}};t.\u0275fac=function(i){return new(i||t)},t.\u0275prov=c({token:t,factory:t.\u0275fac,providedIn:"root"});let e=t;return e})();export{a};
