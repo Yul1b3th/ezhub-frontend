@@ -4,7 +4,7 @@
 
 EZHub es una aplicación diseñada para facilitar la búsqueda y gestión de habitaciones para alquilar. La aplicación permite a los usuarios buscar habitaciones por geolocalización o preferencias, interactuar con el backend para gestionar usuarios, propiedades, habitaciones y transacciones, y proporcionar una experiencia fluida e intuitiva.
 
-## Demo 🚀
+## 🚀 Demo
 
 Puedes ver la demostración de la aplicación en [EZHub App](https://ezhub.vercel.app/).
 
