@@ -1,26 +1,29 @@
-<div class="container mx-auto px-5 my-10 h-min-[100%] flex flex-col">
-  <search-bar />
+@if (!isUserLocationReady) {
+  <app-loading class="loading-map"/>
+}@else {
+  <div class="container mx-auto px-5 my-10 h-min-[100%] flex flex-col">
+    <search-bar />
 
-  <ul>
-    <li>
-      <a routerLink="/list" routerLinkActive="active">
-        <img tabindex="-1" src="assets/icons/ListBullet.svg" alt="List" />
-        List</a
-      >
-    </li>
-    <li>
-      <a routerLink="/map" routerLinkActive="active">
-        <img tabindex="-1" src="assets/icons/MapPin.svg" alt="Map" />
-        Map</a
-      >
-    </li>
-  </ul>
+    <ul>
+      <li>
+        <a routerLink="/list" routerLinkActive="active">
+          <img tabindex="-1" src="assets/icons/ListBullet.svg" alt="List" />
+          List</a>
+      </li>
+      <li>
+        <a routerLink="/map" routerLinkActive="active">
+          <img tabindex="-1" src="assets/icons/MapPin.svg" alt="Map" />
+          Map</a>
+      </li>
+    </ul>
 
-  @defer(on timer(200)){
-  <router-outlet />
-  }@placeholder {
-  <div class="defer">
-    <p>Loading...</p>
+    @defer(){
+    <router-outlet />
+    }@placeholder {
+    <div class="defer">
+      <p>Loading...</p>
+    </div>
+    }
   </div>
-  }
-</div>
+}
+

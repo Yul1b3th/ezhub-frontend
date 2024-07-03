@@ -21,3 +21,10 @@ img {
 .defer {
   @apply w-full h-full bg-gradient-to-r from-gray to-secondary-200/30 animate-pulse flex justify-center items-center;
 }
+
+.loading-map {
+  @apply w-full bg-gradient-to-r from-light to-secondary-200/90 flex justify-center items-center flex-col;
+  color: white;
+  min-width: 100%;
+  min-height: 100%;
+}

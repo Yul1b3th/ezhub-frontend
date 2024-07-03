@@ -15,6 +15,7 @@ export class PlacesService {
   public isLoadingPlaces = false;
   public places: Feature[] = [];
   public cities: string[] = [];
+  userDeniedLocation = false;
 
   get isUserLocationReady(): boolean {
     return !!this.useLocation;
@@ -40,6 +41,7 @@ export class PlacesService {
           //alert(err.message);
           //console.log(err);
           // Resuelve la promesa con un valor predeterminado en lugar de rechazarla
+           this.userDeniedLocation = true;
           resolve([0, 0]);
         }
       );
