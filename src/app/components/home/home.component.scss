@@ -22,9 +22,7 @@ img {
   @apply w-full h-full bg-gradient-to-r from-gray to-secondary-200/30 animate-pulse flex justify-center items-center;
 }
 
-.loading-map {
-  @apply w-full bg-gradient-to-r from-light to-secondary-200/90 flex justify-center items-center flex-col;
-  color: white;
-  min-width: 100%;
-  min-height: 100%;
+.loading-rooms {
+  @apply flex justify-center items-center flex-col w-full min-h-full text-center font-semibold text-3xl leading-normal text-white;
+  background-image: linear-gradient(to right top, #30daa6, #25d9b5, #28d6c2, #38d4cd, #4cd1d4);
 }

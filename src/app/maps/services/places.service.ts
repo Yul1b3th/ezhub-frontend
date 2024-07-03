@@ -35,13 +35,15 @@ export class PlacesService {
         ({ coords }) => {
           this.useLocation = [coords.longitude, coords.latitude];
           resolve(this.useLocation);
-          //console.log('useLocation', this.useLocation);
+          // console.log('useLocation', this.useLocation);
         },
         (err) => {
           //alert(err.message);
           //console.log(err);
           // Resuelve la promesa con un valor predeterminado en lugar de rechazarla
-           this.userDeniedLocation = true;
+          this.userDeniedLocation = true;
+          // console.log('userDeniedLocation', this.userDeniedLocation);
+
           resolve([0, 0]);
         }
       );

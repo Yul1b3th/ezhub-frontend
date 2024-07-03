@@ -14,10 +14,15 @@ import { CommonModule } from '@angular/common';
   styleUrl: './home.component.scss',
 })
 export default class HomeComponent {
-  constructor(private placesService: PlacesService) {
-    console.log(this.placesService.useLocation);
-  }
+  constructor(private placesService: PlacesService) { }
+
   get isUserLocationReady() {
+    console.log(this.placesService.isUserLocationReady);
+    console.log(this.placesService.userDeniedLocation);
+    if (this.placesService.userDeniedLocation && !this.placesService.isUserLocationReady) {
+      return true
+    }
+
     return this.placesService.isUserLocationReady;
   }
 }
