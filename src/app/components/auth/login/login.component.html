@@ -8,52 +8,28 @@
       <div class="mb-4">
         <div class="mb-2">
           <label for="usernameOrEmail"> Username or Email </label>
-          <input
-            formControlName="usernameOrEmail"
-            id="usernameOrEmail"
-            type="text"
-            placeholder="Username or Email"
-            (input)="cleanUsername($event)"
-          />
+          <input formControlName="usernameOrEmail" id="usernameOrEmail" type="text" placeholder="Username or Email"
+            (input)="cleanUsername($event)" />
         </div>
 
-        @if (formSubmitted && loginForm.get('usernameOrEmail')?.errors) {
-        <div
-          class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
-        >
-          <p
-            customLabel
-            [errors]="loginForm.get('usernameOrEmail')?.errors"
-            [fieldName]="'Username or Email'"
-          ></p>
+        <div *ngIf="formSubmitted && loginForm.get('usernameOrEmail')?.errors"
+          class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500">
+          <p customLabel [errors]="loginForm.get('usernameOrEmail')?.errors" [fieldName]="'Username or Email'"></p>
         </div>
-        }
       </div>
 
       <!-- Password -->
       <div class="mb-6">
         <div class="mb-2">
           <label for="password"> Password </label>
-          <input
-            formControlName="password"
-            id="password"
-            type="password"
-            placeholder="******************"
-            (input)="cleanPassword($event)"
-          />
+          <input formControlName="password" id="password" type="password" placeholder="******************"
+            (input)="cleanPassword($event)" />
         </div>
 
-        @if (formSubmitted && loginForm.get('password')?.errors) {
-        <div
-          class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500"
-        >
-          <p
-            customLabel
-            [errors]="loginForm.get('password')?.errors"
-            [fieldName]="'password'"
-          ></p>
+        <div *ngIf="formSubmitted && loginForm.get('password')?.errors"
+          class="w-full bg-red-100 px-2 py-[0.4rem] rounded-md border border-red-500 text-sm text-red-500">
+          <p customLabel [errors]="loginForm.get('password')?.errors" [fieldName]="'password'"></p>
         </div>
-        }
       </div>
 
       <div class="flex items-center justify-between">
@@ -67,6 +43,6 @@
   <!-- Create an account -->
   <div class="register">
     <p class="mb-2">Don't you have an account?</p>
-    <a href="/sign-up">Create an account</a>
+    <a routerLink="/sign-up">Create an account</a>
   </div>
 </div>

@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { AuthService } from '../../../services/auth.service';
 import { CustomLabelDirective } from '../../../directives/custom-label.directive';
@@ -14,7 +14,7 @@ import { CustomLabelDirective } from '../../../directives/custom-label.directive
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CustomLabelDirective],
+  imports: [CommonModule, ReactiveFormsModule, CustomLabelDirective, RouterModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
