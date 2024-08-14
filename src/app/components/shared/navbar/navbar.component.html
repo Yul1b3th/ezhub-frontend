@@ -1,100 +1,59 @@
-<div
-  class="container mx-auto px-5 flex flex-wrap items-center justify-between gap-5 relative"
->
+<div class="container mx-auto px-5 flex flex-wrap items-center justify-between gap-5 relative">
   <!-- Hamburger -->
   <div class="flex items-center gap-5 sm:w-[11.25rem]">
-    <button
-      id="toggleButton"
-      (click)="toggleMenu()"
-      aria-expanded="false"
-      aria-controls="menu"
-      class="cursor-pointer transition-all z-[1050] rounded p-1 hover:bg-primary focus:ring-2 focus:ring-slate-200"
-    >
+    <button id="toggleButton" (click)="toggleMenu()" aria-expanded="false" aria-controls="menu"
+      class="cursor-pointer transition-all z-[1050] rounded p-1 hover:bg-primary focus:ring-2 focus:ring-slate-200">
       <span class="sr-only">Menu</span>
-      <img
-        [src]="menuOpen ? 'assets/icon-close.svg' : 'assets/icon-hamburger.svg'"
-        alt="Menu"
-        class="w-8 h-8"
-      />
+      <img [src]="menuOpen ? 'assets/icon-close.svg' : 'assets/icon-hamburger.svg'" alt="Menu" class="w-8 h-8" />
     </button>
   </div>
 
   <!-- Logo -->
   <div class="flex-1 text-center sm:w-full">
     <div class="max-w-[7.5rem] m-auto mr-0 sm:mx-auto">
-      <a routerLink="./"
-        ><img
-          width="7.5rem"
-          alt="3.0625rem"
-          src="assets/logo.svg"
-          alt="Logo"
-          class="w-full"
-      /></a>
+      <a routerLink="./">
+        <img width="7.5rem" alt="3.0625rem" src="assets/logo.svg" alt="Logo" class="w-full" />
+      </a>
     </div>
   </div>
 
   <!-- Button -->
   <div class="flex items-center gap-5 w-full md:w-min">
     @if (!authService.currentUser()) {
-    <a
-      class="btn btn-normal btn-primary mx-auto"
-      (click)="publish()"
-      routerLink="/publish"
-    >
+    <a class="btn btn-normal btn-primary mx-auto" (click)="publish()" routerLink="/publish">
       Publish
     </a>
-    }@else {
+    } @else {
     <!-- Menu User -->
-    <button
-      id="userMenuButton"
-      class="btn btn-normal mx-auto"
-      *ngIf="authService.currentUser()"
-      (click)="toggleUserMenu()"
-    >
-      <img
-        class="w-[30px] mr-2"
-        src="assets/icons/user.svg"
-        alt=""
-      />&nbsp;Hello,&nbsp;
+    <button id="userMenuButton" class="btn btn-normal mx-auto" *ngIf="authService.currentUser()"
+      (click)="toggleUserMenu()">
+      <img class="w-[30px] mr-2" src="assets/icons/user.svg" alt="" />
+      &nbsp;Hello,&nbsp;
       <span class="capitalize">{{ authService.currentUser()?.username }}</span>
     </button>
     }
   </div>
 
   <!-- Menu -->
-  <div
-    id="menu"
+  <div id="menu"
     class="menu fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform z-[1000] overflow-auto max-h-screen"
-    [style.transform]="menuOpen ? 'translateX(0)' : 'translateX(-100%)'"
-    (keydown)="onKeydown($event)"
-  >
+    [style.transform]="menuOpen ? 'translateX(0)' : 'translateX(-100%)'" (keydown)="onKeydown($event)"
+    (click)="onMenuClick($event)">
     <ul
       class="absolute inset-x-0 top-24 p-5 w-[76%] mx-auto rounded-md h-max text-center grid font-semibold text-dark-blue shadow-2xl bg-white dark:bg-dark-200"
-    >
+      (click)="$event.stopPropagation()">
       <!-- Home -->
       <li class="border-t-[1.5px] border-b-[1.5px] border-primary">
-        <a
-          #menuItems
-          routerLink="./"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          [attr.tabindex]="menuOpen ? '0' : '-1'"
-          (click)="closeMenu()"
-        >
+        <a #menuItems routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+          [attr.tabindex]="menuOpen ? '0' : '-1'" (click)="closeMenu()">
           Home
         </a>
       </li>
 
       <!-- Publish -->
       <li>
-        <a
-          #menuItems
-          class="border-b-[1.5px] border-primary"
-          routerLink="./publish"
-          routerLinkActive="active"
-          [attr.tabindex]="menuOpen ? '0' : '-1'"
-          (click)="closeMenu()"
-        >
+        <a #menuItems class="border-b-[1.5px] border-primary" routerLink="./publish" routerLinkActive="active"
+          [attr.tabindex]="menuOpen ? '0' : '-1'" (click)="closeMenu()">
           Publish
         </a>
       </li>
@@ -102,28 +61,16 @@
       @if (!authService.currentUser()) {
       <!-- Log In -->
       <li>
-        <a
-          #menuItems
-          class="border-b-[1.5px] border-primary"
-          routerLink="./log-in"
-          routerLinkActive="active"
-          [attr.tabindex]="menuOpen ? '0' : '-1'"
-          (click)="closeMenu()"
-        >
+        <a #menuItems class="border-b-[1.5px] border-primary" routerLink="./log-in" routerLinkActive="active"
+          [attr.tabindex]="menuOpen ? '0' : '-1'" (click)="closeMenu()">
           Log In
         </a>
       </li>
 
       <!-- Sign Up -->
       <li>
-        <a
-          #menuItems
-          class="border-b-[1.5px] border-primary"
-          routerLink="./sign-up"
-          routerLinkActive="active"
-          [attr.tabindex]="menuOpen ? '0' : '-1'"
-          (click)="closeMenu()"
-        >
+        <a #menuItems class="border-b-[1.5px] border-primary" routerLink="./sign-up" routerLinkActive="active"
+          [attr.tabindex]="menuOpen ? '0' : '-1'" (click)="closeMenu()">
           Sign Up
         </a>
       </li>
@@ -131,34 +78,19 @@
 
       <!-- Help and Contact -->
       <li>
-        <button
-          #menuItems
-          class="dropdown-toggle"
-          [attr.tabindex]="menuOpen ? '0' : '-1'"
-          (click)="toggleHelpContact()"
-          aria-haspopup="true"
-        >
+        <button #menuItems class="dropdown-toggle" [attr.tabindex]="menuOpen ? '0' : '-1'" (click)="toggleHelpContact()"
+          aria-haspopup="true">
           Help and Contact
         </button>
         <ul *ngIf="helpContact">
           <li>
-            <a
-              #menuItems
-              class="border-t-[1.5px] border-primary"
-              routerLink="./help-contact/help"
-              routerLinkActive="active"
-              (click)="closeMenu()"
-            >
+            <a #menuItems class="border-t-[1.5px] border-primary" routerLink="./help-contact/help"
+              routerLinkActive="active" (click)="closeMenu()">
               Help
             </a>
           </li>
           <li>
-            <a
-              #menuItems
-              routerLink="./help-contact/contact"
-              routerLinkActive="active"
-              (click)="closeMenu()"
-            >
+            <a #menuItems routerLink="./help-contact/contact" routerLinkActive="active" (click)="closeMenu()">
               Contact
             </a>
           </li>
@@ -167,41 +99,27 @@
 
       <!-- Accessibility -->
       <li>
-        <button
-          #menuItems
-          class="border-t-[1.5px] border-b-[1.5px] border-primary dropdown-toggle"
-          [attr.tabindex]="menuOpen ? '0' : '-1'"
-          (click)="toggleAccessibility()"
-          aria-haspopup="true"
-        >
+        <button #menuItems class="border-t-[1.5px] border-b-[1.5px] border-primary dropdown-toggle"
+          [attr.tabindex]="menuOpen ? '0' : '-1'" (click)="toggleAccessibility()" aria-haspopup="true">
           Accessibility
         </button>
         <ul *ngIf="accessibility">
           <li>
-            <button
-              #menuItems
-              class="mb-[1.3rem] mt-[1.3rem]"
-              aria-label="Change theme mode"
-              (click)="toggleDarkMode()"
-            >
+            <button #menuItems class="mb-[1.3rem] mt-[1.3rem]" aria-label="Change theme mode"
+              (click)="toggleDarkMode()">
               {{ darkMode ? "Light Mode ☀️" : "Dark Mode 🌙" }}
             </button>
           </li>
           <li class="border-b-[1.5px] border-primary">
             <p>Adjust Font Size</p>
             <div class="flex justify-center items-center gap-3 mb-[1.3rem]">
-              <button
-                class="btn btn-outline-light btn-increase-font px-[1rem] py-[0.5rem] bg-white dark:text-dark-200"
-                aria-label="Increase font size"
-                (click)="increaseFontSize()"
-              >
+              <button class="btn btn-outline-light btn-increase-font px-[1rem] py-[0.5rem] bg-white dark:text-dark-200"
+                aria-label="Increase font size" (click)="increaseFontSize()">
                 A+
               </button>
               <button
                 class="btn btn-outline-light btn-decrease-font ms-3 px-[1rem] py-[0.5rem] bg-white dark:text-dark-200"
-                aria-label="Decrease font size"
-                (click)="decreaseFontSize()"
-              >
+                aria-label="Decrease font size" (click)="decreaseFontSize()">
                 A-
               </button>
             </div>
@@ -211,54 +129,29 @@
 
       <!-- EZHub -->
       <li>
-        <button
-          #menuItems
-          class="border-b-[1.5px] border-primary dropdown-toggle"
-          [attr.tabindex]="menuOpen ? '0' : '-1'"
-          (click)="toggleEZHub()"
-          aria-haspopup="true"
-        >
+        <button #menuItems class="border-b-[1.5px] border-primary dropdown-toggle"
+          [attr.tabindex]="menuOpen ? '0' : '-1'" (click)="toggleEZHub()" aria-haspopup="true">
           EZHub
         </button>
         <ul *ngIf="ezhub">
           <li>
-            <a
-              #menuItems
-              routerLink="./about"
-              routerLinkActive="active"
-              (click)="closeMenu()"
-            >
+            <a #menuItems routerLink="./about" routerLinkActive="active" (click)="closeMenu()">
               About EZHub
             </a>
           </li>
           <li>
-            <a
-              #menuItems
-              routerLink="./legal-notice"
-              routerLinkActive="active"
-              (click)="closeMenu()"
-            >
+            <a #menuItems routerLink="./legal-notice" routerLinkActive="active" (click)="closeMenu()">
               Legal Notice
             </a>
           </li>
           <li>
-            <a
-              #menuItems
-              routerLink="./terms-conditions"
-              routerLinkActive="active"
-              (click)="closeMenu()"
-            >
+            <a #menuItems routerLink="./terms-conditions" routerLinkActive="active" (click)="closeMenu()">
               Terms and Conditions
             </a>
           </li>
           <li>
-            <a
-              #menuItems
-              class="border-b-[1.5px] border-primary"
-              routerLink="/contactus"
-              routerLinkActive="active"
-              (click)="closeMenu()"
-            >
+            <a #menuItems class="border-b-[1.5px] border-primary" routerLink="/contactus" routerLinkActive="active"
+              (click)="closeMenu()">
               Contact Us
             </a>
           </li>
@@ -268,43 +161,26 @@
   </div>
 
   <!-- Menu User -->
-  <div
-    id="userMenu"
+  <div id="userMenu"
     class="menu fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform z-[1000] overflow-auto max-h-screen"
-    [style.transform]="userMenuOpen ? 'translateX(0)' : 'translateX(100%)'"
-    (keydown)="onKeydown($event)"
-  >
-    <button
-      class="absolute top-5 right-5 closeUserMenu"
-      (click)="closeUserMenu()"
-    >
+    [style.transform]="userMenuOpen ? 'translateX(0)' : 'translateX(100%)'" (keydown)="onKeydown($event)">
+    <button class="absolute top-5 right-5 closeUserMenu" (click)="closeUserMenu()">
       X
     </button>
     <ul
-      class="absolute inset-x-0 top-24 p-5 w-[76%] mx-auto rounded-md h-max text-center grid font-semibold text-dark-blue shadow-2xl bg-white dark:bg-dark-200"
-    >
+      class="absolute inset-x-0 top-24 p-5 w-[76%] mx-auto rounded-md h-max text-center grid font-semibold text-dark-blue shadow-2xl bg-white dark:bg-dark-200">
       <!-- Publish -->
       <li>
-        <a
-          #menuItems
-          class="border-b-[1.5px] border-t-[1.5px] border-primary"
-          routerLink="./publish"
-          routerLinkActive="active"
-          [attr.tabindex]="userMenuOpen ? '0' : '-1'"
-          (click)="closeUserMenu()"
-        >
+        <a #menuItems class="border-b-[1.5px] border-t-[1.5px] border-primary" routerLink="./publish"
+          routerLinkActive="active" [attr.tabindex]="userMenuOpen ? '0' : '-1'" (click)="closeUserMenu()">
           Publish
         </a>
       </li>
 
       <!-- Log Out -->
       <li>
-        <button
-          #menuItems
-          class="btnNavBar border-b-[1.5px] border-primary"
-          [attr.tabindex]="userMenuOpen ? '0' : '-1'"
-          (click)="onLogout(); closeUserMenu()"
-        >
+        <button #menuItems class="btnNavBar border-b-[1.5px] border-primary" [attr.tabindex]="userMenuOpen ? '0' : '-1'"
+          (click)="onLogout(); closeUserMenu()">
           Log Out
         </button>
       </li>

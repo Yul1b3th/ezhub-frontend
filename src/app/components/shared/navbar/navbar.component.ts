@@ -174,6 +174,13 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  onMenuClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (target.id === 'menu') {
+      this.closeMenu();
+    }
+  }
+
   closeMenu() {
     this.menuOpen = false; // Cierra el menú principal
     this.helpContact = false;
