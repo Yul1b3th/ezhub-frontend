@@ -74,6 +74,7 @@ export class AuthService {
     );
   }
 
+
   register(username: string, email: string, password: string) {
     const url = `${this.baseUrl}/auth/register`;
     const body = { username, email, password };
