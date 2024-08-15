@@ -61,7 +61,8 @@
               "buildTarget": "ezhub:build:production"
             },
             "development": {
-              "buildTarget": "ezhub:build:development"
+              "buildTarget": "ezhub:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

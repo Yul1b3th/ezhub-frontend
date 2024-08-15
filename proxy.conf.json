@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "https://ezhub-backend.onrender.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
+
