@@ -1,22 +1,8 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  inject,
-} from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
-import {
-  EMPTY,
-  Subscription,
-  catchError,
-  forkJoin,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { EMPTY, Subscription, catchError, forkJoin, switchMap, tap } from 'rxjs';
 
 import { LngLat, Map, Marker } from 'mapbox-gl';
 

@@ -1,23 +1,14 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild, computed, inject, signal } from '@angular/core';
 
 import { LngLat, Map, Marker } from 'mapbox-gl';
-import { Observable, catchError, throwError } from 'rxjs';
+
 import { PublicPropertyService } from '../../../services/public-property.service';
 import { Property } from '../../../interfaces/property.interface';
 import { environment } from '../../../../environments/environment';
 import { PlacesService } from '../../../maps/services';
 import { QueryService } from '../../../services/query.service';
-import { CommonModule } from '@angular/common';
 import MapWithMarkerComponent from '../map-with-marker/map-with-marker.component';
 
 interface State {

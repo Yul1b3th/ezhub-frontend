@@ -1,14 +1,14 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { map } from 'rxjs';
+
 import { environment } from '../../environments/environment';
 import { Room } from '../interfaces/room.interface';
-import { Observable, map } from 'rxjs';
 import { Amenity } from '../interfaces/amenity.interface';
 import { PlacesService } from '../maps/services';
 import { PublicPropertyService } from './public-property.service';
 import { Property } from '../interfaces/property.interface';
-import { query } from '@angular/animations';
 
 interface State {
   rooms: Room[];

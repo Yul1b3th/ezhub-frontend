@@ -1,24 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { PlacesService } from '../../maps/services';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-  of,
-  switchMap,
-} from 'rxjs';
-import { PublicRoomService } from '../../services/public-room.service';
-import { PublicPropertyService } from '../../services/public-property.service';
-import { QueryService } from '../../services/query.service';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { map } from 'rxjs';
+
+import { PlacesService } from '../../maps/services';
+import { PublicRoomService } from '../../services/public-room.service';
+import { QueryService } from '../../services/query.service';
 import { SearchBarLabelDirective } from '../../directives/search-bar-label.directive';
 
 @Component({
@@ -40,7 +28,6 @@ export class SearchBarComponent implements OnInit {
 
   constructor(
     private placesService: PlacesService,
-    private publicPropertyService: PublicPropertyService,
     private queryService: QueryService
   ) {}
 
@@ -70,7 +57,6 @@ export class SearchBarComponent implements OnInit {
         // Si la consulta no es un código postal, asume que es una ciudad y realiza la búsqueda
         //console.log('Buscando por ciudad');
 
-        //this.publicPropertyService.filterProperties(query);
         this.publicRoomService.filterRooms(query);
         this.queryService.setQuery(query);
       }

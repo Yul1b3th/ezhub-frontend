@@ -16,10 +16,8 @@ export class NotificationService {
   public type = computed(() => this.notificationSignal()?.type);
 
   showNotification(message: string, type: 'success' | 'error' | 'info') {
-    console.log('showNotification');
-    console.log(type);
-
-
+    // console.log('showNotification');
+    // console.log(type);
     this.notificationSignal.set({ message, type });
   }
 

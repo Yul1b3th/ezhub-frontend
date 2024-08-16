@@ -32,7 +32,7 @@ export class AppComponent {
   constructor(private placesServices: PlacesService) {
     // console.log('constructor');
     // console.log(this.finishedAuthCheck());
-    console.log(this.placesServices.useLocation);
+    // console.log(this.placesServices.useLocation);
   }
 
   // Aqui hacemos la peticion http
@@ -48,7 +48,7 @@ export class AppComponent {
         return;
 
       case AuthStatus.notAuthenticated:
-        console.log(AuthStatus.notAuthenticated);
+        // console.log(AuthStatus.notAuthenticated);
         return;
     }
   });

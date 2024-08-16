@@ -19,7 +19,7 @@ export default class ListComponent implements OnInit {
     notification = inject(NotificationService);
 
   constructor(private placesService: PlacesService) {
-    console.log(this.publicRoomService.rooms());
+    // console.log(this.publicRoomService.rooms());
   }
 
   ngOnInit(): void {
