@@ -1,3 +1,7 @@
+@if(notification.type() !== 'success'){
+  <app-notification />
+}
+
 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center">
   @for (room of publicRoomService.rooms(); track room.id) { @defer(on viewport){
   <div
