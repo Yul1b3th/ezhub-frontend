@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { map } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { Room } from '../interfaces/room.interface';
@@ -9,6 +9,7 @@ import { Amenity } from '../interfaces/amenity.interface';
 import { PlacesService } from '../maps/services';
 import { PublicPropertyService } from './public-property.service';
 import { Property } from '../interfaces/property.interface';
+import { NotificationService } from '../components/shared/notification/notification.service';
 
 interface State {
   rooms: Room[];
@@ -17,9 +18,11 @@ interface State {
 
 @Injectable({ providedIn: 'root' })
 export class PublicRoomService {
+  private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
   private publicPropertyService = inject(PublicPropertyService);
-  private readonly baseUrl: string = environment.baseUrl;
+  private notificationService = inject(NotificationService);
+  private placesService = inject(PlacesService);
 
   #state = signal<State>({
     loading: true,
@@ -30,9 +33,10 @@ export class PublicRoomService {
   public rooms = computed(() => this.#state().rooms);
   public loading = computed(() => this.#state().loading);
 
-  constructor(private placesService: PlacesService) {
+  constructor() {
     // this.getPublicRooms();
-    this.filterRooms();
+    // this.filterRooms();
+    this.filterRoomsSignal();
   }
 
   getRoomById(id: number) {
@@ -107,4 +111,42 @@ export class PublicRoomService {
         });
       });
   }
+
+
+filterRoomsSignal(query: string = ''): void {
+    console.log('Fetching Rooms...');
+    this.http.get<Room[]>(`${this.baseUrl}/public-rooms`)
+      .pipe(
+        map(this.filterAvailableRooms),
+        tap(this.updateState.bind(this)),
+        catchError(this.handleError.bind(this))
+      )
+      .subscribe();
+}
+
+private filterAvailableRooms(rooms: Room[]): Room[] {
+    rooms.forEach(room => {
+        // console.log(`Room ID: ${room.id}, is_available: ${room.is_available}, deletedAt: ${room.deletedAt}`);
+    });
+    return rooms.filter(room => room.deletedAt == null && room.is_available);
+}
+
+private updateState(rooms: Room[]): void {
+    this.#state.set({
+        ...this.#state(),
+        rooms: rooms,
+        loading: false,
+    });
+}
+
+private handleError(error: any): Observable<Room[]> {
+    this.notificationService.showNotification(
+        'Unable to fetch available properties at this time. Please try again later.',
+        'error'
+    );
+    console.error('Error al obtener habitaciones disponibles:', error);
+    return of([]);
+}
+
+
 }

@@ -1,5 +1,4 @@
 import { Component, inject, effect } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
 import { PublicRoomService } from '../../../services/public-room.service';
 import { RouterModule } from '@angular/router';
@@ -15,9 +14,18 @@ import { PublicPropertyService } from '../../../services/public-property.service
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export default class ListComponent{
+export default class ListComponent {
   publicRoomService = inject(PublicRoomService);
+  publicPropertyService = inject(PublicPropertyService);
   notification = inject(NotificationService);
   placesService = inject(PlacesService);
 
+  constructor() {
+    // effect(() => {
+    //   console.log( this.publicPropertyService.properties() );
+    // });
+    effect(() => {
+      console.log( this.publicRoomService.rooms() );
+    });
+  }
 }
