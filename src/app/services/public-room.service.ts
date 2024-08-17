@@ -35,24 +35,6 @@ export class PublicRoomService {
     this.filterRooms();
   }
 
-  getPublicRooms(): void {
-    this.publicPropertyService
-      .getPublicProperties()
-      .subscribe((properties: Property[]) => {
-        let rooms: Room[] = [];
-        properties.forEach((property: Property) => {
-          const validRooms = property.rooms.filter(
-            (room) => room.deletedAt === null && room.is_available
-          );
-          rooms = rooms.concat(validRooms);
-        });
-        this.#state.set({
-          loading: false,
-          rooms: rooms,
-        });
-      });
-  }
-
   getRoomById(id: number) {
     return this.http.get<Room>(`${this.baseUrl}/public-rooms/${id}`).pipe(
       map((res) => {
@@ -68,20 +50,6 @@ export class PublicRoomService {
     );
   }
 
-  searchRooms(query: string) {
-    this.http
-      .get<Room[]>(`${this.baseUrl}/public-rooms`, {
-        params: {
-          query: query,
-        },
-      })
-      .subscribe((res) => {
-        this.#state.set({
-          loading: false,
-          rooms: res,
-        });
-      });
-  }
   filterRooms(query: string = '') {
     // Filtra las habitaciones basándose en la consulta y la geolocalización
     this.publicPropertyService
@@ -131,6 +99,7 @@ export class PublicRoomService {
             filteredRooms = filteredRooms.concat(validRooms);
           }
         });
+        console.log(filteredRooms);
 
         this.#state.set({
           loading: false,

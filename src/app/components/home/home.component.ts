@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
 import { SearchBarComponent } from '../search-bar/search-bar.component';
@@ -14,7 +14,7 @@ import { LoadingComponent } from '../shared/loading/loading.component';
   styleUrl: './home.component.scss',
 })
 export default class HomeComponent {
-  constructor(private placesService: PlacesService) { }
+  private placesService = inject(PlacesService);
 
   get isUserLocationReady() {
     // console.log(this.placesService.isUserLocationReady);
