@@ -31,7 +31,7 @@ export class PublicRoomService {
   public loading = computed(() => this.#state().loading);
 
   constructor(private placesService: PlacesService) {
-    this.getPublicRooms();
+    // this.getPublicRooms();
     this.filterRooms();
   }
 

@@ -10,14 +10,14 @@ import { NotificationService } from '../components/shared/notification/notificat
 
 @Injectable({ providedIn: 'root' })
 export class PublicPropertyService {
-  private http = inject(HttpClient);
   private readonly baseUrl: string = environment.baseUrl;
+  private http = inject(HttpClient);
 
   constructor(
     private placesService: PlacesService,
     private notificationService: NotificationService
   ) {
-    this.getPublicProperties();
+    // this.getPublicProperties();
   }
 
 getPublicProperties(): Observable<Property[]> {
@@ -27,6 +27,8 @@ getPublicProperties(): Observable<Property[]> {
       map((properties) => {
         const filteredProperties = properties.filter((property) => property.deletedAt === null);
         // Mostrar notificación de éxito si se obtienen propiedades
+        console.log(filteredProperties);
+
         if (filteredProperties.length > 0) {
           this.notificationService.showNotification(
             'Public properties fetched successfully.',

@@ -1,4 +1,4 @@
-import { Component, OnInit, effect, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { PublicRoomService } from '../../../services/public-room.service';
@@ -14,15 +14,8 @@ import { NotificationService } from '../../shared/notification/notification.serv
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export default class ListComponent implements OnInit {
+export default class ListComponent{
   publicRoomService = inject(PublicRoomService);
-    notification = inject(NotificationService);
-
-  constructor(private placesService: PlacesService) {
-    // console.log(this.publicRoomService.rooms());
-  }
-
-  ngOnInit(): void {
-    //console.log(this.placesService.useLocation);
-  }
+  notification = inject(NotificationService);
+  placesService = inject(PlacesService);
 }

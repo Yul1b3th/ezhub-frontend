@@ -3,17 +3,15 @@
 }
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center">
-  @for (room of publicRoomService.rooms(); track room.id) { @defer(on viewport){
+  @for (room of publicRoomService.rooms(); track room.id) {
   <div
-    class="flex flex-col bg-white dark:bg-light dark:text-white rounded-lg shadow-md overflow-hidden w-full h-full transition-all hover:shadow-primary-hover"
-  >
+    class="flex flex-col bg-white dark:bg-light dark:text-white rounded-lg shadow-md overflow-hidden w-full h-full transition-all hover:shadow-primary-hover" >
     <div tabindex="-1">
       @for (photo of room.photos.split(','); track $index;) {
       <img
         [src]="'assets/img/bedrooms/' + photo.trim()"
         class="w-full h-48 object-cover"
-        alt="{{ room.name }}"
-      />
+        alt="{{ room.name }}"/>
 
       } @empty {
       <p class="text-center">There are no items.</p>
@@ -33,15 +31,12 @@
     <div class="p-4">
       <a
         class="btn btn-secondary btn-normal"
-        [routerLink]="['/rooms', room.id]"
-      >
+        [routerLink]="['/rooms', room.id]">
         See more
       </a>
     </div>
   </div>
-  } @placeholder {
-  <p class="h-[600px]">Loading...</p>
-  } } @empty {
+ } @empty {
   <div class="col-span-3 flex justify-center items-center">
     <p class="text-lg text-center">There are no items.</p>
   </div>
