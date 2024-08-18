@@ -12,6 +12,7 @@ import { Amenity } from '../interfaces/amenity.interface';
 
 interface State {
   properties: Property[];
+  rooms: Room[];
   loading: boolean;
 }
 
@@ -21,155 +22,75 @@ export class PublicPropertyService {
   private http = inject(HttpClient);
 
   #state = signal<State>({
-    loading: true,
     properties: [],
+    rooms: [],
+    loading: true,
   });
 
   // Señales computadas
   public properties = computed(() => this.#state().properties);
+  public rooms = computed(() => this.#state().rooms);
   public loading = computed(() => this.#state().loading);
 
   constructor(
     private placesService: PlacesService,
     private notificationService: NotificationService
   ) {
-    // this.getPublicProperties();
-    this.getAllPublicProperties();
-    // this.getAllPublicPropertiesWithAmenities();
+    this.getPublicPropertiesSignals();
   }
 
-  getPublicProperties(): Observable<Property[]> {
+  getPublicPropertiesSignals(): void {
+    console.log('Fetching public properties...');
+    this.fetchProperties().subscribe(properties => {
+      const rooms: Room[] = this.extractRooms(properties);
+      this.updateState(properties, rooms);
+    });
+  }
+
+  private fetchProperties(): Observable<Property[]> {
     return this.http
       .get<Property[]>(`${this.baseUrl}/public-properties`)
       .pipe(
-        map((properties) => {
-          const filteredProperties = properties.filter((property) => property.deletedAt === null);
-          // Mostrar notificación de éxito si se obtienen propiedades
-          console.log(filteredProperties);
-
-          if (filteredProperties.length > 0) {
-            this.notificationService.showNotification(
-              'Public properties fetched successfully.',
-              'success'
-            );
-          } else {
-            this.notificationService.showNotification(
-              'No public properties found.',
-              'info'
-            );
-          }
-          return filteredProperties;
-        }),
-        catchError((error) => {
-          // Mostrar notificación de error personalizada
-          this.notificationService.showNotification(
-            'Unable to fetch public properties at this time. Please try again later.',
-            'error'
-          );
-          console.error('Error al obtener propiedades públicas:', error);
-          return of([]);
-        })
+        map(this.filterAvailableProperties.bind(this)),
+        tap(properties => this.updateState(properties, this.extractRooms(properties))),
+        catchError(this.handleError.bind(this))
       );
   }
 
-getAllPublicProperties(): void {
-  console.log('Fetching public properties...');
+  private filterAvailableProperties(properties: Property[]): Property[] {
+    return properties.filter(property => property.deletedAt == null && property.is_available);
+  }
 
-  this.http
-    .get<Property[]>(`${this.baseUrl}/public-properties`)
-    .pipe(
-      map((properties) => {
-        const filteredProperties = properties
-          .filter((property) => property.deletedAt === null)
-          .map((property) => ({
-            ...property,
-            rooms: property.rooms.filter((room) => room.is_available), // Mantén las habitaciones en "rooms"
-          }));
+  private updateState(properties: Property[], rooms: Room[]): void {
+    console.log('Updating state with properties:', properties);
+    this.#state.set({
+      ...this.#state(),
+      properties: properties,
+      rooms: rooms,
+      loading: false,
+    });
+  }
 
-        // console.log('Filtered properties with available rooms:', filteredProperties);
-
-        if (filteredProperties.some((property) => property.rooms.length > 0)) {
-          this.notificationService.showNotification(
-            'Available rooms fetched successfully.',
-            'success'
-          );
-        } else {
-          this.notificationService.showNotification(
-            'No available rooms found.',
-            'info'
-          );
+  private extractRooms(properties: Property[]): Room[] {
+    const rooms: Room[] = [];
+    properties.forEach(property => {
+      console.log('Property:', property.id, '-', property.rooms);
+      property.rooms.forEach((room: Room) => {
+        if (room.deletedAt == null && room.is_available) {
+          rooms.push(room);
         }
+      });
+    });
+    return rooms;
+  }
 
-        return filteredProperties;
-      }),
-      tap((properties) => {
-        this.#state.set({
-          ...this.#state(),
-          properties: properties,
-          loading: false,
-        });
-      }),
-      catchError((error) => {
-        this.notificationService.showNotification(
-          'Unable to fetch available properties at this time. Please try again later.',
-          'error'
-        );
-        console.error('Error al obtener habitaciones disponibles:', error);
-        return of([]);
-      })
-    )
-    .subscribe();
-}
-
-getAllPublicPropertiesWithAmenities(): void {
-  console.log('Fetching public properties with amenities...');
-
-  this.http
-    .get<Property[]>(`${this.baseUrl}/public-properties`)
-    .pipe(
-      switchMap((properties) =>
-        from(properties).pipe(
-          concatMap((property) =>
-            from(property.rooms).pipe(
-              concatMap((room) =>
-                this.http.get<Amenity[]>(`${this.baseUrl}/public-rooms/${room.id}/amenities`).pipe(
-                  map((amenities) => ({
-                    ...room,
-                    amenities,
-                  }))
-                )
-              ),
-              toArray(),
-              map((rooms) => ({
-                ...property,
-                rooms,
-              }))
-            )
-          ),
-          toArray()
-        )
-      ),
-      tap((properties) => {
-        console.log('Properties with rooms and amenities:', properties);
-        this.#state.set({
-          ...this.#state(),
-          properties,
-          loading: false,
-        });
-      }),
-      catchError((error) => {
-        this.notificationService.showNotification(
-          'Unable to fetch available properties at this time. Please try again later.',
-          'error'
-        );
-        console.error('Error fetching properties:', error);
-        return of([]);
-      })
-    )
-    .subscribe();
-}
-
-
+  private handleError(error: any): Observable<Property[]> {
+    this.notificationService.showNotification(
+      'Unable to fetch available properties at this time. Please try again later.', 'error'
+    );
+    console.error('Error fetching available properties:', error);
+    return of([]);
+  }
 
   getPropertyById(id: number) {
     return this.http

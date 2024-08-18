@@ -24,8 +24,30 @@ export default class ListComponent {
     // effect(() => {
     //   console.log( this.publicPropertyService.properties() );
     // });
-    effect(() => {
-      console.log( this.publicRoomService.rooms() );
-    });
+    // effect(() => {
+    //   console.log( this.publicRoomService.rooms() );
+    // });
+
+    // effect(() => {
+    //   const properties = this.publicPropertyService.properties();
+    //   console.log('Properties:', properties);
+
+    //   // Iterar sobre las propiedades y mostrar las habitaciones en la consola
+    //   properties.forEach(property => {
+    //     console.log(`Property: ${property.name}`);
+    //     property.rooms.forEach(room => {
+    //       console.log(`Room ID: ${room.id}, Room Name: ${room.name}`);
+    //     });
+    //   });
+    // });
+
+effect(() => {
+  const rooms = this.publicRoomService.rooms();
+  if (rooms) {
+    console.log('Rooms:', rooms);
+  } else {
+    console.warn('Rooms data is not available yet.');
+  }
+});
   }
 }
