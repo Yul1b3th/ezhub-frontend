@@ -4,8 +4,8 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { PlacesService } from '../../maps/services';
-import { LoadingComponent } from '../shared/loading/loading.component';
 import { LocationPermissionComponent } from '../../core/components/location-permission/location-permission.component';
+import { LoadingComponent } from '../../core/components/loading/loading.component';
 
 @Component({
   selector: 'app-home',
