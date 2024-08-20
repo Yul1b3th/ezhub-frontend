@@ -10,6 +10,7 @@ import { NotificationService } from '../components/shared/notification/notificat
 import { Room } from '../interfaces/room.interface';
 import { PublicPropertyService } from './public-property.service';
 import { Amenity } from '../interfaces/amenity.interface';
+import { QueryStateService } from '../components/search-bar/query-state.service';
 
 interface State {
   rooms: Room[];
@@ -23,6 +24,7 @@ export class PublicRoomService {
   private publicPropertyService = inject(PublicPropertyService);
   private notificationService = inject(NotificationService);
   private placesService = inject(PlacesService);
+    private queryStateService = inject(QueryStateService);
 
   #state = signal<State>({
     loading: true,
@@ -33,14 +35,13 @@ export class PublicRoomService {
 
   public rooms = computed(() => this.#state().rooms);
   public loading = computed(() => this.#state().loading);
-  public query = computed(() => this.lastQuery()); // Computed para obtener la última consulta
+  public query = computed(() => this.queryStateService.getQuery()());
 
   constructor() {
-    const query = ''; // Define un valor predeterminado para query
-
     effect(() => {
       const properties: Property[] = this.publicPropertyService.properties();
-      this.extractRooms(properties);
+      const query = this.queryStateService.getQuery()();
+      this.extractRooms(properties, query);
       this.queryRooms(query);
     }, { allowSignalWrites: true });
   }
@@ -64,7 +65,7 @@ export class PublicRoomService {
   }
 
   queryRooms(query: string = '') {
-    this.lastQuery.set(query); // Almacenar la última consulta
+    this.queryStateService.setQuery(query); // Usar querySignal del servicio
     console.log(query);
 
     this.extractRooms(this.publicPropertyService.properties(), query);

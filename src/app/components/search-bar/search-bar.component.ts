@@ -6,7 +6,6 @@ import { map } from 'rxjs';
 
 import { PlacesService } from '../../maps/services';
 import { PublicRoomService } from '../../services/public-room.service';
-import { QueryService } from '../../services/query.service';
 import { SearchBarLabelDirective } from '../../directives/search-bar-label.directive';
 import { QueryStateService } from './query-state.service';
 
@@ -19,8 +18,9 @@ import { QueryStateService } from './query-state.service';
 })
 export class SearchBarComponent implements OnInit {
   private fb = inject(FormBuilder);
-  publicRoomService = inject(PublicRoomService);
-  queryStateService = inject(QueryStateService);
+  private publicRoomService = inject(PublicRoomService);
+  private queryStateService = inject(QueryStateService);
+  private placesService = inject(PlacesService);
 
   public query: string = '';
 
@@ -29,11 +29,6 @@ export class SearchBarComponent implements OnInit {
   });
 
   public formSubmitted = false;
-
-  constructor(
-    private placesService: PlacesService,
-    private queryService: QueryService
-  ) {}
 
   ngOnInit() {
     // Rellenar el buscador con la última consulta desde el servicio de estado
@@ -54,7 +49,6 @@ export class SearchBarComponent implements OnInit {
       this.query = '';
       this.searchForm.get('searchControl')?.setValue('');
       this.publicRoomService.queryRooms(''); // Realizar una consulta vacía para obtener todas las habitaciones
-      this.queryService.setQuery('');
       this.queryStateService.setQuery('');
     } else if ((this.query ?? '').length > 3) {
       if (/^[01-52]\d{4}$/.test(this.query)) {
@@ -65,7 +59,6 @@ export class SearchBarComponent implements OnInit {
           .subscribe(({ query, exists }) => {
             if (exists) {
               this.publicRoomService.queryRooms(query);
-              this.queryService.setQuery(query);
               this.queryStateService.setQuery(query);
             } else {
               //console.log('El código postal no existe');
@@ -76,7 +69,6 @@ export class SearchBarComponent implements OnInit {
         //console.log('Buscando por ciudad');
 
         this.publicRoomService.queryRooms(this.query);
-        this.queryService.setQuery(this.query);
         this.queryStateService.setQuery(this.query);
       }
     }
@@ -86,7 +78,6 @@ export class SearchBarComponent implements OnInit {
     this.query = '';
     this.searchForm.get('searchControl')?.setValue('');
     this.publicRoomService.queryRooms(''); // Realizar una consulta vacía para obtener todas las habitaciones
-    this.queryService.setQuery('');
     this.queryStateService.setQuery('');
   }
 
