@@ -217,7 +217,7 @@ export const routes: Routes = [
     canActivate: [clearStateUrlGuard],
     title: 'EZHub | 404',
     loadComponent: () =>
-      import('./components/shared/error404/error404.component'),
+      import('./core/components/page-not-found/page-not-found.component'),
   },
 
   {

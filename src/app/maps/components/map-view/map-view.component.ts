@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
 import { Map, Popup, Marker } from 'mapbox-gl';
 
@@ -17,17 +11,13 @@ import { MapService, PlacesService } from '../../services';
   templateUrl: './map-view.component.html',
   styleUrl: './map-view.component.scss',
 })
-export class MapViewComponent implements OnInit, AfterViewInit {
+export class MapViewComponent implements  AfterViewInit {
   @ViewChild('mapDiv') mapDivElement!: ElementRef;
 
   constructor(
     private placesService: PlacesService,
     private mapService: MapService
   ) {}
-
-  ngOnInit(): void {
-    console.log(this.placesService.useLocation);
-  }
 
   ngAfterViewInit(): void {
     if (!this.placesService.useLocation)

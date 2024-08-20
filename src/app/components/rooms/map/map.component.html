@@ -1,8 +1,12 @@
-<!-- @defer(when cond){ @if (properties().length > 0) {
-<map-with-marker />
-
+@if(notification.type() === 'error'){
+<app-notification />
 }@else {
-<p class="text-lg text-center">There are no items.</p>
-} } @placeholder {
-<p>Mapa...</p>
-} -->
+  @defer (when rooms.length > 0) {
+    <map-with-marker />
+  } @loading (minimum 2s) {
+    <app-loading class="block h-full min-h-full" />
+  } @error {
+  Error...
+  }
+
+}

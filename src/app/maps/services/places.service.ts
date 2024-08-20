@@ -11,11 +11,11 @@ import { Observable, map } from 'rxjs';
 })
 export class PlacesService {
   public useLocation?: [number, number];
-
   public isLoadingPlaces = false;
   public places: Feature[] = [];
   public cities: string[] = [];
-  userDeniedLocation = false;
+  public userDeniedLocation = false;
+  public maxDistance = 10; // Ajustado maxDistance a 10 km
 
   get isUserLocationReady(): boolean {
     return !!this.useLocation;
@@ -33,17 +33,13 @@ export class PlacesService {
     return new Promise((resolve) => {
       navigator.geolocation.getCurrentPosition(
         ({ coords }) => {
+          // console.log(`coords.longitude: ${coords.longitude}, coords.latitude: ${coords.latitude}`);
+
           this.useLocation = [coords.longitude, coords.latitude];
           resolve(this.useLocation);
-          // console.log('useLocation', this.useLocation);
         },
         (err) => {
-          //alert(err.message);
-          //console.log(err);
-          // Resuelve la promesa con un valor predeterminado en lugar de rechazarla
           this.userDeniedLocation = true;
-          // console.log('userDeniedLocation', this.userDeniedLocation);
-
           resolve([0, 0]);
         }
       );
@@ -51,12 +47,9 @@ export class PlacesService {
   }
 
   getCityFromFeature(feature: Feature): string {
-    // Buscamos el objeto que representa la ciudad en el contexto
     const cityObject = feature.context.find((contextObject) =>
       contextObject.id.startsWith('place')
     );
-
-    // Devolvemos el nombre de la ciudad
     return cityObject ? cityObject.text_es : '';
   }
 
@@ -78,12 +71,9 @@ export class PlacesService {
         },
       })
       .subscribe((resp) => {
-        //console.log('resp', resp.features);
         this.isLoadingPlaces = false;
         this.places = resp.features;
         this.cities = this.places.map(this.getCityFromFeature);
-        //console.log(this.cities);
-
         this.mapService.createMarkersFromPlaces(this.places, this.useLocation!);
       });
   }
@@ -91,22 +81,20 @@ export class PlacesService {
   deletePlaces() {
     this.places = [];
   }
-  calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
-    //console.log(this.useLocation);
-    //console.log({ lat1, lon1, lat2, lon2 });
 
+  calculateDistance(lon1: number, lat1: number, lon2: number, lat2: number): number {
     const R = 6371; // Radio de la tierra en km
     const dLat = this.deg2rad(lat2 - lat1);
     const dLon = this.deg2rad(lon2 - lon1);
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(this.deg2rad(lat1)) *
-        Math.cos(this.deg2rad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+      Math.cos(this.deg2rad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const d = R * c; // Distancia en km
-    return d <= 10; // Devuelve true si la distancia es menor o igual a 10 km
+    return d; // Devuelve la distancia en km
   }
 
   deg2rad(deg: number) {
@@ -114,8 +102,6 @@ export class PlacesService {
   }
 
   checkPostalCode(postalCode: string): Observable<boolean> {
-    //console.log('checkPostalCode');
-
     return this.placesApi
       .get<PlacesResponse>(`/${postalCode}.json`, {
         params: {

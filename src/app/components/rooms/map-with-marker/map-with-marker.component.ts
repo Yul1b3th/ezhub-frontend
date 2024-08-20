@@ -1,19 +1,11 @@
+import { AfterViewInit, Component, ElementRef, ViewChild, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, computed, inject, signal} from '@angular/core';
+import { Map, Marker, LngLat, LngLatBounds } from 'mapbox-gl';
 
-import { LngLat, Map, Marker } from 'mapbox-gl';
+import { NotificationService } from '../../shared/notification/notification.service';
+import { PublicRoomService } from '../../../services/public-room.service';
+import { Room } from '../../../interfaces/room.interface';
 
-import { PublicPropertyService } from '../../../services/public-property.service';
-import { Property } from '../../../interfaces/property.interface';
-import { environment } from '../../../../environments/environment';
-import { PlacesService } from '../../../maps/services';
-import { QueryService } from '../../../services/query.service';
-
-interface State {
-  properties: Property[];
-  loading: boolean;
-}
 
 @Component({
   selector: 'map-with-marker',
@@ -22,154 +14,105 @@ interface State {
   templateUrl: './map-with-marker.component.html',
   styleUrls: ['./map-with-marker.component.scss'],
 })
-  export default class MapWithMarkerComponent{}
-// export default class MapWithMarkerComponent implements AfterViewInit, OnInit {
-//   private http = inject(HttpClient);
-//   private readonly baseUrl: string = environment.baseUrl;
-//   private markers: Marker[] = [];
+export default class MapWithMarkerComponent implements AfterViewInit {
 
-//   @ViewChild('map') divMap?: ElementRef;
+  private markers: Marker[] = [];
 
-//   public map?: Map;
-//   public lngLat: [number, number] = [2.187975058256683, 41.392281189125214];
+  @ViewChild('map') divMap?: ElementRef;
 
-//   stateSignal = signal<State>({
-//     loading: true,
-//     properties: [],
-//   });
+  public map?: Map;
+  public lngLat: [number, number] = [2.187975058256683, 41.392281189125214];
 
-//   // Señales computadas
-//   public properties = computed(() => this.stateSignal().properties);
-//   public loading = computed(() => this.stateSignal().loading);
+  notification = inject(NotificationService);
+  publicRoomService = inject(PublicRoomService);
 
-//   constructor(
-//     private publicPropertyService: PublicPropertyService,
-//     private placesService: PlacesService,
-//     private queryService: QueryService
-//   ) {}
+  constructor() {
+    effect(() => {
+      const rooms = this.publicRoomService.rooms();
+      const uniqueProperties = this.getUniqueProperties(rooms);
 
-//   ngOnInit(): void {
-//     this.queryService.query$.subscribe((query) => {
-//       this.filterProperties(query);
-//     });
-//   }
+      if (this.map) {
+        // Elimina los marcadores existentes
+        this.markers.forEach((marker) => marker.remove());
+        this.markers = [];
 
-//   ngAfterViewInit(): void {
-//     if (!this.divMap) throw 'El elemento HTML no fue encontrado';
-//     this.map = new Map({
-//       container: this.divMap?.nativeElement,
-//       style: 'mapbox://styles/mapbox/streets-v12',
-//       center: this.lngLat,
-//       zoom: 13,
-//     });
+        // Añade los nuevos marcadores
+        this.addMarkers(uniqueProperties);
+      }
+    });
+  }
 
-//     //console.log(this.lngLat);
-//   }
+  ngAfterViewInit(): void {
+    if (!this.divMap) throw new Error('El elemento HTML no fue encontrado');
+    this.map = new Map({
+      container: this.divMap.nativeElement,
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: this.lngLat,
+      zoom: 13,
+    });
+  }
 
-//   filterProperties(query: string = '') {
-//     //console.log('filterProperties');
+  private getUniqueProperties(rooms: Room[]): { [key: string]: Room } {
+    const propertyMap: { [key: string]: Room } = {};
 
-//     // Filtra las propiedades basándose en la consulta y la geolocalización
-//     this.publicPropertyService
-//       .getPublicProperties()
-//       .subscribe((properties: Property[]) => {
-//         let filteredProperties: Property[] = [];
-//         //console.log(properties);
+    rooms.forEach(room => {
+const propertyId = room.property?.id;
+if (propertyId && !propertyMap[propertyId]) {
+  propertyMap[propertyId] = room;
+}
 
-//         properties.forEach((property: Property) => {
-//           let userLongitude: number = 0;
-//           let userLatitude: number = 0;
-//           //console.log(this.placesService.useLocation);
+    });
 
-//           if (this.placesService.useLocation) {
-//             //console.log('this.placesService.useLocation');
+    return propertyMap;
+  }
 
-//             [userLongitude, userLatitude] = this.placesService.useLocation;
-//           }
-//           if (userLongitude !== 0 && userLatitude !== 0 && !query) {
-//             //console.log('useLocation');
-//             //console.log();
+private addMarkers(properties: { [key: string]: Room }): void {
+  const bounds = new LngLatBounds();
 
-//             if (
-//               this.placesService.calculateDistance(
-//                 userLongitude,
-//                 userLatitude,
-//                 Number(property.longitude),
-//                 Number(property.latitude)
-//               )
-//             ) {
-//               filteredProperties.push(property);
-//               //console.log('useLocation', filteredProperties);
-//             }
-//           }
-//           if (query) {
-//             //console.log(query);
-//             if (property.city.toLowerCase().includes(query.toLowerCase())) {
-//               filteredProperties.push(property);
-//             }
-//             if (property.postalCode.includes(query)) {
-//               filteredProperties.push(property);
-//             }
-//           }
-//           if (!this.placesService.useLocation && !query) {
-//             //console.log('!this.placesService.useLocation');
-//             filteredProperties.push(property);
-//           }
-//         });
+  Object.values(properties).forEach((room: Room) => {
+    const property = room.property;
 
-//         //console.log({ filteredProperties });
+    if (!property) return; // Si 'property' es undefined, salta a la siguiente iteración
 
-//         this.stateSignal.set({
-//           loading: false,
-//           properties: filteredProperties,
-//         });
-//         if (this.map) {
-//           // Elimina los marcadores existentes
-//           this.markers.forEach((marker) => marker.remove());
-//           this.markers = [];
+    const lngLat: LngLat = new LngLat(
+      parseFloat(property.longitude),
+      parseFloat(property.latitude)
+    );
 
-//           // Añade los nuevos marcadores y guarda una referencia a ellos
-//           this.addMarkers(filteredProperties);
+    // Añadir las coordenadas al objeto bounds
+    bounds.extend(lngLat);
 
-//           // Centra el mapa en los nuevos marcadores
-//           if (filteredProperties.length > 0) {
-//             const lngs = filteredProperties.map((p) => parseFloat(p.longitude));
-//             const lats = filteredProperties.map((p) => parseFloat(p.latitude));
-//             const centerLng = lngs.reduce((a, b) => a + b) / lngs.length;
-//             const centerLat = lats.reduce((a, b) => a + b) / lats.length;
-//             this.map.setCenter([centerLng, centerLat]);
-//           }
-//         }
-//       });
-//   }
+    const markerElement = document.createElement('div');
+    markerElement.className = 'custom-marker';
 
-//   addMarkers(properties: Property[]): void {
-//     properties.forEach((property) => {
-//       const markerElement = document.createElement('div');
-//       markerElement.className = 'custom-marker';
+    const propertyInfo = document.createElement('div');
+    propertyInfo.innerHTML = `
+      <div>
+        <strong><a href="/property-details/${property.id}">${property.name}</a></strong><br>
+        Habitaciones disponibles: ${property.rooms?.length ?? 0}
+      </div>
+    `;
+    markerElement.appendChild(propertyInfo);
 
-//       const propertyInfo = document.createElement('div');
-//       propertyInfo.innerHTML = `
-//       <div>
-//         <strong><a href="/property-details/${property.id}">${
-//         property.name
-//       }</a></strong><br>
-//         Habitaciones disponibles: ${
-//           property.rooms.filter((room) => room.is_available).length
-//         }
-//       </div>
-//     `;
-//       markerElement.appendChild(propertyInfo);
+    const marker = new Marker({ color: '#30daa6' })
+      .setLngLat(lngLat)
+      .addTo(this.map!);
+    this.markers.push(marker);
+  });
 
-//       const lngLat: LngLat = new LngLat(
-//         parseFloat(property.longitude),
-//         parseFloat(property.latitude)
-//       );
+  if (this.markers.length === 1) {
+    // Si hay un solo marcador, establecemos un zoom fijo, por ejemplo 12
+    this.map!.setZoom(12);
+    this.map!.setCenter(bounds.getCenter()); // Centra el mapa en el único marcador
+  } else if (this.markers.length > 1) {
+    // Si hay más de un marcador, ajusta el zoom y el centro del mapa a los bounds
+    this.map!.fitBounds(bounds, { padding: 50, maxZoom: 12 }); // Ajusta el padding y el maxZoom según sea necesario
+  } else {
+    // Si no hay marcadores o si quieres mostrar un zoom predeterminado
+    this.map!.setZoom(5); // Zoom para mostrar toda España
+    this.map!.setCenter([-3.703790, 40.416775]); // Centro en España (Madrid)
+  }
+}
 
-//       const marker = new Marker({ color: '#30daa6' })
-//         .setLngLat(lngLat)
-//         .addTo(this.map!);
-//       this.markers.push(marker);
-//     });
-//   }
-// }
+
+}

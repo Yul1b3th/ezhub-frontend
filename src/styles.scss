@@ -86,3 +86,7 @@ app-home {
 .container {
   @apply max-w-[67.5rem];
 }
+
+app-list, app-map {
+  height: 100%;
+}
