@@ -1,19 +1,19 @@
 @if(notification.type() === 'error'){
-  <app-notification />
+<app-notification />
 }@else {
-  @if(publicRoomService.loading()){
-    Cargando...
-  }@else{
-    @if(publicRoomService.rooms().length === 0){
-      At this moment, there are no rooms available at the selected destination. Please try again later.
-    }@else {
-      @defer () {
-        <app-show-rooms class="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center" />
-      } @loading (minimum 2s) {
-        <app-loading class="block h-full min-h-full" />
-      } @error {
-        Error...
-      }
-    }
-  }
+@if(publicRoomService.loading()){
+Cargando...
+}@else{
+@if(publicRoomService.rooms().length === 0 && publicRoomService.query().length > 0){
+At this moment, there are no rooms available at the selected destination. Please try again later.
+}@else {
+@defer () {
+<app-show-rooms class="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center" />
+} @loading (minimum 2s) {
+<app-loading class="block h-full min-h-full" />
+} @error {
+Error...
+}
+}
+}
 }

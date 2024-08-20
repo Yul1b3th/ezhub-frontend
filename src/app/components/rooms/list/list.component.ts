@@ -20,15 +20,18 @@ export default class ListComponent {
   notification = inject(NotificationService);
   publicRoomService = inject(PublicRoomService);
   public rooms = this.publicRoomService.rooms();
-    constructor() {
+  public query = this.publicRoomService.query(); // Obtener la última consulta
+
+  constructor() {
+    console.log('Constructor lista');
+
     effect(() => {
       this.rooms = this.publicRoomService.rooms();
-      if (this.rooms ) {
-        console.log('Rooms:', this.rooms );
+      if (this.rooms) {
+        console.log('Rooms:', this.rooms);
       } else {
         console.warn('Rooms data is not available yet.');
       }
     });
   }
-
 }

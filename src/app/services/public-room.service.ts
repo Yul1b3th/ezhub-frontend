@@ -29,13 +29,19 @@ export class PublicRoomService {
     rooms: [],
   });
 
+  private lastQuery = signal<string>(''); // Nueva señal para almacenar la última consulta
+
   public rooms = computed(() => this.#state().rooms);
   public loading = computed(() => this.#state().loading);
+  public query = computed(() => this.lastQuery()); // Computed para obtener la última consulta
 
   constructor() {
+    const query = ''; // Define un valor predeterminado para query
+
     effect(() => {
       const properties: Property[] = this.publicPropertyService.properties();
       this.extractRooms(properties);
+      this.queryRooms(query);
     }, { allowSignalWrites: true });
   }
 
@@ -58,28 +64,34 @@ export class PublicRoomService {
   }
 
   queryRooms(query: string = '') {
+    this.lastQuery.set(query); // Almacenar la última consulta
     console.log(query);
 
     this.extractRooms(this.publicPropertyService.properties(), query);
   }
 
-private extractRooms(properties: Property[], query: string = ''): void {
-  // console.log(query);
+  private extractRooms(properties: Property[], query: string = ''): void {
+    console.log(`query: ${query}`);
 
-  const rooms = query ? this.getRoomsByQuery(properties, query) : this.getRoomsByLocation(properties);
+    const rooms = query ? this.getRoomsByQuery(properties, query) : this.getRoomsByLocation(properties);
 
-  from(rooms).pipe(
-    mergeMap(room => this.populateRoomAmenities(room, properties), 5), // Limitar a 5 solicitudes concurrentes
-    toArray()
-  ).subscribe(() => this.updateState(rooms));
+    from(rooms).pipe(
+      mergeMap(room => this.populateRoomAmenities(room, properties), 2), // Limitar a 2 solicitudes concurrentes
+      toArray()
+    ).subscribe({
+      next: () => this.updateState(rooms),
+      error: (error) => {
+        console.error('Error extracting rooms:', error);
+        this.notificationService.showNotification('Error extracting rooms', 'error');
+        this.updateState([]); // Asegurarse de actualizar el estado aunque haya un error
+      }
+    });
 
-  if (rooms.length === 0) {
-    this.updateState([]); // Asegurarse de actualizar el estado aunque no haya habitaciones
+    if (rooms.length === 0) {
+      this.updateState([]); // Asegurarse de actualizar el estado aunque no haya habitaciones
+    }
+    console.log(rooms);
   }
-  console.log(rooms);
-
-}
-
 
   private updateState(rooms: Room[]): void {
     this.#state.set({ rooms, loading: false });
@@ -91,7 +103,10 @@ private extractRooms(properties: Property[], query: string = ''): void {
       room.property = property;
       return this.getRoomAmenities(room.id).pipe(
         tap(amenities => room.amenities = amenities),
-        catchError(() => of([])),
+        catchError(error => {
+          console.error(`Error fetching amenities for room ID ${room.id}:`, error);
+          return of([]);
+        }),
         map(() => undefined)
       );
     }
@@ -106,8 +121,6 @@ private extractRooms(properties: Property[], query: string = ''): void {
   private getRoomsByLocation(properties: Property[]): Room[] {
     return this.isUserLocationReady() ? this.getNearbyAvailableRooms(properties) : this.getAvailableRoomsFromProperties(properties);
   }
-
-
 
   private filterPropertiesByQuery(properties: Property[], query: string): Property[] {
     return properties.filter((property: Property) =>

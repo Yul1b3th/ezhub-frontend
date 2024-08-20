@@ -17,15 +17,13 @@
       </li>
     </ul>
 
-          @defer () {
-          <router-outlet />
-          } @loading (minimum 2s) {
-          <app-loading class="block h-full min-h-full" />
-          } @error {
-          Error...
-          }
-
-
+    @defer () {
+      <router-outlet />
+    } @loading (minimum 2s) {
+      <app-loading class="block h-full min-h-full" />
+    } @error {
+      Error...
+    }
 
   </div>
 }
