@@ -24,7 +24,7 @@ export default class ListComponent {
     effect(() => {
       this.rooms = this.publicRoomService.rooms();
       if (this.rooms ) {
-        // console.log('Rooms:', this.rooms );
+        console.log('Rooms:', this.rooms );
       } else {
         console.warn('Rooms data is not available yet.');
       }

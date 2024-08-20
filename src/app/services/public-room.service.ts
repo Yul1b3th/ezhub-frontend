@@ -58,16 +58,31 @@ export class PublicRoomService {
   }
 
   queryRooms(query: string = '') {
+    console.log(query);
+
     this.extractRooms(this.publicPropertyService.properties(), query);
   }
 
-  private extractRooms(properties: Property[], query: string = ''): void {
-    const rooms = query ? this.getRoomsByQuery(properties, query) : this.getRoomsByLocation(properties);
+private extractRooms(properties: Property[], query: string = ''): void {
+  // console.log(query);
 
-    from(rooms).pipe(
-      mergeMap(room => this.populateRoomAmenities(room, properties), 5), // Limitar a 5 solicitudes concurrentes
-      toArray()
-    ).subscribe(() => this.updateState(rooms));
+  const rooms = query ? this.getRoomsByQuery(properties, query) : this.getRoomsByLocation(properties);
+
+  from(rooms).pipe(
+    mergeMap(room => this.populateRoomAmenities(room, properties), 5), // Limitar a 5 solicitudes concurrentes
+    toArray()
+  ).subscribe(() => this.updateState(rooms));
+
+  if (rooms.length === 0) {
+    this.updateState([]); // Asegurarse de actualizar el estado aunque no haya habitaciones
+  }
+  console.log(rooms);
+
+}
+
+
+  private updateState(rooms: Room[]): void {
+    this.#state.set({ rooms, loading: false });
   }
 
   private populateRoomAmenities(room: Room, properties: Property[]): Observable<void> {
@@ -92,9 +107,7 @@ export class PublicRoomService {
     return this.isUserLocationReady() ? this.getNearbyAvailableRooms(properties) : this.getAvailableRoomsFromProperties(properties);
   }
 
-  private updateState(rooms: Room[]): void {
-    this.#state.set({ rooms, loading: false });
-  }
+
 
   private filterPropertiesByQuery(properties: Property[], query: string): Property[] {
     return properties.filter((property: Property) =>

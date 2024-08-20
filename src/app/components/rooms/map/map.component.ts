@@ -14,6 +14,7 @@ import { NotificationService } from '../../shared/notification/notification.serv
 import { PublicRoomService } from '../../../services/public-room.service';
 import { NotificationComponent } from '../../shared/notification/notification.component';
 import { LoadingComponent } from '../../../core/components/loading/loading.component';
+import { Room } from '../../../interfaces/room.interface';
 
 interface State {
   propertiesMap: Property[];
@@ -27,18 +28,29 @@ interface State {
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
 })
-export default class MapComponent{
+export default class MapComponent implements OnInit {
   notification = inject(NotificationService);
   publicRoomService = inject(PublicRoomService);
   public rooms = this.publicRoomService.rooms();
-    constructor() {
+
+
+  constructor() {
+    console.log('constructor Map');
+
     effect(() => {
       this.rooms = this.publicRoomService.rooms();
       if (this.rooms ) {
-        // console.log('RoomsMapComponent:', this.rooms );
+        console.log('Rooms:', this.rooms );
       } else {
         console.warn('Rooms data is not available yet.');
       }
     });
+
+
   }
+  ngOnInit(): void {
+    console.log('ngOnInit Map');
+  }
+
+
 }

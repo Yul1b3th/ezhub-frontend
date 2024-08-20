@@ -5,11 +5,12 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { PlacesService } from '../../maps/services';
 import { LoadingComponent } from '../shared/loading/loading.component';
+import { LocationPermissionComponent } from '../../core/components/location-permission/location-permission.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, SearchBarComponent, LoadingComponent, CommonModule],
+  imports: [RouterOutlet, RouterModule, SearchBarComponent, LoadingComponent, CommonModule, LocationPermissionComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

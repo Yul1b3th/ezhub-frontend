@@ -1,12 +1,19 @@
 @if(notification.type() === 'error'){
-<app-notification />
+  <app-notification />
 }@else {
-  @defer (when rooms.length > 0) {
-    <map-with-marker />
-  } @loading (minimum 2s) {
-    <app-loading class="block h-full min-h-full" />
-  } @error {
-  Error...
+  @if(publicRoomService.loading()){
+    Cargando...
+  }@else{
+    @if(publicRoomService.rooms().length === 0){
+      At this moment, there are no rooms available at the selected destination. Please try again later.
+    }@else {
+      @defer () {
+        <map-with-marker />
+      } @loading (minimum 2s) {
+        <app-loading class="block h-full min-h-full" />
+      } @error {
+        Error...
+      }
+    }
   }
-
 }

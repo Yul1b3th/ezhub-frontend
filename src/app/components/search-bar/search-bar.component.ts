@@ -38,6 +38,7 @@ export class SearchBarComponent implements OnInit {
     let query = this.searchForm.get('searchControl')?.value;
 
     query = query?.trim();
+    console.log('query', query);
 
     if ((query ?? '').length > 3) {
       if (/^[01-52]\d{4}$/.test(query)) {
