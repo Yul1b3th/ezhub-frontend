@@ -1,11 +1,9 @@
-import { Component, inject, effect } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { PublicRoomService } from '../../../services/public-room.service';
-import { RouterModule } from '@angular/router';
-import { PlacesService } from '../../../maps/services';
 import { NotificationComponent } from '../../shared/notification/notification.component';
 import { NotificationService } from '../../shared/notification/notification.service';
-import { PublicPropertyService } from '../../../services/public-property.service';
 import { ShowRoomsComponent } from '../show-rooms/show-rooms.component';
 import { LoadingComponent } from '../../../core/components/loading/loading.component';
 
@@ -19,19 +17,4 @@ import { LoadingComponent } from '../../../core/components/loading/loading.compo
 export default class ListComponent {
   notification = inject(NotificationService);
   publicRoomService = inject(PublicRoomService);
-  public rooms = this.publicRoomService.rooms();
-  public query = this.publicRoomService.query(); // Obtener la última consulta
-
-  constructor() {
-    console.log('Constructor lista');
-
-    effect(() => {
-      this.rooms = this.publicRoomService.rooms();
-      if (this.rooms) {
-        console.log('Rooms:', this.rooms);
-      } else {
-        console.warn('Rooms data is not available yet.');
-      }
-    });
-  }
 }
