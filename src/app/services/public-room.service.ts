@@ -1,7 +1,7 @@
 import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { from, Observable, of } from 'rxjs';
-import { catchError, map, tap, mergeMap, toArray } from 'rxjs/operators';
+import { catchError, map, mergeMap, toArray } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Property } from '../interfaces/property.interface';
@@ -9,11 +9,12 @@ import { PlacesService } from '../maps/services';
 import { NotificationService } from '../components/shared/notification/notification.service';
 import { Room } from '../interfaces/room.interface';
 import { PublicPropertyService } from './public-property.service';
-import { Amenity } from '../interfaces/amenity.interface';
 import { QueryStateService } from '../components/search-bar/query-state.service';
+import { Amenity } from '../interfaces/amenity.interface';
 
 interface State {
   rooms: Room[];
+  roomAmenities: Room[];
   loading: boolean;
 }
 
@@ -21,19 +22,19 @@ interface State {
 export class PublicRoomService {
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
-  private publicPropertyService = inject(PublicPropertyService);
   private notificationService = inject(NotificationService);
+  private publicPropertyService = inject(PublicPropertyService);
   private placesService = inject(PlacesService);
-    private queryStateService = inject(QueryStateService);
+  private queryStateService = inject(QueryStateService);
 
   #state = signal<State>({
-    loading: true,
     rooms: [],
+    roomAmenities: [],
+    loading: true,
   });
 
-  private lastQuery = signal<string>(''); // Nueva señal para almacenar la última consulta
-
   public rooms = computed(() => this.#state().rooms);
+  public roomAmenities = computed(() => this.#state().roomAmenities);
   public loading = computed(() => this.#state().loading);
   public query = computed(() => this.queryStateService.getQuery()());
 
@@ -46,71 +47,52 @@ export class PublicRoomService {
     }, { allowSignalWrites: true });
   }
 
-  getRoomById(id: number): Observable<Room> {
+  getRoomById(id: number) {
     return this.http.get<Room>(`${this.baseUrl}/public-rooms/${id}`).pipe(
-      map((res) => res)
-    );
-  }
-
-  getRoomAmenities(id: number): Observable<Amenity[]> {
-    return this.http.get<Amenity[]>(`${this.baseUrl}/public-rooms/${id}/amenities`).pipe(
       catchError(error => {
         this.notificationService.showNotification(
-          `Error fetching amenities for room ID ${id}: ${error.message}`, 'error'
+          `Error fetching room by ID ${id}: ${error.message}`, 'error'
         );
-        console.error(`Error fetching amenities for room ID ${id}:`, error);
-        return of([]); // Retornar un array vacío en caso de error
+        console.error(`Error fetching room by ID ${id}:`, error);
+        return of(null);
       })
     );
   }
 
   queryRooms(query: string = '') {
-    this.queryStateService.setQuery(query); // Usar querySignal del servicio
-    console.log(query);
-
+    this.queryStateService.setQuery(query);
     this.extractRooms(this.publicPropertyService.properties(), query);
   }
 
   private extractRooms(properties: Property[], query: string = ''): void {
-    console.log(`query: ${query}`);
-
     const rooms = query ? this.getRoomsByQuery(properties, query) : this.getRoomsByLocation(properties);
-
     from(rooms).pipe(
-      mergeMap(room => this.populateRoomAmenities(room, properties), 2), // Limitar a 2 solicitudes concurrentes
+      mergeMap(room => this.populateRoomProperty(room, properties), 2),
       toArray()
     ).subscribe({
       next: () => this.updateState(rooms),
       error: (error) => {
         console.error('Error extracting rooms:', error);
         this.notificationService.showNotification('Error extracting rooms', 'error');
-        this.updateState([]); // Asegurarse de actualizar el estado aunque haya un error
+        this.updateState([]);
       }
     });
-
     if (rooms.length === 0) {
-      this.updateState([]); // Asegurarse de actualizar el estado aunque no haya habitaciones
+      this.updateState([]);
     }
     console.log(rooms);
   }
 
   private updateState(rooms: Room[]): void {
-    this.#state.set({ rooms, loading: false });
+    this.#state.set({ rooms, roomAmenities: [], loading: false });
   }
 
-  private populateRoomAmenities(room: Room, properties: Property[]): Observable<void> {
+  private populateRoomProperty(room: Room, properties: Property[]): Observable<void> {
     const property = properties.find(p => p.id === room.propertyId);
     if (property) {
       room.property = property;
-      return this.getRoomAmenities(room.id).pipe(
-        tap(amenities => room.amenities = amenities),
-        catchError(error => {
-          console.error(`Error fetching amenities for room ID ${room.id}:`, error);
-          return of([]);
-        }),
-        map(() => undefined)
-      );
     }
+    console.log(room); // Mostrar por consola room.amenityIds
     return of(undefined);
   }
 

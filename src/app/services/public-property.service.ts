@@ -1,11 +1,10 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Property } from '../interfaces/property.interface';
-import { PlacesService } from '../maps/services';
 import { NotificationService } from '../components/shared/notification/notification.service';
 
 interface State {
@@ -17,6 +16,7 @@ interface State {
 export class PublicPropertyService {
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
+  private notificationService = inject(NotificationService);
 
   #state = signal<State>({
     properties: [],
@@ -27,10 +27,7 @@ export class PublicPropertyService {
   public properties = computed(() => this.#state().properties);
   public loading = computed(() => this.#state().loading);
 
-  constructor(
-    private placesService: PlacesService,
-    private notificationService: NotificationService
-  ) {
+  constructor() {
     this.getPublicPropertiesSignals();
   }
 
@@ -74,9 +71,14 @@ export class PublicPropertyService {
     return this.http
       .get<Property>(`${this.baseUrl}/public-properties/${id}`)
       .pipe(
-        map((res) => {
-          return res;
+        catchError(error => {
+          this.notificationService.showNotification(
+            `Error fetching property by ID ${id}: ${error.message}`, 'error'
+          );
+          console.error(`Error fetching property by ID ${id}:`, error);
+          return of(null);
         })
       );
   }
 }
+

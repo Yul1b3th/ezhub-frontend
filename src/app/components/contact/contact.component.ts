@@ -6,6 +6,7 @@ import { UsersService } from '../../services/users.service';
 import { AuthService } from '../../services/auth.service';
 import { PublicRoomService } from '../../services/public-room.service';
 import { User } from '../../interfaces/user.interface';
+import { NotificationService } from '../shared/notification/notification.service';
 
 @Component({
   selector: 'app-contact',
@@ -15,6 +16,7 @@ import { User } from '../../interfaces/user.interface';
   styleUrl: './contact.component.scss',
 })
 export default class ContactComponent implements OnInit {
+  public notification = inject(NotificationService);
   public usersService = inject(UsersService);
   public authService = inject(AuthService);
   public roomService = inject(PublicRoomService);
@@ -26,10 +28,11 @@ export default class ContactComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    const roomId = this.route.snapshot.paramMap.get('id');
-    if (roomId) {
-      this.roomService.getRoomById(+roomId).subscribe((room) => {
+ngOnInit() {
+  const roomId = this.route.snapshot.paramMap.get('id');
+  if (roomId) {
+    this.roomService.getRoomById(+roomId).subscribe((room) => {
+      if (room) { // Verificar si room no es null
         this.usersService.getUsers().subscribe((users) => {
           this.user = users.find((user) => user.email === room.userEmail);
           if (this.user) {
@@ -39,7 +42,12 @@ export default class ContactComponent implements OnInit {
             this.whatsapp = this.user.whatsapp;
           }
         });
-      });
-    }
+      } else {
+        this.notification.showNotification(
+          `Room with ID ${roomId} not found.`, 'error'
+        );
+      }
+    });
   }
+}
 }
