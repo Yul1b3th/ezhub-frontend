@@ -22,7 +22,6 @@ export class AmenityService {
   private http = inject(HttpClient);
   private notificationAmenityService = inject(NotificationAmenityService);
   private publicRoomService = inject(PublicRoomService);
-  private readonly _injector = inject(EnvironmentInjector);
 
   #state = signal<State>({
     amenities: [],
@@ -49,8 +48,11 @@ export class AmenityService {
   }
 
   getAmenitiesById(id: string): Observable<Amenity[]> {
-    return this.http.get<Amenity[]>(`${this.baseUrl}/public-rooms/${id}/amenities`).pipe(
-      catchError(error => this.handleError(error))
+    return this.http.get<Amenity[]>(`${this.baseUrl}/public-rooms/${id}//amenities`).pipe(
+      catchError(error => {
+        this.handleError(error);
+        return of([]);
+      })
     );
   }
 

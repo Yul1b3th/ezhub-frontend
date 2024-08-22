@@ -18,7 +18,6 @@ export class PublicPropertyService {
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
   private notificationService = inject(NotificationService);
-      private readonly _injector = inject(EnvironmentInjector);
 
   #state = signal<State>({
     properties: [],

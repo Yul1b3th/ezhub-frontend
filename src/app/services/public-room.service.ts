@@ -26,7 +26,6 @@ export class PublicRoomService {
   private publicPropertyService = inject(PublicPropertyService);
   private placesService = inject(PlacesService);
   private queryStateService = inject(QueryStateService);
-    private readonly _injector = inject(EnvironmentInjector);
 
   #state = signal<State>({
     rooms: [],
