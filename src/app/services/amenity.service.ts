@@ -48,7 +48,7 @@ export class AmenityService {
   }
 
   getAmenitiesById(id: string): Observable<Amenity[]> {
-    return this.http.get<Amenity[]>(`${this.baseUrl}/public-rooms/${id}//amenities`).pipe(
+    return this.http.get<Amenity[]>(`${this.baseUrl}/public-rooms/${id}/amenities`).pipe(
       catchError(error => {
         this.handleError(error);
         return of([]);

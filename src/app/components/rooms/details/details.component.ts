@@ -1,4 +1,9 @@
-import { Component, EnvironmentInjector, inject, input, OnInit, runInInjectionContext, Signal } from '@angular/core';
+import { Component, EnvironmentInjector, inject, input, OnInit, AfterViewInit, runInInjectionContext, Signal, effect, WritableSignal, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { catchError, filter, map, of, switchMap } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 
 import { PublicRoomService } from '../../../services/public-room.service';
 import { PublicPropertyService } from '../../../services/public-property.service';
@@ -6,14 +11,16 @@ import { AmenityService } from '../../../services/amenity.service';
 import { NotificationService } from '../../shared/notification/notification.service';
 import { NotificationAmenityService } from '../../shared/notificationAmenity/notificationAmenity.service';
 import { Room } from '../../../interfaces/room.interface';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { catchError, filter, map, of, switchMap } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { NotificationComponent } from '../../shared/notification/notification.component';
+import { NotificationAmenityComponent } from '../../shared/notificationAmenity/notificationAmenity.component';
+import { RouterModule } from '@angular/router';
+import { ShowDetailsComponent } from '../show-details/show-details.component';
+import { LoadingComponent } from '../../../core/components/loading/loading.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, NotificationComponent, NotificationAmenityComponent, ShowDetailsComponent, LoadingComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
@@ -27,8 +34,8 @@ export default class DetailsComponent implements OnInit {
 
   public productId = input<number>(0, { alias: 'id' });
   public room!: Signal<Room | undefined>;
-
-
+  public showDetails: WritableSignal<Room | undefined> = signal(undefined);
+  public roomsMap = computed(() => this.room());
 
   ngOnInit(): void {
     runInInjectionContext(this._injector, () => {
@@ -65,6 +72,19 @@ export default class DetailsComponent implements OnInit {
         ),
         { initialValue: undefined }
       );
+    });
+  }
+
+  constructor() {
+    effect(() => {
+      if (this.room()?.property) {
+        console.log(this.room()?.property);
+      }
+    });
+    effect(() => {
+      if (this.room()) {
+        console.log(this.roomsMap());
+      }
     });
   }
 
