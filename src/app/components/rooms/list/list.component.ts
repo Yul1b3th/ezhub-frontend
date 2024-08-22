@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PublicRoomService } from '../../../services/public-room.service';
@@ -20,6 +20,12 @@ export default class ListComponent implements OnInit {
 
   constructor() {
     console.log('constructor ListComponent');
+    effect(() => {
+      console.log(this.publicRoomService.rooms());
+
+    });
+
+
   }
 
   ngOnInit(): void {

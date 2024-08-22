@@ -19,6 +19,7 @@ img {
 }
 
 .loading-rooms {
-  @apply flex justify-center items-center flex-col w-full min-h-full text-center font-semibold text-3xl leading-normal text-white;
+  @apply flex justify-center flex-col text-center font-semibold text-3xl leading-normal text-white;
   background-image: linear-gradient(to right top, #30daa6, #25d9b5, #28d6c2, #38d4cd, #4cd1d4);
+  flex: 1;
 }

@@ -9,10 +9,6 @@
     }@else {
       @defer () {
         <app-show-rooms class="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center" />
-      } @loading (minimum 2s) {
-        <app-loading class="block h-full min-h-full" />
-      } @error {
-        Error...
       }
     }
   }

@@ -9,10 +9,6 @@
     }@else {
       @defer () {
         <map-with-marker />
-      } @loading (minimum 2s) {
-        <app-loading class="block h-full min-h-full" />
-      } @error {
-        Error...
       }
     }
   }
