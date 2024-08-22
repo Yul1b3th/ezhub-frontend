@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PublicRoomService } from '../../../services/public-room.service';
@@ -14,7 +14,16 @@ import { LoadingComponent } from '../../../core/components/loading/loading.compo
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export default class ListComponent {
+export default class ListComponent implements OnInit {
   notification = inject(NotificationService);
   publicRoomService = inject(PublicRoomService);
+
+  constructor() {
+    console.log('constructor ListComponent');
+  }
+
+  ngOnInit(): void {
+    console.log('ngOnInit ListComponent');
+    ;
+  }
 }

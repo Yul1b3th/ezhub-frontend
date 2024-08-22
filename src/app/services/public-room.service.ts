@@ -1,6 +1,6 @@
-import { Injectable, computed, effect, inject, signal } from '@angular/core';
+import { EnvironmentInjector, Injectable, computed, effect, inject, runInInjectionContext, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, mergeMap, toArray } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
@@ -11,10 +11,10 @@ import { Room } from '../interfaces/room.interface';
 import { PublicPropertyService } from './public-property.service';
 import { QueryStateService } from '../components/search-bar/query-state.service';
 import { Amenity } from '../interfaces/amenity.interface';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 interface State {
   rooms: Room[];
-  roomAmenities: Room[];
   loading: boolean;
 }
 
@@ -26,15 +26,14 @@ export class PublicRoomService {
   private publicPropertyService = inject(PublicPropertyService);
   private placesService = inject(PlacesService);
   private queryStateService = inject(QueryStateService);
+    private readonly _injector = inject(EnvironmentInjector);
 
   #state = signal<State>({
     rooms: [],
-    roomAmenities: [],
     loading: true,
   });
 
   public rooms = computed(() => this.#state().rooms);
-  public roomAmenities = computed(() => this.#state().roomAmenities);
   public loading = computed(() => this.#state().loading);
   public query = computed(() => this.queryStateService.getQuery()());
 
@@ -47,17 +46,17 @@ export class PublicRoomService {
     }, { allowSignalWrites: true });
   }
 
-  getRoomById(id: number) {
-    return this.http.get<Room>(`${this.baseUrl}/public-rooms/${id}`).pipe(
-      catchError(error => {
-        this.notificationService.showNotification(
-          `Error fetching room by ID ${id}: ${error.message}`, 'error'
-        );
-        console.error(`Error fetching room by ID ${id}:`, error);
-        return of(null);
-      })
-    );
-  }
+getRoomById(id: number): Observable<Room | null> {
+  return this.http.get<Room>(`${this.baseUrl}/public-rooms/${id}`).pipe(
+    catchError(error => {
+      this.notificationService.showNotification(
+        `Error fetching room by ID ${id}: ${error.message}`, 'error'
+      );
+      return of(null); // Retorna null para indicar que la habitación no fue encontrada
+    })
+  );
+}
+
 
   queryRooms(query: string = '') {
     this.queryStateService.setQuery(query);
@@ -80,11 +79,11 @@ export class PublicRoomService {
     if (rooms.length === 0) {
       this.updateState([]);
     }
-    console.log(rooms);
+    // console.log(rooms);
   }
 
   private updateState(rooms: Room[]): void {
-    this.#state.set({ rooms, roomAmenities: [], loading: false });
+    this.#state.set({ rooms, loading: false });
   }
 
   private populateRoomProperty(room: Room, properties: Property[]): Observable<void> {
@@ -92,7 +91,7 @@ export class PublicRoomService {
     if (property) {
       room.property = property;
     }
-    console.log(room); // Mostrar por consola room.amenityIds
+    // console.log(room); // Mostrar por consola room.amenityIds
     return of(undefined);
   }
 
@@ -135,4 +134,7 @@ export class PublicRoomService {
   private isUserLocationReady(): boolean {
     return !(this.placesService.userDeniedLocation && !this.placesService.isUserLocationReady);
   }
+
+
+
 }

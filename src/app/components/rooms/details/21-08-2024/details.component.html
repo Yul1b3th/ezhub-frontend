@@ -1,0 +1,51 @@
+<div class="container mx-auto px-5 my-10">
+  @if (roomWithAmenities()) {
+
+  <div class="flex items-start flex-wrap md:flex-nowrap gap-5">
+    <div class="w-full md:w-[70%] justify-center">
+      <!-- PHOTOS -->
+      <div>
+        @for (photo of (roomWithAmenities()?.photos ?? '').split(','); track $index) {
+        <img [srcset]="'assets/img/bedrooms/' + photo.trim()" class="w-full h-[30vh] object-cover"
+          [alt]="roomWithAmenities()?.name" />
+        } @empty {
+        <p class="text-center"></p>
+        }
+      </div>
+
+      <!-- Room features -->
+      <div class="mt-5 bg-zinc-50 dark:bg-light border border-zinc-200 p-5 shadow-sm">
+        <h2 class="font-bold mb-3">Room features</h2>
+
+        <h3 class="font-bold mb-3 md:hidden">{{ roomWithAmenities()?.name }}</h3>
+        <p class="mb-4 md:hidden">
+          Available from: {{ roomWithAmenities()?.available_from | date : "yyyy-MM-dd" }}
+        </p>
+        <p class="mb-4 md:hidden">
+          Room size: {{ roomWithAmenities()?.room_size }} m<sup>2</sup>
+        </p>
+        <p class="mb-4 md:hidden">
+          Room price: {{ roomWithAmenities()?.precio | number : "1.0-0" }}
+        </p>
+
+        <p class="mb-4">{{ roomWithAmenities()?.details }}</p>
+        <p class="mb-4">Bed Type {{ roomWithAmenities()?.bed_type }}</p>
+        @if (roomWithAmenities()?.utilities_included) {
+        <p class="mb-4">Utilities Included</p>
+        } @if (roomWithAmenities()?.deposit_required) {
+        <p class="mb-4">Deposit required</p>
+        } @for (service of (roomWithAmenities()?.services_included ?? '').split(','); track $index)
+        {
+        <p class="mb-4">{{ service }}</p>
+        }
+      </div>
+    </div>
+  </div>
+  @if(roomWithAmenities()?.property?.city){
+    <p>{{ roomWithAmenities()?.property?.city | json }}</p>
+  }
+
+  }@else {
+  <p>Loading...</p>
+  }
+</div>

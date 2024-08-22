@@ -1,11 +1,12 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { EnvironmentInjector, Injectable, computed, inject, runInInjectionContext, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Property } from '../interfaces/property.interface';
 import { NotificationService } from '../components/shared/notification/notification.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 interface State {
   properties: Property[];
@@ -17,6 +18,7 @@ export class PublicPropertyService {
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
   private notificationService = inject(NotificationService);
+      private readonly _injector = inject(EnvironmentInjector);
 
   #state = signal<State>({
     properties: [],
@@ -67,18 +69,16 @@ export class PublicPropertyService {
     return of([]);
   }
 
-  getPropertyById(id: number) {
-    return this.http
-      .get<Property>(`${this.baseUrl}/public-properties/${id}`)
-      .pipe(
-        catchError(error => {
-          this.notificationService.showNotification(
-            `Error fetching property by ID ${id}: ${error.message}`, 'error'
-          );
-          console.error(`Error fetching property by ID ${id}:`, error);
-          return of(null);
-        })
+getPropertyById(id: number): Observable<Property | null> {
+  return this.http.get<Property>(`${this.baseUrl}/public-properties/${id}`).pipe(
+    catchError(error => {
+      this.notificationService.showNotification(
+        `Error fetching property by ID ${id}: ${error.message}`, 'error'
       );
-  }
+      return of(null); // Retorna null para indicar que la propiedad no fue encontrada
+    })
+  );
 }
 
+
+}
