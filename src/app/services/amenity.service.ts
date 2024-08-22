@@ -1,14 +1,11 @@
-import { Injectable, inject, signal, computed, effect, EnvironmentInjector, runInInjectionContext } from '@angular/core';
+import { Injectable, inject, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable, of, throwError } from 'rxjs';
-import { catchError, tap, mergeMap, map, toArray } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { Amenity } from '../interfaces/amenity.interface';
-import { Room } from '../interfaces/room.interface';
-import { NotificationService } from '../components/shared/notification/notification.service';
 import { PublicRoomService } from './public-room.service';
 import { environment } from '../../environments/environment';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { NotificationAmenityService } from '../components/shared/notificationAmenity/notificationAmenity.service';
 
 interface State {
@@ -55,6 +52,4 @@ export class AmenityService {
       })
     );
   }
-
-
 }

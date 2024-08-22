@@ -1,4 +1,4 @@
-import { Component, EnvironmentInjector, inject, input, OnInit, AfterViewInit, runInInjectionContext, Signal, effect, WritableSignal, signal, computed } from '@angular/core';
+import { Component, EnvironmentInjector, inject, input, OnInit, runInInjectionContext, Signal, effect, WritableSignal, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { catchError, filter, map, of, switchMap } from 'rxjs';
@@ -36,8 +36,11 @@ export default class DetailsComponent implements OnInit {
   public room!: Signal<Room | undefined>;
   public showDetails: WritableSignal<Room | undefined> = signal(undefined);
   public roomsMap = computed(() => this.room());
+  public loading: boolean = false;
+
 
   ngOnInit(): void {
+          console.log(this.publicRoomService.getstateRoomId());
     runInInjectionContext(this._injector, () => {
       this.room = toSignal(
         this.publicRoomService.getRoomById(this.productId()).pipe(
@@ -65,14 +68,21 @@ export default class DetailsComponent implements OnInit {
               })
             );
           }),
+        map(room => {
+          // Aquí se establecen todas las propiedades del room, por lo tanto, si ha llegado hasta aquí, todo ha ido bien.
+          this.loading = true;  // Cambia el estado de `loading` a true aquí
+          return room;
+        }),
           catchError(error => {
             console.error('Error in request chain:', error);
+            this.loading = false;
             return of(undefined);
           })
         ),
         { initialValue: undefined }
       );
     });
+          console.log(this.publicRoomService.getstateRoomId());
   }
 
   constructor() {
@@ -82,6 +92,8 @@ export default class DetailsComponent implements OnInit {
       }
     });
     effect(() => {
+      console.log(this.publicRoomService.getstateRoomId());
+
       if (this.room()) {
         console.log(this.roomsMap());
       }

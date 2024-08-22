@@ -1,11 +1,13 @@
 <div class="container mx-auto px-5 my-10">
-@if(notification.type() === 'error'){
-<app-notification />
-}@else {
-@if(publicPropertyService.loading()){
-Cargando...
-}@else{
-@if(roomsMap()){
+  @if(notification.type() === 'error'){
+  <app-notification />
+  }@else {
+  @if(!loading){
+  <app-loading class="block h-full min-h-full" />
+  }@else{
+  @if(!room()){
+  At this moment, there are no rooms available at the selected destination. Please try again later.
+  }@else {
   @defer () {
   <app-show-details [room]="roomsMap"></app-show-details>
   } @loading (minimum 2s) {
@@ -13,11 +15,9 @@ Cargando...
   } @error {
   Error...
   }
-}@else {
-  At this moment, there are no rooms available at the selected destination. Please try again later.
-}
-}
-}
+  }
+  }
+  }
 </div>
 
 

@@ -48,7 +48,6 @@ export class PropertyService {
           });
         }),
         catchError((error) => {
-          // Handle error here
           return throwError(error);
         })
       );

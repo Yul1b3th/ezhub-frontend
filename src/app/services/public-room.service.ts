@@ -1,7 +1,7 @@
-import { EnvironmentInjector, Injectable, computed, effect, inject, runInInjectionContext, signal } from '@angular/core';
+import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable, of, throwError } from 'rxjs';
-import { catchError, map, mergeMap, toArray } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { catchError, mergeMap, tap, toArray } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Property } from '../interfaces/property.interface';
@@ -10,8 +10,7 @@ import { NotificationService } from '../components/shared/notification/notificat
 import { Room } from '../interfaces/room.interface';
 import { PublicPropertyService } from './public-property.service';
 import { QueryStateService } from '../components/search-bar/query-state.service';
-import { Amenity } from '../interfaces/amenity.interface';
-import { toSignal } from '@angular/core/rxjs-interop';
+
 
 interface State {
   rooms: Room[];
@@ -30,11 +29,15 @@ export class PublicRoomService {
   #state = signal<State>({
     rooms: [],
     loading: true,
+
   });
 
   public rooms = computed(() => this.#state().rooms);
   public loading = computed(() => this.#state().loading);
   public query = computed(() => this.queryStateService.getQuery()());
+  public getstateRoomId = computed(() => this.stateRoomId());
+
+  public stateRoomId = signal<boolean>(false);
 
   constructor() {
     effect(() => {
@@ -47,11 +50,15 @@ export class PublicRoomService {
 
 getRoomById(id: number): Observable<Room | null> {
   return this.http.get<Room>(`${this.baseUrl}/public-rooms/${id}`).pipe(
+    tap(() => {
+            this.stateRoomId.set(true );
+      }),
     catchError(error => {
       this.notificationService.showNotification(
         `Error fetching room by ID ${id}: ${error.message}`, 'error'
       );
-      return of(null); // Retorna null para indicar que la habitación no fue encontrada
+      this.stateRoomId.set( false );
+      return of(null);
     })
   );
 }
@@ -78,7 +85,6 @@ getRoomById(id: number): Observable<Room | null> {
     if (rooms.length === 0) {
       this.updateState([]);
     }
-    // console.log(rooms);
   }
 
   private updateState(rooms: Room[]): void {
@@ -90,7 +96,6 @@ getRoomById(id: number): Observable<Room | null> {
     if (property) {
       room.property = property;
     }
-    // console.log(room); // Mostrar por consola room.amenityIds
     return of(undefined);
   }
 
