@@ -38,15 +38,16 @@ export class PublicPropertyService {
     });
   }
 
-  private fetchProperties(): Observable<Property[]> {
-    return this.http
-      .get<Property[]>(`${this.baseUrl}/public-properties`)
-      .pipe(
-        map(this.filterAvailableProperties.bind(this)),
-        tap(properties => this.updateState(properties)),
-        catchError(this.handleError.bind(this))
-      );
-  }
+private fetchProperties(): Observable<Property[]> {
+  return this.http
+    .get<Property[]>(`${this.baseUrl}/public-properties`)
+    .pipe(
+      // tap(properties => console.log('Response:', properties)),
+      map(this.filterAvailableProperties.bind(this)),
+      tap(properties => this.updateState(properties)),
+      catchError(this.handleError.bind(this))
+    );
+}
 
   private filterAvailableProperties(properties: Property[]): Property[] {
     return properties.filter(property => property.deletedAt == null && property.is_available);
