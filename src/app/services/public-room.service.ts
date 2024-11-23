@@ -20,11 +20,12 @@ interface State {
 @Injectable({ providedIn: 'root' })
 export class PublicRoomService {
   private readonly baseUrl: string = environment.baseUrl;
-  private http = inject(HttpClient);
-  private notificationService = inject(NotificationService);
-  private publicPropertyService = inject(PublicPropertyService);
-  private placesService = inject(PlacesService);
-  private queryStateService = inject(QueryStateService);
+  private readonly http = inject(HttpClient);
+  private readonly notificationService = inject(NotificationService);
+  private readonly publicPropertyService = inject(PublicPropertyService);
+  private readonly placesService = inject(PlacesService);
+  private readonly queryStateService = inject(QueryStateService);
+
 
   #state = signal<State>({
     rooms: [],

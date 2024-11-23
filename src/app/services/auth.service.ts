@@ -13,7 +13,7 @@ import { CheckTokenResponse } from '../components/auth/interfaces/check-token.in
 })
 export class AuthService {
   private readonly baseUrl: string = environment.baseUrl;
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   private _currentUser = signal<User | null>(null);
   private _authStatus = signal<AuthStatus | null>(null);

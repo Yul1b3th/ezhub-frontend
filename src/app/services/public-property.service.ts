@@ -23,8 +23,8 @@ interface State {
 @Injectable({ providedIn: 'root' })
 export class PublicPropertyService {
   private readonly baseUrl: string = environment.baseUrl;
-  private http = inject(HttpClient);
-  private notificationService = inject(NotificationService);
+  private readonly http = inject(HttpClient);
+  private readonly notificationService = inject(NotificationService);
 
   #state = signal<State>({
     properties: [],

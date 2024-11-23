@@ -13,7 +13,7 @@ interface State {
 
 @Injectable({ providedIn: 'root' })
 export class PropertyService {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
   private readonly baseUrl: string = environment.baseUrl;
 
   #state = signal<State>({
