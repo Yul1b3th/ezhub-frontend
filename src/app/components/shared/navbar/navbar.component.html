@@ -1,7 +1,7 @@
 <div class="container mx-auto px-5 flex flex-wrap items-center justify-between gap-5 relative">
   <!-- Hamburger -->
   <div class="flex items-center gap-5 sm:w-[11.25rem]">
-    <button id="toggleButton" (click)="toggleMenu()" aria-expanded="false" aria-controls="menu"
+    <button #toggleButton (click)="toggleMenu()" aria-expanded="false" aria-controls="menu"
       class="cursor-pointer transition-all z-[1050] rounded p-1 hover:bg-primary focus:ring-2 focus:ring-slate-200">
       <span class="sr-only">Menu</span>
       <img [src]="menuOpen ? 'assets/icon-close.svg' : 'assets/icon-hamburger.svg'" alt="Menu" class="w-8 h-8" />
@@ -11,7 +11,7 @@
   <!-- Logo -->
   <div class="flex-1 text-center sm:w-full">
     <div class="max-w-[7.5rem] m-auto mr-0 sm:mx-auto">
-      <a routerLink="/list">
+      <a routerLink="/rooms/list">
         <img width="120" height="49.41" src="assets/logo.svg" alt="Logo" class="w-full" />
       </a>
     </div>
@@ -25,8 +25,7 @@
     </a>
     } @else {
     <!-- Menu User -->
-    <button id="userMenuButton" class="btn btn-normal mx-auto" *ngIf="authService.currentUser()"
-      (click)="toggleUserMenu()">
+    <button #userMenuButton class="btn btn-normal mx-auto" *ngIf="authService.currentUser()" (click)="toggleUserMenu()">
       <img class="w-[30px] mr-2" src="assets/icons/user.svg" alt="" />
       &nbsp;Hello,&nbsp;
       <span class="capitalize">{{ authService.currentUser()?.username }}</span>
@@ -36,7 +35,7 @@
 
   <!-- Menu -->
   <div id="menu"
-    class="menu fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform z-[1000] overflow-auto max-h-screen"
+    class="menu fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform duration-300 z-[1000] overflow-auto max-h-screen"
     [style.transform]="menuOpen ? 'translateX(0)' : 'translateX(-100%)'" (keydown)="onKeydown($event)"
     (click)="onMenuClick($event)">
     <ul
@@ -44,7 +43,7 @@
       (click)="$event.stopPropagation()">
       <!-- Home -->
       <li class="border-t-[1.5px] border-b-[1.5px] border-primary">
-        <a #menuItems routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        <a #menuItems routerLink="/rooms/list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
           [attr.tabindex]="menuOpen ? '0' : '-1'" (click)="closeMenu()">
           Home
         </a>
@@ -61,7 +60,7 @@
       @if (!authService.currentUser()) {
       <!-- Log In -->
       <li>
-        <a #menuItems class="border-b-[1.5px] border-primary" routerLink="./log-in" routerLinkActive="active"
+        <a #menuItems class="border-b-[1.5px] border-primary" routerLink="/auth/log-in" routerLinkActive="active"
           [attr.tabindex]="menuOpen ? '0' : '-1'" (click)="closeMenu()">
           Log In
         </a>
@@ -69,7 +68,7 @@
 
       <!-- Sign Up -->
       <li>
-        <a #menuItems class="border-b-[1.5px] border-primary" routerLink="./sign-up" routerLinkActive="active"
+        <a #menuItems class="border-b-[1.5px] border-primary" routerLink="/auth/sign-up" routerLinkActive="active"
           [attr.tabindex]="menuOpen ? '0' : '-1'" (click)="closeMenu()">
           Sign Up
         </a>
@@ -162,7 +161,7 @@
 
   <!-- Menu User -->
   <div id="userMenu"
-    class="menu fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform z-[1000] overflow-auto max-h-screen"
+    class="menu fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 transition-transform duration-300 z-[1000] overflow-auto max-h-screen"
     [style.transform]="userMenuOpen ? 'translateX(0)' : 'translateX(100%)'" (keydown)="onKeydown($event)">
     <button class="absolute top-5 right-5 closeUserMenu" (click)="closeUserMenu()">
       X

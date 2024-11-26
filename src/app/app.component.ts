@@ -1,17 +1,18 @@
 import { Component, computed, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { HeaderComponent } from './components/shared/header/header.component';
-import { FooterComponent } from './components/shared/footer/footer.component';
-import { AuthService } from './services/auth.service';
-import { AuthStatus } from './components/auth/interfaces/auth-status.enum';
-import { PlacesService } from './maps/services';
-import { NotificationComponent } from './components/shared/notification/notification.component';
+import { FooterComponent } from '@components/shared/footer/footer.component';
+import { HeaderComponent } from '@components/shared/header/header.component';
+import { AuthStatus } from '@features/auth/interfaces/auth-status.enum';
+import { PlacesService } from '@features/maps/services/places.service';
+import { AuthService } from '@services/auth.service';
+
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, NotificationComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

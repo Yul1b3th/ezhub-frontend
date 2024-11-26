@@ -1,59 +1,25 @@
-// app-routing.module.ts
-
-import {
-  clearStateUrlGuard,
-  isAuthenticatedGuard,
-  isNotAuthenticatedGuard,
-} from './components/auth/guards';
-
 import { Routes } from '@angular/router';
+import { clearStateUrlGuard, isAuthenticatedGuard } from '@features/auth/guards';
 
 export const routes: Routes = [
   // Home
   {
-    path: '',
-    canActivate: [clearStateUrlGuard],
-    title: 'EZHub',
-    // pathMatch: 'full',
-    loadComponent: () => import('./components/home/home.component'),
-    children: [
-      {
-        path: 'list',
-        title: 'EZHub',
-        loadComponent: () => import('./components/rooms/list/list.component'),
-      },
-      {
-        path: 'map',
-        title: 'EZHub',
-        loadComponent: () => import('./components/rooms/map/map.component'),
-      },
-      {
-        path: '',
-        redirectTo: 'list',
-        pathMatch: 'full',
-      },
-    ],
-  },
-
-  // Rooms
-  {
     path: 'rooms',
     canActivate: [clearStateUrlGuard],
-    children: [
-      {
-        path: 'contact/:id',
-        canActivate: [isAuthenticatedGuard],
-        title: 'EZHub | Contact ',
-        loadComponent: () => import('./components/contact/contact.component'),
-      },
-      {
-        path: ':id',
-        title: 'EZHub | Room',
-        loadComponent: () =>
-          import('./components/rooms/details/details.component'),
-      },
-    ],
+    title: 'EZHub',
+    loadChildren: () => import('./features/rooms/rooms.routes'),
   },
+
+  // Auth
+  {
+    path: 'auth',
+    loadChildren: () => import('./features/auth/auth.routes'),
+  },
+
+  // Dashboard
+  // Profile
+  // Properties
+  // Rooms
 
   // Publish
   {
@@ -141,22 +107,6 @@ export const routes: Routes = [
     ],
   },
 
-  // Log In
-  {
-    path: 'log-in',
-    canActivate: [isNotAuthenticatedGuard],
-    title: 'EZHub | Log In',
-    loadComponent: () => import('./components/auth/login/login.component'),
-  },
-
-  // Sign Up
-  {
-    path: 'sign-up',
-    canActivate: [clearStateUrlGuard, isNotAuthenticatedGuard],
-    title: 'EZHub | Sign Up',
-    loadComponent: () =>
-      import('./components/auth/register/register.component'),
-  },
 
   // About
   {

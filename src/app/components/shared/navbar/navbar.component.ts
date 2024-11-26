@@ -2,6 +2,7 @@ import {
   Component,
   HostListener,
   ViewChildren,
+  ViewChild,
   QueryList,
   ElementRef,
   OnInit,
@@ -10,19 +11,19 @@ import {
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
-import { SearchBarComponent } from '../../search-bar/search-bar.component';
 import { AuthService } from '../../../services/auth.service';
-import { AuthStatus } from '../../auth/interfaces/auth-status.enum';
 
 @Component({
   selector: 'nav',
   standalone: true,
-  imports: [CommonModule, RouterModule, SearchBarComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent implements OnInit {
   @ViewChildren('menuItems') menuItems!: QueryList<ElementRef>;
+  @ViewChild('toggleButton', { static: true }) toggleButton!: ElementRef;
+  @ViewChild('userMenuButton', { static: true }) userMenuButton!: ElementRef;
 
   menuOpen = false;
   helpContact = false;
@@ -37,15 +38,10 @@ export class NavbarComponent implements OnInit {
   public router = inject(Router);
 
   ngOnInit() {
-    //console.log(this.authService.currentUser());
-    //console.log(Boolean(this.authService.currentUser()));
-
-    // Recuperar la preferencia del usuario del almacenamiento local
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       this.darkMode = savedTheme === 'dark';
       if (this.darkMode) {
-        // Aplicar el tema oscuro si el usuario lo ha seleccionado previamente
         document.documentElement.classList.add('dark');
       }
     }
@@ -59,7 +55,7 @@ export class NavbarComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
-    this.router.navigateByUrl('/list');
+    this.router.navigateByUrl('/rooms/list');
   }
 
   toggleHelpContact() {
@@ -77,14 +73,7 @@ export class NavbarComponent implements OnInit {
   @HostListener('document:keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
-      this.menuOpen = false;
-      this.helpContact = false;
-      this.accessibility = false;
-      this.ezhub = false;
-      const button = document.getElementById('toggleButton');
-      if (button) {
-        button.setAttribute('aria-expanded', 'false');
-      }
+      this.closeAllMenus();
     }
 
     if (event.key === 'Tab' && this.menuOpen) {
@@ -101,13 +90,10 @@ export class NavbarComponent implements OnInit {
   toggleDarkMode() {
     this.darkMode = !this.darkMode;
     if (this.darkMode) {
-      // Agregar la clase CSS para el modo oscuro
       document.documentElement.classList.add('dark');
     } else {
-      // Remover la clase CSS para el modo oscuro
       document.documentElement.classList.remove('dark');
     }
-    // Guardar la preferencia del usuario en el almacenamiento local
     localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
   }
 
@@ -128,43 +114,27 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleUserMenu() {
-    this.userMenuOpen = !this.userMenuOpen; // Cambia el estado del menú de usuario
+    this.userMenuOpen = !this.userMenuOpen;
     if (this.userMenuOpen) {
-      this.menuOpen = false; // Si el menú de usuario está abierto, cierra el menú principal
+      this.menuOpen = false;
     }
-    const button = document.getElementById('userMenuButton');
-    if (button) {
-      // Establece el atributo aria-expanded en el botón del menú de usuario para indicar si el menú de usuario está abierto o cerrado
-      button.setAttribute(
-        'aria-expanded',
-        this.userMenuOpen ? 'true' : 'false'
-      );
-    }
+    this.setAriaExpanded(this.userMenuButton, this.userMenuOpen);
   }
 
   closeUserMenu() {
-    this.userMenuOpen = false; // Cierra el menú de usuario
-    const button = document.getElementById('userMenuButton');
-    if (button) {
-      // Establece el atributo aria-expanded en el botón del menú de usuario para indicar que el menú de usuario está cerrado
-      button.setAttribute('aria-expanded', 'false');
-    }
+    this.userMenuOpen = false;
+    this.setAriaExpanded(this.userMenuButton, false);
   }
 
   toggleMenu() {
-    this.menuOpen = !this.menuOpen; // Cambia el estado del menú principal
+    this.menuOpen = !this.menuOpen;
     this.helpContact = false;
     this.accessibility = false;
     this.ezhub = false;
-    const button = document.getElementById('toggleButton');
-    if (button) {
-      // Establece el atributo aria-expanded en el botón del menú principal para indicar si el menú principal está abierto o cerrado
-      button.setAttribute('aria-expanded', this.menuOpen ? 'true' : 'false');
-    }
+    this.setAriaExpanded(this.toggleButton, this.menuOpen);
 
-    // Si el menú está abierto, mueve el enfoque al primer elemento del menú
     if (this.menuOpen) {
-      this.userMenuOpen = false; // Si el menú principal está abierto, cierra el menú de usuario
+      this.userMenuOpen = false;
       setTimeout(() => {
         const menuItemsArray = this.menuItems.toArray();
         if (menuItemsArray.length > 0) {
@@ -182,14 +152,26 @@ export class NavbarComponent implements OnInit {
   }
 
   closeMenu() {
-    this.menuOpen = false; // Cierra el menú principal
+    this.menuOpen = false;
     this.helpContact = false;
     this.accessibility = false;
     this.ezhub = false;
-    const button = document.getElementById('toggleButton');
-    if (button) {
-      // Establece el atributo aria-expanded en el botón del menú principal para indicar que el menú principal está cerrado
-      button.setAttribute('aria-expanded', 'false');
+    this.setAriaExpanded(this.toggleButton, false);
+  }
+
+  closeAllMenus() {
+    this.menuOpen = false;
+    this.userMenuOpen = false;
+    this.helpContact = false;
+    this.accessibility = false;
+    this.ezhub = false;
+    this.setAriaExpanded(this.toggleButton, false);
+    this.setAriaExpanded(this.userMenuButton, false);
+  }
+
+  setAriaExpanded(element: ElementRef, expanded: boolean) {
+    if (element) {
+      element.nativeElement.setAttribute('aria-expanded', expanded.toString());
     }
   }
 
