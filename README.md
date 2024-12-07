@@ -27,7 +27,7 @@ La API sigue los principios de una arquitectura RESTful, lo que facilita su inte
 - [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
 - [SCSS](https://sass-lang.com/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Angular CLI](https://angular.dev/) version 17.1.2
+- [Angular CLI](https://angular.dev/) version 19.0.4
 - [Mapbox](https://www.mapbox.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 
