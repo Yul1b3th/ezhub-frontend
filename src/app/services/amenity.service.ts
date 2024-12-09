@@ -16,9 +16,9 @@ interface State {
 @Injectable({ providedIn: 'root' })
 export class AmenityService {
   private readonly baseUrl: string = environment.baseUrl;
-  private readonly http = inject(HttpClient);
-  private readonly notificationAmenityService = inject(NotificationAmenityService);
-  private readonly publicRoomService = inject(PublicRoomService);
+  private http = inject(HttpClient);
+  private notificationAmenityService = inject(NotificationAmenityService);
+  private publicRoomService = inject(PublicRoomService);
 
   #state = signal<State>({
     amenities: [],

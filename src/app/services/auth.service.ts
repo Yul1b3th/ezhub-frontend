@@ -1,22 +1,19 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 
-import { environment } from '@environments/environment';
-import { User } from '@interfaces/user.interface';
-import { AuthStatus } from '@features/auth/interfaces/auth-status.enum';
-import { LoginResponse } from '@features/auth/interfaces/login-response.interface';
-import { CheckTokenResponse } from '@features/auth/interfaces/check-token.interface';
-
-
+import { environment } from '../../environments/environment';
+import { User } from '../interfaces/user.interface';
+import { LoginResponse } from '../components/auth/interfaces/login-response.interface';
+import { AuthStatus } from '../components/auth/interfaces/auth-status.enum';
+import { CheckTokenResponse } from '../components/auth/interfaces/check-token.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private readonly baseUrl: string = environment.baseUrl;
-  private readonly http = inject(HttpClient);
+  private http = inject(HttpClient);
 
   private _currentUser = signal<User | null>(null);
   private _authStatus = signal<AuthStatus | null>(null);

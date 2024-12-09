@@ -1,0 +1,32 @@
+@if (!isUserLocationReady) {
+  <app-location-permission class="loading-rooms"/>
+}@else{
+  <div class="container mx-auto px-5 my-10 flex flex-col flex-1 max-w-[67.5rem]">
+    <search-bar />
+
+    <ul>
+      <li>
+        <a routerLink="/list" routerLinkActive="active">
+          <img tabindex="-1" width="24" height="24" src="assets/icons/ListBullet.svg" alt="List" />
+          List
+        </a>
+      </li>
+      <li>
+        <a routerLink="/map" routerLinkActive="active">
+          <img tabindex="-1" width="24" height="24" src="assets/icons/MapPin.svg" alt="Map" />
+          Map
+        </a>
+      </li>
+    </ul>
+
+    @defer () {
+      <router-outlet />
+    } @loading (minimum 2s) {
+      <app-loading class="bg-gradient-to-r from-gray to-secondary-200/30 animate-pulse flex justify-center items-center flex-grow" />
+    } @error {
+      Error...
+    }
+
+  </div>
+}
+
