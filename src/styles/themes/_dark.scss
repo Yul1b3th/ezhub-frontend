@@ -1,0 +1,15 @@
+// themes/_dark.scss
+
+@use "sass:map";
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+
+body.dark-mode {
+  background-color: get-color(dark);
+  color: get-color(light);
+}
+
+body.light-mode {
+  background-color: get-color(light);
+  color: get-color(dark);
+}

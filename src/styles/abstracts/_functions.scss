@@ -1,0 +1,28 @@
+// abstracts/_functions.scss
+
+@use "sass:map";
+@use "variables" as *;
+
+// Función genérica para obtener valores de un mapa
+@function get-value-from-map($map, $key) {
+  @if map.has-key($map, $key) {
+    @return map.get($map, $key);
+  } @else {
+    @error "La clave `#{$key}` no existe en el mapa proporcionado.";
+  }
+}
+
+// Función para obtener un color
+@function get-color($color-name) {
+  @return get-value-from-map($colors, $color-name);
+}
+
+// Función para obtener un tamaño de fuente
+@function get-font-size($size-name) {
+  @return get-value-from-map($font-sizes, $size-name);
+}
+
+// Función para obtener un espaciado
+@function get-spacing($size-name) {
+  @return get-value-from-map($spacing, $size-name);
+}

@@ -1,0 +1,151 @@
+// base/_typography.scss
+
+@use "sass:map";
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// Tipografía base para el cuerpo
+body {
+  font-family: $font-family;
+  font-size: get-font-size(base);
+  line-height: 1.5;
+  color: get-color(dark);
+  background-color: get-color(light);
+  letter-spacing: 0.01em;
+  word-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased; // Mejora la renderización en webkit
+  -moz-osx-font-smoothing: grayscale; // Mejora la renderización en Firefox para macOS
+}
+
+// Títulos (h1 - h6)
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family;
+  font-weight: 600;
+  color: get-color(primary);
+  margin-bottom: get-spacing(md);
+  line-height: 1.2;
+  text-transform: uppercase; // Agrega transformación a mayúsculas para consistencia
+
+  @include apply-font-size-responsive(14px, 18px);
+}
+
+h1 {
+  font-size: get-font-size("5xl");
+}
+
+h2 {
+  font-size: get-font-size("4xl");
+}
+
+h3 {
+  font-size: get-font-size("3xl");
+}
+
+h4 {
+  font-size: get-font-size("2xl");
+}
+
+h5 {
+  font-size: get-font-size("xl");
+}
+
+h6 {
+  font-size: get-font-size("lg");
+}
+
+// Párrafos
+p {
+  font-size: get-font-size(base);
+  line-height: 1.6; // Ajuste en el interlineado para mayor legibilidad
+  margin-bottom: get-spacing(md);
+  color: get-color(dark);
+}
+
+// Enlaces
+a {
+  color: get-color(primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: get-color(primary-200);
+  }
+
+  &:focus {
+    outline: 3px solid get-color(primary-200); // Asegura un buen enfoque para accesibilidad
+  }
+}
+
+// Listas
+ul,
+ol {
+  margin-left: get-spacing(md);
+  margin-bottom: get-spacing(md);
+  padding-left: get-spacing(
+    md
+  ); // Asegura que las listas no estén alineadas al borde
+}
+
+li {
+  font-size: get-font-size(base);
+  line-height: 1.5;
+  color: get-color(dark);
+}
+
+// Resaltados
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+// Citas
+blockquote {
+  font-style: italic;
+  border-left: 4px solid get-color(primary);
+  padding-left: get-spacing(md);
+  margin: get-spacing(md) 0;
+  font-size: get-font-size(lg);
+  line-height: 1.5;
+  color: get-color(dark);
+}
+
+// Preformateado y código
+pre,
+code {
+  font-family: "Courier New", Courier, monospace;
+  background-color: get-color(gray-light);
+  padding: get-spacing(sm);
+  border-radius: 4px;
+  color: get-color(dark);
+  line-height: 1.6; // Mejorar legibilidad del código
+
+  &.inline {
+    background-color: transparent; // Asegura que el código en línea no tenga fondo
+    padding: 0;
+  }
+}
+
+// Ajuste responsive para tamaños de fuente
+@mixin font-size-responsive($small, $large) {
+  @media (max-width: #{map.get($breakpoints, sm)}) {
+    font-size: $small;
+  }
+
+  @media (max-width: #{map.get($breakpoints, xs)}) {
+    font-size: $large;
+  }
+}
+
+.some-class {
+  @include apply-font-size-responsive(14px, 18px);
+}

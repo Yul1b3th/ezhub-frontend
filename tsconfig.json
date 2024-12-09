@@ -8,6 +8,8 @@
       "@features/*": ["./src/app/features/*"],
       "@pages/*": ["./src/app/pages/*"],
       "@shared/*": ["./src/app/shared/*"],
+      "@design-system/*": ["./src/app/design-system/*"],
+      "@styles/*": ["./src/styles/*"],
       "@environments/*": ["./src/environments/*"]
     },
     "outDir": "./dist/out-tsc",

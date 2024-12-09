@@ -1,0 +1,18 @@
+// utilities/_colors.scss
+
+@use "sass:map";
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+.text-primary {
+  color: get-color(primary);
+}
+
+.text-secondary {
+  color: get-color(secondary);
+}
+
+.text-tertiary {
+  color: get-color(tertiary);
+}

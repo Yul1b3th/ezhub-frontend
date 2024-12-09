@@ -1,0 +1,134 @@
+// abstracts/_variables.scss
+
+@use "sass:map";
+
+// Tipografías
+$font-family: "BeVietnamPro", sans-serif;
+
+// Tamaños de fuente
+$font-sizes: (
+  xs: 0.75rem,
+  sm: 0.875rem,
+  base: 1rem,
+  lg: 1.125rem,
+  xl: 1.25rem,
+  "2xl": 1.5rem,
+  "3xl": 1.875rem,
+  "4xl": 2.25rem,
+  "5xl": 3rem,
+);
+
+// Alturas de línea
+$line-heights: (
+  xs: 1rem,
+  sm: 1.25rem,
+  base: 1.5rem,
+  lg: 1.75rem,
+  xl: 2rem,
+);
+
+// Breakpoints
+$breakpoints: (
+  xs: 320px,
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+);
+
+// Espaciados
+$spacing: (
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 1rem,
+  lg: 2rem,
+  xl: 4rem,
+);
+
+// Colores
+$primary: hsl(161, 70%, 52%);
+$primary-200: hsl(157, 67%, 70%);
+$primary-900: hsl(176, 94%, 20%);
+$secondary: hsl(181, 61%, 56%);
+$secondary-200: hsl(180, 60%, 69%);
+$success: hsl(134, 61%, 41%);
+$danger: hsl(0, 78%, 62%);
+$warning: hsl(45, 100%, 51%);
+$info: hsl(207, 90%, 54%);
+
+// Paleta de colores básicos
+$dark: hsl(0, 0%, 11%);
+$dark-200: hsl(0, 0%, 6%);
+$light: hsl(0, 0%, 95%);
+$gray: hsl(180, 23%, 95%);
+$gray-light: hsl(180, 23%, 90%);
+$white: hsl(0, 0%, 100%);
+$black: hsl(0, 0%, 0%);
+
+// Mapas de colores
+$colors: (
+  "primary": $primary,
+  "primary-200": $primary-200,
+  "primary-900": $primary-900,
+  "secondary": $secondary,
+  "secondary-200": $secondary-200,
+  "success": $success,
+  "danger": $danger,
+  "warning": $warning,
+  "info": $info,
+  "dark": $dark,
+  "dark-200": $dark-200,
+  "light": $light,
+  "gray": $gray,
+  "gray-light": $gray-light,
+  "white": $white,
+  "black": $black,
+);
+
+$backgrounds: map.merge(
+  $colors,
+  (
+    "default": $light,
+    "inverted": $dark,
+  )
+);
+
+// Variables CSS para temas claros y oscuros
+:root {
+  --color-primary: #{$primary};
+  --color-primary-200: #{$primary-200};
+  --color-secondary: #{$secondary};
+  --color-secondary-200: #{$secondary-200};
+  --color-dark: #{$dark};
+  --color-light: #{$light};
+  --color-gray: #{$gray};
+}
+
+body.light-mode {
+  --color-background: var(--color-light);
+  --color-text: var(--color-dark);
+  --color-navbar: var(--color-primary);
+  --color-button: var(--color-primary);
+  --color-button-hover: var(--color-primary-200);
+  --color-card: var(--color-light);
+  --color-card-border: var(--color-gray-light);
+}
+
+body.dark-mode {
+  --color-background: var(--color-dark);
+  --color-text: var(--color-light);
+  --color-navbar: var(--color-dark-200);
+  --color-button: var(--color-secondary);
+  --color-button-hover: var(--color-secondary-200);
+  --color-card: var(--color-dark);
+  --color-card-border: var(--color-primary-200);
+}
+
+$tertiary: hsl(100, 50%, 50%);
+
+$colors: map.merge(
+  $colors,
+  (
+    "tertiary": $tertiary,
+  )
+);

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import PageNotFoundComponent from '@core/components/page-not-found/page-not-found.component';
+import { DesignSystemComponent } from '@design-system/design-system/design-system.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,11 @@ export const routes: Routes = [
   {
     path: 'help-contact',
     loadChildren: () => import('./pages/help-contact/help-contact.routes'),
+  },
+  {
+    path: 'design-system',
+    title: 'EZHub | Design System',
+    component: DesignSystemComponent,
   },
   {
     path: '404',

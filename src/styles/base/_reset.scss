@@ -1,0 +1,58 @@
+// base/_reset.scss
+
+@use "sass:map";
+// Restablecimiento de márgenes y rellenos predeterminados
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Asegurando un estilo consistente para todos los elementos HTML
+html {
+  font-size: 100%; // Definir base de tipografía
+  scroll-behavior: smooth; // Agregar scroll suave
+}
+
+body {
+  font-family: "Arial", sans-serif; // Fuente base genérica
+  line-height: 1.5; // Espaciado para mejorar la legibilidad
+  background-color: #f9f9f9; // Color base de fondo
+  color: #333; // Color de texto
+}
+
+// Asegura consistencia con elementos de lista
+ul,
+ol {
+  list-style: none; // Elimina los estilos de lista por defecto
+}
+
+// Enlaces
+a {
+  text-decoration: none; // Elimina subrayados por defecto en los enlaces
+  color: inherit; // Hereda color de texto
+}
+
+// Normaliza la apariencia de formularios
+input,
+button,
+textarea {
+  background: transparent; // Elimina fondos no deseados en formularios
+  border: none;
+  outline: none;
+  font: inherit; // Hereda las fuentes y estilos
+}
+
+// Consistencia en el comportamiento de los botones
+button {
+  cursor: pointer; // Añade el estilo de puntero para botones
+  background: none; // Elimina fondo por defecto
+  border: none; // Elimina borde por defecto
+}
+
+// Añadir reglas para una accesibilidad mejorada
+:focus {
+  outline: 2px solid #007bff; // Estilo de enfoque claro
+}

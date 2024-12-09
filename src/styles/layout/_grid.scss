@@ -1,0 +1,27 @@
+// layout/_grid.scss
+
+@use "sass:map";
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+@mixin container {
+  display: grid;
+  grid-template-columns: 1fr; // Estilo base para dispositivos móviles
+  gap: get-spacing(md);
+  max-width: 100%;
+  padding: 0 get-spacing(sm);
+  box-sizing: border-box;
+
+  @include media-query("min-width", "480px") {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include media-query("min-width", "768px") {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  @include media-query("min-width", "1024px") {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
