@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import PageNotFoundComponent from '@core/components/page-not-found/page-not-found.component';
-import { DesignSystemComponent } from '@design-system/design-system/design-system.component';
+import { DesignSystemComponent } from '@design-system/design-system.component';
 
 export const routes: Routes = [
   {
@@ -37,7 +37,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'rooms',
+    redirectTo: 'rooms/list',
     pathMatch: 'full',
   },
   {

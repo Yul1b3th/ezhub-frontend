@@ -1,1 +1,162 @@
-/* You can add global styles to this file, and also import other style files */
+// /* You can add global styles to this file, and also import other style files */
+
+// @use "sass:color";
+// @use "sass:map";
+// @use "../src/app/design-system/styles/abstracts/functions" as *;
+// @use "../src/app/design-system/styles/abstracts/variables" as *;
+// @use "../src/app/design-system/styles/abstracts/mixins" as *;
+
+// @mixin button-light-variant($state, $color) {
+//   &-#{$state} {
+//     background-color: if($state == "light", get-color("gray"), $color);
+//     color: if($state == "dark", get-color("white"), get-color("dark"));
+//     border-color: if($state == "light", get-color("gray"), $color);
+//     border: 4px red solid;
+//     &:hover {
+//       $hover-bg: if(
+//         $state == "light",
+//         color.adjust(get-color("gray"), $lightness: -10%),
+//         if(
+//           $state == "dark",
+//           get-color("light"),
+//           color.adjust($color, $lightness: -15%)
+//         )
+//       );
+//       background-color: $hover-bg;
+//       border-color: $hover-bg;
+//     }
+//   }
+
+//   &.btn-outline-#{$state} {
+//     background-color: transparent;
+//     border-color: if($state == "light", get-color("gray"), $color);
+//     color: get-color("dark");
+
+//     &:hover {
+//       background-color: to-hsla($color, 0.3);
+//       color: get-color("dark");
+//     }
+//   }
+// }
+
+// @mixin button-dark-variant($state, $color) {
+//   &-#{$state} {
+//     background-color: if($state == "light", get-color("dark-200"), $color);
+//     color: if($state == "dark", get-color("gray"), get-color("light"));
+//     border-color: if($state == "light", get-color("dark-200"), $color);
+//     border: 4px green solid;
+
+//     &:hover {
+//       $hover-bg: if(
+//         $state == "light",
+//         color.adjust(get-color("dark-200"), $lightness: -10%),
+//         if(
+//           $state == "dark",
+//           get-color("gray"),
+//           color.adjust($color, $lightness: -15%)
+//         )
+//       );
+//       background-color: $hover-bg;
+//       border-color: $hover-bg;
+//     }
+//   }
+
+//   &.btn-outline-#{$state} {
+//     background-color: transparent;
+//     border-color: if($state == "light", get-color("dark-200"), $color);
+//     color: get-color("white");
+
+//     &:hover {
+//       background-color: to-hsla($color, 0.3);
+//       color: get-color("light");
+//     }
+//   }
+// }
+
+// // Mixin para tamaños de botones
+// @mixin button-size($size, $padding-x, $padding-y, $font-size) {
+//   &.btn-#{$size} {
+//     padding: get-spacing($padding-x) get-spacing($padding-y);
+//     font-size: get-font-size($font-size);
+//   }
+// }
+
+// .btn {
+//   min-height: 44px; // Altura mínima recomendada
+//   display: inline-flex;
+//   align-items: center;
+//   justify-content: center;
+//   padding: get-spacing(sm) get-spacing(md);
+//   font-size: get-font-size(base);
+//   font-weight: 600;
+//   text-align: center;
+//   text-decoration: none;
+//   border-radius: 9999px;
+//   @include transition(all, 0.3s, ease-in-out);
+//   cursor: pointer;
+//   color: get-color("dark");
+//   border: 2px solid;
+
+//   // Button Sizes
+//   @include button-size(sm, xs, sm, sm);
+//   @include button-size(md, sm, md, base);
+//   @include button-size(lg, md, lg, lg);
+
+//   &.btn-block {
+//     display: block;
+//     width: 100%;
+//   }
+
+//   // Disabled State
+//   &:disabled {
+//     cursor: not-allowed;
+//     opacity: 0.5;
+//   }
+// }
+
+// // Estilos para el modo claro
+// body.light-mode .btn {
+//   color: get-color("dark");
+//   border-color: get-color("gray");
+//   border: 5px red solid;
+
+//   // Button Variants
+//   @each $state,
+//     $color
+//       in (
+//         primary: get-color("primary"),
+//         secondary: get-color("secondary"),
+//         success: get-color("success"),
+//         danger: get-color("danger"),
+//         warning: get-color("warning"),
+//         info: get-color("info"),
+//         light: get-color("light"),
+//         dark: get-color("dark")
+//       )
+//   {
+//     @include button-light-variant($state, $color);
+//   }
+// }
+
+// // Estilos para el modo oscuro
+// body.dark-mode .btn {
+//   color: get-color("light");
+//   border-color: get-color("dark-200");
+
+//   // Button Variants
+//   @each $state,
+//     $color
+//       in (
+//         primary: get-color("primary"),
+//         secondary: get-color("secondary"),
+//         success: get-color("success"),
+//         danger: get-color("danger"),
+//         warning: get-color("warning"),
+//         info: get-color("info"),
+//         light: get-color("light"),
+//         dark: get-color("dark")
+//       )
+//   {
+//     @include button-dark-variant($state, $color);
+//   }
+// }

@@ -1,0 +1,113 @@
+// abstracts/_mixins.scss
+
+@use "sass:map";
+@use "sass:color";
+@use "variables" as *;
+@use "functions" as *;
+
+// Mixin para aplicar márgenes y rellenos
+@mixin spacing($property, $size) {
+  #{$property}: get-spacing($size);
+}
+
+// Mixin para aplicar colores generales (textos, fondos, bordes)
+@mixin color($property, $color-name) {
+  #{$property}: get-color($color-name);
+}
+
+// Mixin para aplicar colores de fondo
+@mixin background($background-name) {
+  background-color: get-background($background-name);
+}
+
+// Mixin para tipografía: tamaño de fuente, altura de línea, peso y margen inferior
+@mixin typography(
+  $font-size,
+  $line-height: base,
+  $font-weight: normal,
+  $margin-bottom: null,
+  $color: null
+) {
+  font-size: get-font-size($font-size);
+  line-height: get-line-height($line-height);
+  font-weight: $font-weight;
+  @if $margin-bottom != null {
+    margin-bottom: get-spacing($margin-bottom);
+  }
+  @if $color != null {
+    color: get-color($color);
+  }
+}
+
+// Mixin para aplicar colores específicos en modos claro y oscuro
+@mixin apply-color($light-color, $dark-color) {
+  color: get-color($light-color);
+  @media (prefers-color-scheme: dark) {
+    color: get-color($dark-color);
+  }
+}
+
+// Mixin para establecer una fuente específica
+@mixin font-family($family: $font-family) {
+  font-family: $family;
+}
+
+// Mixin para aplicar estilos en diferentes breakpoints
+@mixin respond-to($size) {
+  @media (min-width: get-breakpoint($size)) {
+    @content;
+  }
+}
+
+// Mixin para bordes redondeados
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+// Mixin para sombras
+@mixin box-shadow($x, $y, $blur, $spread: 0, $color: rgba(0, 0, 0, 0.25)) {
+  box-shadow: $x $y $blur $spread $color;
+}
+
+// Mixin para controlar la opacidad de un color
+@mixin opacity($color, $opacity) {
+  background-color: rgba(
+    color.channel($color, "red"),
+    color.channel($color, "green"),
+    color.channel($color, "blue"),
+    $opacity
+  );
+}
+
+// Mixin para alinear elementos con Flexbox
+@mixin flex-container($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Mixin para items de flex
+@mixin flex-item($grow: 0, $shrink: 1, $basis: auto) {
+  flex-grow: $grow;
+  flex-shrink: $shrink;
+  flex-basis: $basis;
+}
+
+// Mixin para transiciones suaves
+@mixin transition($properties, $duration: 0.3s, $timing-function: ease-in-out) {
+  transition: $properties $duration $timing-function;
+}
+
+// Mixin para aplicar un gradiente
+@mixin gradient($start-color, $end-color, $direction: to right) {
+  background: linear-gradient($direction, $start-color, $end-color);
+}
+
+// Mixin para manejar márgenes y rellenos de manera abreviada
+@mixin padding-margin($type, $size) {
+  #{$type}-top: get-spacing($size);
+  #{$type}-right: get-spacing($size);
+  #{$type}-bottom: get-spacing($size);
+  #{$type}-left: get-spacing($size);
+}

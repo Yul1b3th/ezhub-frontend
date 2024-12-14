@@ -1,0 +1,122 @@
+@use "sass:color";
+@use "sass:map";
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+$button-states: (
+  primary: get-color("primary"),
+  secondary: get-color("secondary"),
+  success: get-color("success"),
+  danger: get-color("danger"),
+  warning: get-color("warning"),
+  info: get-color("info"),
+  light: get-color("light"),
+  dark: get-color("dark"),
+);
+
+// Mixin para tamaños de botones
+@mixin button-size($size, $padding-x, $padding-y, $font-size) {
+  &.btn-#{$size} {
+    padding: get-spacing($padding-x) get-spacing($padding-y);
+    font-size: get-font-size($font-size);
+  }
+}
+
+.btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: get-spacing(sm) get-spacing(md);
+  font-size: get-font-size(base);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 9999px;
+  @include transition(all, 0.3s, ease-in-out);
+  cursor: pointer;
+  border: 2px solid;
+
+  &.dark-mode {
+    @each $state, $color in $button-states {
+      &.btn-#{$state} {
+        background-color: if($state == "dark", get-color("white"), $color);
+        color: get-color("dark-300");
+        border-color: if($state == "dark", get-color("white"), $color);
+        &:hover {
+          color: if(
+            $state == "dark",
+            get-color("white"),
+            get-color("dark-300")
+          );
+          $hover-bg: if(
+            $state == "dark",
+            get-color("dark"),
+            color.adjust($color, $lightness: -15%)
+          );
+          background-color: $hover-bg;
+          border-color: $hover-bg;
+        }
+      }
+
+      &.btn-outline-#{$state} {
+        background-color: transparent;
+        border-color: if($state == "dark", get-color("white"), $color);
+        color: get-color("white");
+
+        &:hover {
+          background-color: $color;
+          color: if($state == "dark", get-color("white"), get-color("dark"));
+        }
+      }
+    }
+  }
+
+  &.light-mode {
+    @each $state, $color in $button-states {
+      &.btn-#{$state} {
+        background-color: $color;
+        color: if($state == "dark", get-color("white"), get-color("dark-300"));
+        border-color: $color;
+
+        &:hover {
+          $hover-bg: if(
+            $state == "dark",
+            get-color("dark-300"),
+            color.adjust($color, $lightness: -15%)
+          );
+          background-color: $hover-bg;
+          border-color: $hover-bg;
+        }
+      }
+
+      &.btn-outline-#{$state} {
+        background-color: transparent;
+        border-color: $color;
+        color: get-color("dark-300");
+
+        &:hover {
+          background-color: to-hsla($color, 0.3);
+          color: get-color("dark-300");
+        }
+      }
+    }
+  }
+
+  // Button Sizes
+  @include button-size(sm, xs, sm, sm);
+  @include button-size(md, sm, md, base);
+  @include button-size(lg, md, lg, lg);
+
+  &.btn-block {
+    display: block;
+    width: 100%;
+  }
+
+  // Disabled State
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,82 @@
+// base/_typography.scss
+
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+body {
+  font-family: $font-family;
+  font-size: get-font-size("base");
+  line-height: get-line-height("base");
+}
+
+h1 {
+  @include typography("5xl", "xl", 700, "md");
+}
+
+h2 {
+  @include typography("4xl", "lg", 700, "md");
+}
+
+h3 {
+  @include typography("3xl", "lg", 600, "md");
+}
+
+h4 {
+  @include typography("2xl", "lg", 600, "md");
+}
+
+h5 {
+  @include typography("xl", "lg", 500, "md");
+}
+
+h6 {
+  @include typography("lg", "lg", 500, "md");
+}
+
+p {
+  @include typography("base", "base", 400, "md");
+}
+
+small {
+  @include typography("sm", "base", 400, "sm");
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+blockquote {
+  font-size: get-font-size("lg");
+  line-height: get-line-height("lg");
+  margin: get-spacing("md") 0;
+  padding: get-spacing("md");
+  border-left: 4px solid get-color("primary");
+  background-color: get-background("default");
+}
+
+code,
+pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: get-font-size("sm");
+  background-color: get-background("default");
+  padding: get-spacing("xs");
+  border-radius: 4px;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+a {
+  color: get-color("primary");
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

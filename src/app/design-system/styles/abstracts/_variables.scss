@@ -1,0 +1,88 @@
+// abstracts/_variables.scss
+
+@use "sass:map";
+
+// Tipografías
+$font-family: "BeVietnamPro", sans-serif;
+
+// Tamaños de fuente
+$font-sizes: (
+  xs: 0.75rem,
+  sm: 0.875rem,
+  base: 1rem,
+  lg: 1.125rem,
+  xl: 1.25rem,
+  "2xl": 1.5rem,
+  "3xl": 1.875rem,
+  "4xl": 2.25rem,
+  "5xl": 3rem,
+);
+
+// Alturas de línea
+$line-heights: (
+  xs: 1rem,
+  sm: 1.25rem,
+  base: 1.5rem,
+  lg: 1.75rem,
+  xl: 2rem,
+);
+
+// Breakpoints
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+// Espaciados
+$spacing: (
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 1rem,
+  lg: 2rem,
+  xl: 4rem,
+);
+
+// Colores principales
+// Colores principales
+$colors: (
+  "primary": #7fe6c0,
+  "primary-200": #a3e8d4,
+  "primary-900": #0d4d3b,
+
+  "secondary": #81dfdf,
+  "secondary-200": #b3e8e9,
+
+  "tertiary": #7dd3fc,
+
+  "success": #22c55e,
+  "danger": #ef4444,
+  "warning": #f59e0b,
+  "info": #26549e,
+
+  "dark": #292929,
+  "dark-200": #1c1c1c,
+  "dark-300": #0f0f0f,
+
+  "gray": #d1d1d1,
+  "gray-light": #f1f1f1,
+  "gray-dark": #3f3f3f,
+
+  "light": #e5e5e5,
+  "light-200": #e9ecef,
+
+  "white": #ffffff,
+  "black": #000000,
+);
+
+// Mapas de colores expandidos
+$backgrounds: map.merge(
+  $colors,
+  (
+    "default": map.get($colors, "gray-light"),
+    "inverted": map.get($colors, "dark-300"),
+  )
+);

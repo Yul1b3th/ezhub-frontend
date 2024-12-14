@@ -1,0 +1,36 @@
+// themes/_light.scss
+
+@use "sass:map";
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+
+body.light-mode {
+  background-color: get-background("default");
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: get-color("dark-200");
+  }
+
+  p,
+  small,
+  strong,
+  em,
+  blockquote,
+  code,
+  pre,
+  a {
+    color: get-color("gray-dark");
+  }
+}
+
+// Ejemplo de estilos adicionales para el modo claro
+.card {
+  background-color: get-background("default");
+  border-color: get-color("primary-200");
+  color: get-color("dark");
+}

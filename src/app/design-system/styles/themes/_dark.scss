@@ -1,0 +1,33 @@
+// themes/_dark.scss
+
+@use "sass:map";
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+
+body.dark-mode {
+  background-color: get-background("inverted");
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  small,
+  strong,
+  em,
+  blockquote,
+  code,
+  pre,
+  a {
+    color: get-color("white");
+  }
+}
+
+// Ejemplo de estilos adicionales para el modo oscuro
+.card {
+  background-color: get-background("inverted");
+  border-color: get-color("dark-200");
+  color: get-color("light");
+}

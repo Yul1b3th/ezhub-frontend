@@ -31,7 +31,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/styles/main.scss",
+              "src/app/design-system/styles/main.scss",
               "public/fonts/fonts.css"
             ],
             "scripts": []

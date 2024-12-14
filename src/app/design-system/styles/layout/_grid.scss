@@ -1,0 +1,56 @@
+// layout/_grid.scss
+
+@use "sass:math";
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+.container {
+  width: 100%;
+  max-width: 100%; // Por defecto ocupa todo el ancho
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: get-spacing(xs);
+  padding-right: get-spacing(xs);
+
+  @each $breakpoint, $value in $breakpoints {
+    @if $breakpoint != xs {
+      // Evita el breakpoint más pequeño
+      @include respond-to($breakpoint) {
+        max-width: $value; // Ancho máximo basado en el breakpoint
+      }
+    }
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -get-spacing(xs);
+  margin-right: -get-spacing(xs);
+}
+
+[class*="col-"] {
+  padding-left: get-spacing(xs);
+  padding-right: get-spacing(xs);
+  flex: 0 0 auto;
+  width: 100%;
+
+  @for $i from 1 through 12 {
+    &.col-#{$i} {
+      width: math.div(100%, 12) * $i;
+    }
+  }
+
+  @each $breakpoint, $value in $breakpoints {
+    @if $breakpoint != xs {
+      @include respond-to($breakpoint) {
+        @for $i from 1 through 12 {
+          &.col-#{$breakpoint}-#{$i} {
+            width: math.div(100%, 12) * $i;
+          }
+        }
+      }
+    }
+  }
+}
