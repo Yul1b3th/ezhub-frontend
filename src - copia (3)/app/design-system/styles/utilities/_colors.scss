@@ -1,0 +1,19 @@
+// utilities/_colors.scss
+
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+@each $color-name, $color-value in $colors {
+  .text-#{$color-name} {
+    color: get-color($color-name);
+  }
+
+  .bg-#{$color-name} {
+    background-color: get-color($color-name);
+  }
+
+  .border-#{$color-name} {
+    border-color: get-color($color-name);
+  }
+}

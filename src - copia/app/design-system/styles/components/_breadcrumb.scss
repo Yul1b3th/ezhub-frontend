@@ -1,0 +1,35 @@
+@use "sass:map";
+@use "../abstracts/variables" as vars;
+@use "../abstracts/functions" as fn;
+
+.breadcrumb {
+  background-color: fn.get-color("light");
+  color: fn.get-color("dark");
+  padding: fn.get-spacing("sm");
+  font-family: vars.$font-family;
+  color: red;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+
+  li {
+    margin-right: fn.get-spacing("sm");
+
+    a {
+      color: fn.get-color("primary");
+      text-decoration: none;
+
+      &:hover {
+        color: fn.get-color("primary-200");
+      }
+    }
+
+    span {
+      color: fn.get-color("gray");
+    }
+  }
+}

@@ -1,0 +1,44 @@
+// styles/components/_tabs.scss
+
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+.tabs {
+  padding: get-spacing(lg) 0;
+
+  .container {
+    @include container;
+  }
+
+  .tab-list {
+    display: flex;
+    flex-direction: column; // Estilo base para dispositivos móviles
+    border-bottom: 1px solid get-color(gray-light);
+
+    .tab-item {
+      padding: get-spacing(sm) get-spacing(md);
+      cursor: pointer;
+      transition: color 0.3s ease;
+
+      &.active {
+        border-bottom: 2px solid get-color(primary);
+        color: get-color(primary);
+      }
+
+      &:hover {
+        color: get-color(primary-200);
+      }
+    }
+  }
+
+  .tab-content {
+    padding: get-spacing(md) 0;
+  }
+
+  @include media-query("min-width", "768px") {
+    .tab-list {
+      flex-direction: row; // Cambia a fila para pantallas más grandes
+    }
+  }
+}

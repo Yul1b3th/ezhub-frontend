@@ -1,0 +1,91 @@
+// layout/_helpers.scss
+
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+// Clearfix
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+// Text alignment
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// Margin utilities
+@each $size-name, $size-value in $spacing {
+  .m-#{$size-name} {
+    margin: get-spacing($size-name);
+  }
+
+  .mt-#{$size-name} {
+    margin-top: get-spacing($size-name);
+  }
+
+  .mr-#{$size-name} {
+    margin-right: get-spacing($size-name);
+  }
+
+  .mb-#{$size-name} {
+    margin-bottom: get-spacing($size-name);
+  }
+
+  .ml-#{$size-name} {
+    margin-left: get-spacing($size-name);
+  }
+
+  .mx-#{$size-name} {
+    margin-left: get-spacing($size-name);
+    margin-right: get-spacing($size-name);
+  }
+
+  .my-#{$size-name} {
+    margin-top: get-spacing($size-name);
+    margin-bottom: get-spacing($size-name);
+  }
+}
+
+// Padding utilities
+@each $size-name, $size-value in $spacing {
+  .p-#{$size-name} {
+    padding: get-spacing($size-name);
+  }
+
+  .pt-#{$size-name} {
+    padding-top: get-spacing($size-name);
+  }
+
+  .pr-#{$size-name} {
+    padding-right: get-spacing($size-name);
+  }
+
+  .pb-#{$size-name} {
+    padding-bottom: get-spacing($size-name);
+  }
+
+  .pl-#{$size-name} {
+    padding-left: get-spacing($size-name);
+  }
+
+  .px-#{$size-name} {
+    padding-left: get-spacing($size-name);
+    padding-right: get-spacing($size-name);
+  }
+
+  .py-#{$size-name} {
+    padding-top: get-spacing($size-name);
+    padding-bottom: get-spacing($size-name);
+  }
+}
