@@ -20,6 +20,11 @@
   width: 100%;
   overflow: hidden;
   height: 100%;
+  cursor: grab;
+}
+
+.carousel-inner:active {
+  cursor: grabbing;
 }
 
 .carousel-item {
@@ -167,4 +172,5 @@ img {
   height: 100%;
   object-position: center;
   object-fit: cover;
+  user-select: none; /* Previene la selección de imágenes */
 }

@@ -1,4 +1,9 @@
-<div id="carouselExampleCaptions" class="carousel slide carousel-container">
+<div
+  id="carouselExampleCaptions"
+  class="carousel slide carousel-container"
+  (mouseenter)="stopAutoplay()"
+  (mouseleave)="startAutoplay()"
+>
   <div class="carousel-indicators">
     <button
       *ngFor="let photo of photos; let i = index"
@@ -9,7 +14,13 @@
       (click)="goToSlide(i)"
     ></button>
   </div>
-  <div class="carousel-inner">
+  <div
+    class="carousel-inner"
+    (mousedown)="startDrag($event)"
+    (mousemove)="drag($event)"
+    (mouseup)="endDrag()"
+    (mouseleave)="endDrag()"
+  >
     <div
       *ngFor="let photo of photos; let i = index"
       class="carousel-item"

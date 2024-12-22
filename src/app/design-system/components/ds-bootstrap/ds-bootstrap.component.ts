@@ -23,6 +23,10 @@ export class DsBootstrapComponent implements AfterViewInit {
   private intervalId: any;
   private isSliding = false;
   public isPlaying = true;
+  private isDragging = false;
+  private startX = 0;
+  private movedX = 0;
+  private dragThreshold = 50;
 
   ngAfterViewInit() {
     this.items = this.carouselItems.toArray().map((item) => item.nativeElement);
@@ -52,11 +56,7 @@ export class DsBootstrapComponent implements AfterViewInit {
   }
 
   toggleAutoplay() {
-    if (this.isPlaying) {
-      this.stopAutoplay();
-    } else {
-      this.startAutoplay();
-    }
+    this.isPlaying ? this.stopAutoplay() : this.startAutoplay();
   }
 
   nextSlide() {
@@ -121,5 +121,34 @@ export class DsBootstrapComponent implements AfterViewInit {
       }, 600); // Duración de la transición
     }, 50); // Pequeño retraso para permitir la aplicación de clases
     console.log(this.currentIndex);
+  }
+
+  startDrag(event: MouseEvent) {
+    event.preventDefault();
+    this.isDragging = true;
+    this.startX = event.clientX;
+    this.movedX = 0;
+    document.body.style.cursor = 'grabbing';
+  }
+
+  drag(event: MouseEvent) {
+    if (!this.isDragging) return;
+
+    this.movedX = event.clientX - this.startX;
+  }
+
+  endDrag() {
+    this.isDragging = false;
+    document.body.style.cursor = 'grab';
+    const deltaX = this.movedX;
+
+    if (Math.abs(deltaX) > this.dragThreshold) {
+      // Umbral para considerar un arrastre
+      if (deltaX > 0) {
+        this.prevSlide();
+      } else {
+        this.nextSlide();
+      }
+    }
   }
 }
