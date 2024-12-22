@@ -9,9 +9,10 @@ import {
 } from '@angular/core';
 import { ButtonComponent } from './components/button/button.component';
 import { DsCardComponent } from './components/ds-card/ds-card.component';
-import { DsCarouselComponent } from './components/ds-carousel/ds-carousel.component';
-import { ImageCarouselComponent } from './components/image-carousel/image-carousel.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { DsCarouselComponent } from './components/ds-carousel/ds-carousel.component';
+import { DsCarousel2Component } from './components/ds-carousel2/ds-carousel2.component';
+import { DsBootstrapComponent } from './components/ds-bootstrap/ds-bootstrap.component';
 
 @Component({
   selector: 'design-system',
@@ -19,6 +20,14 @@ import { CarouselComponent } from './components/carousel/carousel.component';
   styleUrls: ['./design-system.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, ButtonComponent, DsCardComponent, CarouselComponent],
+  imports: [
+    CommonModule,
+    ButtonComponent,
+    DsCardComponent,
+    CarouselComponent,
+    DsCarouselComponent,
+    DsCarousel2Component,
+    DsBootstrapComponent,
+  ],
 })
 export class DesignSystemComponent {}

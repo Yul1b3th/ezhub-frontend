@@ -12,7 +12,7 @@
     (click)="translateRight()"
     [disabled]="isPrevDisabled"
   >
-    &lt;
+    &#10094;
   </button>
   <div class="carousel-track" #track>
     <div
@@ -36,7 +36,7 @@
     (click)="translateLeft()"
     [disabled]="isNextDisabled"
   >
-    &gt;
+    &#10095;
   </button>
   <button class="carousel-control pause" (click)="togglePause()">
     {{ isPaused ? "Play" : "Pause" }}
