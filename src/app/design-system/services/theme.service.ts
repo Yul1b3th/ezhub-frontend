@@ -1,4 +1,4 @@
-import { computed, Injectable, Signal, signal } from '@angular/core';
+import { Injectable, Signal, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -8,26 +8,27 @@ export class ThemeService {
   private readonly themeStorageKey: string = 'theme';
   private currentTheme = signal<string>(this.defaultTheme);
 
-  public readonly dsTheme: Signal<string> = computed(() => this.currentTheme());
-
   constructor() {
     const savedTheme = this.getSavedTheme();
     const preferredTheme = this.getPreferredTheme();
     this.applyTheme(savedTheme || preferredTheme);
   }
 
-  get theme(): string {
-    return this.currentTheme();
+  get theme(): Signal<string> {
+    return this.currentTheme;
   }
 
   setTheme(theme: string): void {
-    this.isValidTheme(theme)
-      ? this.applyTheme(theme)
-      : console.warn(`Invalid theme: ${theme}`);
+    if (this.isValidTheme(theme)) {
+      this.applyTheme(theme);
+    } else {
+      console.warn(`Invalid theme: ${theme}`);
+    }
   }
 
   toggleTheme(): void {
-    const newTheme = this.theme === 'light-mode' ? 'dark-mode' : 'light-mode';
+    const newTheme =
+      this.currentTheme() === 'light-mode' ? 'dark-mode' : 'light-mode';
     this.setTheme(newTheme);
   }
 

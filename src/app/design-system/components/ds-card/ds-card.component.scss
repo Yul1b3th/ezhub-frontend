@@ -50,12 +50,6 @@
     overflow: hidden;
   }
 
-  .card-img-top {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   .card-body {
     padding: get-spacing(md);
     flex-grow: 1;
@@ -67,6 +61,7 @@
   .card-title {
     font-size: get-font-size(lg);
     margin-bottom: get-spacing(sm);
+    color: red;
   }
 
   .card-text {

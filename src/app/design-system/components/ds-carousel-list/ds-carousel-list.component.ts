@@ -12,26 +12,21 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { interval, Subscription, timer, fromEvent } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
+import { auditTime } from 'rxjs/operators';
 
 @Component({
-  selector: 'ds-bootstrap',
+  selector: 'ds-carousel-list',
   imports: [CommonModule],
-  templateUrl: './ds-bootstrap.component.html',
-  styleUrls: ['./ds-bootstrap.component.scss'],
+  templateUrl: './ds-carousel-list.component.html',
+  styleUrls: ['./ds-carousel-list.component.scss'],
 })
-export class DsBootstrapComponent implements AfterViewInit, OnDestroy {
+export class DsCarouselListComponent implements AfterViewInit, OnDestroy {
   @Input() photos: string[] = [];
-  @ViewChildren('carouselItem') carouselItems!: QueryList<ElementRef>;
+  @ViewChild('carouselInner', { static: true }) carouselInner!: ElementRef;
   @ViewChild('nextButton', { static: true }) nextButton!: ElementRef;
   @ViewChild('prevButton', { static: true }) prevButton!: ElementRef;
-  @ViewChild('toggleAutoplayButton', { static: true })
-  toggleAutoplayButton!: ElementRef;
-  currentIndex = 0;
-  private items: HTMLElement[] = [];
   private autoplaySubscription: Subscription | null = null;
   private clickSubscription: Subscription | null = null;
-  private isSliding = false;
   private isAnimating = false;
   private isDragging = false;
   private startX = 0;
@@ -43,7 +38,6 @@ export class DsBootstrapComponent implements AfterViewInit, OnDestroy {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
-    this.items = this.carouselItems.toArray().map((item) => item.nativeElement);
     this.startAutoplay();
     this.setupClickHandlers();
   }
@@ -57,7 +51,7 @@ export class DsBootstrapComponent implements AfterViewInit, OnDestroy {
 
   startAutoplay() {
     this.stopAutoplay();
-    this.autoplaySubscription = interval(5000).subscribe(() =>
+    this.autoplaySubscription = interval(2000).subscribe(() =>
       this.nextSlide()
     );
     this.isPlaying = true;
@@ -79,63 +73,29 @@ export class DsBootstrapComponent implements AfterViewInit, OnDestroy {
   }
 
   nextSlide() {
-    this.slideTo(this.currentIndex + 1, 'left');
+    this.slideTo('next');
   }
 
   prevSlide() {
-    this.slideTo(this.currentIndex - 1, 'right');
+    this.slideTo('prev');
   }
 
-  goToSlide(index: number) {
-    const direction = index > this.currentIndex ? 'left' : 'right';
-    this.slideTo(index, direction);
-  }
+  slideTo(direction: 'next' | 'prev') {
+    if (this.isAnimating) return;
 
-  slideTo(index: number, direction: 'left' | 'right') {
-    if (this.isSliding || this.isAnimating) return;
+    const carousel = this.carouselInner.nativeElement;
+    const scrollAmount = carousel.clientWidth;
 
-    const nextIndex = (index + this.items.length) % this.items.length;
-    if (nextIndex === this.currentIndex) return;
-
-    this.isSliding = true;
     this.isAnimating = true;
-    const currentItem = this.items[this.currentIndex];
-    const nextItem = this.items[nextIndex];
-
-    if (direction === 'left') {
-      nextItem.classList.add('carousel-item-next');
+    if (direction === 'next') {
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     } else {
-      nextItem.classList.add('carousel-item-prev');
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     }
 
-    timer(50).subscribe(() => {
-      if (direction === 'left') {
-        currentItem.classList.add('carousel-item-start');
-        nextItem.classList.add('carousel-item-start');
-      } else {
-        currentItem.classList.add('carousel-item-end');
-        nextItem.classList.add('carousel-item-end');
-      }
-
-      timer(600).subscribe(() => {
-        currentItem.classList.remove(
-          'active',
-          'carousel-item-start',
-          'carousel-item-end'
-        );
-        nextItem.classList.remove(
-          'carousel-item-next',
-          'carousel-item-prev',
-          'carousel-item-start',
-          'carousel-item-end'
-        );
-        nextItem.classList.add('active');
-
-        this.currentIndex = nextIndex;
-        this.isSliding = false;
-        this.isAnimating = false;
-        this.cdr.detectChanges();
-      });
+    timer(600).subscribe(() => {
+      this.isAnimating = false;
+      this.cdr.detectChanges();
     });
   }
 
@@ -147,13 +107,9 @@ export class DsBootstrapComponent implements AfterViewInit, OnDestroy {
     this.startX = event.clientX;
     this.movedX = 0;
     document.body.style.cursor = 'grabbing';
-
-    // Controlar el evento mousemove con throttleTime
-    fromEvent(document, 'mousemove')
-      .pipe(throttleTime(50))
-      .subscribe((moveEvent: any) => this.drag(moveEvent));
   }
 
+  @HostListener('mousemove', ['$event'])
   drag(event: MouseEvent) {
     if (!this.isDragging || this.isAnimating) return;
     this.movedX = event.clientX - this.startX;
@@ -174,21 +130,14 @@ export class DsBootstrapComponent implements AfterViewInit, OnDestroy {
 
   setupClickHandlers() {
     const nextClick$ = fromEvent(this.nextButton.nativeElement, 'click').pipe(
-      throttleTime(700)
+      auditTime(700)
     );
     const prevClick$ = fromEvent(this.prevButton.nativeElement, 'click').pipe(
-      throttleTime(700)
+      auditTime(700)
     );
-    const toggleAutoplayClick$ = fromEvent(
-      this.toggleAutoplayButton.nativeElement,
-      'click'
-    ).pipe(throttleTime(700));
 
     this.clickSubscription = nextClick$.subscribe(() => this.nextSlide());
     this.clickSubscription.add(prevClick$.subscribe(() => this.prevSlide()));
-    this.clickSubscription.add(
-      toggleAutoplayClick$.subscribe(() => this.toggleAutoplay())
-    );
   }
 
   @HostListener('mouseenter')

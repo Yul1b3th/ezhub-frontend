@@ -30,9 +30,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
+              "public/fonts/fonts.css",
               "src/app/design-system/styles/main.scss",
-              "public/fonts/fonts.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },

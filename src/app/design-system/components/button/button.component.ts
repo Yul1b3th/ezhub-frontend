@@ -19,7 +19,7 @@ export class ButtonComponent {
   private themeService = inject(ThemeService);
 
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
-  @Input() btnClass: string = 'btn-primary'; // Valores validados mediante mixins
+  @Input() btnClass: string = 'btn-primary';
   @Input() size: 'btn-sm' | 'btn-md' | 'btn-lg' = 'btn-md';
   @Input() block: boolean = false;
   @Input() outline: boolean = false;
@@ -27,7 +27,7 @@ export class ButtonComponent {
   @Input() ariaLabel: string = '';
 
   get buttonClasses(): string[] {
-    const themeClass = this.themeService.dsTheme(); // 'dark-mode' / 'light-mode' / 'dark-like'
+    const themeClass = this.themeService.theme();
     const baseClass = this.outline
       ? `btn-outline-${this.btnClass.replace('btn-', '')}`
       : this.btnClass;

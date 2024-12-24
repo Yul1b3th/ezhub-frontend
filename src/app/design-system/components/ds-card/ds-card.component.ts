@@ -1,7 +1,15 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  ElementRef,
+  QueryList,
+  Renderer2,
+  inject,
+  Input,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '@design-system/services/theme.service';
-import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'ds-card',
@@ -10,15 +18,38 @@ import { ButtonComponent } from '../button/button.component';
   templateUrl: './ds-card.component.html',
   styleUrls: ['./ds-card.component.scss'],
 })
-export class DsCardComponent {
-  private themeService = inject(ThemeService);
+export class DsCardComponent implements AfterContentInit {
+  private readonly themeService = inject(ThemeService);
+  private readonly renderer = inject(Renderer2);
 
-  @Input() imageUrl: string = '';
-  @Input() title: string = '';
-  @Input() description: string = '';
-  @Input() buttonText: string = 'View Details';
+  @ContentChildren('cardText', { read: ElementRef })
+  cardTextElements!: QueryList<ElementRef>;
+  @ContentChildren('cardTitle', { read: ElementRef })
+  cardTitleElements!: QueryList<ElementRef>;
+  @ContentChildren('cardPrice', { read: ElementRef })
+  cardPriceElements!: QueryList<ElementRef>;
+  @ContentChildren('cardButton', { read: ElementRef })
+  cardButtonElements!: QueryList<ElementRef>;
+
+  ngAfterContentInit(): void {
+    console.log('ngAfterContentInit');
+
+    this.cardTextElements.forEach((cardText) => {
+      this.renderer.addClass(cardText.nativeElement, 'card-text');
+      this.renderer.addClass(cardText.nativeElement, 'line-clamp-3');
+    });
+
+    this.cardTitleElements.forEach((cardTitle) => {
+      this.renderer.addClass(cardTitle.nativeElement, 'card-title');
+      this.renderer.addClass(cardTitle.nativeElement, 'line-clamp-1');
+    });
+
+    this.cardPriceElements.forEach((cardPrice) => {
+      this.renderer.addClass(cardPrice.nativeElement, 'card-price');
+    });
+  }
 
   get themeClass(): string {
-    return this.themeService.dsTheme();
+    return this.themeService.theme();
   }
 }

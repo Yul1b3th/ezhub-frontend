@@ -1,19 +1,8 @@
 <div id="carouselExampleCaptions" class="carousel slide carousel-container">
-  <div class="carousel-indicators">
-    <button
-      *ngFor="let photo of photos; let i = index"
-      type="button"
-      [class.active]="i === currentIndex"
-      aria-current="true"
-      [attr.aria-label]="'Slide ' + (i + 1)"
-      (click)="goToSlide(i)"
-    ></button>
-  </div>
-  <div class="carousel-inner">
+  <div class="carousel-inner" #carouselInner>
     <div
       *ngFor="let photo of photos; let i = index"
       class="carousel-item"
-      [class.active]="i === currentIndex"
       #carouselItem
     >
       <img
@@ -21,10 +10,6 @@
         class="d-block w-100 img-responsive"
         alt="Slide {{ i + 1 }}"
       />
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Slide {{ i + 1 }} label</h5>
-        <p>Some representative placeholder content for slide {{ i + 1 }}.</p>
-      </div>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" #prevButton>
@@ -34,7 +19,7 @@
     <span class="visually-hidden">&#10095;</span>
   </button>
   <div class="carousel-controls">
-    <button #toggleAutoplayButton (click)="toggleAutoplay()">
+    <button (click)="toggleAutoplay()">
       <span [innerHTML]="isPlaying ? '&#10074;&#10074;' : '&#9658;'"></span>
     </button>
   </div>

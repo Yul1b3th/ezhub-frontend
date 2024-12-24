@@ -1,299 +1,174 @@
-<section>
-  <div class="container">
-    <div class="row">
-      <h1>Design System</h1>
+<section class="form-section" aria-labelledby="form-heading">
+  <h2 id="form-heading">Formulario Completo</h2>
+  <form>
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input
+        type="text"
+        id="name"
+        class="input-text"
+        placeholder="Ingrese su nombre"
+        aria-required="true"
+      />
     </div>
-  </div>
+
+    <div class="form-group">
+      <label for="email">Correo Electrónico</label>
+      <input
+        type="email"
+        id="email"
+        class="input-text"
+        placeholder="Ingrese su correo electrónico"
+        aria-required="true"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input
+        type="password"
+        id="password"
+        class="input-text"
+        placeholder="Ingrese su contraseña"
+        aria-required="true"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Teléfono</label>
+      <input
+        type="tel"
+        id="phone"
+        class="input-text"
+        placeholder="Ingrese su teléfono"
+        aria-required="false"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="date">Fecha</label>
+      <input type="date" id="date" class="input-text" aria-required="false" />
+    </div>
+
+    <div class="form-group">
+      <label for="time">Hora</label>
+      <input type="time" id="time" class="input-text" aria-required="false" />
+    </div>
+
+    <div class="form-group">
+      <label for="datetime">Fecha y Hora</label>
+      <input
+        type="datetime-local"
+        id="datetime"
+        class="input-text"
+        aria-required="false"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="url">URL</label>
+      <input
+        type="url"
+        id="url"
+        class="input-text"
+        placeholder="Ingrese una URL"
+        aria-required="false"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="number">Número</label>
+      <input
+        type="number"
+        id="number"
+        class="input-text"
+        placeholder="Ingrese un número"
+        aria-required="false"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="range">Rango</label>
+      <input
+        type="range"
+        id="range"
+        class="input-range"
+        min="0"
+        max="100"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-required="false"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="color">Color</label>
+      <input
+        type="color"
+        id="color"
+        class="input-color"
+        aria-required="false"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="message">Mensaje</label>
+      <textarea
+        id="message"
+        class="textarea"
+        placeholder="Ingrese su mensaje"
+        aria-required="false"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="options">Opciones</label>
+      <select id="options" class="select" aria-required="false">
+        <option value="">Seleccione una opción</option>
+        <option value="1">Opción 1</option>
+        <option value="2">Opción 2</option>
+        <option value="3">Opción 3</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <input type="checkbox" id="subscribe" class="checkbox" />
+      <label for="subscribe">Suscribirse al boletín</label>
+    </div>
+
+    <fieldset class="form-group">
+      <legend>Opciones de radio</legend>
+      <div>
+        <input type="radio" id="option1" name="radio-group" class="radio" />
+        <label for="option1">Opción 1</label>
+      </div>
+      <div>
+        <input type="radio" id="option2" name="radio-group" class="radio" />
+        <label for="option2">Opción 2</label>
+      </div>
+    </fieldset>
+
+    <div class="form-group">
+      <label for="file">Archivo</label>
+      <input type="file" id="file" class="input-file" aria-required="false" />
+    </div>
+
+    <div class="form-group">
+      <label for="form-switch">Activar opción</label>
+      <div class="form-switch">
+        <input
+          type="checkbox"
+          id="form-switch"
+          class="form-switch-checkbox"
+          aria-required="false"
+        />
+        <label class="form-switch-label" for="form-switch">
+          <span class="form-switch-inner"></span>
+          <span class="form-switch-switch"></span>
+        </label>
+      </div>
+    </div>
+
+    <ds-button btnClass="btn-primary" type="submit">Enviar</ds-button>
+  </form>
 </section>
-
-<hr />
-
-<section>
-  <div class="container">
-    <div class="row">
-      <h2>Cards</h2>
-    </div>
-    <div class="row">
-      <div class="col-12 col-md-6 col-lg-3">
-        <ds-card>
-          <img
-            card-image
-            src="https://ezhub.vercel.app/assets/img/bedrooms/1.jpg"
-            alt="Sample Room"
-            class="card-img-top"
-          />
-          <h5 card-title class="card-title line-clamp-1">Sample Room</h5>
-          <p card-text class="card-text line-clamp-3">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
-            dolorum. Tempora distinctio sapiente voluptatem sunt nisi qui sit
-            nesciunt vitae modi optio, autem possimus velit atque illo dolore
-            perspiciatis, sequi, blanditiis repudiandae quis sed accusamus
-            mollitia eveniet debitis ratione. Quos reiciendis quas facilis,
-            sunt, fugiat iure commodi laboriosam iusto earum eveniet excepturi
-            doloribus incidunt vero ratione repellendus, corporis harum aperiam
-            ipsam. Minima molestiae iste maxime blanditiis sit cumque quod
-            rerum, voluptatibus mollitia omnis fuga soluta molestias magni atque
-            tenetur numquam beatae ab veritatis consectetur? Eaque, iusto. In
-            aliquid nesciunt laborum aut id omnis nostrum repudiandae debitis
-            cupiditate dolor, asperiores explicabo amet pariatur deserunt. Qui
-            hic, inventore pariatur labore tenetur distinctio id! Molestias
-            animi ea consequatur dolorum repellat quis doloribus? Amet, ducimus?
-            Ab quis, aspernatur placeat qui perspiciatis asperiores! Dignissimos
-            ex animi porro quos nostrum modi maxime explicabo voluptatem, alias
-            perferendis qui tempora officiis consectetur quia architecto placeat
-            eaque et, asperiores commodi quis debitis esse corrupti? Velit
-            repellat maiores aliquam fuga, odit commodi placeat doloremque unde
-            quod iure. Exercitationem incidunt, minus vel harum enim fugiat
-            fugit iste architecto magni. Distinctio, est!
-          </p>
-          <p card-price class="card-price">
-            100 <span class="currency">€</span>
-          </p>
-          <ds-button card-button btnClass="btn-secondary">See more</ds-button>
-        </ds-card>
-      </div>
-      <div class="col-12 col-md-6 col-lg-3">
-        <ds-card>
-          <img
-            card-image
-            src="https://ezhub.vercel.app/assets/img/bedrooms/2.jpg"
-            alt="Sample Room 2"
-            class="card-img-top"
-          />
-          <h5 card-title class="card-title line-clamp-1">Sample Room 2</h5>
-          <p card-text class="card-text line-clamp-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ipsam
-            quam temporibus totam ex. Assumenda sapiente vitae facilis,
-            consectetur dolores eius labore amet veniam ipsum incidunt voluptate
-            porro ea dolorem?
-          </p>
-          <p card-price class="card-price">
-            150 <span class="currency">€</span>
-          </p>
-          <ds-button card-button btnClass="btn-secondary">See more</ds-button>
-        </ds-card>
-      </div>
-      <div class="col-12 col-md-6 col-lg-3">
-        <ds-card>
-          <img
-            card-image
-            src="https://ezhub.vercel.app/assets/img/bedrooms/3.jpg"
-            alt="Sample Room 3"
-            class="card-img-top"
-          />
-          <h5 card-title class="card-title line-clamp-1">Sample Room 3</h5>
-          <p card-text class="card-text line-clamp-3">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum
-            soluta a aperiam architecto et voluptas? Maxime omnis veritatis vel
-            velit natus, autem, facere ducimus voluptate est officiis aliquid
-            incidunt doloremque quo quaerat, repudiandae cumque necessitatibus
-            sapiente dolores. Facilis expedita, accusantium esse quod dolor
-            similique reprehenderit magnam explicabo maiores nam reiciendis
-            nostrum voluptatibus est delectus natus tempore consectetur ducimus
-            minus iure voluptates nesciunt possimus. At a autem quas repellendus
-            facere mollitia totam velit recusandae eos, placeat, incidunt,
-            tenetur laboriosam? Nisi nulla non quos voluptate quae in voluptatum
-            voluptas sequi nam dicta perspiciatis ipsa deserunt ullam,
-            voluptatem neque esse soluta aspernatur, recusandae provident hic
-            sunt dolore. Dolore dolorum laudantium nihil voluptatem.
-            Necessitatibus ut magnam incidunt eum, earum est eos dignissimos cum
-            rerum tempore quo aperiam dicta iure cumque blanditiis quam dolor at
-            labore molestias ipsa accusantium voluptate. Mollitia, tempora
-            delectus. Provident laboriosam natus, autem corporis numquam, cum
-            nostrum iste ipsam perferendis officiis repellendus, reiciendis
-            aspernatur consectetur eum quibusdam rem nihil libero exercitationem
-            est! Ut, reprehenderit! Voluptatum obcaecati repellendus harum hic
-            facilis, nam id. Facilis impedit quam, totam aliquid repellat,
-            aspernatur, fugit sapiente error debitis accusamus perferendis
-            adipisci dolorem quaerat incidunt est deserunt molestiae! Dolorem
-            inventore minima dolor officia magni laborum quidem voluptates.
-          </p>
-          <p card-price class="card-price">
-            200 <span class="currency">€</span>
-          </p>
-          <ds-button card-button btnClass="btn-secondary">See more</ds-button>
-        </ds-card>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- <hr /> -->
-
-<!-- <section>
-  <app-ds-carousel />
-</section> -->
-
-<!-- <hr /> -->
-<!--
-<section>
-  <div class="container">
-    <div class="row">
-      <h2>Carousel</h2>
-    </div>
-    <div class="row">
-      <app-carousel
-        [photos]="[
-          'https://ezhub.vercel.app/assets/img/bedrooms/1.jpg',
-          'https://ezhub.vercel.app/assets/img/bedrooms/2.jpg',
-          'https://ezhub.vercel.app/assets/img/bedrooms/3.jpg',
-          'https://ezhub.vercel.app/assets/img/bedrooms/4.jpg',
-          'https://ezhub.vercel.app/assets/img/bedrooms/5.jpg'
-        ]"
-      ></app-carousel>
-    </div>
-  </div>
-</section> -->
-
-<!-- <section>
-  <div class="container">
-    <div class="row">
-      <h1>Design System</h1>
-    </div>
-  </div>
-</section> -->
-
-<!-- <hr /> -->
-
-<!-- <section>
-  <app-ds-carousel2 />
-</section> -->
-
-<hr />
-
-<br /><br /><br />
-
-<section>
-  <ds-bootstrap
-    [photos]="[
-      'https://ezhub.vercel.app/assets/img/bedrooms/1.jpg',
-      'https://ezhub.vercel.app/assets/img/bedrooms/2.jpg',
-      'https://ezhub.vercel.app/assets/img/bedrooms/3.jpg'
-    ]"
-  />
-</section>
-
-<br /><br /><br />
-<hr />
-
-<!-- <section>
-  <div class="container">
-    <div class="row">
-      <h2>Cards</h2>
-    </div>
-    <div class="row">
-      <div class="col-12 col-md-6 col-lg-3">
-        <ds-card>
-          <app-carousel
-            card-image
-            [photos]="[
-              'https://ezhub.vercel.app/assets/img/bedrooms/1.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/2.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/3.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/4.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/5.jpg'
-            ]"
-          ></app-carousel>
-          <h5 card-title class="card-title line-clamp-1">Sample Room</h5>
-          <p card-text class="card-text line-clamp-3">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
-            dolorum. Tempora distinctio sapiente voluptatem sunt nisi qui sit
-            nesciunt vitae modi optio, autem possimus velit atque illo dolore
-            perspiciatis, sequi, blanditiis repudiandae quis sed accusamus
-            mollitia eveniet debitis ratione. Quos reiciendis quas facilis,
-            sunt, fugiat iure commodi laboriosam iusto earum eveniet excepturi
-            doloribus incidunt vero ratione repellendus, corporis harum aperiam
-            ipsam. Minima molestiae iste maxime blanditiis sit cumque quod
-            rerum, voluptatibus mollitia omnis fuga soluta molestias magni atque
-            tenetur numquam beatae ab veritatis consectetur? Eaque, iusto. In
-            aliquid nesciunt laborum aut id omnis nostrum repudiandae debitis
-            cupiditate dolor, asperiores explicabo amet pariatur deserunt. Qui
-            hic, inventore pariatur labore tenetur distinctio id! Molestias
-            animi ea consequatur dolorum repellat quis doloribus? Amet, ducimus?
-            Ab quis, aspernatur placeat qui perspiciatis asperiores! Dignissimos
-            ex animi porro quos nostrum modi maxime explicabo voluptatem, alias
-            perferendis qui tempora officiis consectetur quia architecto placeat
-            eaque et, asperiores commodi quis debitis esse corrupti? Velit
-            repellat maiores aliquam fuga, odit commodi placeat doloremque unde
-            quod iure. Exercitationem incidunt, minus vel harum enim fugiat
-            fugit iste architecto magni. Distinctio, est!
-          </p>
-          <p card-price class="card-price">
-            100 <span class="currency">€</span>
-          </p>
-          <ds-button card-button btnClass="btn-secondary">See more</ds-button>
-        </ds-card>
-      </div>
-      <div class="col-12 col-md-6 col-lg-3">
-        <ds-card>
-          <app-carousel
-            card-image
-            [photos]="[
-              'https://ezhub.vercel.app/assets/img/bedrooms/2.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/3.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/4.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/5.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/6.jpg'
-            ]"
-          ></app-carousel>
-          <h5 card-title class="card-title line-clamp-1">Sample Room 2</h5>
-          <p card-text class="card-text line-clamp-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ipsam
-            quam temporibus totam ex. Assumenda sapiente vitae facilis,
-            consectetur dolores eius labore amet veniam ipsum incidunt voluptate
-            porro ea dolorem?
-          </p>
-          <p card-price class="card-price">
-            150 <span class="currency">€</span>
-          </p>
-          <ds-button card-button btnClass="btn-secondary">See more</ds-button>
-        </ds-card>
-      </div>
-      <div class="col-12 col-md-6 col-lg-3">
-        <ds-card>
-          <app-carousel
-            card-image
-            [photos]="[
-              'https://ezhub.vercel.app/assets/img/bedrooms/3.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/4.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/5.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/6.jpg',
-              'https://ezhub.vercel.app/assets/img/bedrooms/7.jpg'
-            ]"
-          ></app-carousel>
-          <h5 card-title class="card-title line-clamp-1">Sample Room 3</h5>
-          <p card-text class="card-text line-clamp-3">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum
-            soluta a aperiam architecto et voluptas? Maxime omnis veritatis vel
-            velit natus, autem, facere ducimus voluptate est officiis aliquid
-            incidunt doloremque quo quaerat, repudiandae cumque necessitatibus
-            sapiente dolores. Facilis expedita, accusantium esse quod dolor
-            similique reprehenderit magnam explicabo maiores nam reiciendis
-            nostrum voluptatibus est delectus natus tempore consectetur ducimus
-            minus iure voluptates nesciunt possimus. At a autem quas repellendus
-            facere mollitia totam velit recusandae eos, placeat, incidunt,
-            tenetur laboriosam? Nisi nulla non quos voluptate quae in voluptatum
-            voluptas sequi nam dicta perspiciatis ipsa deserunt ullam,
-            voluptatem neque esse soluta aspernatur, recusandae provident hic
-            sunt dolore. Dolore dolorum laudantium nihil voluptatem.
-            Necessitatibus ut magnam incidunt eum, earum est eos dignissimos cum
-            rerum tempore quo aperiam dicta iure cumque blanditiis quam dolor at
-            labore molestias ipsa accusantium voluptate. Mollitia, tempora
-            delectus. Provident laboriosam natus, autem corporis numquam, cum
-            nostrum iste ipsam perferendis officiis repellendus, reiciendis
-            aspernatur consectetur eum quibusdam rem nihil libero exercitationem
-            est! Ut, reprehenderit! Voluptatum obcaecati repellendus harum hic
-            facilis, nam id. Facilis impedit quam, totam aliquid repellat,
-            aspernatur, fugit sapiente error debitis accusamus perferendis
-            adipisci dolorem quaerat incidunt est deserunt molestiae! Dolorem
-            inventore minima dolor officia magni laborum quidem voluptates.
-          </p>
-          <p card-price class="card-price">
-            200 <span class="currency">€</span>
-          </p>
-          <ds-button card-button btnClass="btn-secondary">See more</ds-button>
-        </ds-card>
-      </div>
-    </div>
-  </div>
-</section> -->
