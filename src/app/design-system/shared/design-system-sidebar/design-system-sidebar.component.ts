@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-design-system-sidebar',
-  imports: [],
+  selector: 'design-system-sidebar',
+  imports: [RouterLink],
   templateUrl: './design-system-sidebar.component.html',
-  styleUrl: './design-system-sidebar.component.scss'
+  styleUrl: './design-system-sidebar.component.scss',
 })
-export class DesignSystemSidebarComponent {
-
-}
+export class DesignSystemSidebarComponent {}

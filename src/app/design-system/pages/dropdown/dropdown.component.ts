@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-dropdown',
+  selector: 'dropdown',
   imports: [],
   templateUrl: './dropdown.component.html',
-  styleUrl: './dropdown.component.scss'
+  styleUrl: './dropdown.component.scss',
 })
-export class DropdownComponent {
-
-}
+export default class DropdownComponent {}

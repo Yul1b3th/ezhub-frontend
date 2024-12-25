@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-customization',
+  selector: 'customization',
   imports: [],
   templateUrl: './customization.component.html',
-  styleUrl: './customization.component.scss'
+  styleUrl: './customization.component.scss',
 })
-export class CustomizationComponent {
-
-}
+export default class CustomizationComponent {}

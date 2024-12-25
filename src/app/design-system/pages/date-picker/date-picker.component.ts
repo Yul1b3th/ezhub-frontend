@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-date-picker',
+  selector: 'date-picker',
   imports: [],
   templateUrl: './date-picker.component.html',
-  styleUrl: './date-picker.component.scss'
+  styleUrl: './date-picker.component.scss',
 })
-export class DatePickerComponent {
-
-}
+export default class DatePickerComponent {}

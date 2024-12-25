@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-utilities',
+  selector: 'utilities',
   imports: [],
   templateUrl: './utilities.component.html',
-  styleUrl: './utilities.component.scss'
+  styleUrl: './utilities.component.scss',
 })
-export class UtilitiesComponent {
-
-}
+export default class UtilitiesComponent {}
