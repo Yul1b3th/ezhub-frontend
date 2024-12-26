@@ -1,1 +1,235 @@
-<p>utilities works!</p>
+<section class="utilities">
+  <div class="container">
+    <div>
+      <h1>Utilidades</h1>
+      <p>
+        En esta sección, exploraremos las utilidades disponibles en el sistema
+        de diseño. Estas utilidades permiten aplicar estilos comunes de manera
+        rápida y sencilla.
+      </p>
+    </div>
+
+    <hr />
+
+    <!-- Colores -->
+    <div>
+      <h2>Colores</h2>
+      <p>
+        Las utilidades de colores permiten aplicar rápidamente colores de texto,
+        fondo y borde utilizando las variables de colores definidas.
+      </p>
+      <pre><code class="language-scss">
+      &#64;each $color-name, $color-value in $colors &#123;
+        .text-#&#123;$color-name&#125; &#123;
+          color: get-color($color-name);
+        &#125;
+
+        .bg-#&#123;$color-name&#125; &#123;
+          background-color: get-color($color-name);
+        &#125;
+
+        .border-#&#123;$color-name&#125; &#123;
+          border-color: get-color($color-name);
+        &#125;
+      &#125;
+      </code></pre>
+    </div>
+
+    <hr />
+
+    <!-- Espaciado -->
+    <div>
+      <h2>Espaciado</h2>
+      <p>
+        Las utilidades de espaciado permiten aplicar rápidamente márgenes y
+        rellenos utilizando las variables de espaciado definidas.
+      </p>
+      <pre><code class="language-scss">
+      &#64;each $size-name, $size-value in $spacing &#123;
+        .m-#&#123;$size-name&#125; &#123;
+          margin: get-spacing($size-name);
+        &#125;
+
+        .mt-#&#123;$size-name&#125; &#123;
+          margin-top: get-spacing($size-name);
+        &#125;
+
+        .mr-#&#123;$size-name&#125; &#123;
+          margin-right: get-spacing($size-name);
+        &#125;
+
+        .mb-#&#123;$size-name&#125; &#123;
+          margin-bottom: get-spacing($size-name);
+        &#125;
+
+        .ml-#&#123;$size-name&#125; &#123;
+          margin-left: get-spacing($size-name);
+        &#125;
+
+        .mx-#&#123;$size-name&#125; &#123;
+          margin-left: get-spacing($size-name);
+          margin-right: get-spacing($size-name);
+        &#125;
+
+        .my-#&#123;$size-name&#125; &#123;
+          margin-top: get-spacing($size-name);
+          margin-bottom: get-spacing($size-name);
+        &#125;
+
+        .p-#&#123;$size-name&#125; &#123;
+          padding: get-spacing($size-name);
+        &#125;
+
+        .pt-#&#123;$size-name&#125; &#123;
+          padding-top: get-spacing($size-name);
+        &#125;
+
+        .pr-#&#123;$size-name&#125; &#123;
+          padding-right: get-spacing($size-name);
+        &#125;
+
+        .pb-#&#123;$size-name&#125; &#123;
+          padding-bottom: get-spacing($size-name);
+        &#125;
+
+        .pl-#&#123;$size-name&#125; &#123;
+          padding-left: get-spacing($size-name);
+        &#125;
+
+        .px-#&#123;$size-name&#125; &#123;
+          padding-left: get-spacing($size-name);
+          padding-right: get-spacing($size-name);
+        &#125;
+
+        .py-#&#123;$size-name&#125; &#123;
+          padding-top: get-spacing($size-name);
+          padding-bottom: get-spacing($size-name);
+        &#125;
+      &#125;
+      </code></pre>
+    </div>
+
+    <hr />
+
+    <!-- Texto -->
+    <div>
+      <h2>Texto</h2>
+      <p>
+        Las utilidades de texto permiten aplicar rápidamente estilos de
+        alineación y truncamiento de texto.
+      </p>
+      <pre><code class="language-scss">
+      // Mixin para truncar texto
+      &#64;mixin apply-line-clamp($lines) &#123;
+        &#64;if $lines > 0 &#123;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: $lines;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        &#125; &#64;else &#123;
+          &#64;error "El mixin `apply-line-clamp` requiere un número mayor a 0 para `$lines`.";
+        &#125;
+      &#125;
+
+      // Clase global para truncar texto
+      .line-clamp-1 &#123;
+        &#64;include apply-line-clamp(1);
+      &#125;
+
+      .line-clamp-2 &#123;
+        &#64;include apply-line-clamp(2);
+      &#125;
+
+      .line-clamp-3 &#123;
+        &#64;include apply-line-clamp(3);
+      &#125;
+
+      .line-clamp-4 &#123;
+        &#64;include apply-line-clamp(4);
+      &#125;
+
+      .line-clamp-5 &#123;
+        &#64;include apply-line-clamp(5);
+      &#125;
+
+      // Text alignment
+      .text-center &#123;
+        text-align: center;
+      &#125;
+
+      .text-left &#123;
+        text-align: left;
+      &#125;
+
+      .text-right &#123;
+        text-align: right;
+      &#125;
+      </code></pre>
+    </div>
+
+    <hr />
+
+    <!-- Utilidades Generales -->
+    <div>
+      <h2>Utilidades Generales</h2>
+      <p>
+        Las utilidades generales incluyen clases para aplicar estilos comunes
+        como imágenes responsivas.
+      </p>
+      <pre><code class="language-scss">
+      // Clase para imágenes responsivas
+      .img-responsive &#123;
+        width: 100%;
+        height: 100%;
+        object-position: center;
+        object-fit: cover;
+      &#125;
+      </code></pre>
+    </div>
+
+    <hr />
+
+    <!-- Visibilidad -->
+    <div>
+      <h2>Visibilidad</h2>
+      <p>
+        Las utilidades de visibilidad permiten controlar rápidamente la
+        visibilidad de los elementos.
+      </p>
+      <pre><code class="language-scss">
+      .hidden &#123;
+        display: none !important;
+      &#125;
+
+      .visible &#123;
+        display: block !important;
+      &#125;
+
+      .invisible &#123;
+        visibility: hidden !important;
+      &#125;
+
+      .d-block &#123;
+        display: block !important;
+      &#125;
+
+      .d-inline &#123;
+        display: inline !important;
+      &#125;
+
+      .d-inline-block &#123;
+        display: inline-block !important;
+      &#125;
+
+      .d-flex &#123;
+        display: flex !important;
+      &#125;
+
+      .d-none &#123;
+        display: none !important;
+      &#125;
+      </code></pre>
+    </div>
+  </div>
+</section>

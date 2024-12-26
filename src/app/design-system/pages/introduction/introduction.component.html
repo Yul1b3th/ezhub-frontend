@@ -13,8 +13,7 @@
     <ol>
       <li>Descarga el proyecto desde el repositorio.</li>
       <li>
-        Instala las dependencias necesarias utilizando
-        <code>npm install</code>.
+        Instala las dependencias necesarias utilizando <code>npm install</code>.
       </li>
       <li>
         Explora los componentes y estilos disponibles en la documentación.
@@ -30,6 +29,33 @@
     <p>
       Consulta la sección de
       <a routerLink="/customization">Personalización</a> para más detalles.
+    </p>
+
+    <h2>Importación de Estilos</h2>
+    <p>
+      El archivo <code>main.scss</code> centraliza la importación de todos los
+      estilos y utilidades del sistema de diseño. A continuación se muestra el
+      contenido del archivo:
+    </p>
+    <pre><code class="language-scss">
+    &#64;use "abstracts/variables" as *;
+    &#64;use "abstracts/functions" as *;
+    &#64;use "abstracts/mixins" as *;
+    &#64;use "base/reboot" as *;
+    &#64;use "base/typography" as *;
+    &#64;use "layout/grid" as *;
+    &#64;use "layout/helpers" as *;
+    &#64;use "themes/dark" as *;
+    &#64;use "themes/light" as *;
+    &#64;use "utilities/spacing" as *;
+    &#64;use "utilities/visibility" as *;
+    &#64;use "utilities/colors" as *;
+    &#64;use "utilities/text" as *;
+    &#64;use "utilities/utilities" as *;
+    </code></pre>
+    <p>
+      Este archivo asegura que todos los estilos y utilidades estén disponibles
+      en toda la aplicación.
     </p>
   </div>
 </section>
