@@ -116,56 +116,76 @@
       <h2>Texto</h2>
       <p>
         Las utilidades de texto permiten aplicar rápidamente estilos de
-        alineación y truncamiento de texto.
+        alineación, truncamiento de texto y peso de fuente.
       </p>
       <pre><code class="language-scss">
-      // Mixin para truncar texto
-      &#64;mixin apply-line-clamp($lines) &#123;
-        &#64;if $lines > 0 &#123;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: $lines;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        &#125; &#64;else &#123;
-          &#64;error "El mixin `apply-line-clamp` requiere un número mayor a 0 para `$lines`.";
-        &#125;
-      &#125;
+  // Mixin para truncar texto
+  &#64;mixin apply-line-clamp($lines) &#123;
+    &#64;if $lines > 0 &#123;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: $lines;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    &#125; &#64;else &#123;
+      &#64;error "El mixin `apply-line-clamp` requiere un número mayor a 0 para `$lines`.";
+    &#125;
+  &#125;
 
-      // Clase global para truncar texto
-      .line-clamp-1 &#123;
-        &#64;include apply-line-clamp(1);
-      &#125;
+  // Clase global para truncar texto
+  .line-clamp-1 &#123;
+    &#64;include apply-line-clamp(1);
+  &#125;
 
-      .line-clamp-2 &#123;
-        &#64;include apply-line-clamp(2);
-      &#125;
+  .line-clamp-2 &#123;
+    &#64;include apply-line-clamp(2);
+  &#125;
 
-      .line-clamp-3 &#123;
-        &#64;include apply-line-clamp(3);
-      &#125;
+  .line-clamp-3 &#123;
+    &#64;include apply-line-clamp(3);
+  &#125;
 
-      .line-clamp-4 &#123;
-        &#64;include apply-line-clamp(4);
-      &#125;
+  .line-clamp-4 &#123;
+    &#64;include apply-line-clamp(4);
+  &#125;
 
-      .line-clamp-5 &#123;
-        &#64;include apply-line-clamp(5);
-      &#125;
+  .line-clamp-5 &#123;
+    &#64;include apply-line-clamp(5);
+  &#125;
 
-      // Text alignment
-      .text-center &#123;
-        text-align: center;
-      &#125;
+  // Text alignment
+  .text-center &#123;
+    text-align: center;
+  &#125;
 
-      .text-left &#123;
-        text-align: left;
-      &#125;
+  .text-left &#123;
+    text-align: left;
+  &#125;
 
-      .text-right &#123;
-        text-align: right;
-      &#125;
-      </code></pre>
+  .text-right &#123;
+    text-align: right;
+  &#125;
+
+  // Font weight
+  .fw-semibold &#123;
+    font-weight: 600;
+  &#125;
+
+  .fw-bold &#123;
+    font-weight: 700;
+  &#125;
+
+  .fw-normal &#123;
+    font-weight: 400;
+  &#125;
+
+  // Font size
+  &#64;each $size-name, $size-value in $font-sizes &#123;
+    .fs-#&#123;$size-name&#125; &#123;
+      font-size: get-font-size($size-name);
+    &#125;
+  &#125;
+  </code></pre>
     </div>
 
     <hr />
