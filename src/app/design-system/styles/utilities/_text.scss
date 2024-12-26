@@ -1,3 +1,9 @@
+// utilities/_text.scss
+
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
 // Mixin para truncar texto
 @mixin apply-line-clamp($lines) {
   @if $lines > 0 {
@@ -30,4 +36,17 @@
 
 .line-clamp-5 {
   @include apply-line-clamp(5);
+}
+
+// Text alignment
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
 }

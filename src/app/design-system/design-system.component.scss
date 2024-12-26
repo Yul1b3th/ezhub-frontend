@@ -1,85 +1,69 @@
-.theme-switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+@use "sass:color";
+@use "sass:map";
+@use "./styles/abstracts/functions" as *;
+@use "./styles/abstracts/mixins" as *;
+@use "./styles/abstracts/variables" as *;
 
-  .theme-switch-checkbox {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
+$header-height: 90px;
+$footer-height: 70px;
 
-  .theme-switch-label {
-    position: absolute;
-    cursor: pointer;
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  header {
+    position: fixed;
+    width: 100%;
+    height: 90px;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: get-color(gray-light);
-    transition: background-color 0.3s ease;
-    border-radius: 34px;
-
-    .theme-switch-inner {
-      position: absolute;
-      left: 4px;
-      top: 4px;
-      bottom: 4px;
-      right: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 8px;
-      background-color: get-color(light);
-      transition: background-color 0.3s ease;
-      border-radius: 34px;
-
-      .icon {
-        width: 16px;
-        height: 16px;
-        fill: get-color(dark);
-      }
-
-      .icon-sun {
-        display: none;
-      }
-
-      .icon-moon {
-        display: block;
-      }
+    z-index: 1;
+    background-color: #333;
+    color: white;
+    text-align: center;
+  }
+  .main-layout {
+    width: 100%;
+    margin: $header-height auto 0;
+    aside {
+      background-color: red;
     }
-
-    .theme-switch-switch {
-      position: absolute;
-      bottom: 4px;
-      left: 4px;
-      width: 26px;
-      height: 26px;
-      background-color: get-color(dark);
-      transition: transform 0.3s ease;
-      border-radius: 50%;
+    main {
+      background-color: blue;
     }
   }
 
-  .theme-switch-checkbox:checked + .theme-switch-label {
-    background-color: get-color(primary);
+  footer {
+    margin-top: auto;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+  }
 
-    .theme-switch-inner {
-      background-color: get-color(dark);
-
-      .icon-sun {
-        display: block;
-      }
-
-      .icon-moon {
-        display: none;
-      }
+  @include media-breakpoint-up(md) {
+    .main-layout {
+      display: grid;
+      grid-template-columns: 24% 76%;
+      gap: 1.5rem;
+      max-width: 1400px;
     }
 
-    .theme-switch-switch {
-      transform: translateX(26px);
-      background-color: get-color(light);
+    /* Sidebar */
+    aside {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 90px;
+      height: calc(100vh - 90px);
+      overflow-y: auto;
+      background-color: yellow;
+    }
+
+    /* Main Content */
+    main {
+      background-color: red;
+      padding: 20px;
     }
   }
 }

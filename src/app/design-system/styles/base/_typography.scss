@@ -35,7 +35,7 @@ h6 {
 }
 
 // Mixin para tipografía: tamaño de fuente, altura de línea, peso y margen inferior
-p {
+p:not(:last-child) {
   @include typography("base", "base", 400, "md");
 }
 

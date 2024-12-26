@@ -53,7 +53,7 @@
 }
 
 // Mixin para aplicar estilos en diferentes breakpoints
-@mixin respond-to($size) {
+@mixin media-breakpoint-up($size) {
   @media (min-width: get-breakpoint($size)) {
     @content;
   }
@@ -110,18 +110,4 @@
   #{$type}-right: get-spacing($size);
   #{$type}-bottom: get-spacing($size);
   #{$type}-left: get-spacing($size);
-}
-
-// Mixin para truncar líneas de texto con "line-clamp"
-// Mixin para truncar líneas de texto con "line-clamp"
-@mixin apply-line-clamp($lines) {
-  @if $lines > 0 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: $lines;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  } @else {
-    @error "El mixin `apply-line-clamp` requiere un número mayor a 0 para `$lines`.";
-  }
 }

@@ -38,15 +38,16 @@ const routes: Routes = [
         title: 'Design system | Utilities',
         loadComponent: () => import('./pages/utilities/utilities.component'),
       },
+
+      {
+        path: 'alert',
+        title: 'Design system | Alert',
+        loadComponent: () => import('./pages/alert/alert.component'),
+      },
       {
         path: 'breadcrumb',
         title: 'Design system | Breadcrumb',
         loadComponent: () => import('./pages/breadcrumb/breadcrumb.component'),
-      },
-      {
-        path: 'input',
-        title: 'Design system | Input',
-        loadComponent: () => import('./pages/input/input.component'),
       },
       {
         path: 'button',
@@ -54,24 +55,19 @@ const routes: Routes = [
         loadComponent: () => import('./pages/button/button.component'),
       },
       {
-        path: 'modal',
-        title: 'Design system | Modal',
-        loadComponent: () => import('./pages/modal/modal.component'),
-      },
-      {
-        path: 'spinner',
-        title: 'Design system | Spinner',
-        loadComponent: () => import('./pages/spinner/spinner.component'),
-      },
-      {
         path: 'card',
         title: 'Design system | Card',
         loadComponent: () => import('./pages/card/card.component'),
       },
       {
-        path: 'dropdown',
-        title: 'Design system | Dropdown',
-        loadComponent: () => import('./pages/dropdown/dropdown.component'),
+        path: 'carousel',
+        title: 'Design system | Carousel',
+        loadComponent: () => import('./pages/carousel/carousel.component'),
+      },
+      {
+        path: 'data-table',
+        title: 'Design system | Data Table',
+        loadComponent: () => import('./pages/data-table/data-table.component'),
       },
       {
         path: 'date-picker',
@@ -80,14 +76,19 @@ const routes: Routes = [
           import('./pages/date-picker/date-picker.component'),
       },
       {
-        path: 'alert',
-        title: 'Design system | Alert',
-        loadComponent: () => import('./pages/alert/alert.component'),
+        path: 'dropdown',
+        title: 'Design system | Dropdown',
+        loadComponent: () => import('./pages/dropdown/dropdown.component'),
       },
       {
-        path: 'data-table',
-        title: 'Design system | Data Table',
-        loadComponent: () => import('./pages/data-table/data-table.component'),
+        path: 'input',
+        title: 'Design system | Input',
+        loadComponent: () => import('./pages/input/input.component'),
+      },
+      {
+        path: 'modal',
+        title: 'Design system | Modal',
+        loadComponent: () => import('./pages/modal/modal.component'),
       },
       {
         path: 'navbar',
@@ -95,19 +96,35 @@ const routes: Routes = [
         loadComponent: () => import('./pages/navbar/navbar.component'),
       },
       {
-        path: 'search-bar',
-        title: 'Design system | Search Bar',
-        loadComponent: () => import('./pages/search-bar/search-bar.component'),
-      },
-      {
         path: 'pagination',
         title: 'Design system | Pagination',
         loadComponent: () => import('./pages/pagination/pagination.component'),
       },
       {
+        path: 'search-bar',
+        title: 'Design system | Search Bar',
+        loadComponent: () => import('./pages/search-bar/search-bar.component'),
+      },
+      {
         path: 'slider',
         title: 'Design system | Slider',
         loadComponent: () => import('./pages/slider/slider.component'),
+      },
+      {
+        path: 'spinner',
+        title: 'Design system | Spinner',
+        loadComponent: () => import('./pages/spinner/spinner.component'),
+      },
+      {
+        path: 'theme-switch',
+        title: 'Design system | Theme switch',
+        loadComponent: () =>
+          import('./pages/theme-switch/theme-switch.component'),
+      },
+
+      {
+        path: '**',
+        redirectTo: 'introduction',
       },
     ],
   },

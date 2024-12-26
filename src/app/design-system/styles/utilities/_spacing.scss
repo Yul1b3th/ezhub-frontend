@@ -25,6 +25,16 @@
     margin-left: get-spacing($size-name);
   }
 
+  .mx-#{$size-name} {
+    margin-left: get-spacing($size-name);
+    margin-right: get-spacing($size-name);
+  }
+
+  .my-#{$size-name} {
+    margin-top: get-spacing($size-name);
+    margin-bottom: get-spacing($size-name);
+  }
+
   .p-#{$size-name} {
     padding: get-spacing($size-name);
   }
@@ -43,5 +53,15 @@
 
   .pl-#{$size-name} {
     padding-left: get-spacing($size-name);
+  }
+
+  .px-#{$size-name} {
+    padding-left: get-spacing($size-name);
+    padding-right: get-spacing($size-name);
+  }
+
+  .py-#{$size-name} {
+    padding-top: get-spacing($size-name);
+    padding-bottom: get-spacing($size-name);
   }
 }
