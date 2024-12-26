@@ -1,1 +1,158 @@
-<p>base-styles works!</p>
+<section class="base-styles">
+  <div class="container">
+    <h1>Estilos Base</h1>
+    <p>
+      En esta sección, exploraremos los estilos base que se aplican a todo el
+      sistema de diseño. Estos estilos aseguran una apariencia y comportamiento
+      consistentes en toda la aplicación.
+    </p>
+
+    <h2>Reboot</h2>
+    <p>
+      El archivo <code>_reboot.scss</code> contiene un conjunto de reglas CSS
+      que reinician los estilos predeterminados del navegador para asegurar una
+      base consistente. Estas reglas incluyen:
+    </p>
+    <ul>
+      <li>Box sizing rules</li>
+      <li>Prevent font size inflation</li>
+      <li>Remove default margin</li>
+      <li>Remove list styles</li>
+      <li>Set core body defaults</li>
+      <li>Set shorter line heights on headings and interactive elements</li>
+      <li>Balance text wrapping on headings</li>
+      <li>Default styles for unclassed <code>a</code> elements</li>
+      <li>Make images easier to work with</li>
+      <li>Inherit fonts for inputs and buttons</li>
+      <li>Ensure textareas without rows attribute are not tiny</li>
+      <li>Extra scroll margin for anchored elements</li>
+    </ul>
+
+    <h2>Tipografía</h2>
+    <p>
+      El archivo <code>_typography.scss</code> define los estilos tipográficos
+      utilizados en el sistema de diseño. Estos estilos aseguran una apariencia
+      tipográfica consistente y legible en toda la aplicación.
+    </p>
+
+    <h3>Estilos Generales</h3>
+    <pre><code class="language-scss">
+    body &#123;
+      font-family: $font-family;
+      font-size: get-font-size("base");
+      line-height: get-line-height("base");
+    &#125;
+    </code></pre>
+    <p>
+      Estos estilos se aplican al cuerpo del documento, estableciendo la fuente,
+      el tamaño de fuente y la altura de línea predeterminados.
+    </p>
+
+    <h3>Encabezados</h3>
+    <pre><code class="language-scss">
+    h1 &#123;
+      &#64;include typography("5xl", "xl", 700, "md");
+    &#125;
+
+    h2 &#123;
+      &#64;include typography("4xl", "lg", 700, "md");
+    &#125;
+
+    h3 &#123;
+      &#64;include typography("3xl", "lg", 600, "md");
+    &#125;
+
+    h4 &#123;
+      &#64;include typography("2xl", "lg", 600, "md");
+    &#125;
+
+    h5 &#123;
+      &#64;include typography("xl", "lg", 500, "md");
+    &#125;
+
+    h6 &#123;
+      &#64;include typography("lg", "lg", 500, "md");
+    &#125;
+    </code></pre>
+    <p>
+      Estos estilos se aplican a los encabezados <code>h1</code> a
+      <code>h6</code>, estableciendo el tamaño de fuente, la altura de línea, el
+      peso de la fuente y el margen inferior.
+    </p>
+
+    <h3>Parrafos y Textos</h3>
+    <pre><code class="language-scss">
+    p:not(:last-child) &#123;
+      &#64;include typography("base", "base", 400, "md");
+    &#125;
+
+    small &#123;
+      &#64;include typography("sm", "base", 400, "sm");
+    &#125;
+
+    strong &#123;
+      font-weight: 700;
+    &#125;
+
+    em &#123;
+      font-style: italic;
+    &#125;
+    </code></pre>
+    <p>
+      Estos estilos se aplican a los párrafos y otros elementos de texto,
+      asegurando una apariencia consistente y legible.
+    </p>
+
+    <h3>Bloques de Cita</h3>
+    <pre><code class="language-scss">
+    blockquote &#123;
+      font-size: get-font-size("lg");
+      line-height: get-line-height("lg");
+      margin: get-spacing("md") 0;
+      padding: get-spacing("md");
+      border-left: 4px solid get-color("primary");
+      background-color: get-background("default");
+    &#125;
+    </code></pre>
+    <p>
+      Estos estilos se aplican a los bloques de cita, asegurando una apariencia
+      destacada y legible.
+    </p>
+
+    <h3>Código y Preformateado</h3>
+    <pre><code class="language-scss">
+    code,
+    pre &#123;
+      font-family: "Courier New", Courier, monospace;
+      font-size: get-font-size("sm");
+      background-color: get-background("default");
+      padding: get-spacing("xs");
+      border-radius: 4px;
+    &#125;
+
+    pre &#123;
+      overflow-x: auto;
+    &#125;
+    </code></pre>
+    <p>
+      Estos estilos se aplican a los elementos de código y preformateado,
+      asegurando una apariencia consistente y legible.
+    </p>
+
+    <h3>Enlaces</h3>
+    <pre><code class="language-scss">
+    a &#123;
+      color: get-color("primary");
+      text-decoration: none;
+
+      &:hover &#123;
+        text-decoration: underline;
+      &#125;
+    &#125;
+    </code></pre>
+    <p>
+      Estos estilos se aplican a los enlaces, asegurando una apariencia
+      consistente y legible.
+    </p>
+  </div>
+</section>

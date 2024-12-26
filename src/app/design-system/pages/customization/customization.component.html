@@ -1,1 +1,481 @@
-<p>customization works!</p>
+<section class="customization">
+  <div class="container">
+    <div>
+      <h1>Personalización</h1>
+      <p>
+        En esta sección, aprenderás cómo personalizar el Design System
+        utilizando variables, funciones y mixins.
+      </p>
+    </div>
+
+    <hr />
+
+    <!-- Variables -->
+    <div>
+      <h2>Variables</h2>
+      <p>
+        Las variables permiten definir valores reutilizables en todo el sistema
+        de diseño. A continuación se presentan las principales variables
+        utilizadas:
+      </p>
+
+      <h3>Tipografías</h3>
+      <pre><code class="language-scss">
+      // Tipografías
+      $font-family: "BeVietnamPro", sans-serif;
+    </code></pre>
+
+      <h3>Tamaños de fuente</h3>
+      <pre><code class="language-scss">
+      // Tamaños de fuente
+      $font-sizes: (
+        xs: 0.75rem,
+        sm: 0.875rem,
+        base: 1rem,
+        lg: 1.125rem,
+        xl: 1.25rem,
+        "2xl": 1.5rem,
+        "3xl": 1.875rem,
+        "4xl": 2.25rem,
+        "5xl": 3rem,
+      );
+    </code></pre>
+
+      <h3>Alturas de línea</h3>
+      <pre><code class="language-scss">
+      // Alturas de línea
+      $line-heights: (
+        xs: 1rem,
+        sm: 1.25rem,
+        base: 1.5rem,
+        lg: 1.75rem,
+        xl: 2rem,
+      );
+    </code></pre>
+
+      <h3>Breakpoints</h3>
+      <pre><code class="language-scss">
+      // Breakpoints
+      $breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1400px,
+      );
+    </code></pre>
+
+      <h3>Espaciados</h3>
+      <pre><code class="language-scss">
+      // Espaciados
+      $spacing: (
+        xs: 0.25rem,
+        sm: 0.5rem,
+        md: 1rem,
+        lg: 2rem,
+        xl: 4rem,
+      );
+    </code></pre>
+
+      <h3>Colores principales</h3>
+      <pre><code class="language-scss">
+      // Colores principales
+      $colors: (
+        "primary": #7fe6c0,
+        "primary-200": #a3e8d4,
+        "primary-900": #0d4d3b,
+
+        "secondary": #81dfdf,
+        "secondary-200": #b3e8e9,
+
+        "tertiary": #7dd3fc,
+
+        "success": #22c55e,
+        "danger": #ef4444,
+        "warning": #f59e0b,
+        "info": #26549e,
+
+        "dark": #212121,
+        "dark-200": #1c1c1c,
+        "dark-300": #0f0f0f,
+
+        "gray": #d1d1d1,
+        "gray-light": #f1f1f1,
+        "gray-dark": #3f3f3f,
+
+        "light": #e5e5e5,
+        "light-200": #e9ecef,
+
+        "white": #ffffff,
+        "black": #000000,
+      );
+    </code></pre>
+
+      <h3>Mapas de colores expandidos</h3>
+      <pre><code class="language-scss">
+  // Mapas de colores expandidos
+  // Estos mapas se utilizan para definir colores de fondo predeterminados y
+  // colores invertidos, facilitando la implementación de temas claros y oscuros.
+  $backgrounds: map.merge(
+    $colors,
+    (
+      "default": map.get($colors, "gray-light"), // Color de fondo predeterminado
+      "inverted": map.get($colors, "dark"), // Color de fondo invertido para temas oscuros
+    )
+  );
+</code></pre>
+      <p>
+        Los mapas de colores expandidos permiten definir colores de fondo
+        predeterminados e invertidos, lo que facilita la implementación de temas
+        claros y oscuros en el sistema de diseño.
+      </p>
+    </div>
+
+    <hr />
+
+    <!-- Funciones -->
+    <div>
+      <h2>Funciones</h2>
+      <p>
+        Las funciones en Sass permiten reutilizar lógica y cálculos en todo el
+        sistema de diseño. A continuación se presentan las principales funciones
+        utilizadas:
+      </p>
+
+      <h3>Función genérica para obtener valores de un mapa</h3>
+      <pre ngNonBindable>
+    <code class="language-scss">
+      // Función genérica para obtener valores de un mapa
+      &#64;function get-value-from-map($map, $key) &#123;
+        &#64;if map.has-key($map, $key) &#123;
+          &#64;return map.get($map, $key);
+        &#125; &#64;else &#123;
+          &#64;error "La clave &#123;&#123;$key&#125;&#125; no existe en el mapa proporcionado.";
+        &#125;
+      &#125;
+    </code>
+  </pre>
+      <p>
+        Esta función permite obtener valores de un mapa dado una clave
+        específica. Es útil para acceder a valores definidos en mapas como
+        colores, tamaños de fuente, etc.
+      </p>
+
+      <h3>Función para obtener un tamaño de fuente</h3>
+      <pre ngNonBindable>
+    <code class="language-scss">
+      // Función para obtener un tamaño de fuente
+      &#64;function get-font-size($size-name) &#123;
+        &#64;return get-value-from-map($font-sizes, $size-name);
+      &#125;
+    </code>
+  </pre>
+      <p>
+        Esta función devuelve el tamaño de fuente correspondiente a un nombre de
+        tamaño específico.
+      </p>
+
+      <h3>Función para obtener una altura de línea</h3>
+      <pre ngNonBindable>
+    <code class="language-scss">
+      // Función para obtener una altura de línea
+      &#64;function get-line-height($size-name) &#123;
+        &#64;return get-value-from-map($line-heights, $size-name);
+      &#125;
+    </code>
+  </pre>
+      <p>
+        Esta función devuelve la altura de línea correspondiente a un nombre de
+        tamaño específico.
+      </p>
+
+      <h3>Función para obtener un breakpoint</h3>
+      <pre ngNonBindable>
+    <code class="language-scss">
+      // Función para obtener un breakpoint
+      &#64;function get-breakpoint($size-name) &#123;
+        &#64;return get-value-from-map($breakpoints, $size-name);
+      &#125;
+    </code>
+  </pre>
+      <p>
+        Esta función devuelve el valor del breakpoint correspondiente a un
+        nombre de tamaño específico.
+      </p>
+
+      <h3>Función para obtener un espaciado</h3>
+      <pre ngNonBindable>
+    <code class="language-scss">
+      // Función para obtener un espaciado
+      &#64;function get-spacing($size-name) &#123;
+        &#64;return get-value-from-map($spacing, $size-name);
+      &#125;
+    </code>
+  </pre>
+      <p>
+        Esta función devuelve el valor de espaciado correspondiente a un nombre
+        de tamaño específico.
+      </p>
+
+      <h3>Función para obtener un color</h3>
+      <pre ngNonBindable>
+    <code class="language-scss">
+      // Función para obtener un color
+      &#64;function get-color($color-name) &#123;
+        &#64;return get-value-from-map($colors, $color-name);
+      &#125;
+    </code>
+  </pre>
+      <p>
+        Esta función devuelve el valor del color correspondiente a un nombre de
+        color específico.
+      </p>
+
+      <h3>Función para obtener un color de fondo</h3>
+      <pre ngNonBindable>
+    <code class="language-scss">
+      // Función para obtener un color de fondo
+      &#64;function get-background($background-name) &#123;
+        &#64;return get-value-from-map($backgrounds, $background-name);
+      &#125;
+    </code>
+  </pre>
+      <p>
+        Esta función devuelve el valor del color de fondo correspondiente a un
+        nombre de fondo específico.
+      </p>
+
+      <h3>Función para convertir colores a HSL</h3>
+      <pre ngNonBindable>
+    <code class="language-scss">
+      // Función para convertir colores a HSL
+      &#64;function to-hsl($color) &#123;
+        &#64;return hsl(
+          color.channel($color, "hue", $space: hsl),
+          color.channel($color, "saturation", $space: hsl),
+          color.channel($color, "lightness", $space: hsl)
+        );
+      &#125;
+    </code>
+  </pre>
+      <p>
+        Esta función convierte un color a su representación en HSL (Hue,
+        Saturation, Lightness).
+      </p>
+
+      <h3>Función para convertir colores a HSLA con transparencia</h3>
+      <pre ngNonBindable>
+    <code class="language-scss">
+      // Función para convertir colores a HSLA con transparencia
+      &#64;function to-hsla($color, $alpha) &#123;
+        &#64;return hsla(
+          color.channel($color, "hue", $space: hsl),
+          color.channel($color, "saturation", $space: hsl),
+          color.channel($color, "lightness", $space: hsl),
+          $alpha
+        );
+      &#125;
+    </code>
+  </pre>
+      <p>
+        Esta función convierte un color a su representación en HSLA (Hue,
+        Saturation, Lightness, Alpha) con un valor de transparencia.
+      </p>
+    </div>
+
+    <hr />
+
+    <!-- Mixins -->
+    <div>
+      <h2>Mixins</h2>
+      <p>
+        Los mixins en Sass permiten reutilizar bloques de código CSS en todo el
+        sistema de diseño. A continuación se presentan los principales mixins
+        utilizados:
+      </p>
+
+      <h3>Mixin para aplicar márgenes y rellenos</h3>
+      <pre><code class="language-scss">
+  // Mixin para aplicar márgenes y rellenos
+  &#64;mixin spacing($property, $size) &#123;
+    #&#123;$property&#125;: get-spacing($size);
+  &#125;
+  </code></pre>
+      <p>
+        Este mixin permite aplicar márgenes y rellenos de manera dinámica
+        utilizando las variables de espaciado definidas.
+      </p>
+
+      <h3>Mixin para aplicar colores generales</h3>
+      <pre><code class="language-scss">
+  // Mixin para aplicar colores generales (textos, fondos, bordes)
+  &#64;mixin color($property, $color-name) &#123;
+    #&#123;$property&#125;: get-color($color-name);
+  &#125;
+  </code></pre>
+      <p>
+        Este mixin permite aplicar colores a propiedades específicas como texto,
+        fondo y bordes.
+      </p>
+
+      <h3>Mixin para aplicar colores de fondo</h3>
+      <pre><code class="language-scss">
+  // Mixin para aplicar colores de fondo
+  &#64;mixin background($background-name) &#123;
+    background-color: get-background($background-name);
+  &#125;
+  </code></pre>
+      <p>
+        Este mixin permite aplicar colores de fondo utilizando los mapas de
+        colores expandidos.
+      </p>
+
+      <h3>Mixin para tipografía</h3>
+      <pre><code class="language-scss">
+  // Mixin para tipografía: tamaño de fuente, altura de línea, peso y margen inferior
+  &#64;mixin typography(
+    $font-size,
+    $line-height: base,
+    $font-weight: normal,
+    $margin-bottom: null,
+    $color: null
+  ) &#123;
+    font-size: get-font-size($font-size);
+    line-height: get-line-height($line-height);
+    font-weight: $font-weight;
+    &#64;if $margin-bottom != null &#123;
+      margin-bottom: get-spacing($margin-bottom);
+    &#125;
+    &#64;if $color != null &#123;
+      color: get-color($color);
+    &#125;
+  &#125;
+  </code></pre>
+      <p>
+        Este mixin permite aplicar estilos tipográficos como tamaño de fuente,
+        altura de línea, peso, margen inferior y color.
+      </p>
+
+      <h3>Mixin para aplicar colores específicos en modos claro y oscuro</h3>
+      <pre><code class="language-scss">
+  // Mixin para aplicar colores específicos en modos claro y oscuro
+  &#64;mixin apply-color($light-color, $dark-color) &#123;
+    color: get-color($light-color);
+    &#64;media (prefers-color-scheme: dark) &#123;
+      color: get-color($dark-color);
+    &#125;
+  &#125;
+  </code></pre>
+      <p>
+        Este mixin permite aplicar colores específicos para modos claro y
+        oscuro.
+      </p>
+
+      <h3>Mixin para establecer una fuente específica</h3>
+      <pre><code class="language-scss">
+  // Mixin para establecer una fuente específica
+  &#64;mixin font-family($family: $font-family) &#123;
+    font-family: $family;
+  &#125;
+  </code></pre>
+      <p>Este mixin permite establecer una fuente específica.</p>
+
+      <h3>Mixin para aplicar estilos en diferentes breakpoints</h3>
+      <pre><code class="language-scss">
+  // Mixin para aplicar estilos en diferentes breakpoints
+  &#64;mixin media-breakpoint-up($size) &#123;
+    &#64;media (min-width: get-breakpoint($size)) &#123;
+      &#64;content;
+    &#125;
+  &#125;
+  </code></pre>
+      <p>Este mixin permite aplicar estilos en diferentes breakpoints.</p>
+
+      <h3>Mixin para bordes redondeados</h3>
+      <pre><code class="language-scss">
+  // Mixin para bordes redondeados
+  &#64;mixin border-radius($radius) &#123;
+    border-radius: $radius;
+  &#125;
+  </code></pre>
+      <p>Este mixin permite aplicar bordes redondeados.</p>
+
+      <h3>Mixin para sombras</h3>
+      <pre><code class="language-scss">
+  // Mixin para sombras
+  &#64;mixin box-shadow($x, $y, $blur, $spread: 0, $color: rgba(0, 0, 0, 0.25)) &#123;
+    box-shadow: $x $y $blur $spread $color;
+  &#125;
+  </code></pre>
+      <p>Este mixin permite aplicar sombras a los elementos.</p>
+
+      <h3>Mixin para controlar la opacidad de un color</h3>
+      <pre><code class="language-scss">
+  // Mixin para controlar la opacidad de un color
+  &#64;mixin opacity($color, $opacity) &#123;
+    background-color: rgba(
+      color.channel($color, "red"),
+      color.channel($color, "green"),
+      color.channel($color, "blue"),
+      $opacity
+    );
+  &#125;
+  </code></pre>
+      <p>Este mixin permite controlar la opacidad de un color.</p>
+
+      <h3>Mixin para alinear elementos con Flexbox</h3>
+      <pre><code class="language-scss">
+  // Mixin para alinear elementos con Flexbox
+  &#64;mixin flex-container($direction: row, $justify: center, $align: center) &#123;
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+  &#125;
+  </code></pre>
+      <p>Este mixin permite alinear elementos utilizando Flexbox.</p>
+
+      <h3>Mixin para items de flex</h3>
+      <pre><code class="language-scss">
+  // Mixin para items de flex
+  &#64;mixin flex-item($grow: 0, $shrink: 1, $basis: auto) &#123;
+    flex-grow: $grow;
+    flex-shrink: $shrink;
+    flex-basis: $basis;
+  &#125;
+  </code></pre>
+      <p>Este mixin permite definir propiedades de flex para los elementos.</p>
+
+      <h3>Mixin para transiciones suaves</h3>
+      <pre><code class="language-scss">
+  // Mixin para transiciones suaves
+  &#64;mixin transition($properties, $duration: 0.3s, $timing-function: ease-in-out) &#123;
+    transition: $properties $duration $timing-function;
+  &#125;
+  </code></pre>
+      <p>Este mixin permite aplicar transiciones suaves a los elementos.</p>
+
+      <h3>Mixin para aplicar un gradiente</h3>
+      <pre><code class="language-scss">
+  // Mixin para aplicar un gradiente
+  &#64;mixin gradient($start-color, $end-color, $direction: to right) &#123;
+    background: linear-gradient($direction, $start-color, $end-color);
+  &#125;
+  </code></pre>
+      <p>Este mixin permite aplicar un gradiente a los elementos.</p>
+
+      <h3>Mixin para manejar márgenes y rellenos de manera abreviada</h3>
+      <pre><code class="language-scss">
+  // Mixin para manejar márgenes y rellenos de manera abreviada
+  &#64;mixin padding-margin($type, $size) &#123;
+    #&#123;$type&#125;-top: get-spacing($size);
+    #&#123;$type&#125;-right: get-spacing($size);
+    #&#123;$type&#125;-bottom: get-spacing($size);
+    #&#123;$type&#125;-left: get-spacing($size);
+  &#125;
+  </code></pre>
+      <p>Este mixin permite manejar márgenes y rellenos de manera abreviada.</p>
+    </div>
+  </div>
+</section>
