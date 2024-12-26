@@ -10,6 +10,14 @@
   #{$property}: get-spacing($size);
 }
 
+// Mixin para manejar márgenes y rellenos de manera abreviada
+@mixin padding-margin($type, $size) {
+  #{$type}-top: get-spacing($size);
+  #{$type}-right: get-spacing($size);
+  #{$type}-bottom: get-spacing($size);
+  #{$type}-left: get-spacing($size);
+}
+
 // Mixin para aplicar colores generales (textos, fondos, bordes)
 @mixin color($property, $color-name) {
   #{$property}: get-color($color-name);
@@ -102,12 +110,4 @@
 // Mixin para aplicar un gradiente
 @mixin gradient($start-color, $end-color, $direction: to right) {
   background: linear-gradient($direction, $start-color, $end-color);
-}
-
-// Mixin para manejar márgenes y rellenos de manera abreviada
-@mixin padding-margin($type, $size) {
-  #{$type}-top: get-spacing($size);
-  #{$type}-right: get-spacing($size);
-  #{$type}-bottom: get-spacing($size);
-  #{$type}-left: get-spacing($size);
 }

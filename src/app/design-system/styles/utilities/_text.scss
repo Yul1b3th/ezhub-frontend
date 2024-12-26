@@ -50,3 +50,21 @@
 .text-right {
   text-align: right;
 }
+
+.fw-semibold {
+  font-weight: 600;
+}
+
+.fw-bold {
+  font-weight: 700;
+}
+
+.fw-normal {
+  font-weight: 400;
+}
+
+@each $size-name, $size-value in $font-sizes {
+  .fs-#{$size-name} {
+    font-size: get-font-size($size-name);
+  }
+}

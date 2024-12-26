@@ -307,6 +307,18 @@
         utilizando las variables de espaciado definidas.
       </p>
 
+      <h3>Mixin para manejar márgenes y rellenos de manera abreviada</h3>
+      <pre><code class="language-scss">
+  // Mixin para manejar márgenes y rellenos de manera abreviada
+  &#64;mixin padding-margin($type, $size) &#123;
+    #&#123;$type&#125;-top: get-spacing($size);
+    #&#123;$type&#125;-right: get-spacing($size);
+    #&#123;$type&#125;-bottom: get-spacing($size);
+    #&#123;$type&#125;-left: get-spacing($size);
+  &#125;
+  </code></pre>
+      <p>Este mixin permite manejar márgenes y rellenos de manera abreviada.</p>
+
       <h3>Mixin para aplicar colores generales</h3>
       <pre><code class="language-scss">
   // Mixin para aplicar colores generales (textos, fondos, bordes)
@@ -464,18 +476,6 @@
   &#125;
   </code></pre>
       <p>Este mixin permite aplicar un gradiente a los elementos.</p>
-
-      <h3>Mixin para manejar márgenes y rellenos de manera abreviada</h3>
-      <pre><code class="language-scss">
-  // Mixin para manejar márgenes y rellenos de manera abreviada
-  &#64;mixin padding-margin($type, $size) &#123;
-    #&#123;$type&#125;-top: get-spacing($size);
-    #&#123;$type&#125;-right: get-spacing($size);
-    #&#123;$type&#125;-bottom: get-spacing($size);
-    #&#123;$type&#125;-left: get-spacing($size);
-  &#125;
-  </code></pre>
-      <p>Este mixin permite manejar márgenes y rellenos de manera abreviada.</p>
     </div>
   </div>
 </section>
