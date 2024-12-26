@@ -1,1 +1,100 @@
-<p>themes works!</p>
+<section class="themes">
+  <div class="container">
+    <div>
+      <h1>Temas</h1>
+      <p>
+        En esta sección, exploraremos los temas disponibles en el sistema de
+        diseño. Los temas permiten cambiar la apariencia de la aplicación de
+        manera consistente y fácil.
+      </p>
+    </div>
+
+    <hr />
+
+    <!-- Tema Oscuro -->
+    <div>
+      <h2>Tema Oscuro</h2>
+      <p>
+        El tema oscuro aplica un esquema de colores oscuros a la interfaz,
+        proporcionando una apariencia elegante y moderna.
+      </p>
+      <pre><code class="language-scss">
+      body.dark-mode &#123;
+        background-color: get-background("inverted");
+        color: get-color("white");
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        small,
+        strong,
+        em,
+        blockquote,
+        code,
+        pre,
+        a &#123;
+          color: get-color("white");
+        &#125;
+      &#125;
+      </code></pre>
+      <p>
+        Estos estilos se aplican cuando el tema oscuro está activado, asegurando
+        que todos los elementos de texto y fondo utilicen colores adecuados para
+        una mejor legibilidad en entornos oscuros.
+      </p>
+    </div>
+
+    <hr />
+
+    <!-- Tema Claro -->
+    <div>
+      <h2>Tema Claro</h2>
+      <p>
+        El tema claro aplica un esquema de colores claros a la interfaz,
+        proporcionando una apariencia limpia y brillante.
+      </p>
+      <pre><code class="language-scss">
+      body.light-mode &#123;
+        background-color: get-background("default");
+        color: get-color("gray-dark");
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 &#123;
+          color: get-color("dark-200");
+        &#125;
+
+        p,
+        small,
+        strong,
+        em,
+        blockquote,
+        code,
+        pre,
+        a &#123;
+          color: get-color("gray-dark");
+        &#125;
+      &#125;
+
+      // Ejemplo de estilos adicionales para el modo claro
+      .card &#123;
+        background-color: get-background("default");
+        border-color: get-color("primary-200");
+        color: get-color("dark");
+      &#125;
+      </code></pre>
+      <p>
+        Estos estilos se aplican cuando el tema claro está activado, asegurando
+        que todos los elementos de texto y fondo utilicen colores adecuados para
+        una mejor legibilidad en entornos claros.
+      </p>
+    </div>
+  </div>
+</section>
