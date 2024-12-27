@@ -2,86 +2,91 @@
 
 @use "sass:map";
 
-// Tipografías
-$font-family: "BeVietnamPro", sans-serif;
+// === Tipografías ===
+$fonts: (
+  primary: "BeVietnamPro, sans-serif",
+  secondary: "Arial, sans-serif",
+);
 
-// Tamaños de fuente
+// === Tamaños de fuente ===
 $font-sizes: (
-  xs: 0.75rem,
-  sm: 0.875rem,
-  base: 1rem,
-  lg: 1.125rem,
-  xl: 1.25rem,
+  tiny: 0.625rem,
+  small: 0.75rem,
+  medium: 1rem,
+  large: 1.25rem,
   "2xl": 1.5rem,
   "3xl": 1.75rem,
   "4xl": 2rem,
   "5xl": 2.5rem,
 );
 
-// Alturas de línea
+// === Alturas de línea ===
 $line-heights: (
-  xs: 1rem,
-  sm: 1.25rem,
-  base: 1.5rem,
-  lg: 1.75rem,
-  xl: 2rem,
+  tiny: 0.875rem,
+  small: 1rem,
+  medium: 1.5rem,
+  large: 2rem,
 );
 
-// Breakpoints
+// === Breakpoints ===
 $breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px,
+  mobile: 0,
+  tablet: 576px,
+  laptop: 768px,
+  desktop: 992px,
+  widescreen: 1200px,
+  fullhd: 1400px,
 );
 
-// Espaciados
+// === Espaciados ===
 $spacing: (
-  xs: 0.25rem,
-  sm: 0.5rem,
-  md: 1rem,
-  lg: 2rem,
-  xl: 4rem,
+  tiny: 0.125rem,
+  small: 0.25rem,
+  medium: 0.5rem,
+  large: 1rem,
+  "2xl": 4rem,
 );
 
-// Colores principales
+// === Colores ===
 $colors: (
-  "primary": #7fe6c0,
-  "primary-200": #a3e8d4,
-  "primary-900": #0d4d3b,
-
-  "secondary": #81dfdf,
-  "secondary-200": #b3e8e9,
-
-  "tertiary": #7dd3fc,
-
-  "success": #22c55e,
-  "danger": #ef4444,
-  "warning": #f59e0b,
-  "info": #26549e,
-
-  "dark": #212121,
-  "dark-200": #1c1c1c,
-  "dark-300": #0f0f0f,
-
-  "gray": #d1d1d1,
-  "gray-light": #f1f1f1,
-  "gray-dark": #3f3f3f,
-
-  "light": #e5e5e5,
-  "light-200": #e9ecef,
-
-  "white": #ffffff,
-  "black": #000000,
+  primary: (
+    default: #7fe6c0,
+    light: #a3e8d4,
+    dark: #0d4d3b,
+  ),
+  secondary: (
+    default: #81dfdf,
+    light: #b3e8e9,
+    dark: #3a7d7e,
+  ),
+  tertiary: #7dd3fc,
+  status: (
+    success: #22c55e,
+    danger: #ef4444,
+    warning: #f59e0b,
+    info: #26549e,
+  ),
+  neutral: (
+    dark: #212121,
+    "dark-200": #1c1c1c,
+    "dark-300": #0f0f0f,
+    gray: #d1d1d1,
+    "gray-light": #f1f1f1,
+    "gray-dark": #3f3f3f,
+    light: #e5e5e5,
+    "light-200": #e9ecef,
+  ),
+  utility: (
+    white: #ffffff,
+    black: #000000,
+  ),
 );
 
-// Mapas de colores expandidos
+// === Mapas de colores expandidos ===
 $backgrounds: map.merge(
-  $colors,
+  map.get($colors, neutral),
   (
-    "default": map.get($colors, "gray-light"),
-    "inverted": map.get($colors, "dark"),
+    default: map.get(map.get($colors, neutral), "gray-light"),
+    inverted: map.get(map.get($colors, neutral), dark),
   )
 );

@@ -4,8 +4,10 @@
 @use "sass:color";
 @use "variables" as *;
 
-// Función genérica para obtener valores de un mapa
-@function get-value-from-map($map, $key) {
+// === Funciones genéricas ===
+
+// Obtiene un valor de cualquier mapa con verificación de clave
+@function get-map-value($map, $key) {
   @if map.has-key($map, $key) {
     @return map.get($map, $key);
   } @else {
@@ -13,38 +15,46 @@
   }
 }
 
-// Función para obtener un tamaño de fuente
+// === Funciones relacionadas con tipografía ===
+
+// Obtiene un tamaño de fuente
 @function get-font-size($size-name) {
-  @return get-value-from-map($font-sizes, $size-name);
+  @return get-map-value($font-sizes, $size-name);
 }
 
-// Función para obtener una altura de línea
+// Obtiene una altura de línea
 @function get-line-height($size-name) {
-  @return get-value-from-map($line-heights, $size-name);
+  @return get-map-value($line-heights, $size-name);
 }
 
-// Función para obtener un breakpoint
+// === Funciones relacionadas con diseño responsivo ===
+
+// Obtiene un breakpoint
 @function get-breakpoint($size-name) {
-  @return get-value-from-map($breakpoints, $size-name);
+  @return get-map-value($breakpoints, $size-name);
 }
 
-// Función para obtener un espaciado
+// === Funciones relacionadas con espaciado ===
+
+// Obtiene un espaciado
 @function get-spacing($size-name) {
-  @return get-value-from-map($spacing, $size-name);
+  @return get-map-value($spacing, $size-name);
 }
 
-// Función para obtener un color
+// === Funciones relacionadas con colores ===
+
+// Obtiene un color por nombre
 @function get-color($color-name) {
-  @return get-value-from-map($colors, $color-name);
+  @return get-map-value($colors, $color-name);
 }
 
-// Función para obtener un color de fondo
-@function get-background($background-name) {
-  @return get-value-from-map($backgrounds, $background-name);
+// Obtiene un color de fondo por nombre
+@function get-background-color($background-name) {
+  @return get-map-value($backgrounds, $background-name);
 }
 
-// Función para convertir colores a HSL
-@function to-hsl($color) {
+// Convierte un color a HSL
+@function color-to-hsl($color) {
   @return hsl(
     color.channel($color, "hue", $space: hsl),
     color.channel($color, "saturation", $space: hsl),
@@ -52,8 +62,8 @@
   );
 }
 
-// Función para convertir colores a HSLA con transparencia
-@function to-hsla($color, $alpha) {
+// Convierte un color a HSLA con transparencia
+@function color-to-hsla($color, $alpha) {
   @return hsla(
     color.channel($color, "hue", $space: hsl),
     color.channel($color, "saturation", $space: hsl),
@@ -61,3 +71,8 @@
     $alpha
   );
 }
+
+// === Notas ===
+// 1. Los nombres se han cambiado a formas más claras y directas (por ejemplo, `get-color`).
+// 2. Las funciones relacionadas están agrupadas lógicamente para mejorar la legibilidad.
+// 3. Las funciones genéricas como `get-map-value` son reutilizables para cualquier mapa.

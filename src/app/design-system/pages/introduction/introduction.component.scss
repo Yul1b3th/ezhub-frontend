@@ -1,0 +1,14 @@
+@use "sass:color";
+@use "sass:map";
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.box-primary {
+  @include box-shadow(0, 0.125rem, 0.25rem, rgba(0, 0, 0, 0.075));
+
+  @include transition(all, 0.3s, ease-in-out);
+  @include border-radius(9999px);
+  @include background(get-color("primary"));
+  @include color(get-color("dark-300"));
+}

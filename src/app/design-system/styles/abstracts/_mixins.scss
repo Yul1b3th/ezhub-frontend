@@ -5,80 +5,102 @@
 @use "variables" as *;
 @use "functions" as *;
 
-// Mixin para aplicar márgenes y rellenos
-@mixin spacing($property, $size) {
-  #{$property}: get-spacing($size);
+// === Mixins relacionados con espaciado ===
+
+// Aplica márgenes o rellenos
+@mixin apply-spacing($property, $size) {
+  #{$property}: spacing($size);
 }
 
-// Mixin para manejar márgenes y rellenos de manera abreviada
-@mixin padding-margin($type, $size) {
-  #{$type}-top: get-spacing($size);
-  #{$type}-right: get-spacing($size);
-  #{$type}-bottom: get-spacing($size);
-  #{$type}-left: get-spacing($size);
+// Aplica márgenes y rellenos de forma abreviada
+@mixin apply-spacing-shorthand($type, $size) {
+  #{$type}-top: spacing($size);
+  #{$type}-right: spacing($size);
+  #{$type}-bottom: spacing($size);
+  #{$type}-left: spacing($size);
 }
 
-// Mixin para aplicar colores generales (textos, fondos, bordes)
-@mixin color($property, $color-name) {
-  #{$property}: get-color($color-name);
+// === Mixins relacionados con colores ===
+
+// Aplica colores (textos, fondos, bordes)
+@mixin apply-color($property, $color-name) {
+  #{$property}: color($color-name);
 }
 
-// Mixin para aplicar colores de fondo
-@mixin background($background-name) {
-  background-color: get-background($background-name);
+// Aplica colores específicos en modo claro y oscuro
+@mixin apply-color-mode($light-color, $dark-color) {
+  color: color($light-color);
+  @media (prefers-color-scheme: dark) {
+    color: color($dark-color);
+  }
 }
 
-// Mixin para tipografía: tamaño de fuente, altura de línea, peso y margen inferior
-@mixin typography(
+// Aplica un color de fondo
+@mixin apply-background-color($background-name) {
+  background-color: background-color($background-name);
+}
+
+// === Mixins relacionados con tipografía ===
+
+// Aplica propiedades tipográficas: tamaño, altura de línea, peso, margen inferior, y color
+@mixin apply-typography(
   $font-size,
-  $line-height: base,
+  $line-height: medium,
   $font-weight: normal,
   $margin-bottom: null,
-  $color: null
+  $text-color: null
 ) {
-  font-size: get-font-size($font-size);
-  line-height: get-line-height($line-height);
+  font-size: font-size($font-size);
+  line-height: line-height($line-height);
   font-weight: $font-weight;
+
   @if $margin-bottom != null {
-    margin-bottom: get-spacing($margin-bottom);
+    margin-bottom: spacing($margin-bottom);
   }
-  @if $color != null {
-    color: get-color($color);
-  }
-}
-
-// Mixin para aplicar colores específicos en modos claro y oscuro
-@mixin apply-color($light-color, $dark-color) {
-  color: get-color($light-color);
-  @media (prefers-color-scheme: dark) {
-    color: get-color($dark-color);
+  @if $text-color != null {
+    color: color($text-color);
   }
 }
 
-// Mixin para establecer una fuente específica
-@mixin font-family($family: $font-family) {
-  font-family: $family;
+// Establece la familia tipográfica
+@mixin apply-font-family($font: primary) {
+  font-family: map.get($fonts, $font);
 }
 
-// Mixin para aplicar estilos en diferentes breakpoints
-@mixin media-breakpoint-up($size) {
-  @media (min-width: get-breakpoint($size)) {
+// === Mixins relacionados con diseño responsivo ===
+
+// Aplica estilos en un breakpoint específico
+@mixin apply-media-breakpoint($size) {
+  @media (min-width: breakpoint($size)) {
     @content;
   }
 }
 
-// Mixin para bordes redondeados
-@mixin border-radius($radius) {
+// === Mixins relacionados con diseño visual ===
+
+// Aplica bordes redondeados
+@mixin apply-border-radius($radius) {
   border-radius: $radius;
 }
 
-// Mixin para sombras
-@mixin box-shadow($x, $y, $blur, $spread: 0, $color: rgba(0, 0, 0, 0.25)) {
+// Aplica una sombra
+@mixin apply-box-shadow(
+  $x,
+  $y,
+  $blur,
+  $spread: 0,
+  $color: rgba(0, 0, 0, 0.25)
+) {
   box-shadow: $x $y $blur $spread $color;
 }
 
-// Mixin para controlar la opacidad de un color
-@mixin opacity($color, $opacity) {
+// Aplica un gradiente lineal
+@mixin apply-gradient($start-color, $end-color, $direction: to right) {
+  background: linear-gradient($direction, $start-color, $end-color);
+}
+
+// Controla la opacidad de un color
+@mixin apply-color-opacity($color, $opacity) {
   background-color: rgba(
     color.channel($color, "red"),
     color.channel($color, "green"),
@@ -87,27 +109,28 @@
   );
 }
 
-// Mixin para alinear elementos con Flexbox
-@mixin flex-container($direction: row, $justify: center, $align: center) {
+// === Mixins relacionados con Flexbox ===
+
+// Configura un contenedor flex
+@mixin apply-flex-container($direction: row, $justify: center, $align: center) {
   display: flex;
   flex-direction: $direction;
   justify-content: $justify;
   align-items: $align;
 }
 
-// Mixin para items de flex
-@mixin flex-item($grow: 0, $shrink: 1, $basis: auto) {
-  flex-grow: $grow;
-  flex-shrink: $shrink;
-  flex-basis: $basis;
+// Configura un ítem de flex
+@mixin apply-flex-item($grow: 0, $shrink: 1, $basis: auto) {
+  flex: $grow $shrink $basis;
 }
 
-// Mixin para transiciones suaves
-@mixin transition($properties, $duration: 0.3s, $timing-function: ease-in-out) {
+// === Mixins relacionados con animación ===
+
+// Aplica transiciones suaves
+@mixin apply-transition(
+  $properties: all,
+  $duration: 0.3s,
+  $timing-function: ease-in-out
+) {
   transition: $properties $duration $timing-function;
-}
-
-// Mixin para aplicar un gradiente
-@mixin gradient($start-color, $end-color, $direction: to right) {
-  background: linear-gradient($direction, $start-color, $end-color);
 }
