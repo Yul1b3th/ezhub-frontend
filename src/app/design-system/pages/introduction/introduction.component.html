@@ -1,351 +1,74 @@
 <section class="introduction">
-  <div class="container">
+  <!-- Encabezado de la sección -->
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
     <h1>Bienvenido al Design System</h1>
     <p>
-      Este es un sistema de diseño sencillo creado para facilitar el desarrollo
-      de interfaces consistentes y accesibles.
+      Este es un sistema de diseño creado para facilitar el desarrollo de
+      interfaces consistentes y accesibles.
     </p>
+  </header>
 
-    <h2>Cómo Empezar</h2>
-    <p>
-      Para comenzar a utilizar este Design System, sigue los siguientes pasos:
-    </p>
-    <ol>
-      <li>Descarga el proyecto desde el repositorio.</li>
-      <li>
-        Instala las dependencias necesarias utilizando <code>npm install</code>.
-      </li>
-      <li>
-        Explora los componentes y estilos disponibles en la documentación.
-      </li>
-    </ol>
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <div class="documentation-section">
+      <h2>Cómo Empezar</h2>
+      <p>
+        Para comenzar a utilizar este Design System, sigue los siguientes pasos:
+      </p>
+      <ol>
+        <li>Descarga el proyecto desde el repositorio.</li>
+        <li>
+          Instala las dependencias necesarias utilizando
+          <code>npm install</code>.
+        </li>
+        <li>
+          Explora los componentes y estilos disponibles en la documentación.
+        </li>
+      </ol>
+    </div>
 
-    <h2>Personalización</h2>
-    <p>
-      Este Design System es altamente personalizable. Puedes ajustar las
-      variables, funciones y mixins para adaptarlo a tus necesidades
-      específicas.
-    </p>
-    <p>
-      Consulta la sección de
-      <a routerLink="/customization">Personalización</a> para más detalles.
-    </p>
+    <div class="documentation-section">
+      <h2>Personalización</h2>
+      <p>
+        Este Design System es altamente personalizable. Puedes ajustar las
+        variables, funciones y mixins para adaptarlo a tus necesidades
+        específicas.
+      </p>
+      <p>
+        Consulta la sección de
+        <a routerLink="/design-system/customization">Personalización</a> para
+        más detalles.
+      </p>
+    </div>
 
-    <h2>Importación de Estilos</h2>
-    <p>
-      El archivo <code>main.scss</code> centraliza la importación de todos los
-      estilos y utilidades del sistema de diseño. A continuación se muestra el
-      contenido del archivo:
-    </p>
-    <pre><code class="language-scss">
+    <div class="documentation-section">
+      <h2>Importación de Estilos</h2>
+      <p>
+        El archivo <code>main.scss</code> centraliza la importación de todos los
+        estilos y utilidades del sistema de diseño. A continuación se muestra el
+        contenido del archivo:
+      </p>
+      <pre class="mb-md"><code class="language-scss">
     &#64;use "abstracts/variables" as *;
     &#64;use "abstracts/functions" as *;
     &#64;use "abstracts/mixins" as *;
-    &#64;use "base/reboot" as *;
+    &#64;use "base/global" as *;
+    &#64;use "base/reset" as *;
     &#64;use "base/typography" as *;
     &#64;use "layout/grid" as *;
     &#64;use "layout/helpers" as *;
     &#64;use "themes/dark" as *;
     &#64;use "themes/light" as *;
+    &#64;use "utilities/colors" as *;
     &#64;use "utilities/spacing" as *;
     &#64;use "utilities/visibility" as *;
-    &#64;use "utilities/colors" as *;
     &#64;use "utilities/text" as *;
     &#64;use "utilities/utilities" as *;
     </code></pre>
-    <p>
-      Este archivo asegura que todos los estilos y utilidades estén disponibles
-      en toda la aplicación.
-    </p>
-
-    <div>
-      <h2>Typography</h2>
-
-      <p>H1 - BeVietnamPro - 40px (2.5rem)</p>
-      <h1>Lorem, ipsum.</h1>
-
-      <p>H2 - BeVietnamPro - 32px (2rem)</p>
-      <h2>Lorem, ipsum.</h2>
-
-      <p>H3 - BeVietnamPro - 28px (1.75rem)</p>
-      <h3>Lorem, ipsum.</h3>
-
-      <p>H4 - BeVietnamPro - 24px (1.5rem)</p>
-      <h4>Lorem, ipsum.</h4>
-
-      <p>H5 - BeVietnamPro - 20px (1.25rem)</p>
-      <h5>Lorem, ipsum.</h5>
-
-      <p>H6 - BeVietnamPro - 18px (1.125rem)</p>
-      <h6>Lorem, ipsum.</h6>
-
-      <p>p - BeVietnamPro - 16px (1rem)</p>
-      <p>Lorem, ipsum dolor sit amet.</p>
+      <p>
+        Este archivo asegura que todos los estilos y utilidades estén
+        disponibles en toda la aplicación.
+      </p>
     </div>
-
-    <section class="design-system">
-      <h2>Design System</h2>
-      <div class="typography">
-        <h3>Tipografía</h3>
-        <p class="text-xs">Texto XS</p>
-        <p class="text-sm">Texto SM</p>
-        <p class="text-base">Texto Base</p>
-        <p class="text-lg">Texto LG</p>
-        <p class="text-xl">Texto XL</p>
-        <p class="text-2xl">Texto 2XL</p>
-        <p class="text-3xl">Texto 3XL</p>
-        <p class="text-4xl">Texto 4XL</p>
-      </div>
-
-      <div class="buttons">
-        <h3>Botones</h3>
-        <button class="btn btn-primary btn-sm rounded">
-          Botón Primario Pequeño
-        </button>
-        <button class="btn btn-primary btn-md rounded">
-          Botón Primario Mediano
-        </button>
-        <button class="btn btn-primary btn-lg rounded">
-          Botón Primario Grande
-        </button>
-        <button class="btn btn-secondary btn-sm rounded">
-          Botón Secundario Pequeño
-        </button>
-        <button class="btn btn-secondary btn-md rounded">
-          Botón Secundario Mediano
-        </button>
-        <button class="btn btn-secondary btn-lg rounded">
-          Botón Secundario Grande
-        </button>
-        <button class="btn btn-success btn-sm rounded">
-          Botón de Éxito Pequeño
-        </button>
-        <button class="btn btn-success btn-md rounded">
-          Botón de Éxito Mediano
-        </button>
-        <button class="btn btn-success btn-lg rounded">
-          Botón de Éxito Grande
-        </button>
-        <button class="btn btn-danger btn-sm rounded">
-          Botón de Peligro Pequeño
-        </button>
-        <button class="btn btn-danger btn-md rounded">
-          Botón de Peligro Mediano
-        </button>
-        <button class="btn btn-danger btn-lg rounded">
-          Botón de Peligro Grande
-        </button>
-      </div>
-
-      <div class="interactive-elements">
-        <h3>Elementos Interactivos</h3>
-        <input type="text" placeholder="Campo de texto" class="input-text" />
-        <input type="checkbox" id="checkbox" class="checkbox" />
-        <label for="checkbox">Checkbox</label>
-        <input type="radio" id="radio" name="radio-group" class="radio" />
-        <label for="radio">Radio</label>
-        <select class="select">
-          <option>Opción 1</option>
-          <option>Opción 2</option>
-          <option>Opción 3</option>
-        </select>
-      </div>
-    </section>
   </div>
 </section>
-
-<div>
-  <div>
-    <h2>Paleta de Colores</h2>
-  </div>
-  <div class="color-palette">
-    <div class="color-item">
-      <div class="color-box box-primary">#7FE6C0</div>
-      <p>RGB: 127, 230, 192</p>
-      <p>HSL: 160, 70%, 70%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #a3e8d4">
-        <p>#A3E8D4</p>
-      </div>
-      <p>RGB: 163, 232, 212</p>
-      <p>HSL: 160, 50%, 87%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #0d4d3b">
-        <p>#0D4D3B</p>
-      </div>
-      <p>RGB: 13, 77, 59</p>
-      <p>HSL: 160, 71%, 18%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #81dfdf">
-        <p>#81DFDF</p>
-      </div>
-      <p>RGB: 129, 223, 223</p>
-      <p>HSL: 180, 60%, 69%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #b3e8e9">
-        <p>#B3E8E9</p>
-      </div>
-      <p>RGB: 179, 232, 233</p>
-      <p>HSL: 181, 50%, 81%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #7dd3fc">
-        <p>#7DD3FC</p>
-      </div>
-      <p>RGB: 125, 211, 252</p>
-      <p>HSL: 200, 96%, 74%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #22c55e">
-        <p>#22C55E</p>
-      </div>
-      <p>RGB: 34, 197, 94</p>
-      <p>HSL: 134, 71%, 45%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #ef4444">
-        <p>#EF4444</p>
-      </div>
-      <p>RGB: 239, 68, 68</p>
-      <p>HSL: 0, 82%, 60%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #f59e0b">
-        <p>#F59E0B</p>
-      </div>
-      <p>RGB: 245, 158, 11</p>
-      <p>HSL: 36, 91%, 50%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #26549e">
-        <p>#26549E</p>
-      </div>
-      <p>RGB: 38, 84, 158</p>
-      <p>HSL: 215, 61%, 38%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #212121">
-        <p>#212121</p>
-      </div>
-      <p>RGB: 33, 33, 33</p>
-      <p>HSL: 0, 0%, 13%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #1c1c1c">
-        <p>#1C1C1C</p>
-      </div>
-      <p>RGB: 28, 28, 28</p>
-      <p>HSL: 0, 0%, 11%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #0f0f0f">
-        <p>#0F0F0F</p>
-      </div>
-      <p>RGB: 15, 15, 15</p>
-      <p>HSL: 0, 0%, 6%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #d1d1d1">
-        <p>#D1D1D1</p>
-      </div>
-      <p>RGB: 209, 209, 209</p>
-      <p>HSL: 0, 0%, 82%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #f1f1f1">
-        <p>#F1F1F1</p>
-      </div>
-      <p>RGB: 241, 241, 241</p>
-      <p>HSL: 0, 0%, 95%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #3f3f3f">
-        <p>#3F3F3F</p>
-      </div>
-      <p>RGB: 63, 63, 63</p>
-      <p>HSL: 0, 0%, 25%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #e5e5e5">
-        <p>#E5E5E5</p>
-      </div>
-      <p>RGB: 229, 229, 229</p>
-      <p>HSL: 0, 0%, 90%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #e9ecef">
-        <p>#E9ECEF</p>
-      </div>
-      <p>RGB: 233, 236, 239</p>
-      <p>HSL: 210, 17%, 92%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #ffffff">
-        <p>#FFFFFF</p>
-      </div>
-      <p>RGB: 255, 255, 255</p>
-      <p>HSL: 0, 0%, 100%</p>
-    </div>
-
-    <div class="color-item">
-      <div class="color-box" style="background-color: #000000">
-        <p>#000000</p>
-      </div>
-      <p>RGB: 0, 0, 0</p>
-      <p>HSL: 0, 0%, 0%</p>
-    </div>
-  </div>
-</div>
-
-<style>
-  .color-palette {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .color-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  .color-box {
-    width: 200px;
-    height: 80px;
-    color: #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #000;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-  }
-  .color-box p {
-    margin: 4px 0;
-    font-weight: bold;
-    font-size: 1.125rem;
-  }
-</style>

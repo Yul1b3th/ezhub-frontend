@@ -1,1 +1,1285 @@
-<p>input works!</p>
+<section>
+  <!-- Encabezado de la sección -->
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Inputs</h1>
+    <p>
+      Los componentes de entrada (<code>ds-input</code>) se utilizan para
+      permitir a los usuarios ingresar datos en la aplicación. Estos componentes
+      son altamente personalizables y soportan múltiples tipos de entradas para
+      adaptarse a diferentes contextos de uso.
+    </p>
+  </header>
+
+  <!-- Tipos de Inputs -->
+  <div class="documentation-nav">
+    <h2>Tipos de Inputs</h2>
+    <p>
+      A continuación se presentan los diferentes tipos de componentes de entrada
+      disponibles:
+    </p>
+
+    <nav>
+      <ul>
+        <li>
+          <a
+            [routerLink]="[]"
+            fragment="text-input"
+            [class.active-link]="isActive('text-input')"
+            >Text Input</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="[]"
+            fragment="number-input"
+            [class.active-link]="isActive('number-input')"
+            >Number Input</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="[]"
+            fragment="email-input"
+            [class.active-link]="isActive('email-input')"
+            >Email Input</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="[]"
+            fragment="password-input"
+            [class.active-link]="isActive('password-input')"
+            >Password Input</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="[]"
+            fragment="date-input"
+            [class.active-link]="isActive('date-input')"
+            >Date Input</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="[]"
+            fragment="select-input"
+            [class.active-link]="isActive('select-input')"
+            >Select Input</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="[]"
+            fragment="checkbox"
+            [class.active-link]="isActive('checkbox')"
+            >Checkbox</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="[]"
+            fragment="radio"
+            [class.active-link]="isActive('radio')"
+            >Radio</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="[]"
+            fragment="textarea"
+            [class.active-link]="isActive('textarea')"
+            >Textarea</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="[]"
+            fragment="switch"
+            [class.active-link]="isActive('switch')"
+            >Switch</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="documentation-content">
+    <!-- States -->
+    <div class="documentation-section">
+      <h2>States</h2>
+      <p>
+        Los diferentes estados del componente de entrada de texto muestran cómo
+        se comporta el componente en diversas situaciones.
+      </p>
+
+      <!-- Default -->
+      <div class="documentation-item">
+        <h3>Default</h3>
+        <ds-text-input
+          id="default"
+          label="Default"
+          placeholder="Enter text"
+        ></ds-text-input>
+      </div>
+
+      <!-- Hover -->
+      <div class="documentation-item">
+        <h3>Hover</h3>
+        <p>
+          El estado hover se muestra cuando el usuario pasa el cursor sobre el
+          campo de entrada.
+        </p>
+        <ds-text-input
+          id="hover"
+          label="Hover"
+          placeholder="Hover over this input"
+        ></ds-text-input>
+      </div>
+
+      <!-- Typing (Focus) -->
+      <div class="documentation-item">
+        <h3>Typing (Focus)</h3>
+        <p>
+          El estado de enfoque se muestra cuando el usuario hace clic en el
+          campo de entrada y comienza a escribir.
+        </p>
+        <ds-text-input
+          id="focus"
+          label="Focus"
+          placeholder="Focus on this input"
+        ></ds-text-input>
+      </div>
+
+      <!-- Disabled -->
+      <div class="documentation-item">
+        <h3>Disabled</h3>
+        <ds-text-input
+          id="disabled"
+          label="Disabled"
+          placeholder="This input is disabled"
+          [disabled]="true"
+        ></ds-text-input>
+      </div>
+
+      <!-- Verification -->
+      <div class="documentation-item">
+        <h3>Verification</h3>
+        <p>
+          El estado de verificación se muestra cuando el campo de entrada ha
+          sido verificado.
+        </p>
+        <ds-text-input
+          id="verification"
+          label="Verification"
+          placeholder="Verified input"
+          class="verification"
+        ></ds-text-input>
+      </div>
+
+      <!-- Error -->
+      <div class="documentation-item">
+        <h3>Error</h3>
+        <p>
+          El estado de error se muestra cuando hay un error en el campo de
+          entrada.
+        </p>
+        <ds-text-input
+          id="error"
+          label="Error"
+          placeholder="Input with error"
+          required="true"
+          errorMessage="This field is required"
+        ></ds-text-input>
+      </div>
+    </div>
+
+    <!-- Text Input -->
+    <section class="documentation-section" id="text-input" #section>
+      <h2>Text Input</h2>
+      <p>
+        El componente <code>ds-text-input</code> se utiliza para capturar datos
+        de texto con opciones de personalización y validación. Es completamente
+        accesible y adecuado para formularios o campos de entrada
+        independientes.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Uso</h3>
+        <p>Ejemplo de uso en HTML:</p>
+        <pre><code>
+        &lt;form [formGroup]="form"&gt;
+          &lt;ds-text-input
+            formControlName="textInput"
+            id="name"
+            label="Name"
+            placeholder="Enter your name"
+            [ariaRequired]="true"
+            [maxlength]="50"
+            [iconSvg]="textIconSvg"
+          &gt;&lt;/ds-text-input&gt;
+        &lt;/form&gt;
+      </code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Configuración</h3>
+        <p>El componente acepta las siguientes propiedades:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado como etiqueta del campo.</td>
+              <td><code>"Nombre completo"</code></td>
+            </tr>
+            <tr>
+              <td><code>placeholder</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado dentro del campo cuando está vacío.</td>
+              <td><code>"Escribe tu nombre"</code></td>
+            </tr>
+            <tr>
+              <td><code>formControlName</code></td>
+              <td><code>string</code></td>
+              <td>
+                Vincula el componente a un control de un formulario reactivo.
+              </td>
+              <td><code>"name"</code></td>
+            </tr>
+            <tr>
+              <td><code>required</code></td>
+              <td><code>boolean</code></td>
+              <td>Define si el campo es obligatorio.</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td><code>boolean</code></td>
+              <td>Desactiva el campo de entrada.</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>maxlength</code></td>
+              <td><code>number</code></td>
+              <td>Longitud máxima del texto ingresado.</td>
+              <td><code>50</code></td>
+            </tr>
+            <tr>
+              <td><code>errorMessage</code></td>
+              <td><code>string</code></td>
+              <td>
+                Mensaje de error personalizado mostrado para errores de
+                validación.
+              </td>
+              <td><code>"Este campo es obligatorio"</code></td>
+            </tr>
+            <tr>
+              <td><code>iconSvg</code></td>
+              <td><code>string</code></td>
+              <td>SVG del icono a mostrar dentro del campo de entrada.</td>
+              <td><code>&lt;svg ...&gt;&lt;/svg&gt;</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <form [formGroup]="form">
+          <ds-text-input
+            formControlName="textInput"
+            id="name"
+            label="Name"
+            placeholder="Enter your name"
+            [ariaRequired]="true"
+            [maxlength]="50"
+            [iconSvg]="textIconSvg"
+          >
+          </ds-text-input>
+        </form>
+      </div>
+    </section>
+
+    <!-- number-input -->
+    <section class="documentation-section" id="number-input" #section>
+      <h2>Number Input</h2>
+      <p>
+        El componente <code>ds-number-input</code> se utiliza para capturar
+        datos numéricos con opciones de personalización y validación. Es
+        completamente accesible y adecuado para formularios o campos de entrada
+        independientes.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Uso</h3>
+        <p>Ejemplo de uso en HTML:</p>
+        <pre><code>
+        &lt;form [formGroup]="form"&gt;
+          &lt;ds-number-input
+            formControlName="quantity"
+            id="quantity"
+            label="Quantity"
+            placeholder="Enter quantity"
+            [ariaRequired]="true"
+            [min]="1"
+            [max]="100"
+            [step]="1"
+            [iconSvg]="quantityIconSvg"
+          &gt;&lt;/ds-number-input&gt;
+        &lt;/form&gt;
+      </code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Configuración</h3>
+        <p>El componente acepta las siguientes propiedades:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado como etiqueta del campo.</td>
+              <td><code>"Cantidad"</code></td>
+            </tr>
+            <tr>
+              <td><code>placeholder</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado dentro del campo cuando está vacío.</td>
+              <td><code>"Escribe la cantidad"</code></td>
+            </tr>
+            <tr>
+              <td><code>formControlName</code></td>
+              <td><code>string</code></td>
+              <td>
+                Vincula el componente a un control de un formulario reactivo.
+              </td>
+              <td><code>"quantity"</code></td>
+            </tr>
+            <tr>
+              <td><code>required</code></td>
+              <td><code>boolean</code></td>
+              <td>Define si el campo es obligatorio.</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td><code>boolean</code></td>
+              <td>Desactiva el campo de entrada.</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>errorMessage</code></td>
+              <td><code>string</code></td>
+              <td>
+                Mensaje de error personalizado mostrado para errores de
+                validación.
+              </td>
+              <td><code>"Este campo es obligatorio"</code></td>
+            </tr>
+            <tr>
+              <td><code>min</code></td>
+              <td><code>number</code></td>
+              <td>Valor mínimo permitido para el campo de entrada.</td>
+              <td><code>1</code></td>
+            </tr>
+            <tr>
+              <td><code>max</code></td>
+              <td><code>number</code></td>
+              <td>Valor máximo permitido para el campo de entrada.</td>
+              <td><code>100</code></td>
+            </tr>
+            <tr>
+              <td><code>step</code></td>
+              <td><code>number</code></td>
+              <td>Incremento de valor permitido para el campo de entrada.</td>
+              <td><code>1</code></td>
+            </tr>
+            <tr>
+              <td><code>iconSvg</code></td>
+              <td><code>string</code></td>
+              <td>SVG del icono a mostrar dentro del campo de entrada.</td>
+              <td><code>&lt;svg ...&gt;&lt;/svg&gt;</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <form [formGroup]="form">
+          <ds-number-input
+            formControlName="quantity"
+            id="quantity"
+            label="Quantity"
+            placeholder="Enter quantity"
+            [ariaRequired]="true"
+            [min]="1"
+            [max]="100"
+            [step]="1"
+            [iconSvg]="quantityIconSvg"
+          >
+          </ds-number-input>
+        </form>
+      </div>
+    </section>
+
+    <!-- Email Input -->
+    <section class="documentation-section" id="email-input" #section>
+      <h2>Email Input</h2>
+      <p>
+        El componente <code>ds-email-input</code> se utiliza para capturar
+        direcciones de correo electrónico con opciones de personalización y
+        validación. Es completamente accesible y adecuado para formularios o
+        campos de entrada independientes.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Uso</h3>
+        <p>Ejemplo de uso en HTML:</p>
+        <pre><code>
+        &lt;form [formGroup]="form"&gt;
+          &lt;ds-email-input
+            formControlName="emailInput"
+            id="email"
+            label="Email"
+            placeholder="Enter your email"
+            [ariaRequired]="true"
+            [iconSvg]="emailIconSvg"
+          &gt;&lt;/ds-email-input&gt;
+        &lt;/form&gt;
+      </code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Configuración</h3>
+        <p>El componente acepta las siguientes propiedades:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado como etiqueta del campo.</td>
+              <td><code>"Correo Electrónico"</code></td>
+            </tr>
+            <tr>
+              <td><code>placeholder</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado dentro del campo cuando está vacío.</td>
+              <td><code>"Escribe tu correo electrónico"</code></td>
+            </tr>
+            <tr>
+              <td><code>formControlName</code></td>
+              <td><code>string</code></td>
+              <td>
+                Vincula el componente a un control de un formulario reactivo.
+              </td>
+              <td><code>"email"</code></td>
+            </tr>
+            <tr>
+              <td><code>required</code></td>
+              <td><code>boolean</code></td>
+              <td>Define si el campo es obligatorio.</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td><code>boolean</code></td>
+              <td>Desactiva el campo de entrada.</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>errorMessage</code></td>
+              <td><code>string</code></td>
+              <td>
+                Mensaje de error personalizado mostrado para errores de
+                validación.
+              </td>
+              <td><code>"Este campo es obligatorio"</code></td>
+            </tr>
+            <tr>
+              <td><code>iconSvg</code></td>
+              <td><code>string</code></td>
+              <td>SVG del icono a mostrar dentro del campo de entrada.</td>
+              <td><code>&lt;svg ...&gt;&lt;/svg&gt;</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <form [formGroup]="form">
+          <ds-email-input
+            formControlName="emailInput"
+            id="email"
+            label="Email"
+            placeholder="Enter your email"
+            [ariaRequired]="true"
+            [iconSvg]="emailIconSvg"
+          >
+          </ds-email-input>
+        </form>
+      </div>
+    </section>
+
+    <!-- Password Input -->
+    <section class="documentation-section" id="password-input" #section>
+      <h2>Password Input</h2>
+      <p>
+        El componente <code>ds-password-input</code> se utiliza para capturar
+        contraseñas con opciones de personalización y validación. Es
+        completamente accesible y adecuado para formularios o campos de entrada
+        independientes.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Uso</h3>
+        <p>Ejemplo de uso en HTML:</p>
+        <pre><code>
+        &lt;form [formGroup]="form"&gt;
+          &lt;ds-password-input
+            formControlName="passwordInput"
+            id="password"
+            label="Password"
+            placeholder="Enter password"
+            [ariaRequired]="true"
+          &gt;&lt;/ds-password-input&gt;
+        &lt;/form&gt;
+      </code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Configuración</h3>
+        <p>El componente acepta las siguientes propiedades:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado como etiqueta del campo.</td>
+              <td><code>"Contraseña"</code></td>
+            </tr>
+            <tr>
+              <td><code>placeholder</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado dentro del campo cuando está vacío.</td>
+              <td><code>"Escribe tu contraseña"</code></td>
+            </tr>
+            <tr>
+              <td><code>formControlName</code></td>
+              <td><code>string</code></td>
+              <td>
+                Vincula el componente a un control de un formulario reactivo.
+              </td>
+              <td><code>"password"</code></td>
+            </tr>
+            <tr>
+              <td><code>required</code></td>
+              <td><code>boolean</code></td>
+              <td>Define si el campo es obligatorio.</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td><code>boolean</code></td>
+              <td>Desactiva el campo de entrada.</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>errorMessage</code></td>
+              <td><code>string</code></td>
+              <td>
+                Mensaje de error personalizado mostrado para errores de
+                validación.
+              </td>
+              <td><code>"Este campo es obligatorio"</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <form [formGroup]="form">
+          <ds-password-input
+            formControlName="passwordInput"
+            id="password"
+            label="Password"
+            placeholder="Enter password"
+            [ariaRequired]="true"
+          >
+          </ds-password-input>
+        </form>
+      </div>
+    </section>
+
+    <!-- Date Input -->
+    <section class="documentation-section" id="date-input" #section>
+      <h2>Date Input</h2>
+      <p>
+        El componente <code>ds-date-input</code> se utiliza para capturar fechas
+        con opciones de personalización y validación. Es completamente accesible
+        y adecuado para formularios o campos de entrada independientes.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Uso</h3>
+        <p>Ejemplo de uso en HTML:</p>
+        <pre><code>
+        &lt;form [formGroup]="form"&gt;
+          &lt;ds-date-input
+            formControlName="dateInput"
+            id="date"
+            label="Date"
+            placeholder="Select date"
+            [ariaRequired]="true"
+          &gt;&lt;/ds-date-input&gt;
+        &lt;/form&gt;
+      </code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Configuración</h3>
+        <p>El componente acepta las siguientes propiedades:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado como etiqueta del campo.</td>
+              <td><code>"Fecha"</code></td>
+            </tr>
+            <tr>
+              <td><code>placeholder</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado dentro del campo cuando está vacío.</td>
+              <td><code>"Selecciona una fecha"</code></td>
+            </tr>
+            <tr>
+              <td><code>formControlName</code></td>
+              <td><code>string</code></td>
+              <td>
+                Vincula el componente a un control de un formulario reactivo.
+              </td>
+              <td><code>"date"</code></td>
+            </tr>
+            <tr>
+              <td><code>required</code></td>
+              <td><code>boolean</code></td>
+              <td>Define si el campo es obligatorio.</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td><code>boolean</code></td>
+              <td>Desactiva el campo de entrada.</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>errorMessage</code></td>
+              <td><code>string</code></td>
+              <td>
+                Mensaje de error personalizado mostrado para errores de
+                validación.
+              </td>
+              <td><code>"Este campo es obligatorio"</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <form [formGroup]="form">
+          <ds-date-input
+            formControlName="dateInput"
+            id="date"
+            label="Date"
+            placeholder="Select date"
+            [ariaRequired]="true"
+          >
+          </ds-date-input>
+        </form>
+      </div>
+    </section>
+
+    <!-- Select Input -->
+    <section class="documentation-section" id="select-input" #section>
+      <h2>Select Input</h2>
+      <p>
+        El componente <code>ds-select-input</code> se utiliza para permitir a
+        los usuarios seleccionar una opción de una lista desplegable. Este
+        componente es altamente personalizable y soporta múltiples
+        configuraciones.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Uso</h3>
+        <p>Ejemplo de uso en HTML:</p>
+        <pre><code>
+        &lt;form [formGroup]="form"&gt;
+          &lt;ds-select-input
+            formControlName="selectInput"
+            id="select"
+            label="Select"
+            placeholder="Select an option"
+            [ariaRequired]="true"
+            [options]="[
+              &#123; label: 'Option 1', value: 1 &#125;,
+              &#123; label: 'Option 2', value: 2 &#125;,
+              &#123; label: 'Option 3', value: 3 &#125;
+            ]"
+          &gt;&lt;/ds-select-input&gt;
+        &lt;/form&gt;
+      </code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Configuración</h3>
+        <p>El componente acepta las siguientes propiedades:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado como etiqueta del campo.</td>
+              <td><code>"Seleccionar"</code></td>
+            </tr>
+            <tr>
+              <td><code>placeholder</code></td>
+              <td><code>string</code></td>
+              <td>
+                Texto mostrado dentro del campo cuando no se ha seleccionado
+                ninguna opción.
+              </td>
+              <td><code>"Selecciona una opción"</code></td>
+            </tr>
+            <tr>
+              <td><code>formControlName</code></td>
+              <td><code>string</code></td>
+              <td>
+                Vincula el componente a un control de un formulario reactivo.
+              </td>
+              <td><code>"select"</code></td>
+            </tr>
+            <tr>
+              <td><code>required</code></td>
+              <td><code>boolean</code></td>
+              <td>Define si el campo es obligatorio.</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td><code>boolean</code></td>
+              <td>Desactiva el campo de entrada.</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>errorMessage</code></td>
+              <td><code>string</code></td>
+              <td>
+                Mensaje de error personalizado mostrado para errores de
+                validación.
+              </td>
+              <td><code>"Este campo es obligatorio"</code></td>
+            </tr>
+            <tr>
+              <td><code>options</code></td>
+              <td>
+                <code
+                  >Array&lt;&#123; label: string, value: any &#125;&gt;</code
+                >
+              </td>
+              <td>
+                Lista de opciones que se mostrarán en el menú desplegable.
+              </td>
+              <td>
+                <code
+                  >[&#123; label: 'Option 1', value: 1 &#125;, &#123; label:
+                  'Option 2', value: 2 &#125;]</code
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <form [formGroup]="form">
+          <ds-select-input
+            formControlName="selectInput"
+            id="select"
+            label="Select"
+            placeholder="Select an option"
+            [ariaRequired]="true"
+            [options]="[
+        &#123; label: 'Option 1', value: 1 &#125;,
+        &#123; label: 'Option 2', value: 2 &#125;,
+        &#123; label: 'Option 3', value: 3 &#125;
+      ]"
+          >
+          </ds-select-input>
+        </form>
+      </div>
+    </section>
+
+    <!-- Checkbox -->
+    <section class="documentation-section" id="checkbox" #section>
+      <h2>Checkbox</h2>
+      <p>
+        El componente <code>ds-checkbox</code> se utiliza para permitir a los
+        usuarios seleccionar una o más opciones de una lista. Este componente es
+        altamente personalizable y soporta múltiples configuraciones.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Uso</h3>
+        <p>Ejemplo de uso en HTML:</p>
+        <pre><code>&lt;form [formGroup]="form"&gt;
+  &lt;ds-checkbox
+    formControlName="checkboxInput"
+    id="checkbox"
+    label="Accept terms and conditions"
+    [ariaRequired]="true"
+  &gt;&lt;/ds-checkbox&gt;
+&lt;/form&gt;</code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Configuración</h3>
+        <p>El componente acepta las siguientes propiedades:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado junto a la casilla de verificación.</td>
+              <td><code>"Aceptar términos y condiciones"</code></td>
+            </tr>
+            <tr>
+              <td><code>formControlName</code></td>
+              <td><code>string</code></td>
+              <td>
+                Vincula el componente a un control de un formulario reactivo.
+              </td>
+              <td><code>"checkboxInput"</code></td>
+            </tr>
+            <tr>
+              <td><code>required</code></td>
+              <td><code>boolean</code></td>
+              <td>Define si el campo es obligatorio.</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td><code>boolean</code></td>
+              <td>Desactiva la casilla de verificación.</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>errorMessage</code></td>
+              <td><code>string</code></td>
+              <td>
+                Mensaje de error personalizado mostrado para errores de
+                validación.
+              </td>
+              <td><code>"Este campo es obligatorio"</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <form [formGroup]="form">
+          <ds-checkbox
+            formControlName="checkboxInput"
+            id="checkbox"
+            label="Accept terms and conditions"
+            [ariaRequired]="true"
+          >
+          </ds-checkbox>
+        </form>
+      </div>
+    </section>
+
+    <!-- Radio -->
+    <section class="documentation-section" id="radio" #section>
+      <h2>Radio</h2>
+      <p>
+        El componente <code>ds-radio</code> se utiliza para permitir a los
+        usuarios seleccionar una opción de un grupo de opciones. Este componente
+        es altamente personalizable y soporta múltiples configuraciones.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Uso</h3>
+        <p>Ejemplo de uso en HTML:</p>
+        <pre><code>
+          &lt;form [formGroup]="form"&gt;
+            &lt;ds-radio
+              formControlName="radioInput"
+              id="option1"
+              name="options"
+              label="Option 1"
+              value="1"
+              [ariaRequired]="true"
+            &gt;&lt;/ds-radio&gt;
+            &lt;ds-radio
+              formControlName="radioInput"
+              id="option2"
+              name="options"
+              label="Option 2"
+              value="2"
+              [ariaRequired]="true"
+            &gt;&lt;/ds-radio&gt;
+          &lt;/form&gt;
+        </code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Configuración</h3>
+        <p>El componente acepta las siguientes propiedades:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado junto al botón de opción.</td>
+              <td><code>"Opción 1"</code></td>
+            </tr>
+            <tr>
+              <td><code>formControlName</code></td>
+              <td><code>string</code></td>
+              <td>
+                Vincula el componente a un control de un formulario reactivo.
+              </td>
+              <td><code>"radioInput"</code></td>
+            </tr>
+            <tr>
+              <td><code>name</code></td>
+              <td><code>string</code></td>
+              <td>Nombre del grupo de botones de opción.</td>
+              <td><code>"options"</code></td>
+            </tr>
+            <tr>
+              <td><code>value</code></td>
+              <td><code>string</code></td>
+              <td>Valor del botón de opción.</td>
+              <td><code>"1"</code></td>
+            </tr>
+            <tr>
+              <td><code>required</code></td>
+              <td><code>boolean</code></td>
+              <td>Define si el campo es obligatorio.</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td><code>boolean</code></td>
+              <td>Desactiva el botón de opción.</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>errorMessage</code></td>
+              <td><code>string</code></td>
+              <td>
+                Mensaje de error personalizado mostrado para errores de
+                validación.
+              </td>
+              <td><code>"Este campo es obligatorio"</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <form [formGroup]="form">
+          <ds-radio
+            formControlName="radioInput"
+            id="option1"
+            name="options"
+            label="Option 1"
+            value="1"
+            [ariaRequired]="true"
+          >
+          </ds-radio>
+          <ds-radio
+            formControlName="radioInput"
+            id="option2"
+            name="options"
+            label="Option 2"
+            value="2"
+            [ariaRequired]="true"
+          >
+          </ds-radio>
+        </form>
+      </div>
+    </section>
+
+    <!-- Textarea -->
+    <section class="documentation-section" id="textarea" #section>
+      <h2>Textarea</h2>
+      <p>
+        El componente <code>ds-textarea</code> se utiliza para permitir a los
+        usuarios ingresar texto en múltiples líneas. Este componente es
+        altamente personalizable y soporta múltiples configuraciones.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Uso</h3>
+        <p>Ejemplo de uso en HTML:</p>
+        <pre><code>
+          &lt;form [formGroup]="form"&gt;
+            &lt;ds-textarea
+              formControlName="textareaInput"
+              id="textarea"
+              label="Textarea"
+              placeholder="Enter text"
+              [ariaRequired]="true"
+            &gt;&lt;/ds-textarea&gt;
+          &lt;/form&gt;
+        </code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Configuración</h3>
+        <p>El componente acepta las siguientes propiedades:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado como etiqueta del campo.</td>
+              <td><code>"Descripción"</code></td>
+            </tr>
+            <tr>
+              <td><code>placeholder</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado dentro del campo cuando está vacío.</td>
+              <td><code>"Escribe aquí..."</code></td>
+            </tr>
+            <tr>
+              <td><code>formControlName</code></td>
+              <td><code>string</code></td>
+              <td>
+                Vincula el componente a un control de un formulario reactivo.
+              </td>
+              <td><code>"textareaInput"</code></td>
+            </tr>
+            <tr>
+              <td><code>required</code></td>
+              <td><code>boolean</code></td>
+              <td>Define si el campo es obligatorio.</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td><code>boolean</code></td>
+              <td>Desactiva el campo de entrada.</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>errorMessage</code></td>
+              <td><code>string</code></td>
+              <td>
+                Mensaje de error personalizado mostrado para errores de
+                validación.
+              </td>
+              <td><code>"Este campo es obligatorio"</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <form [formGroup]="form">
+          <ds-textarea
+            formControlName="textareaInput"
+            id="textarea"
+            label="Textarea"
+            placeholder="Enter text"
+            [ariaRequired]="true"
+          >
+          </ds-textarea>
+        </form>
+      </div>
+    </section>
+
+    <!-- switch -->
+    <section class="documentation-section" id="switch" #section>
+      <h2>Switch</h2>
+      <p>
+        El componente <code>ds-switch</code> se utiliza para permitir a los
+        usuarios alternar entre dos estados, como "on" y "off". Este componente
+        es altamente personalizable y soporta múltiples configuraciones.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Uso</h3>
+        <p>Ejemplo de uso en HTML:</p>
+        <pre><code>
+          &lt;form [formGroup]="form"&gt;
+            &lt;ds-switch
+              formControlName="switchInput"
+              id="switch"
+              label="Enable notifications"
+              [ariaRequired]="true"
+            &gt;&lt;/ds-switch&gt;
+          &lt;/form&gt;
+        </code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Configuración</h3>
+        <p>El componente acepta las siguientes propiedades:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td>Texto mostrado junto al interruptor.</td>
+              <td><code>"Habilitar notificaciones"</code></td>
+            </tr>
+            <tr>
+              <td><code>formControlName</code></td>
+              <td><code>string</code></td>
+              <td>
+                Vincula el componente a un control de un formulario reactivo.
+              </td>
+              <td><code>"switchInput"</code></td>
+            </tr>
+            <tr>
+              <td><code>required</code></td>
+              <td><code>boolean</code></td>
+              <td>Define si el campo es obligatorio.</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td><code>boolean</code></td>
+              <td>Desactiva el interruptor.</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>errorMessage</code></td>
+              <td><code>string</code></td>
+              <td>
+                Mensaje de error personalizado mostrado para errores de
+                validación.
+              </td>
+              <td><code>"Este campo es obligatorio"</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <form [formGroup]="form">
+          <ds-switch
+            formControlName="switchInput"
+            id="switch"
+            label="Enable notifications"
+            [ariaRequired]="true"
+          >
+          </ds-switch>
+        </form>
+      </div>
+    </section>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: get-spacing(sm) get-spacing(md);
+  margin-bottom: get-spacing(md);
+  list-style: none;
+  background-color: get-background-color(default);
+  border-radius: 0.25rem;
+
+  &.dark-mode {
+    background-color: get-background-color(inverted);
+    @include apply-color(color, utility, white);
+
+    .breadcrumb-item a {
+      @include apply-color(color, primary, light);
+    }
+
+    .breadcrumb-item.active {
+      @include apply-color(color, utility, white);
+    }
+  }
+
+  &.light-mode {
+    background-color: get-background-color(default);
+    @include apply-color(color, neutral, "gray-dark");
+
+    .breadcrumb-item a {
+      @include apply-color(color, primary, dark);
+    }
+
+    .breadcrumb-item.active {
+      @include apply-color(color, neutral, "gray-dark");
+    }
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: get-spacing(sm);
+    color: get-color(neutral, gray);
+    content: "/";
+  }
+
+  .breadcrumb-item a {
+    text-decoration: none;
+    @include apply-transition(color, 0.3s, ease-in-out);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb-item.active {
+    color: get-color(neutral, gray);
+  }
+}

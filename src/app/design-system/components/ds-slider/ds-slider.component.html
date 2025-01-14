@@ -1,1 +1,28 @@
-<p>ds-slider works!</p>
+<div class="form-group">
+  <label [for]="id">{{ label }}</label>
+  <div class="input-wrapper">
+    <input
+      type="range"
+      [id]="id"
+      class="input-slider"
+      [ngClass]="{
+        'dark-mode': themeService.theme() === 'dark',
+        'light-mode': themeService.theme() === 'light',
+        error: !!errorMessage,
+      }"
+      [min]="min"
+      [max]="max"
+      [step]="step"
+      [value]="value"
+      [attr.aria-required]="ariaRequired"
+      [attr.aria-invalid]="!!errorMessage"
+      [attr.aria-describedby]="errorMessage ? 'error-msg' : null"
+      [disabled]="disabled"
+      (input)="handleInput($event)"
+      (blur)="handleBlur()"
+    />
+  </div>
+  <div *ngIf="errorMessage" class="error-message" id="error-msg">
+    {{ errorMessage }}
+  </div>
+</div>

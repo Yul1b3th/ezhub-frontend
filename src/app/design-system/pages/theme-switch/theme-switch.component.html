@@ -1,1 +1,45 @@
-<p>theme-switch works!</p>
+<section>
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Theme Switch</h1>
+    <p>
+      El componente Theme Switch(<code>ds-theme-switch</code>) permite a los
+      usuarios alternar entre el modo claro y el modo oscuro. Este componente es
+      altamente personalizable y fácil de integrar en cualquier aplicación.
+    </p>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section">
+      <h2>Uso</h2>
+      <p>Ejemplo de uso en HTML:</p>
+      <pre><code>&lt;ds-theme-switch&gt;&lt;/ds-theme-switch&gt;</code></pre>
+    </div>
+
+    <!-- Sección: Configuración -->
+    <div class="documentation-section">
+      <h2>Configuración</h2>
+      <p>
+        El componente de interruptor de tema no requiere propiedades de entrada
+        (<code>&#64;Input</code>). Se integra automáticamente con el servicio de
+        tema para alternar entre el modo claro y el modo oscuro.
+      </p>
+    </div>
+
+    <!-- Sección: Ejemplo -->
+    <div class="documentation-section">
+      <h2>Ejemplo</h2>
+      <ds-theme-switch></ds-theme-switch>
+    </div>
+
+    <!-- Sección: Accesibilidad -->
+    <div class="documentation-section">
+      <h2>Accesibilidad</h2>
+      <p>
+        El componente de interruptor de tema incluye soporte para accesibilidad
+        mediante el uso de atributos <code>aria</code> y controles accesibles.
+      </p>
+    </div>
+  </div>
+</section>

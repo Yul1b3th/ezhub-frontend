@@ -1,1 +1,7 @@
-<p>ds-theme-switch works!</p>
+<ds-switch
+  [id]="'theme-switch'"
+  [label]="'Toggle Theme'"
+  [iconOn]="iconOn"
+  [iconOff]="iconOff"
+  (change)="toggleTheme()"
+></ds-switch>

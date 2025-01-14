@@ -1,0 +1,132 @@
+@use "sass:color";
+@use "sass:map";
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+@mixin custom-dropdown($bg-color, $text-color, $border-radius) {
+  background-color: $bg-color;
+  color: $text-color;
+  border-radius: $border-radius;
+  border: 2px solid $bg-color;
+
+  &:hover {
+    background-color: color.adjust($bg-color, $lightness: -10%);
+    border-color: color.adjust($bg-color, $lightness: -10%);
+  }
+
+  &:disabled {
+    background-color: color.scale($bg-color, $lightness: 20%);
+    border-color: color.scale($bg-color, $lightness: 20%);
+    color: color.scale($text-color, $lightness: 20%);
+  }
+}
+
+$dropdown-states: (
+  primary: get-color(primary, default),
+  secondary: get-color(secondary, default),
+  success: get-color(status, success),
+  danger: get-color(status, danger),
+  warning: get-color(status, warning),
+  info: get-color(status, info),
+  light: get-color(neutral, light),
+  dark: get-color(neutral, dark),
+);
+
+// Mixin para tamaños de dropdowns
+@mixin dropdown-size($size, $padding-x, $padding-y, $font-size) {
+  &.dropdown-#{$size} {
+    padding: get-spacing($padding-x) get-spacing($padding-y);
+    font-size: get-font-size($font-size);
+  }
+}
+
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+
+  .dropdown-toggle {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: get-spacing(xs) get-spacing(sm);
+    font-size: get-font-size(sm);
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    border: 2px solid;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); // Sombra ligera en reposo
+
+    &:hover {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); // Sombra más fuerte en hover
+      @include apply-transition(all, 0.3s, ease-in-out);
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .dropdown-arrow {
+      svg {
+        margin-left: get-spacing(sm);
+        width: 20px;
+        height: 20px;
+        stroke-width: 2.5;
+      }
+    }
+
+    // Dropdown Sizes
+    @include dropdown-size(sm, xs, sm, sm);
+    @include dropdown-size(md, sm, md, base);
+    @include dropdown-size(lg, md, lg, lg);
+
+    &.dropdown-block {
+      display: block;
+      width: 100%;
+    }
+
+    // Disabled State
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    min-width: 100%;
+    padding: get-spacing(xs) 0;
+    margin: get-spacing(xs) 0 0;
+    font-size: get-font-size(base);
+    color: get-color(neutral, dark);
+    text-align: left;
+    list-style: none;
+    background-color: get-color(neutral, light);
+    border: 1px solid get-color(neutral, gray);
+    border-radius: 4px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    li {
+      cursor: pointer;
+    }
+  }
+
+  .dropdown-icon {
+    margin-right: get-spacing(xs);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}

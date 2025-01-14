@@ -1,69 +1,80 @@
-@use "sass:color";
-@use "sass:map";
-@use "./styles/abstracts/functions" as *;
 @use "./styles/abstracts/mixins" as *;
-@use "./styles/abstracts/variables" as *;
+@use "./shared/design-system-header/design-system-header.component" as header;
 
-$header-height: 70px;
-$footer-height: 70px;
-
-:host {
+design-system {
   width: 100%;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 
-  header {
-    position: fixed;
-    width: 100%;
-    height: $header-height;
-    top: 0;
-    z-index: 1;
-    background-color: #333;
-    color: white;
-    text-align: center;
-  }
   .main-layout {
     width: 100%;
-    margin: $header-height auto 0;
+    margin: header.$header-height auto 0;
     aside {
-      background-color: red;
+      display: none;
     }
+
     main {
-      // background-color: blue;
+      .container {
+        padding: 0;
+        .documentation-header {
+          padding: 1.875rem 2.5rem;
+          @include apply-theme-colors(
+            (tertiary, default),
+            (neutral, "dark-200"),
+            (neutral, "dark-200"),
+            (utility, white)
+          );
+        }
+
+        ul,
+        ol {
+          margin-left: 1.25rem;
+        }
+
+        .documentation-nav {
+          padding: 3.75rem 2.5rem 0rem 2.5rem;
+          ul {
+            a {
+              font-weight: 500;
+              text-decoration: none;
+              &:hover {
+                text-decoration: underline;
+              }
+              &.active-link {
+                font-weight: bold;
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+
+        .documentation-content {
+          padding: 0 2.5rem 3.125rem 2.5rem;
+          .documentation-section {
+            padding-top: 3.125rem;
+            .documentation-item:not(:last-child) {
+              margin-bottom: 2.5rem;
+            }
+          }
+        }
+      }
     }
   }
 
-  footer {
-    margin-top: auto;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    text-align: center;
-  }
-
-  @include media-breakpoint-up(md) {
+  @include apply-media-breakpoint(lg) {
     .main-layout {
       display: grid;
-      grid-template-columns: 24% 76%;
-      gap: 1.5rem;
-      max-width: 1400px;
-    }
-
-    /* Sidebar */
-    aside {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 90px;
-      height: calc(100vh - $header-height);
-      overflow-y: auto;
-      background-color: yellow;
-    }
-
-    /* Main Content */
-    main {
-      // background-color: red;
-      padding: 20px;
+      grid-template-columns: 20% 80%;
+      max-width: 1500px;
+      aside {
+        display: flex;
+        position: -webkit-sticky;
+        position: sticky;
+        top: header.$header-height;
+        height: calc(100vh - header.$header-height);
+        overflow-y: auto;
+      }
     }
   }
 }

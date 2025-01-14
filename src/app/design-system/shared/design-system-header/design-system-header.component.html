@@ -1,0 +1,73 @@
+<header [ngClass]="{ scrolled: isScrolled() }">
+  <button
+    class="menu-toggle"
+    aria-label="Toggle sidebar"
+    (click)="toggleMenu()"
+    [ngClass]="themeService.theme()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+      />
+    </svg>
+  </button>
+</header>
+
+<div
+  class="mobile-sidebar-overlay"
+  *ngIf="isMenuOpen()"
+  (click)="closeMenu()"
+  [ngClass]="themeService.theme()"
+></div>
+
+<design-system-sidebar
+  [ngClass]="[
+    'mobile-sidebar',
+    themeService.theme(),
+    isMenuOpen() ? 'open' : '',
+  ]"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="sidebarTitle"
+  (linkClick)="handleLinkClick()"
+>
+  <div sidebar-header class="sidebar-header">
+    <p id="sidebarTitle" class="sidebar-title">Design System</p>
+    <button
+      #closeButton
+      class="close-btn"
+      aria-label="Close sidebar"
+      (click)="closeMenu()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+        width="24"
+        height="24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18 18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div sidebar-footer class="sidebar-footer">
+    <small>© {{ year }} Yulibeth Rivero</small>
+  </div>
+</design-system-sidebar>

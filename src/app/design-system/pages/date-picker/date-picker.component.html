@@ -1,1 +1,124 @@
-<p>date-picker works!</p>
+<section class="buttons">
+  <!-- Encabezado de la sección -->
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Date Picker</h1>
+    <p>
+      El componente <code>ds-date-picker</code> se utiliza para permitir a los
+      usuarios seleccionar una fecha de manera interactiva. Este componente es
+      altamente personalizable y soporta múltiples configuraciones.
+    </p>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section">
+      <h2>Uso</h2>
+      <p>Ejemplo de uso en HTML:</p>
+      <pre><code>
+        &lt;form [formGroup]="form"&gt;
+          &lt;ds-date-picker
+            formControlName="datePicker"
+            id="datePicker"
+            label="Select Date"
+            placeholder="Select a date"
+            [ariaRequired]="true"
+          &gt;&lt;/ds-date-picker&gt;
+        &lt;/form&gt;
+      </code></pre>
+    </div>
+
+    <!-- Sección: Configuración -->
+    <div class="documentation-section">
+      <h2>Configuración</h2>
+      <p>El componente acepta las siguientes propiedades:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Propiedad</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>label</code></td>
+            <td><code>string</code></td>
+            <td>Texto mostrado como etiqueta del campo.</td>
+            <td><code>"Seleccionar Fecha"</code></td>
+          </tr>
+          <tr>
+            <td><code>placeholder</code></td>
+            <td><code>string</code></td>
+            <td>Texto mostrado dentro del campo cuando está vacío.</td>
+            <td><code>"Selecciona una fecha"</code></td>
+          </tr>
+          <tr>
+            <td><code>formControlName</code></td>
+            <td><code>string</code></td>
+            <td>
+              Vincula el componente a un control de un formulario reactivo.
+            </td>
+            <td><code>"datePicker"</code></td>
+          </tr>
+          <tr>
+            <td><code>required</code></td>
+            <td><code>boolean</code></td>
+            <td>Define si el campo es obligatorio.</td>
+            <td><code>true</code></td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td><code>boolean</code></td>
+            <td>Desactiva el campo de entrada.</td>
+            <td><code>false</code></td>
+          </tr>
+          <tr>
+            <td><code>errorMessage</code></td>
+            <td><code>string</code></td>
+            <td>
+              Mensaje de error personalizado mostrado para errores de
+              validación.
+            </td>
+            <td><code>"Este campo es obligatorio"</code></td>
+          </tr>
+          <tr>
+            <td><code>minDate</code></td>
+            <td><code>string</code></td>
+            <td>Fecha mínima seleccionable.</td>
+            <td><code>"2023-01-01"</code></td>
+          </tr>
+          <tr>
+            <td><code>maxDate</code></td>
+            <td><code>string</code></td>
+            <td>Fecha máxima seleccionable.</td>
+            <td><code>"2023-12-31"</code></td>
+          </tr>
+          <tr>
+            <td><code>disabledDates</code></td>
+            <td><code>string[]</code></td>
+            <td>Lista de fechas que no se pueden seleccionar.</td>
+            <td><code>["2023-05-01", "2023-05-02"]</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sección: Ejemplo -->
+    <div class="documentation-section">
+      <h2>Ejemplo</h2>
+      <form [formGroup]="form">
+        <ds-date-picker
+          formControlName="datePicker"
+          id="datePicker"
+          label="Select Date"
+          placeholder="Select a date"
+          [ariaRequired]="true"
+        >
+        </ds-date-picker>
+      </form>
+    </div>
+  </div>
+</section>

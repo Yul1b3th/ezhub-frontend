@@ -1,0 +1,64 @@
+@use "sass:map";
+@use "sass:color";
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.spinner {
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 4px;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+
+  &.small {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+  }
+
+  &.medium {
+    width: 40px;
+    height: 40px;
+  }
+
+  &.large {
+    width: 60px;
+    height: 60px;
+    border-width: 6px;
+  }
+
+  &.primary {
+    border-color: get-color(primary, default) get-color(primary, default)
+      get-color(primary, default) transparent;
+  }
+
+  &.secondary {
+    border-color: get-color(secondary, default) get-color(secondary, default)
+      get-color(secondary, default) transparent;
+  }
+
+  &.tertiary {
+    border-color: get-color(tertiary, default) get-color(tertiary, default)
+      get-color(tertiary, default) transparent;
+  }
+
+  &.dark-mode {
+    border-color: get-color(utility, white) get-color(utility, white)
+      get-color(utility, white) transparent;
+  }
+
+  &.light-mode {
+    border-color: get-color(neutral, dark) get-color(neutral, dark)
+      get-color(neutral, dark) transparent;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

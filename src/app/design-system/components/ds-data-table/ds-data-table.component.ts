@@ -1,11 +1,22 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
+import { ThemeService } from '@design-system/services/theme.service';
 
 @Component({
-  selector: 'app-ds-data-table',
-  imports: [],
+  selector: 'ds-data-table',
+  imports: [CommonModule],
   templateUrl: './ds-data-table.component.html',
-  styleUrl: './ds-data-table.component.scss'
+  styleUrls: ['./ds-data-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DsDataTableComponent {
+  public readonly themeService = inject(ThemeService);
 
+  @Input() columns: { header: string; field: string }[] = [];
+  @Input() data: any[] = [];
 }

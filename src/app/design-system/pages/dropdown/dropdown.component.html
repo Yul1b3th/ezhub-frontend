@@ -1,1 +1,77 @@
-<p>dropdown works!</p>
+<section>
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Dropdown</h1>
+    <p>
+      El componente de menú desplegable (<code>ds-dropdown</code>) se utiliza
+      para mostrar una lista de opciones que el usuario puede seleccionar. Este
+      componente es altamente personalizable y soporta múltiples configuraciones
+      para adaptarse a diferentes contextos de uso.
+    </p>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section">
+      <h2>Uso</h2>
+    </div>
+
+    <!-- Sección: Configuración -->
+    <div class="documentation-section">
+      <h2>Configuración</h2>
+    </div>
+
+    <!-- Sección: Accesibilidad -->
+    <div class="documentation-section">
+      <h2>Accesibilidad</h2>
+    </div>
+
+    <!-- Sección: Variantes -->
+    <div class="documentation-section">
+      <h2>Variantes</h2>
+      <!-- Básico -->
+      <div class="documentation-item">
+        <h3>Básico</h3>
+        <ds-dropdown
+          label="Selecciona una opción"
+          [options]="[
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ]"
+        ></ds-dropdown>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Con Icono</h3>
+        <ds-dropdown
+          label="Selecciona una opción"
+          [options]="optionsWithIcons"
+        ></ds-dropdown>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Personalizado</h3>
+        <ds-dropdown
+          label="Selecciona una opción"
+          [options]="[
+            { label: 'Opción 1' },
+            { label: 'Opción 2' },
+            { label: 'Opción 3' },
+          ]"
+          [bgColor]="'#ff5733'"
+          [textColor]="'#ffffff'"
+          [borderRadius]="'8px'"
+        ></ds-dropdown>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Language Selector</h3>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Theme Switch</h3>
+      </div>
+    </div>
+  </div>
+</section>

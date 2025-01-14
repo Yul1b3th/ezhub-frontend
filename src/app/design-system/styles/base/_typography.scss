@@ -1,46 +1,43 @@
-// base/_typography.scss
-
-@use "../abstracts/variables" as *;
-@use "../abstracts/functions" as *;
 @use "../abstracts/mixins" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
 
 body {
-  font-family: $font-family;
-  font-size: get-font-size("base");
-  line-height: get-line-height("base");
+  @include apply-font-family(primary);
+  font-size: get-font-size(base);
+  line-height: get-line-height(base);
 }
 
 h1 {
-  @include typography("5xl", "xl", 700, "md");
+  @include apply-typography("5xl", "sm", 700, "md");
 }
 
 h2 {
-  @include typography("4xl", "lg", 700, "md");
+  @include apply-typography("4xl", "sm", 600, "md");
 }
 
 h3 {
-  @include typography("3xl", "lg", 600, "md");
+  @include apply-typography("3xl", "sm", 600, "md");
 }
 
 h4 {
-  @include typography("2xl", "lg", 600, "md");
+  @include apply-typography("2xl", "sm", 600, "md");
 }
 
 h5 {
-  @include typography("xl", "lg", 500, "md");
+  @include apply-typography("xl", "base", 500, "md");
 }
 
 h6 {
-  @include typography("lg", "lg", 500, "md");
+  @include apply-typography("lg", "base", 500, "md");
 }
 
-// Mixin para tipografía: tamaño de fuente, altura de línea, peso y margen inferior
 p:not(:last-child) {
-  @include typography("base", "base", 400, "md");
+  @include apply-typography("base", "base", 400, "md");
 }
 
 small {
-  @include typography("sm", "base", 400, "sm");
+  @include apply-typography("sm", "base", 400, "sm");
 }
 
 strong {
@@ -56,16 +53,13 @@ blockquote {
   line-height: get-line-height("lg");
   margin: get-spacing("md") 0;
   padding: get-spacing("md");
-  border-left: 4px solid get-color("primary");
-  background-color: get-background("default");
 }
 
 code,
 pre {
   font-family: "Courier New", Courier, monospace;
-  font-size: get-font-size("sm");
-  background-color: get-background("default");
-  padding: get-spacing("xs");
+  font-size: get-font-size(sm);
+  padding: get-spacing(xs);
   border-radius: 4px;
 }
 
@@ -74,8 +68,9 @@ pre {
 }
 
 a {
-  color: get-color("primary");
-  text-decoration: none;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;

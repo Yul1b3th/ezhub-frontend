@@ -1,26 +1,208 @@
-<nav class="sidebar">
-  <ul>
-    <li><a routerLink="/design-system/introduction">Introducción</a></li>
-    <li><a routerLink="/design-system/customization">Personalización</a></li>
-    <li><a routerLink="/design-system/base-styles">Estilos Base</a></li>
-    <li><a routerLink="/design-system/layout">Layout</a></li>
-    <li><a routerLink="/design-system/themes">Temas</a></li>
-    <li><a routerLink="/design-system/utilities">Utilidades</a></li>
-    <li><a routerLink="/design-system/alert">Alert</a></li>
-    <li><a routerLink="/design-system/breadcrumb">Breadcrumb</a></li>
-    <li><a routerLink="/design-system/button">Button</a></li>
-    <li><a routerLink="/design-system/card">Card</a></li>
-    <li><a routerLink="/design-system/carousel">Carousel</a></li>
-    <li><a routerLink="/design-system/data-table">Data Table</a></li>
-    <li><a routerLink="/design-system/date-picker">Date Picker</a></li>
-    <li><a routerLink="/design-system/dropdown">Dropdown</a></li>
-    <li><a routerLink="/design-system/input">Input</a></li>
-    <li><a routerLink="/design-system/modal">Modal</a></li>
-    <li><a routerLink="/design-system/navbar">Navbar</a></li>
-    <li><a routerLink="/design-system/pagination">Pagination</a></li>
-    <li><a routerLink="/design-system/search-bar">Search Bar</a></li>
-    <li><a routerLink="/design-system/slider">Slider</a></li>
-    <li><a routerLink="/design-system/spinner">Spinner</a></li>
-    <li><a routerLink="/design-system/theme-switch">Theme switch</a></li>
-  </ul>
+<nav class="sidebar" role="navigation" aria-labelledby="sidebarTitle">
+  <ng-content select="[sidebar-header]"></ng-content>
+  <div class="sidebar-content">
+    <ul>
+      <li>
+        <a
+          routerLink="/design-system/introduction"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Introducción</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/customization"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Personalización</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/base-styles"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Estilos Base</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/layout"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Layout</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/themes"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Temas</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/utilities"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Utilidades</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/alert"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Alert</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/breadcrumb"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Breadcrumb</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/button"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Button</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/card"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Card</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/card-skeleton"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Card Skeleton</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/carousel"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Carousel</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/data-table"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Data Table</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/date-picker"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Date Picker</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/dropdown"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Dropdown</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/input"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Input</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/language-selector"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Language Selector</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/modal"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Modal</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/navbar"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Navbar</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/pagination"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Pagination</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/search-bar"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Search Bar</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/slider"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Slider</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/spinner"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Spinner</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/theme-selector"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Theme Selector</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/design-system/theme-switch"
+          routerLinkActive="active"
+          (click)="onLinkClick()"
+          >Theme Switch</a
+        >
+      </li>
+    </ul>
+  </div>
+  <ng-content select="[sidebar-footer]"></ng-content>
 </nav>

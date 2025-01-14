@@ -1,1 +1,274 @@
-<!-- <ds-button btnClass="btn-primary">Primary</ds-button> -->
+<section class="buttons">
+  <!-- Encabezado de la sección -->
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Botones</h1>
+    <p>
+      Proporciona una forma estilizada y accesible para integrar botones
+      reutilizables en aplicaciones desarrolladas con Angular.
+    </p>
+  </header>
+
+  <!-- Navegación interna de la sección -->
+  <nav class="documentation-nav">
+    <ul>
+      <li>
+        <a
+          [routerLink]="[]"
+          fragment="overview"
+          [class.active-link]="isActive('overview')"
+          >Uso</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="[]"
+          fragment="example"
+          [class.active-link]="isActive('example')"
+          >Ejemplo</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="[]"
+          fragment="accessibility"
+          [class.active-link]="isActive('accessibility')"
+          >Accesibilidad</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="[]"
+          fragment="variations"
+          [class.active-link]="isActive('variations')"
+          >Variaciones</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="[]"
+          fragment="states"
+          [class.active-link]="isActive('states')"
+          >Estados</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="[]"
+          fragment="sizes"
+          [class.active-link]="isActive('sizes')"
+          >Tamaños</a
+        >
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section" id="overview" #section>
+      <h2>Uso</h2>
+      <p>Ejemplo de implementación en HTML:</p>
+      <pre><code>&lt;ds-button btnClass="btn-primary"&gt;Primary&lt;/ds-button&gt;</code></pre>
+    </div>
+
+    <!-- Sección: Ejemplo -->
+    <div class="documentation-section" id="example" #section>
+      <h2>Ejemplo</h2>
+      <ds-button btnClass="btn-primary">
+        <span content-button>Primary</span>
+      </ds-button>
+    </div>
+
+    <!-- Sección: Accesibilidad -->
+    <div class="documentation-section" id="accessibility" #section>
+      <h2>Accesibilidad</h2>
+      <p>
+        Se debe asegurar de proporcionar una etiqueta <code>aria-label</code>
+        para describir la acción del botón cuando el texto del botón no es
+        suficiente para describir su propósito.
+      </p>
+    </div>
+
+    <!-- Sección: Variantes -->
+    <div class="documentation-section" id="variations" #section>
+      <h2>Variantes</h2>
+      <!-- Primary  -->
+      <div class="documentation-item">
+        <h3>Primary</h3>
+        <div class="row">
+          <!-- Primary Default  -->
+          <div class="col-12 col-lg-6">
+            <h4>Primary Default</h4>
+            <div>
+              <ds-button btnClass="btn-primary">
+                <span content-button>Primary</span>
+              </ds-button>
+            </div>
+          </div>
+
+          <!-- Primary with icon -->
+          <div class="col-12 col-lg-6">
+            <h4>Primary with icon</h4>
+            <div>
+              <ds-button btnClass="btn-primary" [iconSvg]="iconSvg">
+                <span content-button>Primary</span>
+              </ds-button>
+            </div>
+          </div>
+
+          <!-- Primary Tertiary  -->
+          <div class="col-12 col-lg-6">
+            <h4>Primary Tertiary</h4>
+            <div>
+              <ds-button btnClass="btn-primary" [tertiary]="true">
+                <span content-button>Primary</span>
+              </ds-button>
+            </div>
+          </div>
+
+          <!-- Primary Ghost -->
+          <div class="col-12 col-lg-6">
+            <h4>Primary Ghost</h4>
+            <div>
+              <ds-button btnClass="btn-primary" [ghost]="true">
+                <span content-button>Primary</span>
+              </ds-button>
+            </div>
+          </div>
+
+          <!-- Primary Icon  -->
+          <div class="col-12 col-lg-6">
+            <h4>Primary Icon</h4>
+            <div>
+              <ds-button btnClass="btn-primary" [iconOnly]="true">
+                <span content-button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                    width="24"
+                    height="24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"
+                    />
+                  </svg>
+                </span>
+              </ds-button>
+            </div>
+          </div>
+
+          <!-- Primary Block -->
+          <div class="col-12 col-lg-6">
+            <h4>Primary Block</h4>
+            <div>
+              <ds-button btnClass="btn-primary" [block]="true">
+                <span content-button>Primary</span>
+              </ds-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary -->
+      <div class="documentation-item">
+        <h3>Secondary</h3>
+        <ds-button btnClass="btn-secondary">
+          <span content-button>Secondary</span>
+        </ds-button>
+
+        <h4>Tertiary</h4>
+        <ds-button btnClass="btn-secondary" [tertiary]="true">
+          <span content-button>Secondary</span>
+        </ds-button>
+      </div>
+
+      <!-- Accent -->
+      <div class="documentation-item">
+        <h3>Accent</h3>
+        <h4>Default</h4>
+        <ds-button btnClass="btn-accent">
+          <span content-button>Accent</span>
+        </ds-button>
+
+        <h4>Tertiary</h4>
+        <ds-button btnClass="btn-accent" [tertiary]="true">
+          <span content-button>Accent</span>
+        </ds-button>
+      </div>
+
+      <!-- Danger -->
+      <div class="documentation-item">
+        <h3>Danger</h3>
+
+        <h4>Default</h4>
+        <ds-button btnClass="btn-danger">
+          <span content-button>Danger</span>
+        </ds-button>
+
+        <h4>Tertiary</h4>
+        <ds-button btnClass="btn-danger" [tertiary]="true">
+          <span content-button>Danger</span>
+        </ds-button>
+      </div>
+
+      <!-- Custom -->
+      <div class="documentation-item">
+        <h3>Custom</h3>
+        <ds-button
+          [bgColor]="'#ff5733'"
+          [textColor]="'#ffffff'"
+          [borderRadius]="'8px'"
+          btnClass="btn-custom"
+        >
+          <span content-button>Custom</span>
+        </ds-button>
+      </div>
+    </div>
+
+    <!-- Sección: States -->
+    <div class="documentation-section" id="states" #section>
+      <h2>States</h2>
+
+      <div class="documentation-item">
+        <h3>Disabled</h3>
+        <ds-button btnClass="btn-primary" [disabled]="true">
+          <span content-button>Disabled</span>
+        </ds-button>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Cargando</h3>
+      </div>
+    </div>
+
+    <!-- Sección: Sizes  -->
+    <div class="documentation-section" id="sizes" #section>
+      <h2>Sizes</h2>
+      <div class="documentation-item">
+        <ds-button btnClass="btn-primary btn-sm">
+          <span content-button>sm</span>
+        </ds-button>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Medium</h3>
+        <ds-button btnClass="btn-primary btn-md">
+          <span content-button>md</span>
+        </ds-button>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Large</h3>
+        <ds-button btnClass="btn-primary btn-lg">
+          <span content-button>lg</span>
+        </ds-button>
+      </div>
+    </div>
+  </div>
+</section>

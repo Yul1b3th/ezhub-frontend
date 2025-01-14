@@ -1,1 +1,16 @@
-<p>ds-breadcrumb works!</p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" [ngClass]="themeService.theme()">
+    <li
+      *ngFor="let item of items; let last = last"
+      class="breadcrumb-item"
+      [ngClass]="{ active: last }"
+    >
+      <ng-container *ngIf="!last">
+        <a [href]="item.url">{{ item.label }}</a>
+      </ng-container>
+      <ng-container *ngIf="last">
+        {{ item.label }}
+      </ng-container>
+    </li>
+  </ol>
+</nav>

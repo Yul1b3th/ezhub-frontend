@@ -1,11 +1,22 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
+import { ThemeService } from '@design-system/services/theme.service';
 
 @Component({
-  selector: 'app-ds-spinner',
-  imports: [],
+  selector: 'ds-spinner',
+  imports: [CommonModule],
   templateUrl: './ds-spinner.component.html',
-  styleUrl: './ds-spinner.component.scss'
+  styleUrls: ['./ds-spinner.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DsSpinnerComponent {
+  public readonly themeService = inject(ThemeService);
 
+  @Input() size: 'small' | 'medium' | 'large' = 'medium';
+  @Input() color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 }

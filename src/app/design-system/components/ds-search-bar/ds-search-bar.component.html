@@ -1,1 +1,35 @@
-<p>ds-search-bar works!</p>
+<div class="form-group">
+  <label [attr.for]="id">{{ label }}</label>
+  <div class="input-wrapper">
+    <input
+      type="text"
+      [attr.id]="id"
+      class="input-search-bar"
+      #searchInput
+      [ngClass]="{
+        'dark-mode': themeService.theme() === 'dark',
+        'light-mode': themeService.theme() === 'light',
+        error: !!errorMessage,
+      }"
+      [placeholder]="placeholder"
+      [formControl]="searchControl"
+      [attr.aria-required]="ariaRequired"
+      [attr.aria-invalid]="!!errorMessage"
+      [attr.aria-describedby]="errorMessage ? 'error-msg' : null"
+      autocomplete="off"
+      (blur)="handleBlur()"
+      (focus)="handleFocus()"
+    />
+    <ul *ngIf="showOptions && filteredOptions.length > 0" class="options-list">
+      <li
+        *ngFor="let option of filteredOptions"
+        (mousedown)="selectOption(option)"
+      >
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="errorMessage" class="error-message" id="error-msg">
+    {{ errorMessage }}
+  </div>
+</div>

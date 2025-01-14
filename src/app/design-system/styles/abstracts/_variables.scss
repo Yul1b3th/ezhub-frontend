@@ -4,16 +4,20 @@
 
 // === Tipografías ===
 $fonts: (
-  primary: "BeVietnamPro, sans-serif",
+  primary: (
+    "BeVietnamPro",
+    "Arial, sans-serif",
+  ),
   secondary: "Arial, sans-serif",
 );
 
 // === Tamaños de fuente ===
 $font-sizes: (
-  tiny: 0.625rem,
-  small: 0.75rem,
-  medium: 1rem,
-  large: 1.25rem,
+  xs: 0.75rem,
+  sm: 0.875rem,
+  base: 1rem,
+  lg: 1.125rem,
+  xl: 1.25rem,
   "2xl": 1.5rem,
   "3xl": 1.75rem,
   "4xl": 2rem,
@@ -22,29 +26,21 @@ $font-sizes: (
 
 // === Alturas de línea ===
 $line-heights: (
-  tiny: 0.875rem,
-  small: 1rem,
-  medium: 1.5rem,
-  large: 2rem,
-);
-
-// === Breakpoints ===
-$breakpoints: (
-  mobile: 0,
-  tablet: 576px,
-  laptop: 768px,
-  desktop: 992px,
-  widescreen: 1200px,
-  fullhd: 1400px,
+  xs: 1,
+  sm: 1.25,
+  base: 1.5,
+  lg: 1.75,
+  xl: 2,
 );
 
 // === Espaciados ===
 $spacing: (
-  tiny: 0.125rem,
-  small: 0.25rem,
-  medium: 0.5rem,
-  large: 1rem,
-  "2xl": 4rem,
+  zero: 0,
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 1rem,
+  lg: 2rem,
+  xl: 4rem,
 );
 
 // === Colores ===
@@ -59,7 +55,9 @@ $colors: (
     light: #b3e8e9,
     dark: #3a7d7e,
   ),
-  tertiary: #7dd3fc,
+  tertiary: (
+    default: #eff5f5,
+  ),
   status: (
     success: #22c55e,
     danger: #ef4444,
@@ -67,18 +65,20 @@ $colors: (
     info: #26549e,
   ),
   neutral: (
-    dark: #212121,
-    "dark-200": #1c1c1c,
     "dark-300": #0f0f0f,
-    gray: #d1d1d1,
-    "gray-light": #f1f1f1,
+    "dark-200": #1c1c1c,
+    dark: #212121,
+    "dark-100": #333333,
     "gray-dark": #3f3f3f,
+    gray: #d1d1d1,
     light: #e5e5e5,
     "light-200": #e9ecef,
+    "gray-light": #fbfbfb,
   ),
   utility: (
     white: #ffffff,
     black: #000000,
+    transparent: transparent,
   ),
 );
 
@@ -87,6 +87,16 @@ $backgrounds: map.merge(
   map.get($colors, neutral),
   (
     default: map.get(map.get($colors, neutral), "gray-light"),
-    inverted: map.get(map.get($colors, neutral), dark),
+    inverted: map.get(map.get($colors, neutral), "dark-200"),
   )
+);
+
+// === Breakpoints ===
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
 );

@@ -1,0 +1,87 @@
+@use "../../../styles/abstracts/functions" as *;
+@use "../../../styles/abstracts/mixins" as *;
+@use "../../ds-card/ds-card.component" as card;
+
+.skeleton-card {
+  @extend .card;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+
+  .card-header,
+  .card-image,
+  .card-title,
+  .card-body,
+  .card-description div,
+  .card-price,
+  .card-button,
+  .card-footer {
+    padding: 0.5rem;
+    background-color: #e0e0e0;
+    position: relative;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+  }
+
+  .card-header,
+  .card-footer {
+    padding: 15px 8px;
+  }
+
+  .card-description {
+    @include apply-flex-container(column, space-between, stretch, 0.3rem);
+
+    div:nth-child(1) {
+      width: 96%;
+    }
+
+    div:nth-child(2) {
+      width: 80%;
+    }
+
+    div:nth-child(3) {
+      width: 70%;
+    }
+  }
+
+  .card-image {
+    width: 100%;
+    height: 150px;
+  }
+
+  .card-title {
+    width: 70%;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .card-body {
+    width: 96%;
+  }
+
+  .card-button {
+    width: 6.625rem;
+    height: 3rem;
+    border-radius: 9999px;
+  }
+
+  .card-price {
+    width: 70px;
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+/* Animación Skeleton */
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}

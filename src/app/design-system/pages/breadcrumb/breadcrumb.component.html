@@ -1,1 +1,75 @@
-<p>breadcrumb works!</p>
+<section class="buttons">
+  <!-- Encabezado de la sección -->
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Breadcrumb</h1>
+    <p>
+      El componente de breadcrumb (<code>ds-breadcrumb</code>) se utiliza para
+      mostrar la ruta de navegación actual del usuario dentro de la aplicación.
+      Este componente es altamente personalizable y soporta múltiples
+      configuraciones para adaptarse a diferentes contextos de uso.
+    </p>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section">
+      <h2>Uso</h2>
+      <p>Ejemplo de uso en HTML:</p>
+      <pre><code>
+        &lt;ds-breadcrumb
+          [items]="[
+            &#123; label: 'Home', url: '#' &#125;,
+            &#123; label: 'Library', url: '#' &#125;,
+            &#123; label: 'Data' &#125;
+          ]"
+        &gt;&lt;/ds-breadcrumb&gt;
+      </code></pre>
+    </div>
+
+    <!-- Sección: Configuración -->
+    <div class="documentation-section">
+      <h2>Configuración</h2>
+      <p>
+        El componente de breadcrumb acepta las siguientes propiedades de entrada
+        (<code>&#64;Input</code>):
+      </p>
+      <ul>
+        <li>
+          <strong>items</strong> (<code
+            >Array&lt;&#123; label: string, url?: string &#125;&gt;</code
+          >): Lista de elementos del breadcrumb. Cada elemento puede tener una
+          etiqueta (<code>label</code>) y una URL opcional (<code>url</code>).
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sección: Ejemplos de Breadcrumb -->
+    <div class="documentation-section">
+      <h2>Ejemplos de Breadcrumb</h2>
+      <ds-breadcrumb
+        [items]="[
+          { label: 'Home', url: '#' },
+          { label: 'Library', url: '#' },
+          { label: 'Data' },
+        ]"
+      ></ds-breadcrumb>
+      <ds-breadcrumb
+        [items]="[
+          { label: 'Home', url: '#' },
+          { label: 'Section', url: '#' },
+          { label: 'Subsection', url: '#' },
+          { label: 'Current Page' },
+        ]"
+      ></ds-breadcrumb>
+    </div>
+
+    <div class="documentation-section">
+      <h2>Accesibilidad</h2>
+      <p>
+        El componente de breadcrumb incluye soporte para accesibilidad mediante
+        el uso de atributos <code>aria</code> y roles adecuados.
+      </p>
+    </div>
+  </div>
+</section>

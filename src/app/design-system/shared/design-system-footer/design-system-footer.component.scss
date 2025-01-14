@@ -1,0 +1,14 @@
+@use "../../styles/abstracts/mixins" as *;
+
+:host {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  @include apply-color(background-color, neutral, "dark-300");
+
+  p {
+    @include apply-color(color, utility, white);
+    font-size: 0.9rem;
+    padding: 0.7rem;
+  }
+}

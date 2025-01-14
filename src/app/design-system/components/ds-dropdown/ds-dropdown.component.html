@@ -1,1 +1,71 @@
-<p>ds-dropdown works!</p>
+<div class="dropdown-wrapper">
+  <button
+    #dropdownElement
+    class="dropdown-toggle"
+    [ngClass]="dropdownClasses"
+    [attr.aria-label]="ariaLabel"
+    [disabled]="disabled"
+    (click)="toggleDropdown()"
+  >
+    <span *ngIf="iconSvg" class="dropdown-icon" [innerHTML]="iconSvg"></span>
+    <span
+      *ngIf="selectedOption?.icon"
+      class="dropdown-icon"
+      [innerHTML]="selectedOption?.icon"
+    ></span>
+    {{ selectedOption?.label || label }}
+    <span class="dropdown-arrow">
+      <svg
+        *ngIf="!isOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m19.5 8.25-7.5 7.5-7.5-7.5"
+        />
+      </svg>
+      <svg
+        *ngIf="isOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m4.5 15.75 7.5-7.5 7.5 7.5"
+        />
+      </svg>
+    </span>
+  </button>
+  <ul *ngIf="isOpen" class="dropdown-menu">
+    <li
+      *ngFor="let option of options; let i = index"
+      (click)="selectOption(option)"
+      [ngClass]="{ selected: option === selectedOption }"
+      [ngStyle]="{
+        'background-color': option.bgColor,
+        color: option.textColor,
+        'border-radius': option.borderRadius,
+      }"
+      [attr.aria-label]="option.ariaLabel"
+      [class.disabled]="option.disabled"
+    >
+      <span
+        *ngIf="option.icon"
+        class="dropdown-icon"
+        [innerHTML]="option.icon"
+      ></span>
+      {{ option.label }}
+    </li>
+  </ul>
+</div>

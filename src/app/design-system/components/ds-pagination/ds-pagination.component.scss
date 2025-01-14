@@ -1,0 +1,82 @@
+@use "sass:map";
+@use "sass:color";
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+
+  .page-item {
+    margin: 0 0.25rem;
+
+    &.disabled .page-link {
+      pointer-events: none;
+      cursor: not-allowed;
+      @include apply-color(background-color, neutral, gray);
+      @include apply-color(color, neutral, light);
+    }
+
+    &.active .page-link {
+      z-index: 1;
+      @include apply-color(background-color, primary, default);
+      @include apply-color(color, utility, white);
+    }
+
+    .page-link {
+      position: relative;
+      display: block;
+      padding: get-spacing(sm) get-spacing(md);
+      margin-left: -1px;
+      line-height: 1.25;
+      color: get-color(neutral, dark);
+      background-color: get-background-color(default);
+      border: 1px solid get-color(neutral, gray);
+      text-decoration: none;
+      cursor: pointer;
+      @include apply-transition(all, 0.3s, ease-in-out);
+
+      &:hover {
+        @include apply-color(background-color, primary, light);
+        @include apply-color(color, utility, white);
+      }
+    }
+  }
+
+  &.dark-mode {
+    .page-link {
+      @include apply-color(background-color, neutral, dark-200);
+      @include apply-color(color, utility, white);
+    }
+
+    .page-item.disabled .page-link {
+      @include apply-color(background-color, neutral, dark-100);
+      @include apply-color(color, neutral, gray);
+    }
+
+    .page-item.active .page-link {
+      @include apply-color(background-color, primary, dark);
+      @include apply-color(color, utility, white);
+    }
+  }
+
+  &.light-mode {
+    .page-link {
+      @include apply-color(background-color, neutral, light);
+      @include apply-color(color, neutral, dark);
+    }
+
+    .page-item.disabled .page-link {
+      @include apply-color(background-color, neutral, gray);
+      @include apply-color(color, neutral, light);
+    }
+
+    .page-item.active .page-link {
+      @include apply-color(background-color, primary, default);
+      @include apply-color(color, utility, white);
+    }
+  }
+}

@@ -60,6 +60,12 @@ const routes: Routes = [
         loadComponent: () => import('./pages/card/card.component'),
       },
       {
+        path: 'card-skeleton',
+        title: 'Design system | Card',
+        loadComponent: () =>
+          import('./pages/card/card-skeleton/card-skeleton.component'),
+      },
+      {
         path: 'carousel',
         title: 'Design system | Carousel',
         loadComponent: () => import('./pages/carousel/carousel.component'),
@@ -84,6 +90,12 @@ const routes: Routes = [
         path: 'input',
         title: 'Design system | Input',
         loadComponent: () => import('./pages/input/input.component'),
+      },
+      {
+        path: 'language-selector',
+        title: 'Design system | LanguageSelector',
+        loadComponent: () =>
+          import('./pages/language-selector/language-selector.component'),
       },
       {
         path: 'modal',
@@ -116,12 +128,17 @@ const routes: Routes = [
         loadComponent: () => import('./pages/spinner/spinner.component'),
       },
       {
+        path: 'theme-selector',
+        title: 'Design system | ThemeSelector',
+        loadComponent: () =>
+          import('./pages/theme-selector/theme-selector.component'),
+      },
+      {
         path: 'theme-switch',
         title: 'Design system | Theme switch',
         loadComponent: () =>
           import('./pages/theme-switch/theme-switch.component'),
       },
-
       {
         path: '**',
         redirectTo: 'introduction',

@@ -1,0 +1,100 @@
+@use "sass:color";
+@use "sass:map";
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.form-group {
+  margin-bottom: get-spacing(md);
+
+  label {
+    display: block;
+    margin-bottom: get-spacing(xs);
+    font-size: get-font-size(base);
+    @include apply-color(color, neutral, dark);
+  }
+
+  .input-wrapper {
+    position: relative;
+
+    .input-slider {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 0.5rem;
+      border-radius: 0.25rem;
+      background: get-color(neutral, light);
+      outline: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background: get-color(primary, default);
+        cursor: pointer;
+      }
+
+      &::-moz-range-thumb {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background: get-color(primary, default);
+        cursor: pointer;
+      }
+
+      // Dark mode
+      &.dark-mode {
+        background: get-color(neutral, "dark-200");
+
+        &::-webkit-slider-thumb {
+          background: get-color(primary, light);
+        }
+
+        &::-moz-range-thumb {
+          background: get-color(primary, light);
+        }
+      }
+
+      // Light mode
+      &.light-mode {
+        background: get-color(neutral, light);
+
+        &::-webkit-slider-thumb {
+          background: get-color(primary, default);
+        }
+
+        &::-moz-range-thumb {
+          background: get-color(primary, default);
+        }
+      }
+
+      // Error state
+      &.error {
+        @include apply-color(border-color, status, danger);
+        @include apply-color(color, status, danger);
+
+        &::-webkit-slider-thumb {
+          background: get-color(status, danger);
+        }
+
+        &::-moz-range-thumb {
+          background: get-color(status, danger);
+        }
+      }
+    }
+
+    .error-message {
+      margin-top: get-spacing(xs);
+      font-size: get-font-size(sm);
+      @include apply-color(color, status, danger);
+    }
+  }
+}

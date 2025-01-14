@@ -1,37 +1,36 @@
-// utilities/_colors.scss
-
+@use "sass:map";
+@use "sass:color";
+@use "sass:meta";
 @use "../abstracts/variables" as *;
 @use "../abstracts/functions" as *;
 @use "../abstracts/mixins" as *;
 
-body.light-mode {
-  @each $color-name, $color-value in $colors {
-    .text-#{$color-name} {
-      color: get-color($color-name);
-    }
+@mixin generate-color-classes($color-map, $prefix: "") {
+  @each $color-name, $color-value in $color-map {
+    $new-prefix: if($prefix == "", $color-name, "#{$prefix}-#{$color-name}");
 
-    .bg-#{$color-name} {
-      background-color: get-color($color-name);
-    }
+    @if meta.type-of($color-value) == "map" {
+      @include generate-color-classes($color-value, $new-prefix);
+    } @else {
+      .text-#{$new-prefix} {
+        color: $color-value;
+      }
 
-    .border-#{$color-name} {
-      border-color: get-color($color-name);
+      .bg-#{$new-prefix} {
+        background-color: $color-value;
+      }
+
+      .border-#{$new-prefix} {
+        border-color: $color-value;
+      }
     }
   }
 }
 
+body.light-mode {
+  @include generate-color-classes($colors);
+}
+
 body.dark-mode {
-  @each $color-name, $color-value in $colors {
-    .text-#{$color-name} {
-      color: get-color($color-name);
-    }
-
-    .bg-#{$color-name} {
-      background-color: get-color($color-name);
-    }
-
-    .border-#{$color-name} {
-      border-color: get-color($color-name);
-    }
-  }
+  @include generate-color-classes($colors);
 }

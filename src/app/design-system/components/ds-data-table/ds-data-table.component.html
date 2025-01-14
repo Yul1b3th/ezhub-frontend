@@ -1,1 +1,14 @@
-<p>ds-data-table works!</p>
+<div class="data-table" [ngClass]="themeService.theme()">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">{{ column.header }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let column of columns">{{ row[column.field] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

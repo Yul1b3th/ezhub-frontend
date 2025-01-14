@@ -1,0 +1,49 @@
+@use "sass:map";
+@use "sass:color";
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.alert {
+  padding: get-spacing(md);
+  border-radius: 4px;
+  margin-bottom: get-spacing(md);
+  position: relative;
+  @include apply-typography(base, base, 400);
+
+  &.success {
+    @include apply-color(background-color, status, success);
+    @include apply-color(color, utility, white);
+  }
+
+  &.error {
+    @include apply-color(background-color, status, danger);
+    @include apply-color(color, utility, white);
+  }
+
+  &.warning {
+    @include apply-color(background-color, status, warning);
+    @include apply-color(color, utility, white);
+  }
+
+  &.info {
+    @include apply-color(background-color, status, info);
+    @include apply-color(color, utility, white);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 50%;
+    right: get-spacing(sm);
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: get-font-size(base);
+    cursor: pointer;
+    @include apply-color(color, utility, white);
+
+    &:hover {
+      @include apply-color(color, neutral, light);
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: get-spacing(sm);
+  right: get-spacing(sm);
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  @include apply-flex-container(row, center, center);
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, primary, default);
+  @include apply-box-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
+  @include apply-transition(all, 0.3s, ease-in-out);
+
+  &:hover {
+    @include apply-color-opacity(background-color, 0.6, primary, default);
+    @include apply-box-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
+  }
+}

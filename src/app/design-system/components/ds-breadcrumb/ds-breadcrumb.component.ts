@@ -1,11 +1,22 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
+
+import { ThemeService } from '@design-system/services/theme.service';
 
 @Component({
-  selector: 'app-ds-breadcrumb',
-  imports: [],
+  selector: 'ds-breadcrumb',
+  imports: [CommonModule],
   templateUrl: './ds-breadcrumb.component.html',
-  styleUrl: './ds-breadcrumb.component.scss'
+  styleUrls: ['./ds-breadcrumb.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DsBreadcrumbComponent {
+  public readonly themeService = inject(ThemeService);
 
+  @Input() items: { label: string; url?: string }[] = [];
 }

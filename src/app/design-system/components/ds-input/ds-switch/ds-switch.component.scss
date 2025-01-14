@@ -1,0 +1,126 @@
+@use "sass:color";
+@use "sass:map";
+@use "../../../styles/abstracts/functions" as *;
+@use "../../../styles/abstracts/variables" as *;
+@use "../../../styles/abstracts/mixins" as *;
+
+.form-group {
+  margin-bottom: get-spacing(md);
+
+  label {
+    display: block;
+    margin-bottom: get-spacing(xs);
+    font-size: get-font-size(base);
+    @include apply-color(color, neutral, dark);
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    width: fit-content;
+
+    .input-switch {
+      width: 44px;
+      height: 24px;
+      border: 1px solid;
+      @include apply-color(border-color, neutral, gray);
+      border-radius: 1rem;
+      @include apply-transition(all, 0.3s, ease-in-out);
+      appearance: none;
+      background-color: get-color(neutral, light);
+      position: relative;
+      cursor: pointer;
+
+      &:checked {
+        background-color: get-color(primary, default);
+      }
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 2px; // Ajuste para mantener el borde visible
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: get-color(utility, white);
+        @include apply-transition(all, 0.3s, ease-in-out);
+        z-index: 1;
+      }
+
+      &:checked:before {
+        left: calc(100% - 22px); // Ajuste para mantener el borde visible
+      }
+
+      // Default state
+      @include apply-color(background-color, neutral, light);
+      @include apply-color(color, neutral, dark);
+
+      // Hover state
+      &:hover {
+        @include input-state-hover;
+      }
+
+      // Typing state (focus)
+      &:focus {
+        @include input-state-focus(get-color(primary, default));
+      }
+
+      // Disabled state
+      &:disabled {
+        @include apply-color(background-color, neutral, light);
+        @include apply-color(color, neutral, "gray-dark");
+        @include apply-color(border-color, neutral, gray);
+        cursor: not-allowed;
+      }
+
+      // Verification state
+      &.verification {
+        @include apply-color(border-color, status, info);
+        @include apply-color(color, status, info);
+
+        &:focus {
+          box-shadow: 0 0 0 3px
+            color.scale(get-color(status, info), $alpha: -50%);
+        }
+      }
+
+      // Error state
+      &.error {
+        @include apply-color(border-color, status, danger);
+        @include apply-color(color, status, danger);
+
+        &:focus {
+          box-shadow: 0 0 0 3px
+            color.scale(get-color(status, danger), $alpha: -50%);
+        }
+      }
+    }
+
+    .switch-icons {
+      width: 100%;
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      padding: 0 3px;
+
+      @include apply-color(color, neutral, "gray-dark");
+      .switch-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  .error-message {
+    margin-top: get-spacing(xs);
+    font-size: get-font-size(sm);
+    @include apply-color(color, status, danger);
+  }
+}

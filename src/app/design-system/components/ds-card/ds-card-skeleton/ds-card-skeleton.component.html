@@ -1,0 +1,51 @@
+<div class="skeleton-card">
+  <ng-container *ngIf="hasCardHeader">
+    <div class="card-header">
+      <ng-content select="[card-header]"></ng-content>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="hasCardImage">
+    <div class="card-image">
+      <ng-content select="[card-image]"></ng-content>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="hasCardTitle">
+    <div class="card-title">
+      <ng-content select="[card-title]"></ng-content>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="hasCardBody">
+    <div class="card-body">
+      <ng-content select="[card-body]"></ng-content>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="hasCardDescription">
+    <div class="card-description">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="hasCardPrice">
+    <div class="card-price">
+      <ng-content select="[card-price]"></ng-content>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="hasCardButton">
+    <div class="card-button">
+      <ng-content select="[card-button]"></ng-content>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="hasCardFooter">
+    <div class="card-footer">
+      <ng-content select="[card-footer]"></ng-content>
+    </div>
+  </ng-container>
+</div>

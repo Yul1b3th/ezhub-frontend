@@ -1,127 +1,182 @@
 @use "sass:color";
-@use "sass:map";
 @use "../../styles/abstracts/functions" as *;
-@use "../../styles/abstracts/variables" as *;
 @use "../../styles/abstracts/mixins" as *;
 
-$button-states: (
-  primary: get-color("primary"),
-  secondary: get-color("secondary"),
-  success: get-color("success"),
-  danger: get-color("danger"),
-  warning: get-color("warning"),
-  info: get-color("info"),
-  light: get-color("light"),
-  dark: get-color("dark"),
-);
-
-// Mixin para tamaños de botones
-@mixin button-size($size, $padding-x, $padding-y, $font-size) {
-  &.btn-#{$size} {
-    padding: get-spacing($padding-x) get-spacing($padding-y);
-    font-size: get-font-size($font-size);
+@mixin apply-hover-darken($color, $amount: 15%) {
+  &:hover {
+    background-color: color.adjust(get-color($color...), $lightness: -$amount);
   }
 }
 
 .btn {
-  min-height: 44px;
+  text-decoration: none;
+  cursor: pointer;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: get-spacing(sm) get-spacing(md);
+
+  color: #333;
+  background-color: transparent;
+  padding: 15px;
   font-size: get-font-size(base);
+  line-height: 1;
   font-weight: 600;
-  text-align: center;
-  text-decoration: none;
+  border: 1px solid transparent;
   border-radius: 9999px;
-  @include transition(all, 0.3s, ease-in-out);
-  cursor: pointer;
-  border: 2px solid;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); // Sombra ligera en reposo
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); // Sombra más fuerte en hover
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 2px 4px rgba(0, 0, 0, 0.06);
   }
 
-  &.dark-mode {
-    @each $state, $color in $button-states {
-      &.btn-#{$state} {
-        background-color: if($state == "dark", get-color("white"), $color);
-        color: get-color("dark-300");
-        border-color: if($state == "dark", get-color("white"), $color);
-        &:hover {
-          color: if(
-            $state == "dark",
-            get-color("white"),
-            get-color("dark-300")
-          );
-          $hover-bg: if(
-            $state == "dark",
-            get-color("dark"),
-            color.adjust($color, $lightness: -15%)
-          );
-          background-color: $hover-bg;
-          border-color: $hover-bg;
-        }
-      }
+  // Primary Button
+  &.btn-primary {
+    @include apply-color(border-color, primary, default);
+    @include apply-color(background-color, primary, default);
+    @include apply-color(color, neutral, "dark-300");
+    @include apply-hover-darken((primary, default));
+  }
 
-      &.btn-outline-#{$state} {
-        background-color: transparent;
-        border-color: if($state == "dark", get-color("white"), $color);
-        color: get-color("white");
+  // Primary with icon
+  .icon-param {
+    margin-right: get-spacing(xs);
+    display: inline-flex;
+    width: 24px;
+  }
 
-        &:hover {
-          background-color: $color;
-          color: if($state == "dark", get-color("white"), get-color("dark"));
-        }
-      }
+  // Primary Tertiary
+  &.btn-tertiary-primary {
+    border-color: color.adjust(get-color(primary, default), $lightness: -15);
+    @include apply-theme-colors(
+      (utility, transparent),
+      (neutral, "dark-300"),
+      (utility, transparent),
+      (utility, white)
+    );
+
+    &:hover {
+      @include apply-color(border-color, primary, default);
+      @include apply-color(background-color, primary, default);
+      @include apply-color(color, neutral, "dark-300");
     }
   }
 
-  &.light-mode {
-    @each $state, $color in $button-states {
-      &.btn-#{$state} {
-        background-color: $color;
-        color: if($state == "dark", get-color("white"), get-color("dark-300"));
-        border-color: $color;
+  // Primary Ghost
+  &.btn-ghost-primary {
+    box-shadow: none;
+    border-color: transparent;
+    @include apply-theme-colors(
+      (utility, transparent),
+      (neutral, "dark-300"),
+      (utility, transparent),
+      (utility, white)
+    );
 
-        &:hover {
-          $hover-bg: if(
-            $state == "dark",
-            get-color("dark-300"),
-            color.adjust($color, $lightness: -15%)
-          );
-          background-color: $hover-bg;
-          border-color: $hover-bg;
-        }
-      }
-
-      &.btn-outline-#{$state} {
-        background-color: transparent;
-        border-color: $color;
-        color: get-color("dark-300");
-
-        &:hover {
-          background-color: to-hsla($color, 0.3);
-          color: get-color("dark-300");
-        }
-      }
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      @include apply-color(border-color, primary, default);
+      @include apply-color(background-color, primary, default);
+      @include apply-color(color, neutral, "dark-300");
     }
   }
 
-  // Button Sizes
-  @include button-size(sm, xs, sm, sm);
-  @include button-size(md, sm, md, base);
-  @include button-size(lg, md, lg, lg);
+  // Primary Icon
+  &.btn-icon {
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+  }
 
+  // Primary Block
   &.btn-block {
     display: block;
     width: 100%;
   }
 
-  // Disabled State
+  // Secondary Button
+  &.btn-secondary {
+    @include apply-color(border-color, neutral, gray);
+    @include apply-color(background-color, neutral, gray);
+    @include apply-color(color, neutral, "dark-300");
+    @include apply-hover-darken((neutral, gray));
+  }
+
+  // Secondary Tertiary Button
+  &.btn-tertiary-secondary {
+    border-color: color.adjust(get-color(neutral, gray), $lightness: -15);
+    @include apply-theme-colors(
+      (utility, transparent),
+      (neutral, "dark-300"),
+      (utility, transparent),
+      (utility, white)
+    );
+  }
+
+  // Accent Button
+  &.btn-accent {
+    @include apply-color(border-color, secondary, default);
+    @include apply-color(background-color, secondary, default);
+    @include apply-color(color, neutral, "dark-300");
+    @include apply-hover-darken((secondary, default));
+  }
+
+  // Tertiary Accent Button
+  &.btn-tertiary-accent {
+    border-color: color.adjust(get-color(secondary, default), $lightness: -15);
+    @include apply-theme-colors(
+      (utility, transparent),
+      (neutral, "dark-300"),
+      (utility, transparent),
+      (utility, white)
+    );
+  }
+
+  // Danger Button
+  &.btn-danger {
+    @include apply-color(border-color, status, danger);
+    @include apply-color(background-color, status, danger);
+    @include apply-color(color, neutral, "dark-300");
+    @include apply-hover-darken((status, danger));
+  }
+
+  // Tertiary Danger Button
+  &.btn-tertiary-danger {
+    border-color: color.adjust(get-color(status, danger), $lightness: -15);
+    @include apply-theme-colors(
+      (utility, transparent),
+      (neutral, "dark-300"),
+      (utility, transparent),
+      (utility, white)
+    );
+  }
+
+  // Button State
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  // Button Sizes
+  &.btn-sm {
+    padding: 14px;
+    font-size: get-font-size(sm);
+  }
+  &.btn-md {
+    padding: 15px;
+    font-size: get-font-size(base);
+  }
+  &.btn-lg {
+    padding: 16px;
+    font-size: get-font-size(lg);
   }
 }

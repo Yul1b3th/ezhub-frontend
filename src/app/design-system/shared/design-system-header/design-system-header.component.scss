@@ -1,0 +1,126 @@
+@use "../../styles/abstracts/mixins" as *;
+
+$header-height: 70px;
+
+:host {
+  header {
+    position: fixed;
+    width: 100%;
+    height: $header-height;
+    top: 0;
+    z-index: 998;
+    text-align: center;
+    @include apply-color(color, neutral, "dark-300");
+    @include apply-color(background-color, neutral, "gray-light");
+    @include apply-transition(box-shadow, 0.3s, ease-in-out);
+    @include apply-box-shadow(
+      0 2px 4px 0 rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(0, 0, 0, 0.15)
+    );
+
+    &.scrolled {
+      @include apply-box-shadow(
+        0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 0 0 2px rgba(0, 0, 0, 0.2)
+      );
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      padding: 10px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      @include apply-media-breakpoint(lg) {
+        display: none;
+      }
+    }
+  }
+
+  .mobile-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include apply-color-opacity(background-color, 0.5, neutral, "gray-light");
+    z-index: 999;
+
+    @include apply-media-breakpoint(lg) {
+      display: none;
+    }
+  }
+
+  design-system-sidebar {
+    &.mobile-sidebar {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      min-width: 200px;
+      max-width: 360px;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      transform: translateX(-100%);
+      border-radius: 0 0.75rem 0.75rem 0;
+      overflow: hidden;
+      @include apply-transition(transform, 0.3s, ease-in-out);
+      @include apply-box-shadow(
+        0 2px 4px 0 rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.1)
+      );
+
+      .sidebar-header {
+        height: 60px;
+        padding: 0 20px;
+        @include apply-flex-container(row, space-between, center);
+        @include apply-box-shadow(0 2px 4px 0 rgba(0, 0, 0, 0.1));
+        @include apply-color(color, neutral, "dark-300");
+        @include apply-color(background-color, neutral, light);
+
+        p.sidebar-title {
+          @include apply-color(color, neutral, "dark-300");
+          font-weight: 600;
+          margin-bottom: 0;
+        }
+
+        .close-btn {
+          @include apply-flex-container(row, center, center);
+          padding: 0.25rem;
+          border-radius: 0.375rem;
+          background: none;
+          border: none;
+          cursor: pointer;
+          &:hover {
+            @include apply-box-shadow(0 2px 4px 0 rgba(0, 0, 0, 0.1));
+            @include apply-color(background-color, neutral, gray);
+          }
+        }
+      }
+
+      .sidebar-footer {
+        height: 40px;
+        @include apply-flex-container(row, center, center);
+        @include apply-color(background-color, neutral, "dark-300");
+
+        small {
+          margin: 0;
+          @include apply-color(color, utility, white);
+        }
+      }
+
+      @include apply-media-breakpoint(lg) {
+        display: none;
+      }
+
+      &.open {
+        transform: translateX(0);
+      }
+    }
+  }
+}

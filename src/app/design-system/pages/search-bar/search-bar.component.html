@@ -1,1 +1,122 @@
-<p>search-bar works!</p>
+<section>
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Search Bar</h1>
+    <p>
+      El componente de barra de búsqueda (<code>ds-search-bar</code>) se utiliza
+      para permitir a los usuarios buscar y seleccionar opciones de una lista
+      desplegable. Este componente es altamente personalizable y soporta
+      múltiples configuraciones para adaptarse a diferentes contextos de uso.
+    </p>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section">
+      <h2>Uso</h2>
+      <p>Ejemplo de uso en HTML:</p>
+      <pre><code>
+        &lt;form [formGroup]="form"&gt;
+          &lt;ds-search-bar
+            formControlName="searchValue"
+            id="searchValue"
+            label="Search"
+            placeholder="Type to search..."
+            [ariaRequired]="true"
+            [options]="['Option 1', 'Option 2', 'Option 3']"
+          &gt;&lt;/ds-search-bar&gt;
+        &lt;/form&gt;
+      </code></pre>
+    </div>
+
+    <!-- Sección: Configuración -->
+    <div class="documentation-section">
+      <h2>Configuración</h2>
+      <p>El componente acepta las siguientes propiedades:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Propiedad</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>label</code></td>
+            <td><code>string</code></td>
+            <td>Texto mostrado como etiqueta del campo.</td>
+            <td><code>"Buscar"</code></td>
+          </tr>
+          <tr>
+            <td><code>placeholder</code></td>
+            <td><code>string</code></td>
+            <td>Texto mostrado dentro del campo cuando está vacío.</td>
+            <td><code>"Escribe para buscar..."</code></td>
+          </tr>
+          <tr>
+            <td><code>formControlName</code></td>
+            <td><code>string</code></td>
+            <td>
+              Vincula el componente a un control de un formulario reactivo.
+            </td>
+            <td><code>"searchValue"</code></td>
+          </tr>
+          <tr>
+            <td><code>required</code></td>
+            <td><code>boolean</code></td>
+            <td>Define si el campo es obligatorio.</td>
+            <td><code>true</code></td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td><code>boolean</code></td>
+            <td>Desactiva el campo de entrada.</td>
+            <td><code>false</code></td>
+          </tr>
+          <tr>
+            <td><code>errorMessage</code></td>
+            <td><code>string</code></td>
+            <td>
+              Mensaje de error personalizado mostrado para errores de
+              validación.
+            </td>
+            <td><code>"Este campo es obligatorio"</code></td>
+          </tr>
+          <tr>
+            <td><code>options</code></td>
+            <td><code>string[]</code></td>
+            <td>Lista de opciones que se mostrarán en el menú desplegable.</td>
+            <td><code>["Option 1", "Option 2", "Option 3"]</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sección: Ejemplo -->
+    <div class="documentation-section">
+      <h2>Ejemplo</h2>
+      <form [formGroup]="form">
+        <ds-search-bar
+          formControlName="searchValue"
+          id="searchValue"
+          label="Search"
+          placeholder="Type to search..."
+          [ariaRequired]="true"
+          [options]="['Option 1', 'Option 2', 'Option 3']"
+        ></ds-search-bar>
+      </form>
+    </div>
+
+    <!-- Sección: Accesibilidad -->
+    <div class="documentation-section">
+      <h2>Accesibilidad</h2>
+      <p>
+        El componente de barra de búsqueda incluye soporte para accesibilidad
+        mediante el uso de atributos <code>aria</code> y roles adecuados.
+      </p>
+    </div>
+  </div>
+</section>

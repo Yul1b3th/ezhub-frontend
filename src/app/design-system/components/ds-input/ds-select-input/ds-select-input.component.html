@@ -1,1 +1,28 @@
-<p>ds-select-input works!</p>
+<div class="form-group">
+  <label [for]="id">{{ label }}</label>
+  <div class="input-wrapper">
+    <select
+      [id]="id"
+      class="input-select"
+      [ngClass]="{
+        'dark-mode': themeService.theme() === 'dark',
+        'light-mode': themeService.theme() === 'light',
+        error: !!errorMessage,
+      }"
+      [attr.aria-required]="ariaRequired"
+      [attr.aria-invalid]="!!errorMessage"
+      [attr.aria-describedby]="errorMessage ? 'error-msg' : null"
+      [disabled]="disabled"
+      (input)="handleInput($event)"
+      (blur)="handleBlur()"
+    >
+      <option value="" disabled selected>{{ placeholder }}</option>
+      <option *ngFor="let option of options" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+  <div *ngIf="errorMessage" class="error-message" id="error-msg">
+    {{ errorMessage }}
+  </div>
+</div>

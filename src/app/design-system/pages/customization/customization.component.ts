@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+
+import { ThemeService } from '@design-system/services/theme.service';
 
 @Component({
   selector: 'customization',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './customization.component.html',
   styleUrl: './customization.component.scss',
 })
-export default class CustomizationComponent {}
+export default class CustomizationComponent {
+  public readonly themeService = inject(ThemeService);
+}

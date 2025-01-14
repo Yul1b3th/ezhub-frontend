@@ -1,1 +1,73 @@
-<p>navbar works!</p>
+<section>
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Navbar</h1>
+    <p>
+      El componente de barra de navegación (<code>ds-navbar</code>) se utiliza
+      para proporcionar una navegación consistente en la parte superior de la
+      aplicación. Este componente es altamente personalizable y soporta
+      múltiples configuraciones para adaptarse a diferentes contextos de uso.
+    </p>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section">
+      <h2>Uso</h2>
+      <p>Ejemplo de uso en HTML:</p>
+      <pre><code>
+        &lt;ds-navbar&gt;
+          &lt;ds-navbar-brand&gt;Brand&lt;/ds-navbar-brand&gt;
+          &lt;ds-navbar-nav&gt;
+            &lt;ds-navbar-item&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/ds-navbar-item&gt;
+            &lt;ds-navbar-item&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/ds-navbar-item&gt;
+            &lt;ds-navbar-item&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/ds-navbar-item&gt;
+          &lt;/ds-navbar-nav&gt;
+        &lt;/ds-navbar&gt;
+      </code></pre>
+    </div>
+
+    <!-- Sección: Configuración -->
+    <div class="documentation-section">
+      <h2>Configuración</h2>
+      <p>
+        El componente de barra de navegación acepta las siguientes propiedades
+        de entrada (<code>&#64;Input</code>):
+      </p>
+      <ul>
+        <li>
+          <strong>brand</strong> (<code>string</code>): El nombre de la marca o
+          logo que se mostrará en la barra de navegación.
+        </li>
+        <li>
+          <strong>items</strong> (<code
+            >Array&lt;&#123; label: string, url: string &#125;&gt;</code
+          >): Lista de elementos de navegación. Cada elemento debe tener una
+          etiqueta (<code>label</code>) y una URL (<code>url</code>).
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sección: Ejemplo -->
+    <div class="documentation-section">
+      <h2>Ejemplo</h2>
+      <!-- <ds-navbar>
+        <ds-navbar-brand>Brand</ds-navbar-brand>
+        <ds-navbar-nav>
+          <ds-navbar-item><a href="#">Home</a></ds-navbar-item>
+          <ds-navbar-item><a href="#">About</a></ds-navbar-item>
+          <ds-navbar-item><a href="#">Contact</a></ds-navbar-item>
+        </ds-navbar-nav>
+      </ds-navbar> -->
+    </div>
+
+    <!-- Sección: Accesibilidad -->
+    <div class="documentation-section">
+      <h2>Accesibilidad</h2>
+      <p>
+        El componente de barra de navegación incluye soporte para accesibilidad
+        mediante el uso de atributos <code>aria</code> y roles adecuados.
+      </p>
+    </div>
+  </div>
+</section>

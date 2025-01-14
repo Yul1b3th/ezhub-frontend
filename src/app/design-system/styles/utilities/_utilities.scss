@@ -1,7 +1,12 @@
 // Clase para imágenes responsivas
 .img-responsive {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-position: center;
   object-fit: cover;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
 }

@@ -1,0 +1,55 @@
+@use "sass:map";
+@use "sass:color";
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.data-table {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: get-spacing(md);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0;
+
+    th,
+    td {
+      padding: get-spacing(sm);
+      text-align: left;
+      border-bottom: 1px solid get-color(neutral, gray);
+    }
+
+    th {
+      background-color: get-background-color(default);
+      @include apply-typography(base, base, 600);
+    }
+
+    td {
+      @include apply-typography(base, base, 400);
+    }
+
+    &.dark-mode {
+      th {
+        background-color: get-background-color(inverted);
+        @include apply-color(color, utility, white);
+      }
+
+      td {
+        @include apply-color(color, utility, white);
+      }
+    }
+
+    &.light-mode {
+      th {
+        background-color: get-background-color(default);
+        @include apply-color(color, neutral, "gray-dark");
+      }
+
+      td {
+        @include apply-color(color, neutral, "gray-dark");
+      }
+    }
+  }
+}

@@ -1,17 +1,17 @@
 <section class="layout">
-  <div class="container">
-    <div>
-      <h1>Layout</h1>
-      <p>
-        En esta sección, exploraremos el sistema de diseño de layout que se
-        utiliza para crear estructuras de página consistentes y responsivas.
-      </p>
-    </div>
+  <!-- Encabezado de la sección -->
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Layout</h1>
+    <p>
+      En esta sección, se explora el sistema de diseño de layout que se utiliza
+      para crear estructuras de página consistentes y responsivas.
+    </p>
+  </header>
 
-    <hr />
-
+  <!-- Contenido principal -->
+  <div class="documentation-content">
     <!-- Grid -->
-    <div>
+    <div class="documentation-section">
       <h2>Grid</h2>
       <p>
         El sistema de grid se basa en un diseño de 12 columnas que permite crear
@@ -19,86 +19,89 @@
         principales clases y mixins utilizados:
       </p>
 
-      <h3>Contenedor</h3>
-      <pre><code class="language-scss">
-    .container &#123;
-      width: 100%;
-      max-width: 100%; // Por defecto ocupa todo el ancho
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: get-spacing(xs);
-      padding-right: get-spacing(xs);
+      <div class="documentation-item">
+        <h3>Contenedor</h3>
+        <pre class="mb-md"><code class="language-scss">
+      .container &#123;
+        width: 100%;
+        max-width: 100%; // Por defecto ocupa todo el ancho
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: get-spacing(xs);
+        padding-right: get-spacing(xs);
 
-      &#64;each $breakpoint, $value in $breakpoints &#123;
-        &#64;if $breakpoint != xs &#123;
-          // Evita el breakpoint más pequeño
-          &#64;include media-breakpoint-up($breakpoint) &#123;
-            max-width: $value; // Ancho máximo basado en el breakpoint
+        &#64;each $breakpoint, $value in $breakpoints &#123;
+          &#64;if $breakpoint != xs &#123;
+            // Evita el breakpoint más pequeño
+            &#64;include apply-media-breakpoint($breakpoint) &#123;
+              max-width: $value; // Ancho máximo basado en el breakpoint
+            &#125;
           &#125;
         &#125;
       &#125;
-    &#125;
-    </code></pre>
-      <p>
-        La clase <code>.container</code> se utiliza para envolver el contenido y
-        aplicar márgenes y rellenos automáticos, asegurando que el contenido
-        esté centrado y tenga un ancho máximo basado en los breakpoints
-        definidos.
-      </p>
+      </code></pre>
+        <p>
+          La clase <code>.container</code> se utiliza para envolver el contenido
+          y aplicar márgenes y rellenos automáticos, asegurando que el contenido
+          esté centrado y tenga un ancho máximo basado en los breakpoints
+          definidos.
+        </p>
+      </div>
 
-      <h3>Fila</h3>
-      <pre><code class="language-scss">
-    .row &#123;
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: -get-spacing(xs);
-      margin-right: -get-spacing(xs);
-    &#125;
-    </code></pre>
-      <p>
-        La clase <code>.row</code> se utiliza para crear una fila de columnas.
-        Utiliza flexbox para asegurar que las columnas se distribuyan
-        correctamente y se envuelvan según sea necesario.
-      </p>
-
-      <h3>Columnas</h3>
-      <pre><code class="language-scss">
-    [class*="col-"] &#123;
-      padding-left: get-spacing(xs);
-      padding-right: get-spacing(xs);
-      flex: 0 0 auto;
-      width: 100%;
-
-      &#64;for $i from 1 through 12 &#123;
-        &.col-#&#123;$i&#125; &#123;
-          width: math.div(100%, 12) * $i;
-        &#125;
+      <div class="documentation-item">
+        <h3>Fila</h3>
+        <pre class="mb-md"><code class="language-scss">
+      .row &#123;
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -get-spacing(xs);
+        margin-right: -get-spacing(xs);
       &#125;
+      </code></pre>
+        <p>
+          La clase <code>.row</code> se utiliza para crear una fila de columnas.
+          Utiliza flexbox para asegurar que las columnas se distribuyan
+          correctamente y se envuelvan según sea necesario.
+        </p>
+      </div>
 
-      &#64;each $breakpoint, $value in $breakpoints &#123;
-        &#64;if $breakpoint != xs &#123;
-          &#64;include media-breakpoint-up($breakpoint) &#123;
-            &#64;for $i from 1 through 12 &#123;
-              &.col-#&#123;$breakpoint&#125;-#&#123;$i&#125; &#123;
-                width: math.div(100%, 12) * $i;
+      <div class="documentation-item">
+        <h3>Columnas</h3>
+        <pre class="mb-md"><code class="language-scss">
+      [class*="col-"] &#123;
+        padding-left: get-spacing(xs);
+        padding-right: get-spacing(xs);
+        flex: 0 0 auto;
+        width: 100%;
+
+        &#64;for $i from 1 through 12 &#123;
+          &.col-#&#123;$i&#125; &#123;
+            width: math.div(100%, 12) * $i;
+          &#125;
+        &#125;
+
+        &#64;each $breakpoint, $value in $breakpoints &#123;
+          &#64;if $breakpoint != xs &#123;
+            &#64;include apply-media-breakpoint($breakpoint) &#123;
+              &#64;for $i from 1 through 12 &#123;
+                &.col-#&#123;$breakpoint&#125;-#&#123;$i&#125; &#123;
+                  width: math.div(100%, 12) * $i;
+                &#125;
               &#125;
             &#125;
           &#125;
         &#125;
       &#125;
-    &#125;
-    </code></pre>
-      <p>
-        Las clases de columna se utilizan para definir el ancho de las columnas
-        en diferentes breakpoints. Utilizan un sistema de 12 columnas para
-        asegurar que el contenido se distribuya de manera uniforme.
-      </p>
+      </code></pre>
+        <p>
+          Las clases de columna se utilizan para definir el ancho de las
+          columnas en diferentes breakpoints. Utilizan un sistema de 12 columnas
+          para asegurar que el contenido se distribuya de manera uniforme.
+        </p>
+      </div>
     </div>
 
-    <hr />
-
-    <!-- Helpers -->
-    <div>
+    <div class="documentation-section">
       <h2>Helpers</h2>
       <p>
         Los helpers son clases utilitarias que facilitan la aplicación de
@@ -106,22 +109,25 @@
         los helpers más utilizados:
       </p>
 
-      <h3>Clearfix</h3>
-      <pre><code class="language-scss">
+      <div class="documentation-item">
+        <h3>Clearfix</h3>
+        <pre class="mb-md"><code class="language-scss">
       .clearfix::after &#123;
         content: "";
         display: table;
         clear: both;
       &#125;
       </code></pre>
-      <p>
-        La clase <code>.clearfix</code> se utiliza para aplicar el clearfix a un
-        elemento, asegurando que los elementos flotantes dentro de él se
-        comporten correctamente.
-      </p>
+        <p>
+          La clase <code>.clearfix</code> se utiliza para aplicar el clearfix a
+          un elemento, asegurando que los elementos flotantes dentro de él se
+          comporten correctamente.
+        </p>
+      </div>
 
-      <h3>Flexbox Utilities</h3>
-      <pre><code class="language-scss">
+      <div class="documentation-item">
+        <h3>Flexbox Utilities</h3>
+        <pre class="mb-md"><code class="language-scss">
       .flex &#123;
         display: flex;
       &#125;
@@ -134,13 +140,15 @@
         flex-direction: column;
       &#125;
       </code></pre>
-      <p>
-        Las clases de utilidades de flexbox se utilizan para aplicar rápidamente
-        estilos de flexbox a los elementos.
-      </p>
+        <p>
+          Las clases de utilidades de flexbox se utilizan para aplicar
+          rápidamente estilos de flexbox a los elementos.
+        </p>
+      </div>
 
-      <h3>Display Utilities</h3>
-      <pre><code class="language-scss">
+      <div class="documentation-item">
+        <h3>Display Utilities</h3>
+        <pre class="mb-md"><code class="language-scss">
       .d-none &#123;
         display: none;
       &#125;
@@ -149,10 +157,11 @@
         display: block;
       &#125;
       </code></pre>
-      <p>
-        Las clases de utilidades de display se utilizan para controlar
-        rápidamente la propiedad de display de los elementos.
-      </p>
+        <p>
+          Las clases de utilidades de display se utilizan para controlar
+          rápidamente la propiedad de display de los elementos.
+        </p>
+      </div>
     </div>
   </div>
 </section>

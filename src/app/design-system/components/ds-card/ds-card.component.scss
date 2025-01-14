@@ -1,0 +1,60 @@
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+@mixin header-footer() {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  @include apply-color(color, neutral, dark);
+}
+
+.card {
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  overflow: hidden;
+  @include apply-flex-container(column, space-between, stretch, 0);
+  @include apply-box-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+  @include apply-transition(all, 0.3s, ease-in-out);
+
+  &:hover {
+    @include apply-box-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  }
+
+  &-header {
+    @include header-footer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+  &-footer {
+    @include header-footer;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+  &-body {
+    height: 100%;
+    padding: get-spacing(md);
+    @include apply-flex-container(column, space-between, stretch, 0);
+
+    .card-title {
+      @include apply-typography(xl, base, 500, sm);
+    }
+
+    .card-content {
+      flex: 1 1 auto;
+    }
+
+    .card-text {
+      p:not(:last-child) {
+        @include apply-typography(base, base, 400, sm);
+      }
+    }
+
+    .price {
+      @include apply-typography(lg, lg, 600, sm);
+    }
+
+    .currency-symbol {
+      @include apply-typography(sm, base, 600, sm);
+    }
+  }
+}

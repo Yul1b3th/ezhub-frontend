@@ -2,7 +2,8 @@
 
 @use "sass:map";
 @use "sass:color";
-@use "variables" as *;
+@use "sass:meta";
+@use "./variables" as *;
 
 // === Funciones genéricas ===
 
@@ -17,6 +18,11 @@
 
 // === Funciones relacionadas con tipografía ===
 
+// Obtiene una fuente por nombre
+@function get-font($font-name) {
+  @return get-map-value($fonts, $font-name);
+}
+
 // Obtiene un tamaño de fuente
 @function get-font-size($size-name) {
   @return get-map-value($font-sizes, $size-name);
@@ -25,13 +31,6 @@
 // Obtiene una altura de línea
 @function get-line-height($size-name) {
   @return get-map-value($line-heights, $size-name);
-}
-
-// === Funciones relacionadas con diseño responsivo ===
-
-// Obtiene un breakpoint
-@function get-breakpoint($size-name) {
-  @return get-map-value($breakpoints, $size-name);
 }
 
 // === Funciones relacionadas con espaciado ===
@@ -44,13 +43,41 @@
 // === Funciones relacionadas con colores ===
 
 // Obtiene un color por nombre
-@function get-color($color-name) {
-  @return get-map-value($colors, $color-name);
+@function get-color($color-name...) {
+  $color-map: $colors;
+
+  @each $name in $color-name {
+    @if map.has-key($color-map, $name) {
+      $color-map: map.get($color-map, $name);
+    } @else {
+      @error "La clave `#{$name}` no existe en el mapa de colores.";
+    }
+  }
+
+  @if meta.type-of($color-map) == "map" {
+    @error "El valor `#{$color-name}` no es un color válido.";
+  }
+
+  @return $color-map;
 }
 
 // Obtiene un color de fondo por nombre
-@function get-background-color($background-name) {
-  @return get-map-value($backgrounds, $background-name);
+@function get-background-color($background-name...) {
+  $color-map: $backgrounds;
+
+  @each $name in $background-name {
+    @if map.has-key($color-map, $name) {
+      $color-map: map.get($color-map, $name);
+    } @else {
+      @error "La clave `#{$name}` no existe en el mapa de colores de fondo.";
+    }
+  }
+
+  @if meta.type-of($color-map) != "color" {
+    @error "El valor `#{$background-name}` no es un color válido.";
+  }
+
+  @return $color-map;
 }
 
 // Convierte un color a HSL
@@ -72,7 +99,13 @@
   );
 }
 
-// === Notas ===
-// 1. Los nombres se han cambiado a formas más claras y directas (por ejemplo, `get-color`).
-// 2. Las funciones relacionadas están agrupadas lógicamente para mejorar la legibilidad.
-// 3. Las funciones genéricas como `get-map-value` son reutilizables para cualquier mapa.
+@function is-color($value) {
+  @return meta.type-of($value) == "color";
+}
+
+// === Funciones relacionadas con diseño responsivo ===
+
+// Obtiene un breakpoint
+@function get-breakpoint($size-name) {
+  @return get-map-value($breakpoints, $size-name);
+}

@@ -1,1 +1,69 @@
-<p>pagination works!</p>
+<section>
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Paginación</h1>
+    <p>
+      El componente de paginación (<code>ds-pagination</code>) se utiliza para
+      dividir el contenido en páginas y permitir a los usuarios navegar entre
+      ellas. Este componente es altamente personalizable y soporta múltiples
+      configuraciones para adaptarse a diferentes contextos de uso.
+    </p>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section">
+      <h2>Uso</h2>
+      <p>Ejemplo de uso en HTML:</p>
+      <pre><code>
+        &lt;ds-pagination
+          [totalItems]="100" [itemsPerPage]="10"
+          [currentPage]="currentPage"
+          (currentPageChange)="onPageChange($event)"
+        &gt;&lt;/ds-pagination&gt;
+      </code></pre>
+    </div>
+
+    <!-- Sección: Configuración -->
+    <div class="documentation-section">
+      <h2>Configuración</h2>
+      <p>
+        El componente de paginación acepta las siguientes propiedades de entrada
+        (<code>&#64;Input</code>):
+      </p>
+      <ul>
+        <li>
+          <strong>totalItems</strong> (<code>number</code>): El número total de
+          elementos a paginar.
+        </li>
+        <li>
+          <strong>itemsPerPage</strong> (<code>number</code>): El número de
+          elementos por página.
+        </li>
+        <li>
+          <strong>currentPage</strong> (<code>number</code>): La página actual.
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sección: Ejemplo -->
+    <div class="documentation-section">
+      <h2>Ejemplo</h2>
+      <ds-pagination
+        [totalItems]="100"
+        [itemsPerPage]="10"
+        [currentPage]="currentPage"
+        (currentPageChange)="onPageChange($event)"
+      ></ds-pagination>
+    </div>
+
+    <!-- Sección: Accesibilidad -->
+    <div class="documentation-section">
+      <h2>Accesibilidad</h2>
+      <p>
+        El componente de paginación incluye soporte para accesibilidad mediante
+        el uso de atributos <code>aria</code> y roles adecuados.
+      </p>
+    </div>
+  </div>
+</section>

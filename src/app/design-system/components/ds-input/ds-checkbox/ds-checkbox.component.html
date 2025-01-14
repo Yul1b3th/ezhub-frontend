@@ -1,1 +1,25 @@
-<p>ds-checkbox works!</p>
+<div class="form-group">
+  <div class="input-wrapper">
+    <input
+      type="checkbox"
+      [id]="id"
+      class="input-checkbox"
+      [ngClass]="{
+        'dark-mode': themeService.theme() === 'dark',
+        'light-mode': themeService.theme() === 'light',
+        error: !!errorMessage,
+      }"
+      [checked]="value"
+      [attr.aria-required]="ariaRequired"
+      [attr.aria-invalid]="!!errorMessage"
+      [attr.aria-describedby]="errorMessage ? 'error-msg' : null"
+      [disabled]="disabled"
+      (change)="handleInput($event)"
+      (blur)="handleBlur()"
+    />
+    <label [for]="id">{{ label }}</label>
+  </div>
+  <div *ngIf="errorMessage" class="error-message" id="error-msg">
+    {{ errorMessage }}
+  </div>
+</div>

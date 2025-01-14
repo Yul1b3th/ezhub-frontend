@@ -1,1 +1,28 @@
-<p>ds-date-picker works!</p>
+<div class="form-group">
+  <label [for]="id">{{ label }}</label>
+  <div class="input-wrapper">
+    <input
+      type="date"
+      [id]="id"
+      class="input-date-picker"
+      [ngClass]="{
+        'dark-mode': themeService.theme() === 'dark',
+        'light-mode': themeService.theme() === 'light',
+        error: !!errorMessage,
+      }"
+      [placeholder]="placeholder"
+      [value]="value"
+      [attr.min]="minDate"
+      [attr.max]="maxDate"
+      [attr.aria-required]="ariaRequired"
+      [attr.aria-invalid]="!!errorMessage"
+      [attr.aria-describedby]="errorMessage ? 'error-msg' : null"
+      [disabled]="disabled"
+      (input)="handleInput($event)"
+      (blur)="handleBlur()"
+    />
+  </div>
+  <div *ngIf="errorMessage" class="error-message" id="error-msg">
+    {{ errorMessage }}
+  </div>
+</div>

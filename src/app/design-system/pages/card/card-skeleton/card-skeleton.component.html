@@ -1,0 +1,121 @@
+<section>
+  <!-- Encabezado de la sección -->
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Card Skeleton</h1>
+    <p>
+      El componente <code>ds-card-skeleton</code> se utiliza para mostrar un
+      skeleton de carga para las cards. Este componente es altamente
+      personalizable y soporta múltiples configuraciones para adaptarse a
+      diferentes contextos de uso.
+    </p>
+  </header>
+
+  <div class="documentation-content">
+    <div class="documentation-section">
+      <h2>Uso</h2>
+      <p>Ejemplo de implementación en HTML:</p>
+      <pre><code>
+      &lt;ds-card-skeleton&gt;
+        &lt;div card-image&gt;&lt;/div&gt;
+        &lt;div card-title&gt;&lt;/div&gt;
+        &lt;div card-body&gt;&lt;/div&gt;
+        &lt;div card-button&gt;&lt;/div&gt;
+      &lt;/ds-card-skeleton&gt;
+      </code></pre>
+    </div>
+
+    <!-- Variantes -->
+    <div class="documentation-section">
+      <h2>Variantes</h2>
+
+      <!-- Tarjeta Body -->
+      <div class="documentation-item">
+        <h3>Card Body</h3>
+        <ds-card-skeleton>
+          <div card-body #cardBody></div>
+        </ds-card-skeleton>
+      </div>
+
+      <!-- Tarjeta con Título y Texto -->
+      <div class="documentation-item">
+        <h3>Card with Title and Text</h3>
+        <ds-card-skeleton>
+          <div card-title #cardTitle></div>
+          <div card-body #cardBody></div>
+        </ds-card-skeleton>
+      </div>
+
+      <!-- Tarjeta con Imagen, Título y Texto -->
+      <div class="documentation-item">
+        <h3>Card with Image, Title and Text</h3>
+        <ds-card-skeleton>
+          <div card-image #cardImage></div>
+          <div card-title #cardTitle></div>
+          <div card-body #cardBody></div>
+        </ds-card-skeleton>
+      </div>
+
+      <!-- Tarjeta con Título, Texto y Botón -->
+      <div class="documentation-item">
+        <h3>Card with Title, Text and Button</h3>
+        <ds-card-skeleton>
+          <div card-title #cardTitle></div>
+          <div card-body #cardBody></div>
+          <div card-button #cardButton></div>
+        </ds-card-skeleton>
+      </div>
+
+      <div class="documentation-item">
+        <h3></h3>
+      </div>
+
+      <!-- Tarjeta con Imagen, Título, Texto y Botón -->
+      <div class="documentation-item">
+        <h3>Card with Image, Title, Text and Button</h3>
+        <ds-card-skeleton>
+          <div card-image #cardImage></div>
+          <div card-title #cardTitle></div>
+          <div card-body #cardBody></div>
+          <div card-button #cardButton></div>
+        </ds-card-skeleton>
+      </div>
+
+      <!-- Tarjeta con Header y Footer -->
+      <div class="documentation-item">
+        <h3>Card with Header and Footer</h3>
+        <ds-card-skeleton>
+          <div card-header #cardHeader></div>
+          <div card-title #cardTitle></div>
+          <div card-body #cardBody></div>
+          <div card-footer #cardFooter></div>
+        </ds-card-skeleton>
+      </div>
+
+      <!-- Tarjeta con Contenido Proyectado -->
+      <div class="documentation-item">
+        <h3>Card with Projected Content</h3>
+        <ds-card-skeleton>
+          <div card-header #cardHeader></div>
+          <div card-title #cardTitle></div>
+          <div card-projected-content></div>
+          <div card-body #cardBody></div>
+          <div card-footer #cardFooter></div>
+        </ds-card-skeleton>
+      </div>
+
+      <!-- Tarjeta con Contenido Proyectado -->
+      <div class="documentation-item">
+        <h3>Card con precio</h3>
+        <ds-card-skeleton>
+          <div card-image #cardImage></div>
+          <div card-title #cardTitle></div>
+
+          <div #cardDescription></div>
+
+          <div card-price #cardPrice></div>
+          <div card-button #cardButton></div>
+        </ds-card-skeleton>
+      </div>
+    </div>
+  </div>
+</section>

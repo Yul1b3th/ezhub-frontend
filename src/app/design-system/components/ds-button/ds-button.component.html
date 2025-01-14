@@ -1,8 +1,25 @@
-<button
-  [type]="type"
-  [ngClass]="buttonClasses"
-  [disabled]="disabled"
-  [attr.aria-label]="ariaLabel"
->
-  <ng-content />
-</button>
+<ng-container *ngIf="href; else buttonTemplate">
+  <a
+    #buttonElement
+    [href]="href"
+    [ngClass]="buttonClasses"
+    [attr.aria-label]="ariaLabel"
+    [attr.target]="target"
+    role="button"
+  >
+    <span *ngIf="iconSvg" class="icon-param" #iconContainer></span>
+    <ng-content select="[content-anchor]"></ng-content>
+  </a>
+</ng-container>
+<ng-template #buttonTemplate>
+  <button
+    #buttonElement
+    [type]="type"
+    [ngClass]="buttonClasses"
+    [disabled]="disabled"
+    [attr.aria-label]="ariaLabel"
+  >
+    <span *ngIf="iconSvg" class="icon-param" #iconContainer></span>
+    <ng-content select="[content-button]"></ng-content>
+  </button>
+</ng-template>

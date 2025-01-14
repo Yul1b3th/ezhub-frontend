@@ -4,14 +4,13 @@ import { Injectable, Signal, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class ThemeService {
-  private readonly defaultTheme: string = 'light-mode';
+  private readonly defaultTheme: string = 'auto-mode';
   private readonly themeStorageKey: string = 'theme';
   private currentTheme = signal<string>(this.defaultTheme);
 
   constructor() {
     const savedTheme = this.getSavedTheme();
-    const preferredTheme = this.getPreferredTheme();
-    this.applyTheme(savedTheme || preferredTheme);
+    this.applyTheme(savedTheme || this.defaultTheme);
   }
 
   get theme(): Signal<string> {
@@ -28,12 +27,21 @@ export class ThemeService {
 
   toggleTheme(): void {
     const newTheme =
-      this.currentTheme() === 'light-mode' ? 'dark-mode' : 'light-mode';
+      this.currentTheme() === 'light-mode'
+        ? 'dark-mode'
+        : this.currentTheme() === 'dark-mode'
+          ? 'auto-mode'
+          : 'light-mode';
     this.setTheme(newTheme);
   }
 
   private applyTheme(theme: string): void {
-    this.updateBodyClass(theme);
+    if (theme === 'auto-mode') {
+      const preferredTheme = this.getPreferredTheme();
+      this.updateBodyClass(preferredTheme);
+    } else {
+      this.updateBodyClass(theme);
+    }
     this.currentTheme.set(theme);
     this.saveTheme(theme);
   }
@@ -48,11 +56,18 @@ export class ThemeService {
 
   private updateBodyClass(theme: string): void {
     document.body.classList.remove('light-mode', 'dark-mode');
-    document.body.classList.add(theme);
+    if (theme !== 'auto-mode') {
+      document.body.classList.add(theme);
+    } else {
+      const preferredTheme = this.getPreferredTheme();
+      document.body.classList.add(preferredTheme);
+    }
   }
 
   private isValidTheme(theme: string): boolean {
-    return theme === 'light-mode' || theme === 'dark-mode';
+    return (
+      theme === 'light-mode' || theme === 'dark-mode' || theme === 'auto-mode'
+    );
   }
 
   private getPreferredTheme(): string {

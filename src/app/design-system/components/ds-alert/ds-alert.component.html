@@ -1,1 +1,4 @@
-<p>ds-alert works!</p>
+<div *ngIf="isVisible" class="alert" [ngClass]="type">
+  <span>{{ message }}</span>
+  <button *ngIf="dismissible" class="close-btn" (click)="dismiss()">×</button>
+</div>

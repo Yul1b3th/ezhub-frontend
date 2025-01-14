@@ -1,16 +1,42 @@
-<header>
-  <!-- <button class="menu-toggle" aria-label="Toggle sidebar">☰</button> -->
-  header
-</header>
+<design-system-header />
 
 <div class="main-layout">
   <aside>
-    <design-system-sidebar></design-system-sidebar>
+    <design-system-sidebar
+      [ngClass]="themeService.theme()"
+    ></design-system-sidebar>
   </aside>
 
   <main>
-    <router-outlet></router-outlet>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
   </main>
 </div>
 
-<footer>&copy; 2023 Your Company</footer>
+<design-system-footer />
+
+<ds-scroll-top-button>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="2.5"
+    stroke="currentColor"
+    class="size-6"
+    width="28"
+    height="28"
+    aria-labelledby="svgTitle svgDesc"
+    role="img"
+  >
+    <title id="svgTitle">Flecha hacia arriba</title>
+    <desc id="svgDesc">
+      Un botón para desplazarse hacia arriba en la página
+    </desc>
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="m4.5 15.75 7.5-7.5 7.5 7.5"
+    />
+  </svg>
+</ds-scroll-top-button>

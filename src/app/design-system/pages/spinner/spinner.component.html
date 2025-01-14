@@ -1,1 +1,67 @@
-<p>spinner works!</p>
+<section>
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Spinner</h1>
+    <p>
+      El componente de spinner (<code>ds-spinner</code>) se utiliza para indicar
+      que una operación está en curso. Este componente es altamente
+      personalizable y soporta múltiples configuraciones para adaptarse a
+      diferentes contextos de uso.
+    </p>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section">
+      <h2>Uso</h2>
+      <p>Ejemplo de uso en HTML:</p>
+      <pre><code>
+        &lt;ds-spinner
+          [size]="'medium'"
+          [color]="'primary'"
+        &gt;&lt;/ds-spinner&gt;
+      </code></pre>
+    </div>
+
+    <!-- Sección: Configuración -->
+    <div class="documentation-section">
+      <h2>Configuración</h2>
+      <p>
+        El componente de spinner acepta las siguientes propiedades de entrada
+        (<code>&#64;Input</code>):
+      </p>
+      <ul>
+        <li>
+          <strong>size</strong> (<code>'small' | 'medium' | 'large'</code>):
+          Tamaño del spinner. Valor por defecto: <code>'medium'</code>.
+        </li>
+        <li>
+          <strong>color</strong> (<code
+            >'primary' | 'secondary' | 'tertiary'</code
+          >): Color del spinner. Valor por defecto: <code>'primary'</code>.
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sección: Accesibilidad -->
+    <div class="documentation-section">
+      <h2>Accesibilidad</h2>
+      <p>
+        El componente de spinner incluye soporte para accesibilidad mediante el
+        uso de atributos <code>aria</code> y roles adecuados.
+      </p>
+    </div>
+
+    <!-- Sección: Variantes -->
+    <div class="documentation-section">
+      <h2>Variantes</h2>
+      <!-- Success -->
+      <div class="documentation-item">
+        <h3>Success</h3>
+        <ds-spinner [size]="'small'" [color]="'primary'"></ds-spinner>
+        <ds-spinner [size]="'medium'" [color]="'secondary'"></ds-spinner>
+        <ds-spinner [size]="'large'" [color]="'tertiary'"></ds-spinner>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,34 @@
+<div class="form-group">
+  <label [for]="id">{{ label }}</label>
+  <div class="input-wrapper">
+    <input
+      type="checkbox"
+      role="switch"
+      [id]="id"
+      class="input-switch"
+      [ngClass]="{
+        'dark-mode': themeService.theme() === 'dark',
+        'light-mode': themeService.theme() === 'light',
+        error: !!errorMessage,
+      }"
+      [checked]="value"
+      [attr.aria-required]="ariaRequired"
+      [attr.aria-invalid]="!!errorMessage"
+      [attr.aria-describedby]="errorMessage ? 'error-msg' : null"
+      [disabled]="disabled"
+      (change)="handleInput($event)"
+      (blur)="handleBlur()"
+    />
+    <div class="switch-icons">
+      <div *ngIf="iconOn && !value" class="switch-icon" #iconOnContainer></div>
+      <div
+        *ngIf="iconOff && !value"
+        class="switch-icon"
+        #iconOffContainer
+      ></div>
+    </div>
+  </div>
+  <div *ngIf="errorMessage" class="error-message" id="error-msg">
+    {{ errorMessage }}
+  </div>
+</div>

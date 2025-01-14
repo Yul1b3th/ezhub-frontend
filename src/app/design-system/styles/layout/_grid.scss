@@ -16,7 +16,7 @@
   @each $breakpoint, $value in $breakpoints {
     @if $breakpoint != xs {
       // Evita el breakpoint más pequeño
-      @include media-breakpoint-up($breakpoint) {
+      @include apply-media-breakpoint($breakpoint) {
         max-width: $value; // Ancho máximo basado en el breakpoint
       }
     }
@@ -44,7 +44,7 @@
 
   @each $breakpoint, $value in $breakpoints {
     @if $breakpoint != xs {
-      @include media-breakpoint-up($breakpoint) {
+      @include apply-media-breakpoint($breakpoint) {
         @for $i from 1 through 12 {
           &.col-#{$breakpoint}-#{$i} {
             width: math.div(100%, 12) * $i;

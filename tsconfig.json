@@ -5,12 +5,12 @@
   "compilerOptions": {
     "paths": {
       "@core/*": ["./src/app/core/*"],
+      "@design-system/*": ["./src/app/design-system/*"],
       "@features/*": ["./src/app/features/*"],
       "@pages/*": ["./src/app/pages/*"],
       "@shared/*": ["./src/app/shared/*"],
-      "@design-system/*": ["./src/app/design-system/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@environments/*": ["./src/environments/*"]
+      "@environments/*": ["./src/environments/*"],
+      "@i18n/*": ["./src/i18n/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

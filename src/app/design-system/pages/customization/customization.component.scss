@@ -1,0 +1,133 @@
+@use "sass:color";
+@use "sass:map";
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/functions" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.color-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.box {
+  width: 200px;
+  height: 60px;
+  font-weight: bold;
+  @include apply-flex-container(column, center, center);
+  @include apply-border(1px, solid, neutral, dark);
+  @include apply-border-radius(0.25rem);
+  @include apply-box-shadow(0, 1px, 3px, 0, rgba(0, 0, 0, 0.2));
+  @include apply-spacing(padding, md);
+  @include apply-transition(box-shadow, 0.2s, ease-in-out);
+}
+
+.box-primary {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, primary, default);
+}
+
+.box-primary-light {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, primary, light);
+}
+
+.box-primary-dark {
+  @include apply-color(color, utility, white);
+  @include apply-color(background-color, primary, dark);
+}
+
+.box-secondary {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, secondary, default);
+}
+
+.box-secondary-light {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, secondary, light);
+}
+
+.box-secondary-dark {
+  @include apply-color(color, utility, white);
+  @include apply-color(background-color, secondary, dark);
+}
+
+.box-tertiary {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, tertiary, default);
+}
+
+.box-status-success {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, status, success);
+}
+
+.box-status-danger {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, status, danger);
+}
+
+.box-status-warning {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, status, warning);
+}
+
+.box-status-info {
+  @include apply-color(color, utility, white);
+  @include apply-color(background-color, status, info);
+}
+
+.box-neutral-dark-300 {
+  @include apply-color(color, utility, white);
+  @include apply-color(background-color, neutral, "dark-300");
+}
+
+.box-neutral-dark-200 {
+  @include apply-color(color, utility, white);
+  @include apply-color(background-color, neutral, "dark-200");
+}
+
+.box-neutral-dark {
+  @include apply-color(color, utility, white);
+  @include apply-color(background-color, neutral, dark);
+}
+
+.box-neutral-dark-100 {
+  @include apply-color(color, utility, white);
+  @include apply-color(background-color, neutral, "dark-100");
+}
+
+.box-neutral-gray-dark {
+  @include apply-color(color, utility, white);
+  @include apply-color(background-color, neutral, "gray-dark");
+}
+
+.box-neutral-gray {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, neutral, gray);
+}
+
+.box-neutral-light {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, neutral, light);
+}
+
+.box-neutral-light-200 {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, neutral, "light-200");
+}
+
+.box-neutral-gray-light {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, neutral, "gray-light");
+}
+
+.box-utility-white {
+  @include apply-color(color, neutral, "dark-300");
+  @include apply-color(background-color, utility, white);
+}
+
+.box-utility-black {
+  @include apply-color(color, utility, white);
+  @include apply-color(background-color, utility, black);
+}

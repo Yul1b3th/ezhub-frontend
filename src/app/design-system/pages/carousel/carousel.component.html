@@ -1,1 +1,70 @@
-<p>carousel works!</p>
+<section class="buttons">
+  <!-- Encabezado de la sección -->
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Carousel</h1>
+    <p>
+      El componente de carrusel (<code>ds-carousel</code>) permite mostrar una
+      serie de imágenes de manera interactiva, con soporte para navegación y
+      reproducción automática. Este componente es altamente personalizable y
+      soporta múltiples configuraciones para adaptarse a diferentes contextos de
+      uso.
+    </p>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section">
+      <h2>Uso</h2>
+      <p>Ejemplo de uso en HTML:</p>
+      <pre><code>
+        &lt;ds-carousel
+          [photos]="[
+            'https://ezhub.vercel.app/assets/img/bedrooms/1.jpg',
+            'https://ezhub.vercel.app/assets/img/bedrooms/2.jpg',
+            'https://ezhub.vercel.app/assets/img/bedrooms/3.jpg',
+            'https://ezhub.vercel.app/assets/img/bedrooms/4.jpg',
+            'https://ezhub.vercel.app/assets/img/bedrooms/5.jpg'
+          ]"
+        &gt;&lt;/ds-carousel&gt;
+      </code></pre>
+    </div>
+    <!-- Sección: Configuración -->
+    <div class="documentation-section">
+      <h2>Configuración</h2>
+      <p>
+        El componente de carrusel acepta las siguientes propiedades de entrada
+        (<code>&#64;Input</code>):
+      </p>
+      <ul>
+        <li>
+          <strong>photos</strong> (<code>string[]</code>): Lista de URLs de las
+          imágenes a mostrar en el carrusel.
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sección: Ejemplos de Carrusel -->
+    <div class="documentation-section">
+      <h2>Ejemplo</h2>
+      <ds-carousel
+        [photos]="[
+          'https://ezhub.vercel.app/assets/img/bedrooms/1.jpg',
+          'https://ezhub.vercel.app/assets/img/bedrooms/2.jpg',
+          'https://ezhub.vercel.app/assets/img/bedrooms/3.jpg',
+          'https://ezhub.vercel.app/assets/img/bedrooms/4.jpg',
+          'https://ezhub.vercel.app/assets/img/bedrooms/5.jpg',
+        ]"
+      ></ds-carousel>
+    </div>
+
+    <!-- Sección: Accesibilidad -->
+    <div class="documentation-section">
+      <h2>Accesibilidad</h2>
+      <p>
+        El componente de carrusel incluye soporte para accesibilidad mediante el
+        uso de atributos <code>aria</code> y controles de navegación accesibles.
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,1 +1,294 @@
-<p>card works!</p>
+<section>
+  <!-- Encabezado de la sección -->
+  <header [ngClass]="[themeService.theme(), 'documentation-header']">
+    <h1>Card</h1>
+    <p>
+      El componente de tarjeta (<code>ds-card</code>) se utiliza para mostrar
+      contenido en un formato de tarjeta. Este componente es altamente
+      personalizable y soporta múltiples configuraciones para adaptarse a
+      diferentes contextos de uso.
+    </p>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="documentation-content">
+    <!-- Sección: Uso -->
+    <div class="documentation-section">
+      <h2>Uso</h2>
+      <p>Ejemplo de implementación en HTML:</p>
+      <pre><code>
+      &lt;ds-card
+        [imageUrl]="'https://ezhub.vercel.app/assets/img/bedrooms/1.jpg'"
+        [title]="'Card Title'"
+        [body]="'This is a card body text.'"
+        [buttonText]="'Learn More'"
+        [buttonUrl]="'#'"
+      &gt;&lt;/ds-card&gt;
+      </code></pre>
+    </div>
+
+    <!-- Sección: Ejemplo -->
+    <div class="documentation-section">
+      <h2>Ejemplo</h2>
+      <ds-card
+        [imageUrl]="cardData[3].imageUrl"
+        [title]="cardData[3].title"
+        [body]="cardData[3].body"
+        [buttonText]="cardData[3].buttonText"
+        [buttonUrl]="cardData[3].buttonUrl"
+        [buttonTarget]="cardData[3].buttonTarget"
+        class="card-width-18rem"
+      ></ds-card>
+    </div>
+
+    <!-- Sección: Accesibilidad -->
+    <div class="documentation-section">
+      <h2>Accesibilidad</h2>
+      <p>
+        El componente de tarjeta incluye soporte para accesibilidad mediante el
+        uso de atributos <code>aria</code> y roles adecuados.
+      </p>
+
+      <div class="documentation-item">
+        <h3>Atributos ARIA</h3>
+        <p>
+          Los siguientes atributos ARIA se utilizan en el componente de tarjeta:
+        </p>
+        <ul>
+          <li>
+            <code>aria-label</code>: Proporciona una etiqueta accesible para
+            elementos interactivos como botones.
+          </li>
+          <li>
+            <code>aria-labelledby</code>: Asocia un elemento con su etiqueta.
+            Utilizado para asociar la tarjeta con su título.
+          </li>
+          <li>
+            <code>aria-describedby</code>: Proporciona una descripción adicional
+            para un elemento. Utilizado para asociar la tarjeta con su cuerpo.
+          </li>
+        </ul>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Roles</h3>
+        <p>Los siguientes roles se utilizan en el componente de tarjeta:</p>
+        <ul>
+          <li>
+            <code>role="region"</code>: Indica que el contenedor principal de la
+            tarjeta es una región del contenido.
+          </li>
+          <li>
+            <code>role="img"</code>: Indica que un elemento es una imagen.
+          </li>
+        </ul>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Ejemplo</h3>
+        <p>
+          Aquí hay un ejemplo de cómo se pueden utilizar estos atributos y roles
+          en el HTML:
+        </p>
+        <pre><code>
+  &lt;ds-card
+    [imageUrl]="'https://ezhub.vercel.app/assets/img/bedrooms/1.jpg'"
+    [title]="'Card Title'"
+    [body]="'This is a card body text.'"
+    [buttonText]="'Learn More'"
+    [buttonUrl]="'#'"
+    [ariaLabelledby]="'card-title-Card Title'"
+    [ariaDescribedby]="'card-body-This is a card body text.'"
+    role="region"
+  &gt;&lt;/ds-card&gt;
+  </code></pre>
+      </div>
+
+      <div class="documentation-item">
+        <h3>Buenas Prácticas</h3>
+        <p>Para asegurar la accesibilidad, siga estas buenas prácticas:</p>
+        <ul>
+          <li>
+            Proporcione etiquetas accesibles para todos los elementos
+            interactivos.
+          </li>
+          <li>
+            Use roles y atributos ARIA adecuados para describir la funcionalidad
+            de los elementos.
+          </li>
+          <li>
+            Verifique la accesibilidad utilizando herramientas como el inspector
+            de accesibilidad del navegador.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sección: Variantes -->
+
+    <div class="documentation-section">
+      <h2>Variantes</h2>
+
+      <!-- Tarjeta Body -->
+      <div class="documentation-item">
+        <h3>Card Body</h3>
+        <ds-card [body]="cardData[0].body"></ds-card>
+      </div>
+
+      <!-- Tarjeta con Título y Texto -->
+      <div class="documentation-item">
+        <h3>Card with Title and Text</h3>
+        <ds-card
+          [title]="cardData[0].title"
+          [body]="cardData[0].body"
+        ></ds-card>
+      </div>
+
+      <!-- Tarjeta con Imagen, Título y Texto -->
+      <div class="documentation-item">
+        <h3>Card with Image, Title and Text</h3>
+        <ds-card
+          [imageUrl]="cardData[1].imageUrl"
+          [title]="cardData[1].title"
+          [body]="cardData[1].body"
+          class="card-width-18rem"
+        >
+        </ds-card>
+      </div>
+
+      <!-- Tarjeta con Título, Texto y Botón -->
+      <div class="documentation-item">
+        <h3>Card with Title, Text and Button</h3>
+        <ds-card
+          [title]="cardData[2].title"
+          [body]="cardData[2].body"
+          [buttonText]="cardData[2].buttonText"
+          [buttonUrl]="cardData[2].buttonUrl"
+          [buttonTarget]="cardData[2].buttonTarget"
+        ></ds-card>
+      </div>
+
+      <!-- Tarjeta con Imagen, Título, Texto y Botón -->
+      <div class="documentation-item">
+        <h3>Card with Image, Title, Text and Button</h3>
+        <ds-card
+          [imageUrl]="cardData[3].imageUrl"
+          [title]="cardData[3].title"
+          [body]="cardData[3].body"
+          [buttonText]="cardData[3].buttonText"
+          [buttonUrl]="cardData[3].buttonUrl"
+          [buttonTarget]="cardData[3].buttonTarget"
+          class="card-width-18rem"
+        ></ds-card>
+      </div>
+
+      <!-- Tarjeta con Header y Footer -->
+      <div class="documentation-item">
+        <h3>Card with Header and Footer</h3>
+        <ds-card
+          [header]="cardData[4].header"
+          [title]="cardData[4].title"
+          [body]="cardData[4].body"
+          [footer]="cardData[4].footer"
+        ></ds-card>
+      </div>
+
+      <!-- Tarjeta con Contenido Proyectado -->
+      <div class="documentation-item">
+        <h3>Card with Projected Content</h3>
+        <ds-card
+          [header]="cardData[5].header"
+          [title]="cardData[5].title"
+          [footer]="cardData[5].footer"
+        >
+          <div card-body>
+            <p>This is some projected content inside the card.</p>
+            <p>It can include any HTML elements or Angular components.</p>
+          </div>
+        </ds-card>
+      </div>
+    </div>
+
+    <!-- Sección de Grid de 5 Tarjetas Responsive -->
+    <div class="documentation-section">
+      <h2>Grid de Cards Responsivas</h2>
+      <div class="card-grid">
+        <ds-card
+          [imageUrl]="'https://ezhub.vercel.app/assets/img/bedrooms/1.jpg'"
+          [title]="'Habitación acogedora con vistas al jardín'"
+          [titleClass]="'font-bold line-clamp-1'"
+          [description]="
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.'
+          "
+          [descriptionClass]="'mt-2 line-clamp-3'"
+          [price]="'350'"
+          [priceClass]="'text-lg mt-2 font-bold'"
+          [buttonText]="'See more'"
+          [buttonUrl]="'https://ezhub.vercel.app/rooms/1'"
+          [buttonTarget]="'_blank'"
+        >
+        </ds-card>
+        <ds-card
+          [imageUrl]="'https://ezhub.vercel.app/assets/img/bedrooms/2.jpg'"
+          [title]="'Amplia habitación en el centro de la ciudad'"
+          [titleClass]="'font-bold line-clamp-1'"
+          [description]="
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+          "
+          [descriptionClass]="'mt-2 line-clamp-3'"
+          [price]="'450'"
+          [priceClass]="'text-lg mt-2 font-bold'"
+          [buttonText]="'See more'"
+          [buttonUrl]="'https://ezhub.vercel.app/rooms/2'"
+          [buttonTarget]="'_blank'"
+        >
+        </ds-card>
+        <ds-card
+          [imageUrl]="'https://ezhub.vercel.app/assets/img/bedrooms/3.jpg'"
+          [title]="'Habitación luminosa con balcón privado'"
+          [titleClass]="'font-bold line-clamp-1'"
+          [description]="
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, pulvinar facilisis justo mollis, auctor consequat urna. Morbi a bibendum metus.'
+          "
+          [descriptionClass]="'mt-2 line-clamp-3'"
+          [price]="'500'"
+          [priceClass]="'text-lg mt-2 font-bold'"
+          [buttonText]="'See more'"
+          [buttonUrl]="'https://ezhub.vercel.app/rooms/3'"
+          [buttonTarget]="'_blank'"
+        >
+        </ds-card>
+        <ds-card
+          [imageUrl]="'https://ezhub.vercel.app/assets/img/bedrooms/4.jpg'"
+          [title]="'Habitación económica cerca del transporte público'"
+          [titleClass]="'font-bold line-clamp-1'"
+          [description]="
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.'
+          "
+          [descriptionClass]="'mt-2 line-clamp-3'"
+          [price]="'300'"
+          [priceClass]="'text-lg mt-2 font-bold'"
+          [buttonText]="'See more'"
+          [buttonUrl]="'https://ezhub.vercel.app/rooms/4'"
+          [buttonTarget]="'_blank'"
+        >
+        </ds-card>
+        <ds-card
+          [imageUrl]="'https://ezhub.vercel.app/assets/img/bedrooms/5.jpg'"
+          [title]="'Habitación moderna con todas las comodidades'"
+          [titleClass]="'font-bold line-clamp-1'"
+          [description]="
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+          "
+          [descriptionClass]="'mt-2 line-clamp-3'"
+          [price]="'600'"
+          [priceClass]="'text-lg mt-2 font-bold'"
+          [buttonText]="'See more'"
+          [buttonUrl]="'https://ezhub.vercel.app/rooms/5'"
+          [buttonTarget]="'_blank'"
+        >
+        </ds-card>
+      </div>
+    </div>
+  </div>
+</section>

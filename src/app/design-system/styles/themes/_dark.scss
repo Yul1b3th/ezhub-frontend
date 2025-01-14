@@ -1,12 +1,15 @@
-// themes/_dark.scss
-
 @use "sass:map";
-@use "../abstracts/functions" as *;
 @use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
 
 body.dark-mode {
-  background-color: get-background("inverted");
-  color: get-color("white");
+  @include apply-theme-colors(
+    (neutral, "gray-light"),
+    (neutral, "gray-dark"),
+    (neutral, dark),
+    (utility, white)
+  );
 
   h1,
   h2,
@@ -19,9 +22,13 @@ body.dark-mode {
   strong,
   em,
   blockquote,
-  code,
-  pre,
   a {
-    color: get-color("white");
+    @include apply-color(color, neutral, "dark-300");
+    @include apply-color(color, utility, white);
+  }
+
+  code,
+  pre {
+    @include apply-color(background-color, neutral, "dark-100");
   }
 }

@@ -1,1 +1,28 @@
-<p>ds-email-input works!</p>
+<div class="form-group">
+  <label [for]="id">{{ label }}</label>
+  <div class="input-wrapper">
+    <input
+      type="email"
+      [id]="id"
+      class="input-email"
+      [ngClass]="{
+        'dark-mode': themeService.theme() === 'dark',
+        'light-mode': themeService.theme() === 'light',
+        error: !!errorMessage,
+        'has-icon': hasIcon,
+      }"
+      [placeholder]="placeholder"
+      [value]="value"
+      [attr.aria-required]="ariaRequired"
+      [attr.aria-invalid]="!!errorMessage"
+      [attr.aria-describedby]="errorMessage ? 'error-msg' : null"
+      [disabled]="disabled"
+      (input)="handleInput($event)"
+      (blur)="handleBlur()"
+    />
+    <div *ngIf="iconSvg" class="input-icon" #iconContainer></div>
+  </div>
+  <div *ngIf="errorMessage" class="error-message" id="error-msg">
+    {{ errorMessage }}
+  </div>
+</div>
